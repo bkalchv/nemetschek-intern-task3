@@ -6,12 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TunakCell.h"
+#import "Cell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Board : NSObject
-@property (nonatomic, strong) NSMutableArray<NSMutableArray<TunakCell*>*>* boardMatrix;
+@property (nonatomic, strong) NSMutableArray<NSMutableArray<Cell*>*>* boardMatrix;
 @property (nonatomic) NSUInteger numberOfRows;
 @property (nonatomic) NSUInteger numberOfColumns;
 - (instancetype)initWithRows:(NSUInteger)rowsAmount;

@@ -20,6 +20,7 @@
 		42A945DD27676AC5002767C6 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945DC27676AC5002767C6 /* Board.m */; };
 		42A945E027678B1B002767C6 /* Engine.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945DF27678B1B002767C6 /* Engine.m */; };
 		42A945E327678C13002767C6 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945E227678C13002767C6 /* Player.m */; };
+		42A945E62767A330002767C6 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945E52767A330002767C6 /* Cell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		42A945DF27678B1B002767C6 /* Engine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Engine.m; sourceTree = "<group>"; };
 		42A945E127678C13002767C6 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		42A945E227678C13002767C6 /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		42A945E42767A330002767C6 /* Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		42A945E52767A330002767C6 /* Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +91,6 @@
 				42A945C22767515E002767C6 /* Main.storyboard */,
 				42A945D2276756C5002767C6 /* WelcomeViewController.h */,
 				42A945D3276756C5002767C6 /* WelcomeViewController.m */,
-				42A945D5276758F5002767C6 /* TunakCell.h */,
-				42A945D6276758F5002767C6 /* TunakCell.m */,
 				42A945C52767515F002767C6 /* Assets.xcassets */,
 				42A945C72767515F002767C6 /* LaunchScreen.storyboard */,
 				42A945CA2767515F002767C6 /* Info.plist */,
@@ -100,8 +101,12 @@
 				42A945DF27678B1B002767C6 /* Engine.m */,
 				42A945DB27676AC5002767C6 /* Board.h */,
 				42A945DC27676AC5002767C6 /* Board.m */,
+				42A945E42767A330002767C6 /* Cell.h */,
+				42A945E52767A330002767C6 /* Cell.m */,
 				42A945E127678C13002767C6 /* Player.h */,
 				42A945E227678C13002767C6 /* Player.m */,
+				42A945D5276758F5002767C6 /* TunakCell.h */,
+				42A945D6276758F5002767C6 /* TunakCell.m */,
 			);
 			path = "Tunak-Tunak-Tun";
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42A945E62767A330002767C6 /* Cell.m in Sources */,
 				42A945D4276756C5002767C6 /* WelcomeViewController.m in Sources */,
 				42A945DA276769E9002767C6 /* ConsoleViewController.m in Sources */,
 				42A945E027678B1B002767C6 /* Engine.m in Sources */,

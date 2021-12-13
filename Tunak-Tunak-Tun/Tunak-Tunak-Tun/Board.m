@@ -15,12 +15,12 @@
         
         self.numberOfRows = rowsAmount;
         self.numberOfColumns = rowsAmount;
-        self.boardMatrix = [[NSMutableArray<NSMutableArray<TunakCell*>*> alloc] init];
+        self.boardMatrix = [[NSMutableArray<NSMutableArray<Cell*>*> alloc] init];
         
         for (size_t r = 0; r < self.numberOfRows; ++r) {
-            NSMutableArray<TunakCell*>* currentRow = [[NSMutableArray<TunakCell*> alloc] init];
+            NSMutableArray<Cell*>* currentRow = [[NSMutableArray<Cell*> alloc] init];
             for (size_t c = 0; c < self.numberOfColumns; ++c) {
-                [currentRow addObject: [[TunakCell alloc] initWithState:TunakCellStateUnchecked]];
+                [currentRow addObject: [[Cell alloc] initWithState:CellStateEmpty atRow:r atColumn:c]];
             }
             [self.boardMatrix addObject:currentRow];
         }

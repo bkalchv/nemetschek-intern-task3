@@ -175,10 +175,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aln-xS-DDI">
-                                <rect key="frame" x="152" y="480" width="110" height="45"/>
+                                <rect key="frame" x="152" y="479" width="110" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Enter"/>
+                                <connections>
+                                    <action selector="onConsoleVCEnterButton:" destination="l9W-wL-bPk" eventType="touchUpInside" id="TvR-q7-NF7"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HD1-x6-TB2">
                                 <rect key="frame" x="68" y="408" width="279" height="34"/>
@@ -187,15 +190,22 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFM-oU-jKJ">
-                                <rect key="frame" x="157" y="548" width="101" height="35"/>
+                                <rect key="frame" x="157" y="547" width="101" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Print state"/>
+                                <connections>
+                                    <action selector="onConsoleVCPrintStateButtonClick:" destination="l9W-wL-bPk" eventType="touchUpInside" id="YBs-W9-8d1"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0P5-LT-41I"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="consoleVCEnterButton" destination="aln-xS-DDI" id="CC9-di-Pce"/>
+                        <outlet property="consoleVCTextField" destination="HD1-x6-TB2" id="X8v-lA-r9a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUz-8s-sEI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

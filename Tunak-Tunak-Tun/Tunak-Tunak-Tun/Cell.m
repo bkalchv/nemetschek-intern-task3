@@ -1,19 +1,19 @@
 //
-//  TunakCell.m
+//  Cell.m
 //  Tunak-Tunak-Tun
 //
 //  Created by Bogdan Kalchev on 13.12.21.
 //
 
-#import "TunakCell.h"
+#import "Cell.h"
 
-@implementation TunakCell
-- (instancetype) initWithState:(TunakCellState)state atRow:(NSUInteger)row atColumn:(NSUInteger)col {
+@implementation Cell
+- (instancetype)initWithState:(CellState)state atRow:(NSUInteger)row atColumn:(NSUInteger)col {
     self = [super init];
     if (self) {
-        if (state == TunakCellStateUnchecked) {
+        if (state == CellStateEmpty) {
             self.isChecked = NO;
-            self.state = TunakCellStateUnchecked;
+            self.state = CellStateEmpty;
         } else {
             self.isChecked = YES;
             self.state = state;
@@ -28,16 +28,13 @@
     NSString* result;
     
     switch (self.state){
-        case TunakCellStateGreen:
-            result = @"g";
+        case CellStateX:
+            result = @"X";
             break;
-        case TunakCellStateRed:
-            result = @"r";
+        case CellStateO:
+            result = @"O";
             break;
-        case TunakCellStateYellow:
-            result = @"y";
-            break;
-        case TunakCellStateUnchecked:
+        case CellStateEmpty:
             result = @"-";
             break;
     }

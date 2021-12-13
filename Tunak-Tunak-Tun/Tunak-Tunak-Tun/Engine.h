@@ -13,9 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Engine : NSObject
 @property (nonatomic, strong) Board* gameBoard;
-@property (nonatomic, strong) NSSet<Player*>* players;
+@property (nonatomic, strong) NSArray<Player*>* players;
+@property (nonatomic) NSUInteger freeCellsAmount;
+@property (nonatomic) BOOL hasFreeCells;
 - (instancetype)init;
+- (instancetype)initWithPlayersName:(NSString*)playersName;
 - (void)printBoardState;
+- (void)changeCellStateAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex toState:(CellState)state;
+- (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player;
+- (void)CPUSelects;
 @end
 
 NS_ASSUME_NONNULL_END

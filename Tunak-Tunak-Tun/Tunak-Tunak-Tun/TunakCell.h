@@ -18,8 +18,10 @@ typedef NS_ENUM(NSInteger, TunakCellState) {
 
 @interface TunakCell : NSObject
 @property (nonatomic) TunakCellState state;
-@property BOOL isChecked;
-- (instancetype)initWithState:(TunakCellState) state;
+@property (nonatomic) BOOL isChecked;
+@property (nonatomic) NSUInteger rowIndex;
+@property (nonatomic) NSUInteger colIndex;
+- (instancetype)initWithState:(TunakCellState)state atRow:(NSUInteger)row atColumn:(NSUInteger)col;
 - (NSString*)description;
 @end
 

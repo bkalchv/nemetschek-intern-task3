@@ -8,16 +8,33 @@
 #import "ConsoleViewController.h"
 
 @interface ConsoleViewController ()
-
+@property (weak, nonatomic) IBOutlet UITextField *consoleVCTextField;
+@property (weak, nonatomic) IBOutlet UIButton *consoleVCEnterButton;
 @end
 
 @implementation ConsoleViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.gameEngine = [[Engine alloc] init];
+    self.gameEngine = [[Engine alloc] initWithPlayersName:@"Bogdan"];
     [self.gameEngine printBoardState];
     // Do any additional setup after loading the view.
+}
+
+- (IBAction)onConsoleVCEnterButton:(id)sender {
+    NSString* input = self.consoleVCTextField.text;
+    // if input == @""?
+    
+    NSUInteger inputRowIndex = [input integerValue] / 10;
+    NSUInteger inputColIndex = [input integerValue] % 10;
+    [self.gameEngine selectCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex byPlayer:self.gameEngine.players[1]];
+    [self.gameEngine printBoardState];
+    [self.gameEngine CPUSelects];
+    [self.gameEngine printBoardState];
+    self.consoleVCTextField.text = @"";
+}
+- (IBAction)onConsoleVCPrintStateButtonClick:(id)sender {
+    [self.gameEngine printBoardState];
 }
 
 /*

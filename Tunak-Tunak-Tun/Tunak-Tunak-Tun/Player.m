@@ -7,12 +7,15 @@
 
 #import "Player.h"
 
+
 @implementation Player
--(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerID {
+-(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerID withSign:(CellState)sign {
     self = [super init];
     if (self) {
         self.name = name;
         self.playerID = playerID;
+        self.sign = sign;
+        self.selectedCells = [[NSMutableSet<Cell*> alloc] init];
     }
     return self;
 }
