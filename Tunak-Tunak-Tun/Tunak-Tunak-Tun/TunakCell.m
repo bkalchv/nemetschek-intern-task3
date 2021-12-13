@@ -12,12 +12,34 @@
     self = [super init];
     if (self) {
         if (state == TunakCellStateUnchecked) {
-            self.isChecked = false;
+            self.isChecked = NO;
+            self.state = TunakCellStateUnchecked;
         } else {
-            self.isChecked = true;
+            self.isChecked = YES;
             self.state = state;
         }
     }
     return self;
+}
+
+- (NSString*)description {
+    NSString* result;
+    
+    switch (self.state){
+        case TunakCellStateGreen:
+            result = @"g";
+            break;
+        case TunakCellStateRed:
+            result = @"r";
+            break;
+        case TunakCellStateYellow:
+            result = @"y";
+            break;
+        case TunakCellStateUnchecked:
+            result = @"-";
+            break;
+    }
+    
+    return result;
 }
 @end

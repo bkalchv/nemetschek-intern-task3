@@ -16,6 +16,8 @@
 		42A945CC2767515F002767C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945CB2767515F002767C6 /* main.m */; };
 		42A945D4276756C5002767C6 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945D3276756C5002767C6 /* WelcomeViewController.m */; };
 		42A945D7276758F5002767C6 /* TunakCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945D6276758F5002767C6 /* TunakCell.m */; };
+		42A945DA276769E9002767C6 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945D9276769E9002767C6 /* ConsoleViewController.m */; };
+		42A945DD27676AC5002767C6 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945DC27676AC5002767C6 /* Board.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,10 @@
 		42A945D3276756C5002767C6 /* WelcomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		42A945D5276758F5002767C6 /* TunakCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TunakCell.h; sourceTree = "<group>"; };
 		42A945D6276758F5002767C6 /* TunakCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TunakCell.m; sourceTree = "<group>"; };
+		42A945D8276769E9002767C6 /* ConsoleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
+		42A945D9276769E9002767C6 /* ConsoleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConsoleViewController.m; sourceTree = "<group>"; };
+		42A945DB27676AC5002767C6 /* Board.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
+		42A945DC27676AC5002767C6 /* Board.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,10 @@
 				42A945C72767515F002767C6 /* LaunchScreen.storyboard */,
 				42A945CA2767515F002767C6 /* Info.plist */,
 				42A945CB2767515F002767C6 /* main.m */,
+				42A945D8276769E9002767C6 /* ConsoleViewController.h */,
+				42A945D9276769E9002767C6 /* ConsoleViewController.m */,
+				42A945DB27676AC5002767C6 /* Board.h */,
+				42A945DC27676AC5002767C6 /* Board.m */,
 			);
 			path = "Tunak-Tunak-Tun";
 			sourceTree = "<group>";
@@ -157,6 +167,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				42A945D4276756C5002767C6 /* WelcomeViewController.m in Sources */,
+				42A945DA276769E9002767C6 /* ConsoleViewController.m in Sources */,
+				42A945DD27676AC5002767C6 /* Board.m in Sources */,
 				42A945C12767515E002767C6 /* ViewController.m in Sources */,
 				42A945BB2767515E002767C6 /* AppDelegate.m in Sources */,
 				42A945CC2767515F002767C6 /* main.m in Sources */,

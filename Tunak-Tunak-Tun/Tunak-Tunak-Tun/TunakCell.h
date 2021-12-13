@@ -18,8 +18,9 @@ typedef NS_ENUM(NSInteger, TunakCellState) {
 
 @interface TunakCell : NSObject
 @property (nonatomic) TunakCellState state;
-@property Boolean isChecked;
+@property BOOL isChecked;
 - (instancetype)initWithState:(TunakCellState) state;
+- (NSString*)description;
 @end
 
 NS_ASSUME_NONNULL_END
