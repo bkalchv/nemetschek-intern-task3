@@ -6,14 +6,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Board.h"
+#import "Engine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 
 
 @interface ConsoleViewController : UIViewController
-@property (nonatomic, strong) Board* board;
+@property (nonatomic, strong) Engine* gameEngine;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -15,8 +15,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.board = [[Board alloc] initWithRows:3];
-    [self.board printState];
+    self.gameEngine = [[Engine alloc] init];
+    [self.gameEngine printBoardState];
     // Do any additional setup after loading the view.
 }
 
