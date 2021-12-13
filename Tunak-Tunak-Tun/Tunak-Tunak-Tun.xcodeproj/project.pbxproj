@@ -15,6 +15,7 @@
 		42A945C92767515F002767C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42A945C72767515F002767C6 /* LaunchScreen.storyboard */; };
 		42A945CC2767515F002767C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945CB2767515F002767C6 /* main.m */; };
 		42A945D4276756C5002767C6 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945D3276756C5002767C6 /* WelcomeViewController.m */; };
+		42A945D7276758F5002767C6 /* TunakCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945D6276758F5002767C6 /* TunakCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		42A945CB2767515F002767C6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		42A945D2276756C5002767C6 /* WelcomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		42A945D3276756C5002767C6 /* WelcomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		42A945D5276758F5002767C6 /* TunakCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TunakCell.h; sourceTree = "<group>"; };
+		42A945D6276758F5002767C6 /* TunakCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TunakCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,8 @@
 				42A945C22767515E002767C6 /* Main.storyboard */,
 				42A945D2276756C5002767C6 /* WelcomeViewController.h */,
 				42A945D3276756C5002767C6 /* WelcomeViewController.m */,
+				42A945D5276758F5002767C6 /* TunakCell.h */,
+				42A945D6276758F5002767C6 /* TunakCell.m */,
 				42A945C52767515F002767C6 /* Assets.xcassets */,
 				42A945C72767515F002767C6 /* LaunchScreen.storyboard */,
 				42A945CA2767515F002767C6 /* Info.plist */,
@@ -156,6 +161,7 @@
 				42A945BB2767515E002767C6 /* AppDelegate.m in Sources */,
 				42A945CC2767515F002767C6 /* main.m in Sources */,
 				42A945BE2767515E002767C6 /* SceneDelegate.m in Sources */,
+				42A945D7276758F5002767C6 /* TunakCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
