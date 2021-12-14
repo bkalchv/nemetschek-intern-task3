@@ -6,6 +6,7 @@
 //
 
 #import "ConsoleViewController.h"
+#import "OneMoreTimeViewController.h"
 
 @interface ConsoleViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *consoleVCTextField;
@@ -58,8 +59,6 @@
         } else {
             [self.gameEngine selectCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex byPlayer:self.gameEngine.players[1]];
             self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
-            //[self.matrixLabel sizeToFit];
-            //[self.matrixLabel adjustsFontSizeToFitWidth];
             self.matrixLabel.hidden = NO;
             [self.gameEngine printBoardState];
             
@@ -70,11 +69,13 @@
                     } else if(self.gameEngine.isGameOver) {
                         [self.consoleVCEnterButton setEnabled:NO];
                     }
+                    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        OneMoreTimeViewController* oneMoreTimeViewController = [storyboard instantiateViewControllerWithIdentifier:@"OneMoreTimeViewController"];
+                        // delegate?
+                        [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
                 } else {
                     [self.gameEngine CPUSelects];
                     self.matrixLabel.text =[self.gameEngine.gameBoard stateString];
-                    //[self.matrixLabel sizeToFit];
-                    //[self.matrixLabel adjustsFontSizeToFitWidth];
                     self.matrixLabel.hidden = NO;
                     [self.gameEngine printBoardState];
                 }
