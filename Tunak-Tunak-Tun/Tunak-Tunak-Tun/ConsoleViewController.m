@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *consoleVCTextField;
 @property (weak, nonatomic) IBOutlet UIButton *consoleVCEnterButton;
 @property (weak, nonatomic) IBOutlet UILabel *matrixLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @end
 
 @implementation ConsoleViewController
@@ -20,6 +21,7 @@
     [super viewDidLoad];
     self.gameEngine = [[Engine alloc] initWithPlayersName:@"Bogdan"];
     self.matrixLabel.hidden = YES;
+    self.usernameLabel.text = self.username;
     [self.gameEngine printBoardState];
     // Do any additional setup after loading the view.
 }
@@ -35,15 +37,12 @@
     return input.length == 2 && [[input substringToIndex: 1] rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:allowedInputDecimals]].location != NSNotFound && [[input substringFromIndex:1] rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:allowedInputDecimals]].location != NSNotFound;
 }
 
-//- (NSString*)validateInput:(NSString*)input {
-//    while (![self isValidInput:input]) {
-//        NSLog(@"Invalid input. Try again!");
-//        NSLog(@"***Expected input: a digit <= %tu, followed by another digit <= %tu***", self.gameEngine.gameBoard.numberOfRows - 1, self.gameEngine.gameBoard.numberOfColumns - 1);
-//        self.consoleVCTextField.text = @"";
-//
-//      }
-//    return input;
-//}
+- (void)showOneMoreTimeViewController {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    OneMoreTimeViewController* oneMoreTimeViewController = [storyboard instantiateViewControllerWithIdentifier:@"OneMoreTimeViewController"];
+    // delegate?
+    [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
+}
 
 - (IBAction)onConsoleVCEnterButton:(id)sender {
     NSString* input = self.consoleVCTextField.text;
@@ -69,10 +68,7 @@
                     } else if(self.gameEngine.isGameOver) {
                         [self.consoleVCEnterButton setEnabled:NO];
                     }
-                    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                        OneMoreTimeViewController* oneMoreTimeViewController = [storyboard instantiateViewControllerWithIdentifier:@"OneMoreTimeViewController"];
-                        // delegate?
-                        [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
+                    [self showOneMoreTimeViewController];
                 } else {
                     [self.gameEngine CPUSelects];
                     self.matrixLabel.text =[self.gameEngine.gameBoard stateString];
