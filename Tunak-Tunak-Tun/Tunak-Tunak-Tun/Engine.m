@@ -30,6 +30,7 @@
 
 - (void)printBoardState {
     [self.gameBoard printState];
+    
 }
 
 - (void)changeCellStateAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex toState:(CellState)state {
@@ -75,6 +76,11 @@
     
     return randomColumnIndex;
 }
+
+// TODO: - use a separate collection for the free cells instead of recursice calls to random (calculated property
+//-(NSArray *)freeCells {
+//    
+//}
 
 -(Cell*)getRandomFreeCell{
     Cell* currentCell = self.gameBoard.boardMatrix[[self getRandomRowIndex]][[self getRandomColIndex]];
@@ -131,4 +137,7 @@
 - (BOOL)areWinningConditionsFulfilledForSelectionOfCell:(Cell*)cell withSign:(CellState)sign {
     return [self checkColumnForCellSelection:cell withSign:sign] || [self checkRowForCellSelection:cell withSign:sign] || [self checkDiagonalForCellSelection:cell withSign:sign] || [self checkAntiDiagonalForCellSelection:cell withSign:sign];
 }
+
+- (BOOL)isDraw {return self.freeCellsAmount == 1;}
+
 @end

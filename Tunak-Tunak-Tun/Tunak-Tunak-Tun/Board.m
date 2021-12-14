@@ -29,7 +29,7 @@
 }
 
 -(void)printRow:(NSUInteger)row {
-    NSString* rowToPrint = [NSString stringWithFormat:@"%@ %@ %@", self.boardMatrix[row][0], self.boardMatrix[row][1], self.boardMatrix[row][2]];
+    NSString* rowToPrint = [[[NSArray alloc] initWithArray: self.boardMatrix[row]] componentsJoinedByString:@"  "];
     NSLog(@"%@", rowToPrint);
 }
 
@@ -38,5 +38,15 @@
         [self printRow: r];
         NSLog(@"\n");
     }
+}
+
+-(NSString*)stateString {
+    NSString* state = [[NSString alloc] init];
+    for (NSUInteger r = 0; r < self.numberOfRows; ++r) {
+        NSString* rowToString = [self.boardMatrix[r] componentsJoinedByString:@"   "];
+        if (r != self.numberOfRows - 1) rowToString = [NSString stringWithFormat:@"%@\n", rowToString];
+        state = [state stringByAppendingString:rowToString];
+    }
+    return state;
 }
 @end

@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSUInteger freeCellsAmount;
 @property (nonatomic) BOOL hasFreeCells;
 @property (nonatomic) BOOL isGameOver;
+
 - (instancetype)init;
 - (instancetype)initWithPlayersName:(NSString*)playersName;
 - (void)printBoardState;
@@ -25,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)CPUSelects;
 - (Cell*)getCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex;
 - (BOOL)areWinningConditionsFulfilledForSelectionOfCell:(Cell*)cell withSign:(CellState)sign;
+
 @end
 
 NS_ASSUME_NONNULL_END
