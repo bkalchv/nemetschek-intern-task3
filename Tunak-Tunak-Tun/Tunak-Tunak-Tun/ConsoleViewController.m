@@ -21,18 +21,50 @@
     // Do any additional setup after loading the view.
 }
 
+-(NSString*)getAllowedInput:(NSUInteger)dimension {
+    NSString* indexDecimals = @"0123456789";
+    NSString* allowedDecimals = [indexDecimals substringToIndex:(dimension-1)];
+    return allowedDecimals;
+}
+
+- (BOOL)isValidInput:(NSString*)input {
+    NSString* allowedInputDecimals = [self getAllowedInput: self.gameEngine.gameBoard.numberOfRows + 1];
+    return input.length == 2 && [[input substringToIndex: 1] rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:allowedInputDecimals]].location != NSNotFound && [[input substringFromIndex:1] rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:allowedInputDecimals]].location != NSNotFound;
+}
+
 - (IBAction)onConsoleVCEnterButton:(id)sender {
     NSString* input = self.consoleVCTextField.text;
-    // if input == @""?
-    
-    NSUInteger inputRowIndex = [input integerValue] / 10;
-    NSUInteger inputColIndex = [input integerValue] % 10;
-    [self.gameEngine selectCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex byPlayer:self.gameEngine.players[1]];
-    [self.gameEngine printBoardState];
-    [self.gameEngine CPUSelects];
-    [self.gameEngine printBoardState];
+    if ([self isValidInput:input]) {
+        
+        NSUInteger inputRowIndex = [input integerValue] / 10;
+        NSUInteger inputColIndex = [input integerValue] % 10;
+        
+        Cell* selectedCell = [self.gameEngine getCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex];
+        if (selectedCell.isChecked) {
+            NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
+        } else {
+            [self.gameEngine selectCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex byPlayer:self.gameEngine.players[1]];
+            [self.gameEngine printBoardState];
+            
+                if (self.gameEngine.freeCellsAmount == 1 || self.gameEngine.isGameOver) {
+                    if (self.gameEngine.freeCellsAmount == 1) {
+                        NSLog(@"It's a draw. Nobody wins!");
+                    } else if(self.gameEngine.isGameOver) {
+                        [self.consoleVCEnterButton setEnabled:NO];
+                    }
+                } else {
+                [self.gameEngine CPUSelects];
+                [self.gameEngine printBoardState];
+            }
+        }
+        
+    } else {
+        NSLog(@"Invalid input. Try again!");
+        NSLog(@"***Expected input: a digit <= %tu, followed by another digit <= %tu***", self.gameEngine.gameBoard.numberOfRows - 1, self.gameEngine.gameBoard.numberOfColumns - 1);
+    }
     self.consoleVCTextField.text = @"";
 }
+
 - (IBAction)onConsoleVCPrintStateButtonClick:(id)sender {
     [self.gameEngine printBoardState];
 }

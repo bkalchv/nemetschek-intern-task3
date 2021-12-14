@@ -15,7 +15,7 @@
         self.name = name;
         self.playerID = playerID;
         self.sign = sign;
-        self.selectedCells = [[NSMutableSet<Cell*> alloc] init];
+        //self.selectedCells = [[NSMutableSet<Cell*> alloc] init];
     }
     return self;
 }

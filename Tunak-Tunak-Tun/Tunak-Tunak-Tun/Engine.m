@@ -15,6 +15,7 @@
         self.gameBoard = [[Board alloc] initWithRows:3];
         self.freeCellsAmount = 9;
         self.hasFreeCells = YES;
+        self.isGameOver = NO;
     }
     return self;
 }
@@ -39,11 +40,20 @@
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player {
     if (self.hasFreeCells) {
         [self changeCellStateAtRowIndex:rowIndex atColumnIndex:columnIndex toState:player.sign];
-        Cell* selectedCell = self.gameBoard.boardMatrix[rowIndex][columnIndex];
-        [self.players[player.playerID].selectedCells addObject: selectedCell];
+        Cell* selectedCell = [self getCellAtRowIndex:rowIndex atColumnIndex:columnIndex];
+        //[self.players[player.playerID].selectedCells addObject: selectedCell];
         self.freeCellsAmount -= 1;
-        self.hasFreeCells = self.freeCellsAmount != 0;
-        NSLog(@"Player: %tu selected: %tu %tu", player.playerID, rowIndex, columnIndex);
+        self.hasFreeCells = (self.freeCellsAmount != 0);
+        
+        if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign:player.sign])
+        {
+            self.isGameOver = YES;
+            NSLog(@"Player: %tu won!", player.playerID);
+            NSLog(@"Game over!");
+            return;
+        } else {
+            NSLog(@"Player: %tu selected: %tu %tu", player.playerID, rowIndex, columnIndex);
+        }
     } else {
         NSLog(@"No more free cells!");
     }
@@ -76,6 +86,49 @@
     Cell* CPUCellToSelect = [self getRandomFreeCell];
     [self selectCellAtRowIndex:CPUCellToSelect.rowIndex atColumnIndex:CPUCellToSelect.colIndex byPlayer:self.players[0]];
     }
-    
+}
+
+- (Cell*)getCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex {
+    return self.gameBoard.boardMatrix[rowIndex][columnIndex];
+}
+
+- (BOOL)checkColumnForCellSelection:(Cell*)cell withSign:(CellState)sign {
+    for (size_t i = 0; i < self.gameBoard.numberOfColumns; ++i) {
+        if (self.gameBoard.boardMatrix[cell.rowIndex][i].state != sign) break;
+        if (i + 1 == self.gameBoard.numberOfColumns) return true;
+    }
+    return false;
+}
+
+-(BOOL)checkRowForCellSelection:(Cell*)cell withSign:(CellState)sign {
+    for (size_t i = 0; i < self.gameBoard.numberOfRows; ++i) {
+        if (self.gameBoard.boardMatrix[i][cell.colIndex].state != sign) break;
+        if (i + 1 == self.gameBoard.numberOfRows) return true;
+    }
+    return false;
+}
+
+-(BOOL)checkDiagonalForCellSelection:(Cell*)cell withSign:(CellState)sign {
+    if(cell.rowIndex == cell.colIndex) {
+        for(int i = 0; i < self.gameBoard.numberOfRows; ++i) {
+            if(self.gameBoard.boardMatrix[i][i].state != sign) break;
+            if(i + 1 == self.gameBoard.numberOfRows) return true;
+        }
+    }
+    return false;
+}
+
+-(BOOL)checkAntiDiagonalForCellSelection:(Cell*)cell withSign:(CellState)sign {
+    if(cell.rowIndex + cell.colIndex + 1 == self.gameBoard.numberOfRows) {
+        for(int i = 0; i < self.gameBoard.numberOfRows; ++i) {
+            if(self.gameBoard.boardMatrix[i][(self.gameBoard.numberOfRows - 1) - i].state != sign) break;
+            if(i + 1 == self.gameBoard.numberOfRows) return true;
+        }
+    }
+    return false;
+}
+
+- (BOOL)areWinningConditionsFulfilledForSelectionOfCell:(Cell*)cell withSign:(CellState)sign {
+    return [self checkColumnForCellSelection:cell withSign:sign] || [self checkRowForCellSelection:cell withSign:sign] || [self checkDiagonalForCellSelection:cell withSign:sign] || [self checkAntiDiagonalForCellSelection:cell withSign:sign];
 }
 @end
