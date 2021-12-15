@@ -9,8 +9,7 @@
 #import "OneMoreTimeViewController.h"
 
 @interface ConsoleViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *consoleVCRowTextField;
-@property (weak, nonatomic) IBOutlet UITextField *consoleVCColumnTextField;
+@property (weak, nonatomic) IBOutlet UITextField *inputTextField;
 @property (weak, nonatomic) IBOutlet UIButton *consoleVCEnterButton;
 @property (weak, nonatomic) IBOutlet UILabel *matrixLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -65,22 +64,25 @@
     return inputUInteger >= 0 && inputUInteger < self.gameEngine.gameBoard.numberOfColumns;
 }
 
+-(BOOL)isValidInput:(NSString*)input {
+    NSArray<NSString*>* inputArray = [input componentsSeparatedByString:@" "];
+    return inputArray.count == 2 && [self isValidRowIndexInput:inputArray[0]] && [self isValidColumnIndexInput:inputArray[1]];
+}
+
 - (void)showOneMoreTimeViewController {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     OneMoreTimeViewController* oneMoreTimeViewController = [storyboard instantiateViewControllerWithIdentifier:@"OneMoreTimeViewController"];
     self.presentationController.delegate = self;
-    // delegate?
     [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
 }
 
 - (IBAction)onConsoleVCEnterButton:(id)sender {
-    NSString* inputRowIndexString = self.consoleVCRowTextField.text;
-    NSString* inputColumnIndexString = self.consoleVCColumnTextField.text;
+    NSString* inputString = self.inputTextField.text;
     
-    if ([self isValidRowIndexInput:inputRowIndexString] && [self isValidColumnIndexInput:inputColumnIndexString]) {
-        
-        NSUInteger inputRowIndex = [inputRowIndexString integerValue];
-        NSUInteger inputColIndex = [inputColumnIndexString integerValue];
+    if ([self isValidInput:inputString]) {
+        NSArray<NSString*>* inputArray = [inputString componentsSeparatedByString:@" "];
+        NSUInteger inputRowIndex = [inputArray[0] integerValue];
+        NSUInteger inputColIndex = [inputArray[1] integerValue];
         
         Cell* selectedCell = [self.gameEngine.gameBoard cellAtRowIndex:inputRowIndex columnIndex:inputColIndex];
         if (selectedCell.isChecked) {
@@ -119,10 +121,9 @@
         
     } else {
         NSLog(@"Invalid input. Try again!");
-        NSLog(@"***Expected input: a digit <= %tu, followed by another digit <= %tu***", self.gameEngine.gameBoard.numberOfRows - 1, self.gameEngine.gameBoard.numberOfColumns - 1);
+        NSLog(@"***Expected input: a digit <= %tu, followed by space, followed by another digit <= %tu***", self.gameEngine.gameBoard.numberOfRows - 1, self.gameEngine.gameBoard.numberOfColumns - 1);
     }
-    self.consoleVCRowTextField.text = @"";
-    self.consoleVCColumnTextField.text = @"";
+    self.inputTextField.text = @"";
 }
 
 - (IBAction)onConsoleVCPrintStateButtonClick:(id)sender {

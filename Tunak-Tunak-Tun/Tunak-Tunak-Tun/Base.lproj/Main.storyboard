@@ -212,13 +212,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HD1-x6-TB2">
-                                <rect key="frame" x="142" y="407" width="32" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PPa-0R-i8S">
-                                <rect key="frame" x="224" y="407" width="32" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="rowIndex' 'columnIndex " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qEl-PR-jqt">
+                                <rect key="frame" x="115" y="441" width="184.5" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="184.5" id="UYQ-Ai-jLf"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -227,27 +225,22 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aln-xS-DDI" firstAttribute="centerX" secondItem="0P5-LT-41I" secondAttribute="centerX" id="04m-Rq-bTc"/>
-                            <constraint firstItem="HD1-x6-TB2" firstAttribute="leading" secondItem="0P5-LT-41I" secondAttribute="leading" constant="142" id="5Sp-aS-Gkp"/>
-                            <constraint firstItem="PPa-0R-i8S" firstAttribute="width" secondItem="HD1-x6-TB2" secondAttribute="width" id="74f-Yq-JIg"/>
-                            <constraint firstItem="HD1-x6-TB2" firstAttribute="top" secondItem="6wm-Tx-Xcj" secondAttribute="bottom" constant="7.5" id="BqF-T1-3SN"/>
-                            <constraint firstItem="PPa-0R-i8S" firstAttribute="top" secondItem="6wm-Tx-Xcj" secondAttribute="bottom" constant="7.5" id="IGV-4r-kSA"/>
+                            <constraint firstItem="qEl-PR-jqt" firstAttribute="top" secondItem="6wm-Tx-Xcj" secondAttribute="bottom" constant="41.5" id="IQ2-ht-zCi"/>
                             <constraint firstItem="0P5-LT-41I" firstAttribute="bottom" secondItem="aln-xS-DDI" secondAttribute="bottom" constant="338" id="JNC-0a-VXn"/>
                             <constraint firstItem="6wm-Tx-Xcj" firstAttribute="centerX" secondItem="0P5-LT-41I" secondAttribute="centerX" id="PCd-zC-q2S"/>
                             <constraint firstItem="fcQ-vD-0BX" firstAttribute="top" secondItem="0P5-LT-41I" secondAttribute="top" constant="35" id="Rmu-g1-6QT"/>
                             <constraint firstItem="fcQ-vD-0BX" firstAttribute="centerX" secondItem="0P5-LT-41I" secondAttribute="centerX" id="S4C-pK-ftZ"/>
-                            <constraint firstItem="HD1-x6-TB2" firstAttribute="height" secondItem="PPa-0R-i8S" secondAttribute="height" id="UHt-qQ-uTT"/>
+                            <constraint firstItem="qEl-PR-jqt" firstAttribute="centerX" secondItem="0P5-LT-41I" secondAttribute="centerX" id="TaA-2E-EGJ"/>
                             <constraint firstItem="tFM-oU-jKJ" firstAttribute="top" secondItem="aln-xS-DDI" secondAttribute="bottom" constant="23" id="X4x-1Z-TnS"/>
                             <constraint firstItem="tFM-oU-jKJ" firstAttribute="centerX" secondItem="0P5-LT-41I" secondAttribute="centerX" id="au0-j0-Jiz"/>
-                            <constraint firstItem="0P5-LT-41I" firstAttribute="trailing" secondItem="PPa-0R-i8S" secondAttribute="trailing" constant="158" id="hWZ-Cx-NlJ"/>
                             <constraint firstItem="6wm-Tx-Xcj" firstAttribute="top" secondItem="fcQ-vD-0BX" secondAttribute="bottom" constant="39" id="jSX-EP-gj5"/>
+                            <constraint firstItem="aln-xS-DDI" firstAttribute="top" secondItem="qEl-PR-jqt" secondAttribute="bottom" constant="18" id="k5y-cJ-HL5"/>
                             <constraint firstItem="0P5-LT-41I" firstAttribute="bottom" secondItem="tFM-oU-jKJ" secondAttribute="bottom" constant="280" id="tDV-9g-Jp6"/>
-                            <constraint firstItem="PPa-0R-i8S" firstAttribute="leading" secondItem="HD1-x6-TB2" secondAttribute="trailing" constant="50" id="wB1-L4-hgK"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="consoleVCColumnTextField" destination="PPa-0R-i8S" id="9hX-re-F3f"/>
                         <outlet property="consoleVCEnterButton" destination="aln-xS-DDI" id="CC9-di-Pce"/>
-                        <outlet property="consoleVCRowTextField" destination="HD1-x6-TB2" id="TQK-vp-MUv"/>
+                        <outlet property="inputTextField" destination="qEl-PR-jqt" id="xj1-mC-9ki"/>
                         <outlet property="matrixLabel" destination="6wm-Tx-Xcj" id="Kgo-TI-4aH"/>
                         <outlet property="usernameLabel" destination="fcQ-vD-0BX" id="56F-go-fiV"/>
                     </connections>
