@@ -19,7 +19,7 @@
 @implementation ConsoleViewController
 
 - (void)refreshView {
-    self.usernameLabel.text = self.username;
+    self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
     self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
     self.consoleVCEnterButton.enabled = YES;
     self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
-    self.usernameLabel.text = self.username;
+    self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
     [self.gameEngine printBoardState];
     // Do any additional setup after loading the view.
 }
@@ -88,7 +88,6 @@
         } else {
             [self.gameEngine selectCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex byPlayer:self.gameEngine.players[1]];
             self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
-            self.matrixLabel.hidden = NO;
             [self.gameEngine printBoardState];
             
                 if (self.gameEngine.freeCellsAmount == 0 || self.gameEngine.isGameOver) {
@@ -104,7 +103,6 @@
                 } else {
                     [self.gameEngine CPUSelects];
                     self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
-                    self.matrixLabel.hidden = NO;
                     [self.gameEngine printBoardState];
                     
                     if (self.gameEngine.freeCellsAmount == 0 || self.gameEngine.isGameOver) {

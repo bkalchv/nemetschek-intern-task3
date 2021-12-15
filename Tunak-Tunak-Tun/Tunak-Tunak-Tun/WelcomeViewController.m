@@ -34,7 +34,7 @@
     } else {
         username = self.usernameTextField.text;
     }
-    [self showConsoleViewControllerWithUsername:[NSString stringWithFormat: @"It's up to you, %@!", username]];
+    [self showConsoleViewControllerWithUsername:username];
 }
 
 /*
