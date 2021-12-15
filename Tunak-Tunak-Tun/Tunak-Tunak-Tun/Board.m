@@ -31,8 +31,7 @@
 }
 
 -(NSArray<Cell*>*)row:(NSUInteger)rowIndex {
-    NSMutableArray* rowArray = [[NSMutableArray<Cell*> alloc] init];
-
+    NSMutableArray<Cell*>* rowArray = [[NSMutableArray<Cell*> alloc] init];
     for (NSUInteger columnIndex = 0; columnIndex < self.numberOfColumns; ++columnIndex) {
         [rowArray addObject: [self cellAtRowIndex:rowIndex columnIndex:columnIndex]];
     }

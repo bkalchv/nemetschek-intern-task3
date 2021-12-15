@@ -13,7 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Engine : NSObject
 @property (nonatomic, strong) Board* gameBoard;
-@property (nonatomic, strong) NSArray<Player*>* players;
+@property (nonatomic, strong) Player* player1;
+@property (nonatomic, strong) Player* player2;
+//@property (nonatomic, strong) NSArray<Player*>* players;
 @property (nonatomic) NSUInteger freeCellsAmount;
 @property (nonatomic) BOOL hasFreeCells;
 @property (nonatomic) BOOL isGameOver;

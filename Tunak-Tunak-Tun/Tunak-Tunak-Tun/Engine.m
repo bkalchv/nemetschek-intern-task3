@@ -23,14 +23,15 @@
 - (instancetype)initWithPlayersName:(NSString*)playersName {
     self = [self init];
     if (self) {
-        self.players =  [NSArray  arrayWithObjects: [[Player alloc] initPlayerWithName:@"CPU" withId:0 withSign:CellStateO], [[Player alloc] initPlayerWithName:playersName withId:1 withSign:CellStateX], nil];
+//        self.players =  [NSArray  arrayWithObjects: [[Player alloc] initPlayerWithName:@"CPU" withId:0 withSign:CellStateO], [[Player alloc] initPlayerWithName:playersName withId:1 withSign:CellStateX], nil];
+        self.player1 = [[Player alloc] initPlayerWithName:playersName withId:1 withSign:CellStateX];
+        self.player2 = [[Player alloc] initPlayerWithName:@"CPU" withId:1 withSign:CellStateO];
     }
     return self;
 }
 
 - (void)printBoardState {
     [self.gameBoard printState];
-    
 }
 
 - (void)changeCellStateAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex toState:(CellState)state {
@@ -49,7 +50,7 @@
         if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign:player.sign])
         {
             self.isGameOver = YES;
-            NSLog(@"Player: %tu won!", player.playerID);
+            NSLog(@"%@ won!", player.name);
             NSLog(@"Game over!");
             return;
         } else {
@@ -84,8 +85,8 @@
 
 - (void)CPUSelects {
     if (self.hasFreeCells) {
-    Cell* CPUCellToSelect = [self getRandomFreeCell];
-    [self selectCellAtRowIndex:CPUCellToSelect.rowIndex atColumnIndex:CPUCellToSelect.colIndex byPlayer:self.players[0]];
+        Cell* CPUCellToSelect = [self getRandomFreeCell];
+        [self selectCellAtRowIndex:CPUCellToSelect.rowIndex atColumnIndex:CPUCellToSelect.colIndex byPlayer:self.player2];
     }
 }
 

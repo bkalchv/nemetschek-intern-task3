@@ -86,7 +86,7 @@
         if (selectedCell.isChecked) {
             NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
         } else {
-            [self.gameEngine selectCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex byPlayer:self.gameEngine.players[1]];
+            [self.gameEngine selectCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex byPlayer:self.gameEngine.player1];
             self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
             [self.gameEngine printBoardState];
             
@@ -97,7 +97,7 @@
                         
                     } else if(self.gameEngine.isGameOver) {
                         [self.consoleVCEnterButton setEnabled:NO];
-                        [self showPlayerWonAlert: self.gameEngine.players[1] ];
+                        [self showPlayerWonAlert: self.gameEngine.player1];
                     }
                     
                 } else {
@@ -111,7 +111,7 @@
                             [self showDrawAlert];
                         } else if(self.gameEngine.isGameOver) {
                             [self.consoleVCEnterButton setEnabled:NO];
-                            [self showPlayerWonAlert: self.gameEngine.players[0] ];
+                            [self showPlayerWonAlert: self.gameEngine.player2];
                         }
                     }
                 }
