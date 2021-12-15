@@ -17,13 +17,41 @@
 
 @implementation ConsoleViewController
 
+- (void)refreshView {
+    self.usernameLabel.text = self.username;
+    self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
+    self.consoleVCEnterButton.enabled = YES;
+    self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
+    [self.gameEngine printBoardState];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    [self refreshView];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.gameEngine = [[Engine alloc] initWithPlayersName:@"Bogdan"];
-    self.matrixLabel.hidden = YES;
+    self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
     self.usernameLabel.text = self.username;
     [self.gameEngine printBoardState];
     // Do any additional setup after loading the view.
+}
+
+- (void)showDrawAlert {
+    UIAlertController* drawAlert = [UIAlertController alertControllerWithTitle: @"It's a draw!" message: [NSString stringWithString:self.gameEngine.gameBoard.stateString] preferredStyle:UIAlertControllerStyleAlert];
+    [drawAlert addAction: [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+        [self showOneMoreTimeViewController];
+    } ]];
+    [self presentViewController:drawAlert animated:YES completion:nil];
+}
+
+- (void)showPlayerWonAlert:(Player*)player {
+    UIAlertController* playerWonAlert = [UIAlertController alertControllerWithTitle: [NSString stringWithFormat:@"Player %@ won!", player.name] message: [NSString stringWithString:self.gameEngine.gameBoard.stateString] preferredStyle:UIAlertControllerStyleAlert];
+    [playerWonAlert addAction: [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+        [self showOneMoreTimeViewController];
+    } ]];
+    [self presentViewController:playerWonAlert animated:YES completion:nil];
 }
 
 -(NSString*)getAllowedInput:(NSUInteger)dimension {
@@ -40,6 +68,7 @@
 - (void)showOneMoreTimeViewController {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     OneMoreTimeViewController* oneMoreTimeViewController = [storyboard instantiateViewControllerWithIdentifier:@"OneMoreTimeViewController"];
+    self.presentationController.delegate = self;
     // delegate?
     [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
 }
@@ -64,16 +93,28 @@
                 if (self.gameEngine.freeCellsAmount == 0 || self.gameEngine.isGameOver) {
                     if (self.gameEngine.freeCellsAmount == 0) {
                         NSLog(@"It's a draw. Nobody wins!");
+                        [self showDrawAlert];
                         
                     } else if(self.gameEngine.isGameOver) {
                         [self.consoleVCEnterButton setEnabled:NO];
+                        //[self showPlayerWonAlert: [self.gameEngine players[1]]];
                     }
-                    [self showOneMoreTimeViewController];
+                    
                 } else {
                     [self.gameEngine CPUSelects];
-                    self.matrixLabel.text =[self.gameEngine.gameBoard stateString];
+                    self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
                     self.matrixLabel.hidden = NO;
                     [self.gameEngine printBoardState];
+                    
+                    if (self.gameEngine.freeCellsAmount == 0 || self.gameEngine.isGameOver) {
+                        if (self.gameEngine.freeCellsAmount == 0) {
+                            NSLog(@"It's a draw. Nobody wins!");
+                            [self showDrawAlert];
+                        } else if(self.gameEngine.isGameOver) {
+                            [self.consoleVCEnterButton setEnabled:NO];
+                            //[self showPlayerWonAlert: [self.gameEngine players[0]]];
+                        }
+                    }
                 }
         }
         

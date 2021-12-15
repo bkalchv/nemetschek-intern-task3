@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-@interface ConsoleViewController : UIViewController
+@interface ConsoleViewController : UIViewController <UIAdaptivePresentationControllerDelegate>
 @property (nonatomic, strong) Engine* gameEngine;
 @property (weak, nonatomic) NSString* username;
 @end

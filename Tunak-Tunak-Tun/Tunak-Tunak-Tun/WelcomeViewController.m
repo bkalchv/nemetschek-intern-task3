@@ -30,7 +30,7 @@
 - (IBAction)onGameOnButtonClick:(id)sender {
     NSString* username = [[NSString alloc] init];
     if ([self.usernameTextField.text isEqualToString:@""]) {
-        username = @"Jackass";
+        username = @"Annonymous Mouse";
     } else {
         username = self.usernameTextField.text;
     }
