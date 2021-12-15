@@ -33,9 +33,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
+    self.inputTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
     [self.gameEngine printBoardState];
     // Do any additional setup after loading the view.
+}
+
+-(void)showInvalidInputAlert {
+    UIAlertController* invalidInputAlert = [UIAlertController alertControllerWithTitle: @"Invalid input!" message: [NSString stringWithFormat: @"*Expected input format:*\n a digit <= %tu, followed by space, followed by another digit <= %tu", self.gameEngine.gameBoard.numberOfRows - 1, self.gameEngine.gameBoard.numberOfColumns - 1] preferredStyle:UIAlertControllerStyleAlert];
+    [invalidInputAlert addAction: [UIAlertAction actionWithTitle:@"Try again" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        self.inputTextField.text = @"";
+    } ]];
+    [self presentViewController:invalidInputAlert animated:YES completion:nil];
 }
 
 - (void)showDrawAlert {
@@ -64,9 +73,16 @@
     return inputUInteger >= 0 && inputUInteger < self.gameEngine.gameBoard.numberOfColumns;
 }
 
+- (BOOL)isStringNumeric:(NSString *)text
+{
+    NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
+    NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:text];
+    return [alphaNums isSupersetOfSet:inStringSet];
+}
+
 -(BOOL)isValidInput:(NSString*)input {
     NSArray<NSString*>* inputArray = [input componentsSeparatedByString:@" "];
-    return inputArray.count == 2 && [self isValidRowIndexInput:inputArray[0]] && [self isValidColumnIndexInput:inputArray[1]];
+    return inputArray.count == 2 && [self isValidRowIndexInput:inputArray[0]] && [self isValidColumnIndexInput:inputArray[1]] && [self isStringNumeric:inputArray[0]] && [self isStringNumeric:inputArray[1]];
 }
 
 - (void)showOneMoreTimeViewController {
@@ -120,6 +136,7 @@
         }
         
     } else {
+        [self showInvalidInputAlert];
         NSLog(@"Invalid input. Try again!");
         NSLog(@"***Expected input: a digit <= %tu, followed by space, followed by another digit <= %tu***", self.gameEngine.gameBoard.numberOfRows - 1, self.gameEngine.gameBoard.numberOfColumns - 1);
     }
