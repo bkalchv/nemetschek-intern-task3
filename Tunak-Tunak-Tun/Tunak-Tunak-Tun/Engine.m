@@ -34,14 +34,14 @@
 }
 
 - (void)changeCellStateAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex toState:(CellState)state {
-    [self.gameBoard.boardMatrix[rowIndex][columnIndex] setState:state];
-    [self.gameBoard.boardMatrix[rowIndex][columnIndex] setIsChecked:YES];
+    [[self.gameBoard cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:state];
+    [[self.gameBoard cellAtRowIndex:rowIndex columnIndex:columnIndex] setIsChecked:YES];
 }
 
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player {
     if (self.hasFreeCells) {
         [self changeCellStateAtRowIndex:rowIndex atColumnIndex:columnIndex toState:player.sign];
-        Cell* selectedCell = [self getCellAtRowIndex:rowIndex atColumnIndex:columnIndex];
+        Cell* selectedCell = [self.gameBoard cellAtRowIndex:rowIndex columnIndex:columnIndex];
         //[self.players[player.playerID].selectedCells addObject: selectedCell];
         self.freeCellsAmount -= 1;
         self.hasFreeCells = (self.freeCellsAmount != 0);
@@ -61,30 +61,25 @@
 
 }
 
--(NSUInteger)getRandomRowIndex{
+-(NSUInteger)randomIndex:(NSUInteger)maxIndex {
     NSUInteger lowerBoundIndex = 0;
-    NSUInteger upperBoundIndex = self.gameBoard.numberOfRows - 1;
-    NSUInteger randomRowIndex = lowerBoundIndex + arc4random() % (upperBoundIndex - lowerBoundIndex + 1);
-    
-    return randomRowIndex;
+    NSUInteger upperBoundIndex = maxIndex;
+    NSUInteger randomIndex = lowerBoundIndex + arc4random() % (upperBoundIndex - lowerBoundIndex + 1);
+    return randomIndex;
 }
 
--(NSUInteger)getRandomColIndex{
-    NSUInteger lowerBoundIndex = 0;
-    NSUInteger upperBoundIndex = self.gameBoard.numberOfColumns - 1;
-    NSUInteger randomColumnIndex = lowerBoundIndex + arc4random() % (upperBoundIndex - lowerBoundIndex + 1);
-    
-    return randomColumnIndex;
+//TODO: - use a separate collection for the free cells instead of recursice calls to random (calculated property
+-(NSArray<Cell*> *)freeCells {
+    NSMutableArray<Cell*>* freeCellsArray = [[NSMutableArray<Cell*> alloc] init];
+    for (Cell* cell in self.gameBoard.boardMatrixArray) {
+        if (!cell.isChecked) [freeCellsArray addObject:cell];
+    }
+    return freeCellsArray;
 }
-
-// TODO: - use a separate collection for the free cells instead of recursice calls to random (calculated property
-//-(NSArray *)freeCells {
-//    
-//}
 
 -(Cell*)getRandomFreeCell{
-    Cell* currentCell = self.gameBoard.boardMatrix[[self getRandomRowIndex]][[self getRandomColIndex]];
-    return (currentCell.isChecked) ? [self getRandomFreeCell] : currentCell;
+    NSArray<Cell*>* freeCells = [self freeCells];
+    return [freeCells objectAtIndex: [self randomIndex:([freeCells count] - 1)] ];
 }
 
 - (void)CPUSelects {
@@ -94,13 +89,9 @@
     }
 }
 
-- (Cell*)getCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex {
-    return self.gameBoard.boardMatrix[rowIndex][columnIndex];
-}
-
 - (BOOL)checkColumnForCellSelection:(Cell*)cell withSign:(CellState)sign {
     for (size_t i = 0; i < self.gameBoard.numberOfColumns; ++i) {
-        if (self.gameBoard.boardMatrix[cell.rowIndex][i].state != sign) break;
+        if ([self.gameBoard cellAtRowIndex:cell.rowIndex columnIndex:i].state != sign) break;
         if (i + 1 == self.gameBoard.numberOfColumns) return true;
     }
     return false;
@@ -108,7 +99,7 @@
 
 -(BOOL)checkRowForCellSelection:(Cell*)cell withSign:(CellState)sign {
     for (size_t i = 0; i < self.gameBoard.numberOfRows; ++i) {
-        if (self.gameBoard.boardMatrix[i][cell.colIndex].state != sign) break;
+        if ([self.gameBoard cellAtRowIndex:i columnIndex:cell.colIndex].state != sign) break;
         if (i + 1 == self.gameBoard.numberOfRows) return true;
     }
     return false;
@@ -117,7 +108,7 @@
 -(BOOL)checkDiagonalForCellSelection:(Cell*)cell withSign:(CellState)sign {
     if(cell.rowIndex == cell.colIndex) {
         for(int i = 0; i < self.gameBoard.numberOfRows; ++i) {
-            if(self.gameBoard.boardMatrix[i][i].state != sign) break;
+            if([self.gameBoard cellAtRowIndex:i columnIndex:i].state != sign) break;
             if(i + 1 == self.gameBoard.numberOfRows) return true;
         }
     }
@@ -127,7 +118,7 @@
 -(BOOL)checkAntiDiagonalForCellSelection:(Cell*)cell withSign:(CellState)sign {
     if(cell.rowIndex + cell.colIndex + 1 == self.gameBoard.numberOfRows) {
         for(int i = 0; i < self.gameBoard.numberOfRows; ++i) {
-            if(self.gameBoard.boardMatrix[i][(self.gameBoard.numberOfRows - 1) - i].state != sign) break;
+            if([self.gameBoard cellAtRowIndex:i columnIndex:(self.gameBoard.numberOfRows - 1)].state !=sign) break;
             if(i + 1 == self.gameBoard.numberOfRows) return true;
         }
     }

@@ -15,21 +15,32 @@
         
         self.numberOfRows = rowsAmount;
         self.numberOfColumns = rowsAmount;
-        self.boardMatrix = [[NSMutableArray<NSMutableArray<Cell*>*> alloc] init];
+        self.boardMatrixArray = [[NSMutableArray<Cell*> alloc] init];
         
         for (size_t r = 0; r < self.numberOfRows; ++r) {
-            NSMutableArray<Cell*>* currentRow = [[NSMutableArray<Cell*> alloc] init];
             for (size_t c = 0; c < self.numberOfColumns; ++c) {
-                [currentRow addObject: [[Cell alloc] initWithState:CellStateEmpty atRow:r atColumn:c]];
+                [self.boardMatrixArray addObject: [[Cell alloc] initWithState:CellStateEmpty atRow:r atColumn:c]];
             }
-            [self.boardMatrix addObject:currentRow];
         }
     }
     return self;
 }
 
--(void)printRow:(NSUInteger)row {
-    NSString* rowToPrint = [[[NSArray alloc] initWithArray: self.boardMatrix[row]] componentsJoinedByString:@"  "];
+-(Cell*)cellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)colIndex {
+    return self.boardMatrixArray[rowIndex * self.numberOfColumns + colIndex];
+}
+
+-(NSArray<Cell*>*)row:(NSUInteger)rowIndex {
+    NSMutableArray* rowArray = [[NSMutableArray<Cell*> alloc] init];
+
+    for (NSUInteger columnIndex = 0; columnIndex < self.numberOfColumns; ++columnIndex) {
+        [rowArray addObject: [self cellAtRowIndex:rowIndex columnIndex:columnIndex]];
+    }
+    return rowArray;
+}
+
+-(void)printRow:(NSUInteger)rowIndex {
+    NSString* rowToPrint = [[self row:rowIndex] componentsJoinedByString:@"  "];
     NSLog(@"%@", rowToPrint);
 }
 
@@ -43,7 +54,7 @@
 -(NSString*)stateString {
     NSString* state = [[NSString alloc] init];
     for (NSUInteger r = 0; r < self.numberOfRows; ++r) {
-        NSString* rowToString = [self.boardMatrix[r] componentsJoinedByString:@"   "];
+        NSString* rowToString = [[self row:r] componentsJoinedByString:@"   "];
         if (r != self.numberOfRows - 1) rowToString = [NSString stringWithFormat:@"%@\n", rowToString];
         state = [state stringByAppendingString:rowToString];
     }

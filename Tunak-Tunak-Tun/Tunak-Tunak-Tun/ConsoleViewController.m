@@ -82,7 +82,7 @@
         NSUInteger inputRowIndex = [inputRowIndexString integerValue];
         NSUInteger inputColIndex = [inputColumnIndexString integerValue];
         
-        Cell* selectedCell = [self.gameEngine getCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex];
+        Cell* selectedCell = [self.gameEngine.gameBoard cellAtRowIndex:inputRowIndex columnIndex:inputColIndex];
         if (selectedCell.isChecked) {
             NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
         } else {

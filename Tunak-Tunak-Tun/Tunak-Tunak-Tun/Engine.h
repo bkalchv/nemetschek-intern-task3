@@ -24,9 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)changeCellStateAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex toState:(CellState)state;
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player;
 - (void)CPUSelects;
-- (Cell*)getCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex;
 - (BOOL)areWinningConditionsFulfilledForSelectionOfCell:(Cell*)cell withSign:(CellState)sign;
-
 @end
 
 NS_ASSUME_NONNULL_END
