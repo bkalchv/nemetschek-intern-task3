@@ -9,7 +9,8 @@
 #import "OneMoreTimeViewController.h"
 
 @interface ConsoleViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *consoleVCTextField;
+@property (weak, nonatomic) IBOutlet UITextField *consoleVCRowTextField;
+@property (weak, nonatomic) IBOutlet UITextField *consoleVCColumnTextField;
 @property (weak, nonatomic) IBOutlet UIButton *consoleVCEnterButton;
 @property (weak, nonatomic) IBOutlet UILabel *matrixLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -54,15 +55,14 @@
     [self presentViewController:playerWonAlert animated:YES completion:nil];
 }
 
--(NSString*)getAllowedInput:(NSUInteger)dimension {
-    NSString* indexDecimals = @"0123456789";
-    NSString* allowedDecimals = [indexDecimals substringToIndex:(dimension-1)];
-    return allowedDecimals;
+- (BOOL)isValidRowIndexInput:(NSString*)input {
+    NSUInteger inputUInteger = [input integerValue];
+    return inputUInteger >= 0 && inputUInteger < self.gameEngine.gameBoard.numberOfRows;
 }
 
-- (BOOL)isValidInput:(NSString*)input {
-    NSString* allowedInputDecimals = [self getAllowedInput: self.gameEngine.gameBoard.numberOfRows + 1];
-    return input.length == 2 && [[input substringToIndex: 1] rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:allowedInputDecimals]].location != NSNotFound && [[input substringFromIndex:1] rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:allowedInputDecimals]].location != NSNotFound;
+- (BOOL)isValidColumnIndexInput:(NSString*)input {
+    NSUInteger inputUInteger = [input integerValue];
+    return inputUInteger >= 0 && inputUInteger < self.gameEngine.gameBoard.numberOfColumns;
 }
 
 - (void)showOneMoreTimeViewController {
@@ -74,12 +74,13 @@
 }
 
 - (IBAction)onConsoleVCEnterButton:(id)sender {
-    NSString* input = self.consoleVCTextField.text;
+    NSString* inputRowIndexString = self.consoleVCRowTextField.text;
+    NSString* inputColumnIndexString = self.consoleVCColumnTextField.text;
     
-    if ([self isValidInput:input]) {
+    if ([self isValidRowIndexInput:inputRowIndexString] && [self isValidColumnIndexInput:inputColumnIndexString]) {
         
-        NSUInteger inputRowIndex = [input integerValue] / 10;
-        NSUInteger inputColIndex = [input integerValue] % 10;
+        NSUInteger inputRowIndex = [inputRowIndexString integerValue];
+        NSUInteger inputColIndex = [inputColumnIndexString integerValue];
         
         Cell* selectedCell = [self.gameEngine getCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex];
         if (selectedCell.isChecked) {
@@ -97,7 +98,7 @@
                         
                     } else if(self.gameEngine.isGameOver) {
                         [self.consoleVCEnterButton setEnabled:NO];
-                        //[self showPlayerWonAlert: [self.gameEngine players[1]]];
+                        [self showPlayerWonAlert: self.gameEngine.players[1] ];
                     }
                     
                 } else {
@@ -112,7 +113,7 @@
                             [self showDrawAlert];
                         } else if(self.gameEngine.isGameOver) {
                             [self.consoleVCEnterButton setEnabled:NO];
-                            //[self showPlayerWonAlert: [self.gameEngine players[0]]];
+                            [self showPlayerWonAlert: self.gameEngine.players[0] ];
                         }
                     }
                 }
@@ -122,7 +123,8 @@
         NSLog(@"Invalid input. Try again!");
         NSLog(@"***Expected input: a digit <= %tu, followed by another digit <= %tu***", self.gameEngine.gameBoard.numberOfRows - 1, self.gameEngine.gameBoard.numberOfColumns - 1);
     }
-    self.consoleVCTextField.text = @"";
+    self.consoleVCRowTextField.text = @"";
+    self.consoleVCColumnTextField.text = @"";
 }
 
 - (IBAction)onConsoleVCPrintStateButtonClick:(id)sender {
