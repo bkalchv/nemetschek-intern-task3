@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		429BAEF2276B818A007D73C5 /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429BAEF1276B818A007D73C5 /* PreferencesViewController.m */; };
+		429BAEF5276B8E15007D73C5 /* MobileUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429BAEF4276B8E15007D73C5 /* MobileUIViewController.m */; };
 		42A5A0582768DDBB007AD579 /* OneMoreTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5A0572768DDBB007AD579 /* OneMoreTimeViewController.m */; };
 		42A945BB2767515E002767C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945BA2767515E002767C6 /* AppDelegate.m */; };
 		42A945BE2767515E002767C6 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945BD2767515E002767C6 /* SceneDelegate.m */; };
@@ -28,6 +29,8 @@
 /* Begin PBXFileReference section */
 		429BAEF0276B818A007D73C5 /* PreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
 		429BAEF1276B818A007D73C5 /* PreferencesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreferencesViewController.m; sourceTree = "<group>"; };
+		429BAEF3276B8E15007D73C5 /* MobileUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileUIViewController.h; sourceTree = "<group>"; };
+		429BAEF4276B8E15007D73C5 /* MobileUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MobileUIViewController.m; sourceTree = "<group>"; };
 		42A5A0562768DDBB007AD579 /* OneMoreTimeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneMoreTimeViewController.h; sourceTree = "<group>"; };
 		42A5A0572768DDBB007AD579 /* OneMoreTimeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneMoreTimeViewController.m; sourceTree = "<group>"; };
 		42A945B62767515E002767C6 /* Tunak-Tunak-Tun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tunak-Tunak-Tun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +121,8 @@
 				429BAEF1276B818A007D73C5 /* PreferencesViewController.m */,
 				42A945D8276769E9002767C6 /* ConsoleViewController.h */,
 				42A945D9276769E9002767C6 /* ConsoleViewController.m */,
+				429BAEF3276B8E15007D73C5 /* MobileUIViewController.h */,
+				429BAEF4276B8E15007D73C5 /* MobileUIViewController.m */,
 				42A5A0562768DDBB007AD579 /* OneMoreTimeViewController.h */,
 				42A5A0572768DDBB007AD579 /* OneMoreTimeViewController.m */,
 				42A945C52767515F002767C6 /* Assets.xcassets */,
@@ -205,6 +210,7 @@
 				42A945E027678B1B002767C6 /* Engine.m in Sources */,
 				42A945DD27676AC5002767C6 /* Board.m in Sources */,
 				42A945E327678C13002767C6 /* Player.m in Sources */,
+				429BAEF5276B8E15007D73C5 /* MobileUIViewController.m in Sources */,
 				42A945C12767515E002767C6 /* ViewController.m in Sources */,
 				42A945BB2767515E002767C6 /* AppDelegate.m in Sources */,
 				42A945CC2767515F002767C6 /* main.m in Sources */,

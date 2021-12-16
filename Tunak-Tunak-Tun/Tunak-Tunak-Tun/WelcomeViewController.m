@@ -6,10 +6,10 @@
 //
 
 #import "WelcomeViewController.h"
-#import "ConsoleViewController.h"
+#import "PreferencesViewController.h"
 
 @interface WelcomeViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *gameOnButton;
+@property (weak, nonatomic) IBOutlet UIButton *toPreferencesButton;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @end
 
@@ -20,22 +20,25 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)showConsoleViewControllerWithUsername:(NSString*)username {
+- (void)showPreferencesViewControllerWithUsername:(NSString*)username {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ConsoleViewController* consoleViewController = [storyboard instantiateViewControllerWithIdentifier:@"ConsoleViewController"];
-    consoleViewController.username = username;
-    [self presentViewController:consoleViewController animated:YES completion:nil];
+    PreferencesViewController* preferencesViewController = [storyboard instantiateViewControllerWithIdentifier:@"PreferencesViewController"];
+    preferencesViewController.username = username;
+    [self presentViewController:preferencesViewController animated:YES completion:nil];
 }
 
-- (IBAction)onGameOnButtonClick:(id)sender {
+- (IBAction)onToPreferencesButtonClick:(id)sender {
     NSString* username = [[NSString alloc] init];
     if ([self.usernameTextField.text isEqualToString:@""]) {
         username = @"Annonymous Mouse";
     } else {
         username = self.usernameTextField.text;
     }
-    [self showConsoleViewControllerWithUsername:username];
+    [self showPreferencesViewControllerWithUsername:username];
 }
+
+
+
 
 /*
 #pragma mark - Navigation

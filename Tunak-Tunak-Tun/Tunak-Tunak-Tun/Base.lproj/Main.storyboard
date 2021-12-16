@@ -298,7 +298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q3E-OM-Eo7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-197" y="-559"/>
+            <point key="canvasLocation" x="-188" y="-988"/>
         </scene>
         <!--Welcome View Controller-->
         <scene sceneID="knS-In-L1c">
@@ -337,7 +337,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="To preferences"/>
                                 <connections>
-                                    <action selector="onGameOnButtonClick:" destination="l29-XB-j0G" eventType="touchUpInside" id="KEp-cW-Kem"/>
+                                    <action selector="onToPreferencesButtonClick:" destination="l29-XB-j0G" eventType="touchUpInside" id="ivu-0E-y2I"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -358,7 +358,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="gameOnButton" destination="7EP-O0-KnT" id="8Ov-ki-YBh"/>
+                        <outlet property="toPreferencesButton" destination="7EP-O0-KnT" id="mdG-eV-1K0"/>
                         <outlet property="usernameTextField" destination="ILz-AU-dzI" id="6GY-E1-uyr"/>
                     </connections>
                 </viewController>
@@ -366,10 +366,10 @@
             </objects>
             <point key="canvasLocation" x="-2748" y="-988"/>
         </scene>
-        <!--Mobile Controller View-->
+        <!--MobileUI View Controller-->
         <scene sceneID="MiZ-hy-D8j">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="JN5-Rx-dQp" customClass="MobileControllerView" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MobileUIViewController" modalPresentationStyle="fullScreen" id="JN5-Rx-dQp" customClass="MobileUIViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p6a-sD-OzP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -426,9 +426,6 @@
                             <constraint firstItem="shP-a3-0LJ" firstAttribute="bottom" secondItem="wsO-dk-qJQ" secondAttribute="bottom" constant="280" id="v0U-9Z-ao6"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="inputTextField" destination="Nmk-5z-F12" id="ENf-PO-GxZ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sfa-SG-akO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -443,7 +440,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="351" height="300"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="Mp7-cZ-s6m">
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Mp7-cZ-s6m">
                             <size key="itemSize" width="110" height="85"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -527,7 +524,7 @@
                     <size key="freeformSize" width="351" height="300"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-214" y="-1264"/>
+            <point key="canvasLocation" x="-283" y="-1465"/>
         </scene>
         <!--Preferences View Controller-->
         <scene sceneID="ztw-3B-A4U">
@@ -537,7 +534,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Okay, %@name what will it be today?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pI-CJ-HJN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Okay, %@name what will it be today?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pI-CJ-HJN">
                                 <rect key="frame" x="66" y="277" width="298" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -577,7 +574,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Game on!"/>
                                 <connections>
-                                    <action selector="onGameOnButtonClick:" destination="l29-XB-j0G" eventType="touchUpInside" id="kPE-RT-ij8"/>
+                                    <action selector="onGameOnButtonClick:" destination="IGb-go-ybQ" eventType="touchUpInside" id="SrQ-Wt-zrw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -591,10 +588,15 @@
                             <constraint firstItem="6Jw-W6-V2r" firstAttribute="bottom" secondItem="4gS-EA-t97" secondAttribute="bottom" constant="635" id="ri8-8B-WSO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="gameOnButton" destination="DZW-ul-zaP" id="mDu-2w-KOX"/>
+                        <outlet property="preferenceUISwitchButton" destination="MT2-d7-JbX" id="lMT-cu-kFo"/>
+                        <outlet property="preferencesMessageLabel" destination="5pI-CJ-HJN" id="85L-p8-2yW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHY-pK-09X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2036" y="-988"/>
+            <point key="canvasLocation" x="-1884" y="-988"/>
         </scene>
     </scenes>
     <resources>
