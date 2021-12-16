@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		429BAEF2276B818A007D73C5 /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429BAEF1276B818A007D73C5 /* PreferencesViewController.m */; };
 		42A5A0582768DDBB007AD579 /* OneMoreTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5A0572768DDBB007AD579 /* OneMoreTimeViewController.m */; };
 		42A945BB2767515E002767C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945BA2767515E002767C6 /* AppDelegate.m */; };
 		42A945BE2767515E002767C6 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945BD2767515E002767C6 /* SceneDelegate.m */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		429BAEF0276B818A007D73C5 /* PreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
+		429BAEF1276B818A007D73C5 /* PreferencesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreferencesViewController.m; sourceTree = "<group>"; };
 		42A5A0562768DDBB007AD579 /* OneMoreTimeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneMoreTimeViewController.h; sourceTree = "<group>"; };
 		42A5A0572768DDBB007AD579 /* OneMoreTimeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneMoreTimeViewController.m; sourceTree = "<group>"; };
 		42A945B62767515E002767C6 /* Tunak-Tunak-Tun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tunak-Tunak-Tun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,16 +112,18 @@
 				42A945BF2767515E002767C6 /* ViewController.h */,
 				42A945C02767515E002767C6 /* ViewController.m */,
 				42A945C22767515E002767C6 /* Main.storyboard */,
-				42A5A0562768DDBB007AD579 /* OneMoreTimeViewController.h */,
-				42A5A0572768DDBB007AD579 /* OneMoreTimeViewController.m */,
 				42A945D2276756C5002767C6 /* WelcomeViewController.h */,
 				42A945D3276756C5002767C6 /* WelcomeViewController.m */,
+				429BAEF0276B818A007D73C5 /* PreferencesViewController.h */,
+				429BAEF1276B818A007D73C5 /* PreferencesViewController.m */,
+				42A945D8276769E9002767C6 /* ConsoleViewController.h */,
+				42A945D9276769E9002767C6 /* ConsoleViewController.m */,
+				42A5A0562768DDBB007AD579 /* OneMoreTimeViewController.h */,
+				42A5A0572768DDBB007AD579 /* OneMoreTimeViewController.m */,
 				42A945C52767515F002767C6 /* Assets.xcassets */,
 				42A945C72767515F002767C6 /* LaunchScreen.storyboard */,
 				42A945CA2767515F002767C6 /* Info.plist */,
 				42A945CB2767515F002767C6 /* main.m */,
-				42A945D8276769E9002767C6 /* ConsoleViewController.h */,
-				42A945D9276769E9002767C6 /* ConsoleViewController.m */,
 				42A5A0592768DEF8007AD579 /* GameComponents */,
 			);
 			path = "Tunak-Tunak-Tun";
@@ -205,6 +210,7 @@
 				42A945CC2767515F002767C6 /* main.m in Sources */,
 				42A5A0582768DDBB007AD579 /* OneMoreTimeViewController.m in Sources */,
 				42A945BE2767515E002767C6 /* SceneDelegate.m in Sources */,
+				429BAEF2276B818A007D73C5 /* PreferencesViewController.m in Sources */,
 				42A945D7276758F5002767C6 /* TunakCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
