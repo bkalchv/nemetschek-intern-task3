@@ -36,7 +36,6 @@
 
 - (void)changeCellStateAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex toState:(CellState)state {
     [[self.gameBoard cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:state];
-    [[self.gameBoard cellAtRowIndex:rowIndex columnIndex:columnIndex] setIsChecked:YES];
 }
 
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player {

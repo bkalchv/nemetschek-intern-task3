@@ -37,7 +37,7 @@
 }
 
 - (BOOL)isChecked {
-    return self.state == CellStateEmpty;
+    return self.state != CellStateEmpty;
 }
 
 @end
