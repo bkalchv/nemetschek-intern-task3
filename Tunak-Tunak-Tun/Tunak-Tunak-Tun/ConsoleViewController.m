@@ -101,7 +101,7 @@
         NSUInteger inputColIndex = [inputArray[1] integerValue];
         
         Cell* selectedCell = [self.gameEngine.gameBoard cellAtRowIndex:inputRowIndex columnIndex:inputColIndex];
-        if (selectedCell.isChecked) {
+        if ([selectedCell isChecked]) {
             NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
         } else {
             [self.gameEngine selectCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex byPlayer:self.gameEngine.player1];

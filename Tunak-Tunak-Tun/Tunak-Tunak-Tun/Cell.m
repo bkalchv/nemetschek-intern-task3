@@ -11,13 +11,7 @@
 - (instancetype)initWithState:(CellState)state atRow:(NSUInteger)row atColumn:(NSUInteger)col {
     self = [super init];
     if (self) {
-        if (state == CellStateEmpty) {
-            self.isChecked = NO;
-            self.state = CellStateEmpty;
-        } else {
-            self.isChecked = YES;
-            self.state = state;
-        }
+        self.state = state;
         self.rowIndex = row;
         self.colIndex = col;
     }
@@ -41,4 +35,9 @@
     
     return result;
 }
+
+- (BOOL)isChecked {
+    return self.state == CellStateEmpty;
+}
+
 @end

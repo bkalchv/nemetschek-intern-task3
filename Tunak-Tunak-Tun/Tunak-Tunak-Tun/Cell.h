@@ -17,11 +17,11 @@ typedef NS_ENUM(NSInteger, CellState) {
 
 @interface Cell : NSObject
 @property (nonatomic) CellState state;
-@property (nonatomic) BOOL isChecked;
 @property (nonatomic) NSUInteger rowIndex;
 @property (nonatomic) NSUInteger colIndex;
 - (instancetype)initWithState:(CellState)state atRow:(NSUInteger)row atColumn:(NSUInteger)col;
 - (NSString*)description;
+- (BOOL)isChecked;
 @end
 
 
