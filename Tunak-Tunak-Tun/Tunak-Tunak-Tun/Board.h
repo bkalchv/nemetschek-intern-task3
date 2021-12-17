@@ -6,9 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Cell.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@class Cell;
 
 @interface Board : NSObject
 @property (nonatomic, strong) NSMutableArray<Cell*>* boardMatrixArray;
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)printState;
 -(NSString*)stateString;
 -(Cell*)cellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)colIndex;
+
 @end
 
 NS_ASSUME_NONNULL_END

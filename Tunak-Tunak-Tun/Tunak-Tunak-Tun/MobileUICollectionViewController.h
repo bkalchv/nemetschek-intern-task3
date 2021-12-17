@@ -10,8 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol MobileUICollectionViewControllerDelegate <NSObject>
+- (void) selectCell:(NSIndexPath*)selectedCellIndexPath;
+@end
+
 @interface MobileUICollectionViewController : UICollectionViewController
 @property (nonatomic, strong) Board* board;
+@property (nonatomic, strong)id <MobileUICollectionViewControllerDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

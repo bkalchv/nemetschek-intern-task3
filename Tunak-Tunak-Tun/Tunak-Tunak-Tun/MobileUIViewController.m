@@ -8,6 +8,7 @@
 #import "MobileUIViewController.h"
 #import "Engine.h"
 #import "MobileUICollectionViewController.h"
+#import "MobileUICollectionViewCell.h"
 
 @interface MobileUIViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *mobileUIUsernameLabel;
@@ -19,7 +20,6 @@
 - (void)refreshView {
     self.mobileUIUsernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
     self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
-    //self.consoleVCEnterButton.enabled = YES;
     [self.gameEngine printBoardState];
 }
 
@@ -30,7 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.mobileUIUsernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
     self.mobileUIInputTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     // Do any additional setup after loading the view.
@@ -47,8 +46,13 @@
     if ([[segue identifier] isEqualToString:@"ShowMobileUICollectionView"]) {
         MobileUICollectionViewController* mobileUICollectionViewController = [segue destinationViewController];
         self.gameEngine = [[Engine alloc] initWithPlayersName: self.username];
+        mobileUICollectionViewController.delegate = self;
         mobileUICollectionViewController.board = self.gameEngine.gameBoard;
     }
+}
+
+- (void) selectCell:(NSIndexPath*)selectedCellIndexPath {
+
 }
 
 

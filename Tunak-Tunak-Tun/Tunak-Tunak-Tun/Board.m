@@ -6,6 +6,7 @@
 //
 
 #import "Board.h"
+#import "Cell.h"
 
 @implementation Board
 - (instancetype)initWithRows:(NSUInteger)rowsAmount {

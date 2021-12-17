@@ -6,6 +6,7 @@
 //
 
 #import "MobileUICollectionViewController.h"
+#import "MobileUICollectionViewCell.h"
 
 @interface MobileUICollectionViewController ()
 
@@ -23,8 +24,12 @@ static NSString * const reuseIdentifier = @"Cell";
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     // Do any additional setup after loading the view.
+    self.collectionView.allowsMultipleSelection = YES;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    //[self.delegate selectCell:indexPath];
+}
 
 #pragma mark - Navigation
 //
@@ -38,23 +43,22 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    NSInteger one = 1;
-    return one;
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSInteger boardSize = [self.board.boardMatrixArray count];
-    return boardSize;
+    NSInteger cellsAmount = self.board.boardMatrixArray.count;
+    return cellsAmount;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    
+    MobileUICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
     [cell setBackgroundColor: UIColor.blackColor];
+//    cell.MobileUICollectionViewCellLabel.text = @"hello";
+//    cell.MobileUICollectionViewCellLabel.textColor = UIColor.whiteColor;
     
     
     return cell;

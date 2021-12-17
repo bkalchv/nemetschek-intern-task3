@@ -8,10 +8,11 @@
 #import <UIKit/UIKit.h>
 
 #import "Engine.h"
+#import "MobileUICollectionViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MobileUIViewController : UIViewController
+@interface MobileUIViewController : UIViewController <MobileUICollectionViewControllerDelegate>
 @property (nonatomic, strong) Engine* gameEngine;
 @property (nonatomic, weak) NSString* username;
 @end

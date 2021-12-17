@@ -76,20 +76,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="351" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="0.0" id="s0d-id-InU">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="1" id="s0d-id-InU">
                             <size key="itemSize" width="115" height="100"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U3A-Pz-DV1">
-                                <rect key="frame" x="0.0" y="0.0" width="115" height="100"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U3A-Pz-DV1" customClass="MobileUICollectionViewCell">
+                                <rect key="frame" x="0.0" y="1" width="115" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Uxs-bX-9Zi">
                                     <rect key="frame" x="0.0" y="0.0" width="115" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0PB-hE-NUI">
+                                            <rect key="frame" x="36" y="40" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="MobileUICollectionViewCellLabel" destination="0PB-hE-NUI" id="Izj-p4-buW"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -310,36 +322,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zF2-Ou-69O">
-                                <rect key="frame" x="152" y="493" width="110" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="KiI-Sr-4Ii"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Enter"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsO-dk-qJQ">
-                                <rect key="frame" x="156.5" y="547" width="101" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="101" id="ifg-qk-YBL"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Print state"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It's up to you" textAlignment="natural" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MRF-Eu-wJ3">
                                 <rect key="frame" x="146.5" y="79" width="121.5" height="26.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="rowIndex' 'columnIndex " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nmk-5z-F12">
-                                <rect key="frame" x="115" y="441" width="184.5" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="184.5" id="GeH-rZ-GbN"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RtT-iC-adp">
                                 <rect key="frame" x="32" y="123" width="351" height="300"/>
                                 <connections>
@@ -352,21 +340,13 @@
                         <constraints>
                             <constraint firstItem="shP-a3-0LJ" firstAttribute="trailing" secondItem="RtT-iC-adp" secondAttribute="trailing" constant="31" id="4Ho-i8-RrH"/>
                             <constraint firstItem="shP-a3-0LJ" firstAttribute="bottom" secondItem="RtT-iC-adp" secondAttribute="bottom" constant="439" id="9ed-Md-y7r"/>
-                            <constraint firstItem="wsO-dk-qJQ" firstAttribute="centerX" secondItem="shP-a3-0LJ" secondAttribute="centerX" id="B1P-X9-zLa"/>
                             <constraint firstItem="RtT-iC-adp" firstAttribute="leading" secondItem="shP-a3-0LJ" secondAttribute="leading" constant="32" id="Eam-Nz-2cK"/>
-                            <constraint firstItem="zF2-Ou-69O" firstAttribute="centerX" secondItem="shP-a3-0LJ" secondAttribute="centerX" id="Eyn-wf-X6i"/>
                             <constraint firstItem="RtT-iC-adp" firstAttribute="top" secondItem="shP-a3-0LJ" secondAttribute="top" constant="79" id="Nf5-SW-VLY"/>
-                            <constraint firstItem="zF2-Ou-69O" firstAttribute="top" secondItem="Nmk-5z-F12" secondAttribute="bottom" constant="18" id="TIi-qS-I6B"/>
-                            <constraint firstItem="Nmk-5z-F12" firstAttribute="centerX" secondItem="shP-a3-0LJ" secondAttribute="centerX" id="ZGy-L6-gLs"/>
                             <constraint firstItem="MRF-Eu-wJ3" firstAttribute="centerX" secondItem="shP-a3-0LJ" secondAttribute="centerX" id="faA-7r-9XR"/>
                             <constraint firstItem="MRF-Eu-wJ3" firstAttribute="top" secondItem="shP-a3-0LJ" secondAttribute="top" constant="35" id="lI4-yH-5Fe"/>
-                            <constraint firstItem="wsO-dk-qJQ" firstAttribute="top" secondItem="zF2-Ou-69O" secondAttribute="bottom" constant="23" id="mpn-3U-Hbc"/>
-                            <constraint firstItem="shP-a3-0LJ" firstAttribute="bottom" secondItem="zF2-Ou-69O" secondAttribute="bottom" constant="338" id="ovq-Uq-1FZ"/>
-                            <constraint firstItem="shP-a3-0LJ" firstAttribute="bottom" secondItem="wsO-dk-qJQ" secondAttribute="bottom" constant="280" id="v0U-9Z-ao6"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="mobileUIInputTextField" destination="Nmk-5z-F12" id="DdA-cn-Qqt"/>
                         <outlet property="mobileUIUsernameLabel" destination="MRF-Eu-wJ3" id="6lC-yA-ZWg"/>
                     </connections>
                 </viewController>
