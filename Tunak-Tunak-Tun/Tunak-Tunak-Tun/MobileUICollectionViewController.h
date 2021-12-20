@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) selectCell:(NSIndexPath*)selectedCellIndexPath;
 @end
 
-@interface MobileUICollectionViewController : UICollectionViewController
+@interface MobileUICollectionViewController : UICollectionViewController <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) Board* board;
 @property (nonatomic, strong)id <MobileUICollectionViewControllerDelegate> delegate;
 @end

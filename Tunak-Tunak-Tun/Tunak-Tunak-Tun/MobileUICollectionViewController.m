@@ -28,6 +28,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell* cell = [collectionView cellForItemAtIndexPath:indexPath];
     //[self.delegate selectCell:indexPath];
 }
 
@@ -52,11 +53,23 @@ static NSString * const reuseIdentifier = @"Cell";
     return cellsAmount;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGFloat cellWidth = (CGRectGetWidth(collectionView.frame) * 0.32); // 32% width of the CollectionView Frame
+    CGFloat cellHeight = (CGRectGetHeight(collectionView.frame) * 0.32); // 32 height of the CollectionView Frame
+    
+    return CGSizeMake(cellWidth, cellHeight);
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MobileUICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
-    [cell setBackgroundColor: UIColor.blackColor];
+
+    [cell setBackgroundColor: UIColor.grayColor];
+    	
+    
+    
 //    cell.MobileUICollectionViewCellLabel.text = @"hello";
 //    cell.MobileUICollectionViewCellLabel.textColor = UIColor.whiteColor;
     
