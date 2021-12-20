@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Board.h"
+#import "Engine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface MobileUICollectionViewController : UICollectionViewController <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-@property (nonatomic, strong) Board* board;
+@property (nonatomic, strong) Engine* gameEngine;
 @property (nonatomic, strong)id <MobileUICollectionViewControllerDelegate> delegate;
 @end
 

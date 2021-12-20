@@ -12,8 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MobileUIViewController : UIViewController <MobileUICollectionViewControllerDelegate>
-@property (nonatomic, strong) Engine* gameEngine;
+@interface MobileUIViewController : UIViewController
 @property (nonatomic, weak) NSString* username;
 @end
 

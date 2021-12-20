@@ -38,6 +38,10 @@
     [[self.gameBoard cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:state];
 }
 
+- (void)changeCellStateAtIndex:(NSUInteger)index toState:(CellState)state {
+    [[self.gameBoard.boardMatrixArray objectAtIndex:index] setState:state];
+}
+
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player {
     if (self.hasFreeCells) {
         [self changeCellStateAtRowIndex:rowIndex atColumnIndex:columnIndex toState:player.sign];
@@ -59,6 +63,12 @@
         NSLog(@"No more free cells!");
     }
 
+}
+
+- (void)selectCellAtIndexPath:(NSIndexPath*)indexPath byPlayer:(Player *)player{
+    if (self.hasFreeCells) {
+        [self changeCellStateAtIndex:[indexPath indexAtPosition:1] toState: player.sign];
+    }
 }
 
 -(NSUInteger)randomIndex:(NSUInteger)maxIndex {

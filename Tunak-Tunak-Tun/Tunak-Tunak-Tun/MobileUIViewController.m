@@ -12,15 +12,12 @@
 
 @interface MobileUIViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *mobileUIUsernameLabel;
-@property (weak, nonatomic) IBOutlet UITextField *mobileUIInputTextField;
 @end
 
 @implementation MobileUIViewController
 
 - (void)refreshView {
     self.mobileUIUsernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
-    self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
-    [self.gameEngine printBoardState];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -31,7 +28,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.mobileUIUsernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
-    self.mobileUIInputTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     // Do any additional setup after loading the view.
 }
 
@@ -45,9 +41,8 @@
     
     if ([[segue identifier] isEqualToString:@"ShowMobileUICollectionView"]) {
         MobileUICollectionViewController* mobileUICollectionViewController = [segue destinationViewController];
-        self.gameEngine = [[Engine alloc] initWithPlayersName: self.username];
         mobileUICollectionViewController.delegate = self;
-        mobileUICollectionViewController.board = self.gameEngine.gameBoard;
+        mobileUICollectionViewController.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
     }
 }
 

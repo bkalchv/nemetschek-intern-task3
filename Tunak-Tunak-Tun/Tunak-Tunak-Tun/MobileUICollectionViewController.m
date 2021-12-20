@@ -31,6 +31,7 @@ static NSString * const reuseIdentifier = @"Cell";
     //UICollectionViewCell* cell = [collectionView cellForItemAtIndexPath:indexPath];
     //[self.delegate selectCell:indexPath];
     NSLog(@"I was pressed: %@", indexPath);
+    [self.gameEngine selectCellAtIndexPath:indexPath byPlayer: self.gameEngine.player1];
 }
 
 #pragma mark - Navigation
@@ -50,7 +51,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSInteger cellsAmount = self.board.boardMatrixArray.count;
+    NSInteger cellsAmount = self.gameEngine.gameBoard.boardMatrixArray.count;
     return cellsAmount;
 }
 
