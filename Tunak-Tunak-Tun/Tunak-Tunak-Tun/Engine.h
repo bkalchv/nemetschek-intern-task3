@@ -24,8 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)printBoardState;
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player;
 - (void)selectCellAtIndexPath:(NSIndexPath*)indexPath byPlayer:(Player*)player;
-- (void)CPUSelects; // not public, yo
+- (Cell*)CPUSelects; // not public, yo
 - (BOOL)areWinningConditionsFulfilledForSelectionOfCell:(Cell*)cell withSign:(CellState)sign;
+- (Cell*)cellAtIndex:(NSUInteger)index;
 @end
 
 NS_ASSUME_NONNULL_END

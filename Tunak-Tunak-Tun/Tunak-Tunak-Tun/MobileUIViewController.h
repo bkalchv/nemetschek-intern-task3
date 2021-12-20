@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MobileUIViewController : UIViewController
+@interface MobileUIViewController : UIViewController <MobileUICollectionViewControllerDelegate, UIAdaptivePresentationControllerDelegate>
 @property (nonatomic, weak) NSString* username;
 @end
 

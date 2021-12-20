@@ -7,31 +7,72 @@
 
 #import "MobileUICollectionViewController.h"
 #import "MobileUICollectionViewCell.h"
+#import "OneMoreTimeViewController.h"
 
 @interface MobileUICollectionViewController ()
-
 @end
 
 @implementation MobileUICollectionViewController
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
+
+- (void)refreshView {
+    self.gameEngine = [[Engine alloc] initWithPlayersName: self.username];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    [self refreshView];
+    self.collectionView.allowsSelection = YES;
+    [self.collectionView reloadData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    // Do any additional setup after loading the view.
     self.collectionView.allowsMultipleSelection = YES;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    //UICollectionViewCell* cell = [collectionView cellForItemAtIndexPath:indexPath];
-    //[self.delegate selectCell:indexPath];
     NSLog(@"I was pressed: %@", indexPath);
-    [self.gameEngine selectCellAtIndexPath:indexPath byPlayer: self.gameEngine.player1];
+    
+    Cell* selectedGameCell = [self.gameEngine cellAtIndex: [indexPath indexAtPosition:1]];
+    
+    if ([selectedGameCell isChecked]) {
+        [self.delegate showAlreadySelectedAlertForCell:selectedGameCell]; // TODO DO NOT SHOW
+    } else {
+        [self.gameEngine selectCellAtIndexPath:indexPath byPlayer: self.gameEngine.player1];
+        [self.gameEngine printBoardState];
+        
+        MobileUICollectionViewCell* selectedCollectionViewCell = (MobileUICollectionViewCell*)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
+        [selectedCollectionViewCell.cellLabel setText:[selectedGameCell description]];
+        [self.collectionView reloadData];
+        
+        if (self.gameEngine.freeCellsAmount == 0 || self.gameEngine.isGameOver) {
+            self.collectionView.allowsSelection = NO;
+            if (self.gameEngine.freeCellsAmount == 0 && !self.gameEngine.isGameOver) {
+                NSLog(@"It's a draw. Nobody wins!");
+                [self.delegate showDrawAlert: [self.gameEngine.gameBoard stateString]];
+                
+            } else if(self.gameEngine.isGameOver) {
+                [self.delegate showPlayerWonAlert: self.gameEngine.player1 withGameBoardState: [self.gameEngine.gameBoard stateString]];
+            }
+        } else {
+            // queryForNextPlayerMove - change player
+            // player2
+            [self.gameEngine CPUSelects];
+            [self.collectionView reloadData];
+            
+            if (self.gameEngine.freeCellsAmount == 0 || self.gameEngine.isGameOver) {
+                if (self.gameEngine.freeCellsAmount == 0 && !self.gameEngine.isGameOver) {
+                    NSLog(@"It's a draw. Nobody wins!");
+                    [self.delegate showDrawAlert: [self.gameEngine.gameBoard stateString]];
+                } else if(self.gameEngine.isGameOver) {
+                    [self.delegate showPlayerWonAlert: self.gameEngine.player2 withGameBoardState:[self.gameEngine.gameBoard stateString]];
+                }
+            }
+        }
+        
+    }
 }
 
 #pragma mark - Navigation
@@ -67,13 +108,29 @@ static NSString * const reuseIdentifier = @"Cell";
     return 1;
 }
 
+-(NSString*)cellLabelTextByState:(CellState)state {
+    switch (state) {
+        case CellStateO:
+            return @"O";
+            break;
+        case CellStateX:
+            return @"X";
+            break;
+        case CellStateEmpty:
+            return @"";
+            break;
+
+        default:
+            break;
+    }
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MobileUICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    //Configure the cell
-
+    Cell* gameCell = [self.gameEngine cellAtIndex: [indexPath indexAtPosition:1]];
+    NSString* cellLabelText = [self cellLabelTextByState:gameCell.state];
+    [cell.cellLabel setText: cellLabelText];
     [cell setBackgroundColor: UIColor.grayColor];
-
     
     return cell;
 }

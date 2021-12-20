@@ -11,11 +11,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MobileUICollectionViewControllerDelegate <NSObject>
-- (void) selectCell:(NSIndexPath*)selectedCellIndexPath;
+- (void)showDrawAlert:(NSString*)gameBoardState;
+- (void)showPlayerWonAlert:(Player*)player withGameBoardState:(NSString*)gameBoardState;
+- (void)showOneMoreTimeViewController;
+- (void)showAlreadySelectedAlertForCell:(Cell*)cell;
+
 @end
 
 @interface MobileUICollectionViewController : UICollectionViewController <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) Engine* gameEngine;
+@property (nonatomic, strong) NSString* username;
 @property (nonatomic, strong)id <MobileUICollectionViewControllerDelegate> delegate;
 @end
 

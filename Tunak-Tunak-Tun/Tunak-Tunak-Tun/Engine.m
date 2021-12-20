@@ -68,6 +68,20 @@
 - (void)selectCellAtIndexPath:(NSIndexPath*)indexPath byPlayer:(Player *)player{
     if (self.hasFreeCells) {
         [self changeCellStateAtIndex:[indexPath indexAtPosition:1] toState: player.sign];
+        Cell* selectedCell = [self cellAtIndex: [indexPath indexAtPosition:1]];
+        self.freeCellsAmount -= 1;
+        self.hasFreeCells = (self.freeCellsAmount != 0);
+        if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign:player.sign])
+        {
+            self.isGameOver = YES;
+            NSLog(@"%@ won!", player.name);
+            NSLog(@"Game over!");
+            return;
+        } else {
+            NSLog(@"Player: %tu selected: %tu %tu", player.playerID, selectedCell.rowIndex, selectedCell.colIndex);
+        }
+    } else {
+        NSLog(@"No more free cells!");
     }
 }
 
@@ -92,11 +106,12 @@
     return [freeCells objectAtIndex: [self randomIndex:([freeCells count] - 1)] ];
 }
 
-- (void)CPUSelects {
+- (Cell*)CPUSelects {
     if (self.hasFreeCells) {
         Cell* CPUCellToSelect = [self getRandomFreeCell];
         [self selectCellAtRowIndex:CPUCellToSelect.rowIndex atColumnIndex:CPUCellToSelect.colIndex byPlayer:self.player2];
-    }
+        return CPUCellToSelect;
+    } else return nil;
 }
 
 - (BOOL)checkColumnForCellSelection:(Cell*)cell withSign:(CellState)sign {
@@ -139,6 +154,9 @@
     return [self checkColumnForCellSelection:cell withSign:sign] || [self checkRowForCellSelection:cell withSign:sign] || [self checkDiagonalForCellSelection:cell withSign:sign] || [self checkAntiDiagonalForCellSelection:cell withSign:sign];
 }
 
-- (BOOL)isDraw {return self.freeCellsAmount == 1;}
+- (Cell*)cellAtIndex:(NSUInteger)index {
+    return [self.gameBoard cellAtIndex:index];
+}
+
 
 @end

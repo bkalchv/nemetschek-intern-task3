@@ -116,7 +116,7 @@
             [self.gameEngine printBoardState];
             
                 if (self.gameEngine.freeCellsAmount == 0 || self.gameEngine.isGameOver) {
-                    if (self.gameEngine.freeCellsAmount == 0) {
+                    if (self.gameEngine.freeCellsAmount == 0 && !self.gameEngine.isGameOver) {
                         NSLog(@"It's a draw. Nobody wins!");
                         [self showDrawAlert];
                         
@@ -131,10 +131,10 @@
                     [self.gameEngine printBoardState];
                     
                     if (self.gameEngine.freeCellsAmount == 0 || self.gameEngine.isGameOver) {
-                        if (self.gameEngine.freeCellsAmount == 0) {
+                        if (self.gameEngine.freeCellsAmount == 0 && !self.gameEngine.isGameOver) {
                             NSLog(@"It's a draw. Nobody wins!");
                             [self showDrawAlert];
-                        } else if(self.gameEngine.isGameOver) {
+                        } else if (self.gameEngine.isGameOver) {
                             [self.consoleVCEnterButton setEnabled:NO];
                             [self showPlayerWonAlert: self.gameEngine.player2];
                         }

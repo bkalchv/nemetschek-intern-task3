@@ -31,6 +31,11 @@
     return self.boardMatrixArray[rowIndex * self.numberOfColumns + colIndex];
 }
 
+-(Cell*)cellAtIndex:(NSUInteger)index {
+    return self.boardMatrixArray[index];
+}
+
+
 -(NSArray<Cell*>*)row:(NSUInteger)rowIndex {
     NSMutableArray<Cell*>* rowArray = [[NSMutableArray<Cell*> alloc] init];
     for (NSUInteger columnIndex = 0; columnIndex < self.numberOfColumns; ++columnIndex) {

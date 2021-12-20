@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)printState;
 -(NSString*)stateString;
 -(Cell*)cellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)colIndex;
-
+-(Cell*)cellAtIndex:(NSUInteger)index;
 @end
 
 NS_ASSUME_NONNULL_END

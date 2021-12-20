@@ -83,24 +83,31 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U3A-Pz-DV1" customClass="MobileUICollectionViewCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MobileUICollectionViewCell" id="U3A-Pz-DV1" customClass="MobileUICollectionViewCell">
                                 <rect key="frame" x="0.0" y="0.0" width="115" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Uxs-bX-9Zi">
                                     <rect key="frame" x="0.0" y="0.0" width="115" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0PB-hE-NUI">
-                                            <rect key="frame" x="36" y="40" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNk-Vc-MIR">
+                                            <rect key="frame" x="36.5" y="39.5" width="42" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="42" id="OBX-ga-fbv"/>
+                                                <constraint firstAttribute="height" constant="21" id="pkT-m7-BEN"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="aNk-Vc-MIR" firstAttribute="centerY" secondItem="Uxs-bX-9Zi" secondAttribute="centerY" id="Gle-aS-Yer"/>
+                                        <constraint firstItem="aNk-Vc-MIR" firstAttribute="centerX" secondItem="Uxs-bX-9Zi" secondAttribute="centerX" id="XaX-4V-y8C"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
                                 <connections>
-                                    <outlet property="MobileUICollectionViewCellLabel" destination="0PB-hE-NUI" id="Izj-p4-buW"/>
+                                    <outlet property="cellLabel" destination="aNk-Vc-MIR" id="5qx-Py-Ge9"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
