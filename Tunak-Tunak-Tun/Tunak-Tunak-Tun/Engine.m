@@ -6,6 +6,7 @@
 //
 
 #import "Engine.h"
+#import "Cell.h"
 
 @implementation Engine
 
@@ -46,7 +47,6 @@
     if (self.hasFreeCells) {
         [self changeCellStateAtRowIndex:rowIndex atColumnIndex:columnIndex toState:player.sign];
         Cell* selectedCell = [self.gameBoard cellAtRowIndex:rowIndex columnIndex:columnIndex];
-        //[self.players[player.playerID].selectedCells addObject: selectedCell];
         self.freeCellsAmount -= 1;
         self.hasFreeCells = (self.freeCellsAmount != 0);
         
@@ -156,6 +156,10 @@
 
 - (Cell*)cellAtIndex:(NSUInteger)index {
     return [self.gameBoard cellAtIndex:index];
+}
+
+- (BOOL)checkAvailabilityOfCellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex {
+    return [[[self gameBoard] cellAtRowIndex:rowIndex columnIndex:columnIndex] isChecked];
 }
 
 

@@ -7,6 +7,7 @@
 
 #import "ConsoleViewController.h"
 #import "OneMoreTimeViewController.h"
+#import "Engine.h"
 
 @interface ConsoleViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *inputTextField;
@@ -18,8 +19,8 @@
 @implementation ConsoleViewController
 
 - (void)refreshView {
-    self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
     self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
+    self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
     self.consoleVCEnterButton.enabled = YES;
     self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
     [self.gameEngine printBoardState];
@@ -47,11 +48,11 @@
     [self presentViewController:invalidInputAlert animated:YES completion:nil];
 }
 
-- (void)showAlreadySelectedAlertForCell:(Cell*)cell {
-    UIAlertController* alreadySelectedAlert = [UIAlertController alertControllerWithTitle: [NSString stringWithFormat:@"Cell [%tu,%tu] has already been selected!", cell.rowIndex, cell.colIndex] message: @"Please, select another cell." preferredStyle:UIAlertControllerStyleAlert];
-    [alreadySelectedAlert addAction: [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler: nil]];
-    [self presentViewController:alreadySelectedAlert animated:YES completion:nil];
-}
+//- (void)showAlreadySelectedAlertForCell:(Cell*)cell {
+//    UIAlertController* alreadySelectedAlert = [UIAlertController alertControllerWithTitle: [NSString stringWithFormat:@"Cell [%tu,%tu] has already been selected!", [cell rowIndex], [cell colIndex]] message: @"Please, select another cell." preferredStyle:UIAlertControllerStyleAlert];
+//    [alreadySelectedAlert addAction: [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler: nil]];
+//    [self presentViewController:alreadySelectedAlert animated:YES completion:nil];
+//}
 
 - (void)showDrawAlert {
     UIAlertController* drawAlert = [UIAlertController alertControllerWithTitle: @"It's a draw!" message: [NSString stringWithString:self.gameEngine.gameBoard.stateString] preferredStyle:UIAlertControllerStyleAlert];
@@ -106,9 +107,8 @@
         NSUInteger inputRowIndex = [inputArray[0] integerValue];
         NSUInteger inputColIndex = [inputArray[1] integerValue];
         
-        Cell* selectedCell = [self.gameEngine.gameBoard cellAtRowIndex:inputRowIndex columnIndex:inputColIndex];
-        if ([selectedCell isChecked]) {
-            [self showAlreadySelectedAlertForCell:selectedCell];
+        if ([self.gameEngine checkAvailabilityOfCellAtRowIndex:inputRowIndex columnIndex:inputColIndex]) {
+            //[self showAlreadySelectedAlertForCell:selectedCell];
             NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
         } else {
             [self.gameEngine selectCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex byPlayer:self.gameEngine.player1];

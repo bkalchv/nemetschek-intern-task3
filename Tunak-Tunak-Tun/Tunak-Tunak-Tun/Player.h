@@ -6,14 +6,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Cell.h"
+
+typedef NS_ENUM(NSInteger, CellState);
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Player : NSObject
 @property NSUInteger playerID;
 @property (nonatomic, strong) NSString* name;
-//@property (nonatomic, strong) NSMutableSet<Cell*>* selectedCells;
 @property (nonatomic) CellState sign;
 -(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerId withSign:(CellState)sign;
 @end

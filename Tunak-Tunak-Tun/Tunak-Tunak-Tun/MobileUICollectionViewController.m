@@ -38,7 +38,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     Cell* selectedGameCell = [self.gameEngine cellAtIndex: [indexPath indexAtPosition:1]];
     
     if ([selectedGameCell isChecked]) {
-        [self.delegate showAlreadySelectedAlertForCell:selectedGameCell]; // TODO DO NOT SHOW
+        //[self.delegate showAlreadySelectedAlertForCell:selectedGameCell]; // TODO DO NOT SHOW
     } else {
         [self.gameEngine selectCellAtIndexPath:indexPath byPlayer: self.gameEngine.player1];
         [self.gameEngine printBoardState];

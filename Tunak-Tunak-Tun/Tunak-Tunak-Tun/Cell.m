@@ -7,6 +7,9 @@
 
 #import "Cell.h"
 
+@interface Cell()
+@end
+
 @implementation Cell
 - (instancetype)initWithState:(CellState)state atRow:(NSUInteger)row atColumn:(NSUInteger)col {
     self = [super init];

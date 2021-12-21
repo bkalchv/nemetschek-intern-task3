@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (Cell*)CPUSelects; // not public, yo
 - (BOOL)areWinningConditionsFulfilledForSelectionOfCell:(Cell*)cell withSign:(CellState)sign;
 - (Cell*)cellAtIndex:(NSUInteger)index;
+
+- (BOOL)checkAvailabilityOfCellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex;
 @end
 
 NS_ASSUME_NONNULL_END

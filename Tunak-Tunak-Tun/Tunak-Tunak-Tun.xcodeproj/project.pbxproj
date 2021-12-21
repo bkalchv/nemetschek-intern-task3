@@ -81,16 +81,16 @@
 		42A5A0592768DEF8007AD579 /* GameComponents */ = {
 			isa = PBXGroup;
 			children = (
-				42A945DB27676AC5002767C6 /* Board.h */,
-				42A945DC27676AC5002767C6 /* Board.m */,
 				42A945E42767A330002767C6 /* Cell.h */,
 				42A945E52767A330002767C6 /* Cell.m */,
+				42A945DB27676AC5002767C6 /* Board.h */,
+				42A945DC27676AC5002767C6 /* Board.m */,
 				42A945E127678C13002767C6 /* Player.h */,
 				42A945E227678C13002767C6 /* Player.m */,
-				42A945D5276758F5002767C6 /* TunakCell.h */,
-				42A945D6276758F5002767C6 /* TunakCell.m */,
 				42A945DE27678B1B002767C6 /* Engine.h */,
 				42A945DF27678B1B002767C6 /* Engine.m */,
+				42A945D5276758F5002767C6 /* TunakCell.h */,
+				42A945D6276758F5002767C6 /* TunakCell.m */,
 			);
 			name = GameComponents;
 			sourceTree = "<group>";
