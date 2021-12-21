@@ -139,34 +139,6 @@
                     [self.gameEngine printBoardState];
                 }
             }
-            
-//                if ([self.gameEngine isGameOver]) {
-//                    if (!self.gameEngine.hasFreeCells && !self.gameEngine.winningConditionsFulfiled) {
-//                        NSLog(@"It's a draw. Nobody wins!");
-//                        [self showDrawAlert];
-//
-//                    } else if (self.gameEngine.winningConditionsFulfiled) {
-//                        [self.consoleVCEnterButton setEnabled:NO];
-//                        [self showPlayerWonAlert: self.gameEngine.currentPlayer];
-//                    }
-//                } else {
-//                    [self.gameEngine switchCurrentPlayer];
-//                    Cell* CPUCellToSelect = [self.gameEngine randomFreeCell];
-//                    [self.gameEngine.currentPlayer makeMoveOnBoard:[self.gameEngine gameBoard] atRowIndex: [CPUCellToSelect rowIndex] columnIndex: [CPUCellToSelect colIndex]];
-//                    self.matrixLabel.text = [self.gameEngine gameBoardState];
-//                    [self.gameEngine printBoardState];
-//
-//                    if ([self.gameEngine isGameOver]) {
-//                        if (!self.gameEngine.hasFreeCells && !self.gameEngine.winningConditionsFulfiled) {
-//                            NSLog(@"It's a draw. Nobody wins!");
-//                            [self showDrawAlert];
-//
-//                        } else if (self.gameEngine.winningConditionsFulfiled) {
-//                            [self.consoleVCEnterButton setEnabled:NO];
-//                            [self showPlayerWonAlert: self.gameEngine.currentPlayer];
-//                        }
-//                    }
-//                }
         }
         
     } else {

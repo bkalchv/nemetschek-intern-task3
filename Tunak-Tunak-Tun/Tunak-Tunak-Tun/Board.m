@@ -70,4 +70,8 @@
     [[self cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:sign];
 }
 
+-(void)changeCellStateAtIndex:(NSUInteger)index withSign:(CellState)sign {
+    [[self cellAtIndex:index] setState:sign];
+}
+
 @end

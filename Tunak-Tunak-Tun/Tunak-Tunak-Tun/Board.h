@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, CellState);
 -(Cell*)cellAtIndex:(NSUInteger)index;
 
 -(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withSign:(CellState)sign;
+-(void)changeCellStateAtIndex:(NSUInteger)index withSign:(CellState)sign;
 @end
 
 NS_ASSUME_NONNULL_END

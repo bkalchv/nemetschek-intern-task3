@@ -32,46 +32,41 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     self.collectionView.allowsMultipleSelection = YES;
 }
 
+- (bool)checkIfGameShouldContinue {
+    if ([self.gameEngine isGameOver]) {
+        if (!self.gameEngine.hasFreeCells && !self.gameEngine.winningConditionsFulfiled) {
+            NSLog(@"It's a draw. Nobody wins!");
+            [self.delegate showDrawAlert: [self.gameEngine gameBoardState]];
+            
+        } else if (self.gameEngine.winningConditionsFulfiled) {
+            [self.delegate showPlayerWonAlert: self.gameEngine.currentPlayer withGameBoardState:[self.gameEngine gameBoardState]];
+        }
+        return false;
+    } else
+        return true;
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"I was pressed: %@", indexPath);
     
-    Cell* selectedGameCell = [self.gameEngine cellAtIndex: [indexPath indexAtPosition:1]];
+    NSUInteger inputIndex = [indexPath indexAtPosition:1];
     
-    if ([selectedGameCell isChecked]) {
+    if ([self.gameEngine checkAvailabilityOfCellAtIndex: inputIndex]) {
         //[self.delegate showAlreadySelectedAlertForCell:selectedGameCell]; // TODO DO NOT SHOW
     } else {
-        [self.gameEngine selectCellAtIndexPath:indexPath byPlayer: self.gameEngine.player1];
+        [self.gameEngine.currentPlayer makeMoveOnBoard:[self.gameEngine gameBoard] atIndex:inputIndex];
+        [self.gameEngine updateGameEngineStateOnPlayerSelectionOfCellAtIndex:inputIndex];;
+
+        [self.collectionView reloadData];
         [self.gameEngine printBoardState];
         
-        MobileUICollectionViewCell* selectedCollectionViewCell = (MobileUICollectionViewCell*)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
-        [selectedCollectionViewCell.cellLabel setText:[selectedGameCell description]];
-        [self.collectionView reloadData];
-        
-        if (self.gameEngine.freeCellsAmount == 0 || self.gameEngine.isGameOver) {
-            self.collectionView.allowsSelection = NO;
-            if (self.gameEngine.freeCellsAmount == 0 && !self.gameEngine.isGameOver) {
-                NSLog(@"It's a draw. Nobody wins!");
-                [self.delegate showDrawAlert: [self.gameEngine.gameBoard stateString]];
-                
-            } else if (self.gameEngine.isGameOver) {
-                [self.delegate showPlayerWonAlert: self.gameEngine.player1 withGameBoardState: [self.gameEngine.gameBoard stateString]];
-            }
-        } else {
-            // queryForNextPlayerMove - change player
-            // player2
-            [self.gameEngine CPUSelects];
-            [self.collectionView reloadData];
-            
-            if (self.gameEngine.freeCellsAmount == 0 || self.gameEngine.isGameOver) {
-                if (self.gameEngine.freeCellsAmount == 0 && !self.gameEngine.isGameOver) {
-                    NSLog(@"It's a draw. Nobody wins!");
-                    [self.delegate showDrawAlert: [self.gameEngine.gameBoard stateString]];
-                } else if(self.gameEngine.isGameOver) {
-                    [self.delegate showPlayerWonAlert: self.gameEngine.player2 withGameBoardState:[self.gameEngine.gameBoard stateString]];
-                }
+        if ([self checkIfGameShouldContinue]) {
+            [self.gameEngine switchCurrentPlayer];
+            if (self.gameEngine.gameMode == OnePlayerGameMode) {
+                [self.collectionView reloadData];
+                [self.gameEngine printBoardState];
             }
         }
-        
     }
 }
 

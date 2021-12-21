@@ -25,6 +25,6 @@
 
 
 -(void)makeMoveOnBoard:(Board*)board atIndex:(NSUInteger)index {
-    
+    [board changeCellStateAtIndex:index withSign:self.sign];
 }
 @end

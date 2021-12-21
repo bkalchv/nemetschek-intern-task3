@@ -37,8 +37,10 @@ typedef NS_ENUM(NSInteger, GameMode) {
 - (Cell*)cellAtIndex:(NSUInteger)index;
 
 - (BOOL)checkAvailabilityOfCellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex;
+- (BOOL)checkAvailabilityOfCellAtIndex:(NSUInteger)index;
 - (NSString*)gameBoardState;
 - (void)updateGameEngineStateOnPlayerSelectionOfCellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex;
+- (void)updateGameEngineStateOnPlayerSelectionOfCellAtIndex:(NSUInteger)index;
 - (void)switchCurrentPlayer;
 - (BOOL)isGameOver;
 @end

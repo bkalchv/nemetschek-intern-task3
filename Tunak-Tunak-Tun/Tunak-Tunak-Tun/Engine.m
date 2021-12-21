@@ -173,6 +173,10 @@
     return [[[self gameBoard] cellAtRowIndex:rowIndex columnIndex:columnIndex] isChecked];
 }
 
+- (BOOL)checkAvailabilityOfCellAtIndex:(NSUInteger)index {
+    return [[[self gameBoard] cellAtIndex:index] isChecked];
+}
+
 -(void)switchCurrentPlayer{
     if (self.gameMode == OnePlayerGameMode) {
         [self CPUSelects];
@@ -207,4 +211,21 @@
 - (BOOL)isGameOver {
     return self.winningConditionsFulfiled || !self.hasFreeCells;
 }
+
+- (void)updateGameEngineStateOnPlayerSelectionOfCellAtIndex:(NSUInteger)index {
+    Cell* selectedCell = [self.gameBoard cellAtIndex:index];
+    self.freeCellsAmount -= 1;
+    self.hasFreeCells = (self.freeCellsAmount != 0);
+    
+    if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign:self.currentPlayer.sign])
+    {
+        self.winningConditionsFulfiled = YES;
+        NSLog(@"%@ won!", self.currentPlayer.name);
+        NSLog(@"Game over!");
+        return;
+    } else {
+        NSLog(@"Player: %tu selected: %tu %tu", self.currentPlayer.playerID, [selectedCell rowIndex], [selectedCell colIndex]);
+    }
+}
+
 @end
