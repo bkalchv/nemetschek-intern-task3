@@ -9,9 +9,9 @@
 #import "Cell.h"
 
 @interface Engine()
-//@property (nonatomic, strong) Player* player1;
-//@property (nonatomic, strong) Player* player2;
-//@property (nonatomic) NSUInteger freeCellsAmount;
+@property (nonatomic, strong) Player* player1;
+@property (nonatomic, strong) Player* player2;
+@property (nonatomic) NSUInteger freeCellsAmount;
 @end
 
 @implementation Engine

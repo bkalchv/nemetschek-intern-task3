@@ -20,9 +20,6 @@ typedef NS_ENUM(NSInteger, GameMode) {
 @property (nonatomic, strong)       Board* gameBoard;
 @property (nonatomic, strong)       Player* currentPlayer;
 @property (nonatomic)               GameMode gameMode;
-@property (nonatomic, strong)       Player* player1; // to be made private
-@property (nonatomic, strong)       Player* player2; // to be made private
-@property (nonatomic) NSUInteger    freeCellsAmount; // to be made private
 @property (nonatomic) BOOL          hasFreeCells;
 @property (nonatomic) BOOL          winningConditionsFulfiled;
 
