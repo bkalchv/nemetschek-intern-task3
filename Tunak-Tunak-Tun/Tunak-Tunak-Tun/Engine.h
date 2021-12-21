@@ -26,15 +26,15 @@ typedef NS_ENUM(NSInteger, GameMode) {
 - (instancetype)init;
 - (instancetype)initWithPlayersName:(NSString*)playersName;
 - (void)printBoardState;
-- (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player;
-- (void)selectCellAtIndexPath:(NSIndexPath*)indexPath byPlayer:(Player*)player;
+- (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex;
+- (void)selectCellAtIndex:(NSUInteger)index;
 - (Cell*)CPUSelects; // not public, yo
 - (Cell*)randomFreeCell;
 - (BOOL)areWinningConditionsFulfilledForSelectionOfCell:(Cell*)cell withSign:(CellState)sign;
 - (Cell*)cellAtIndex:(NSUInteger)index;
 
-- (BOOL)checkAvailabilityOfCellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex;
-- (BOOL)checkAvailabilityOfCellAtIndex:(NSUInteger)index;
+- (BOOL)isCellCheckedAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex;
+- (BOOL)isCellCheckedAtIndex:(NSUInteger)index;
 - (NSString*)gameBoardState;
 - (void)updateGameEngineStateOnPlayerSelectionOfCellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex;
 - (void)updateGameEngineStateOnPlayerSelectionOfCellAtIndex:(NSUInteger)index;

@@ -32,12 +32,11 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     self.collectionView.allowsMultipleSelection = YES;
 }
 
-- (bool)checkIfGameShouldContinue {
+- (bool)shouldGameContinue {
     if ([self.gameEngine isGameOver]) {
         if (!self.gameEngine.hasFreeCells && !self.gameEngine.winningConditionsFulfiled) {
             NSLog(@"It's a draw. Nobody wins!");
             [self.delegate showDrawAlert: [self.gameEngine gameBoardState]];
-            
         } else if (self.gameEngine.winningConditionsFulfiled) {
             [self.delegate showPlayerWonAlert: self.gameEngine.currentPlayer withGameBoardState:[self.gameEngine gameBoardState]];
         }
@@ -51,20 +50,20 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     
     NSUInteger inputIndex = [indexPath indexAtPosition:1];
     
-    if ([self.gameEngine checkAvailabilityOfCellAtIndex: inputIndex]) {
+    if ([self.gameEngine isCellCheckedAtIndex: inputIndex]) {
         //[self.delegate showAlreadySelectedAlertForCell:selectedGameCell]; // TODO DO NOT SHOW
+        NSLog(@"Cell %tu already selected! Please select another cell!", inputIndex);
     } else {
-        [self.gameEngine.currentPlayer makeMoveOnBoard:[self.gameEngine gameBoard] atIndex:inputIndex];
-        [self.gameEngine updateGameEngineStateOnPlayerSelectionOfCellAtIndex:inputIndex];;
-
+        [self.gameEngine selectCellAtIndex:inputIndex];
         [self.collectionView reloadData];
         [self.gameEngine printBoardState];
         
-        if ([self checkIfGameShouldContinue]) {
+        if ([self shouldGameContinue]) {
             [self.gameEngine switchCurrentPlayer];
             if (self.gameEngine.gameMode == OnePlayerGameMode) {
                 [self.collectionView reloadData];
                 [self.gameEngine printBoardState];
+                [self shouldGameContinue];
             }
         }
     }

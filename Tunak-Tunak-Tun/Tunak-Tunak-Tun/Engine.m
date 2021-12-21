@@ -55,45 +55,22 @@
 }
 
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player {
-    if (self.hasFreeCells) {
-        [self changeCellStateAtRowIndex:rowIndex atColumnIndex:columnIndex toState:player.sign];
-        Cell* selectedCell = [self.gameBoard cellAtRowIndex:rowIndex columnIndex:columnIndex];
-        self.freeCellsAmount -= 1;
-        self.hasFreeCells = (self.freeCellsAmount != 0);
-        
-        if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign:player.sign])
-        {
-            self.winningConditionsFulfiled = YES;
-            NSLog(@"%@ won!", player.name);
-            NSLog(@"Game over!");
-            return;
-        } else {
-            NSLog(@"Player: %tu selected: %tu %tu", player.playerID, rowIndex, columnIndex);
-        }
-    } else {
-        NSLog(@"No more free cells!");
-    }
-
+    [player makeMoveOnBoard:[self gameBoard] atRowIndex:rowIndex columnIndex:columnIndex];
+    [self updateGameEngineStateOnPlayerSelectionOfCellAtRowIndex:rowIndex columnIndex:columnIndex];
 }
 
-- (void)selectCellAtIndexPath:(NSIndexPath*)indexPath byPlayer:(Player *)player{
-    if (self.hasFreeCells) {
-        [self changeCellStateAtIndex:[indexPath indexAtPosition:1] toState: player.sign];
-        Cell* selectedCell = [self cellAtIndex: [indexPath indexAtPosition:1]];
-        self.freeCellsAmount -= 1;
-        self.hasFreeCells = (self.freeCellsAmount != 0);
-        if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign:player.sign])
-        {
-            self.winningConditionsFulfiled = YES;
-            NSLog(@"%@ won!", player.name);
-            NSLog(@"Game over!");
-            return;
-        } else {
-            NSLog(@"Player: %tu selected: %tu %tu", player.playerID, selectedCell.rowIndex, selectedCell.colIndex);
-        }
-    } else {
-        NSLog(@"No more free cells!");
-    }
+- (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex {
+    [self selectCellAtRowIndex:rowIndex atColumnIndex:columnIndex byPlayer:self.currentPlayer];
+}
+
+- (void)selectCellAtIndex:(NSUInteger)index byPlayer:(Player *)player{
+    [player makeMoveOnBoard:[self gameBoard] atIndex:index];
+    [self updateGameEngineStateOnPlayerSelectionOfCellAtIndex:index];
+}
+
+
+- (void)selectCellAtIndex:(NSUInteger)index {
+    [self selectCellAtIndex:index byPlayer:self.currentPlayer];
 }
 
 -(NSUInteger)randomIndex:(NSUInteger)maxIndex {
@@ -120,7 +97,8 @@
 - (Cell*)CPUSelects {
     if (self.hasFreeCells) {
         Cell* CPUCellToSelect = [self randomFreeCell];
-        [self selectCellAtRowIndex:CPUCellToSelect.rowIndex atColumnIndex:CPUCellToSelect.colIndex byPlayer:self.player2];
+        [self selectCellAtRowIndex:CPUCellToSelect.rowIndex atColumnIndex:CPUCellToSelect.colIndex byPlayer: self.currentPlayer];
+        [self setCurrentPlayer:self.player1];
         return CPUCellToSelect;
     } else return nil;
 }
@@ -169,32 +147,40 @@
     return [self.gameBoard cellAtIndex:index];
 }
 
-- (BOOL)checkAvailabilityOfCellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex {
+- (BOOL)isCellCheckedAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex {
     return [[[self gameBoard] cellAtRowIndex:rowIndex columnIndex:columnIndex] isChecked];
 }
 
-- (BOOL)checkAvailabilityOfCellAtIndex:(NSUInteger)index {
+- (BOOL)isCellCheckedAtIndex:(NSUInteger)index {
     return [[[self gameBoard] cellAtIndex:index] isChecked];
 }
 
 -(void)switchCurrentPlayer{
-    if (self.gameMode == OnePlayerGameMode) {
-        [self CPUSelects];
-        return;
-    } else {
-        if (self.currentPlayer == self.player1) {
 
-            self.currentPlayer = self.player2;
+    if (self.currentPlayer == self.player1) {
 
-        } else if (self.currentPlayer == self.player2) {
-            self.currentPlayer = self.player1;
-        } else NSLog(@"Engine obj, switchCurrentPlayer: undefined behavior");
-    }
+        self.currentPlayer = self.player2;
+        
+        if (self.gameMode == OnePlayerGameMode) {
+            [self CPUSelects];
+        }
+
+    } else if (self.currentPlayer == self.player2) {
+        
+        self.currentPlayer = self.player1;
+    
+    } else NSLog(@"Engine obj, switchCurrentPlayer: undefined behavior");
 }
+
+- (BOOL)isGameOver {
+    return self.winningConditionsFulfiled || !self.hasFreeCells;
+}
+
 
 - (void)updateGameEngineStateOnPlayerSelectionOfCellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex{
     Cell* selectedCell = [self.gameBoard cellAtRowIndex:rowIndex columnIndex:columnIndex];
     self.freeCellsAmount -= 1;
+    NSLog(@"%tu", [self freeCellsAmount]);
     self.hasFreeCells = (self.freeCellsAmount != 0);
     
     if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign: self.currentPlayer.sign])
@@ -208,13 +194,11 @@
     }
 }
 
-- (BOOL)isGameOver {
-    return self.winningConditionsFulfiled || !self.hasFreeCells;
-}
 
 - (void)updateGameEngineStateOnPlayerSelectionOfCellAtIndex:(NSUInteger)index {
     Cell* selectedCell = [self.gameBoard cellAtIndex:index];
     self.freeCellsAmount -= 1;
+    NSLog(@"%tu", [self freeCellsAmount]);
     self.hasFreeCells = (self.freeCellsAmount != 0);
     
     if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign:self.currentPlayer.sign])
