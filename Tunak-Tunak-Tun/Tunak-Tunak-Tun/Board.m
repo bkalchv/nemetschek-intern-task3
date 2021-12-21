@@ -65,4 +65,9 @@
     }
     return state;
 }
+
+-(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withSign:(CellState)sign {
+    [[self cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:sign];
+}
+
 @end

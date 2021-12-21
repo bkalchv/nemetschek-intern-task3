@@ -99,6 +99,21 @@
     [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
 }
 
+- (bool)checkIfGameShouldContinue {
+    if ([self.gameEngine isGameOver]) {
+        if (!self.gameEngine.hasFreeCells && !self.gameEngine.winningConditionsFulfiled) {
+            NSLog(@"It's a draw. Nobody wins!");
+            [self showDrawAlert];
+            
+        } else if (self.gameEngine.winningConditionsFulfiled) {
+            [self.consoleVCEnterButton setEnabled:NO];
+            [self showPlayerWonAlert: self.gameEngine.currentPlayer];
+        }
+        return false;
+    } else
+        return true;
+}
+
 - (IBAction)onConsoleVCEnterButton:(id)sender {
     NSString* inputString = self.inputTextField.text;
     
@@ -111,35 +126,47 @@
             //[self showAlreadySelectedAlertForCell:selectedCell];
             NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
         } else {
-            [self.gameEngine selectCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex byPlayer:self.gameEngine.player1];
-            self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
+//            [self.gameEngine selectCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex byPlayer:self.gameEngine.player1];
+            [self.gameEngine.currentPlayer makeMoveOnBoard:[self.gameEngine gameBoard] atRowIndex:inputRowIndex columnIndex:inputColIndex];
+            [self.gameEngine updateGameEngineStateOnPlayerSelectionOfCellAtRowIndex:inputRowIndex columnIndex:inputColIndex];
+            self.matrixLabel.text = [self.gameEngine gameBoardState];
             [self.gameEngine printBoardState];
             
-                if (self.gameEngine.freeCellsAmount == 0 || self.gameEngine.isGameOver) {
-                    if (self.gameEngine.freeCellsAmount == 0 && !self.gameEngine.isGameOver) {
-                        NSLog(@"It's a draw. Nobody wins!");
-                        [self showDrawAlert];
-                        
-                    } else if(self.gameEngine.isGameOver) {
-                        [self.consoleVCEnterButton setEnabled:NO];
-                        [self showPlayerWonAlert: self.gameEngine.player1];
-                    }
-                    
-                } else {
-                    [self.gameEngine CPUSelects];
-                    self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
+            if ([self checkIfGameShouldContinue]) {
+                [self.gameEngine switchCurrentPlayer];
+                if (self.gameEngine.gameMode == OnePlayerGameMode) {
+                    self.matrixLabel.text = [self.gameEngine gameBoardState];
                     [self.gameEngine printBoardState];
-                    
-                    if (self.gameEngine.freeCellsAmount == 0 || self.gameEngine.isGameOver) {
-                        if (self.gameEngine.freeCellsAmount == 0 && !self.gameEngine.isGameOver) {
-                            NSLog(@"It's a draw. Nobody wins!");
-                            [self showDrawAlert];
-                        } else if (self.gameEngine.isGameOver) {
-                            [self.consoleVCEnterButton setEnabled:NO];
-                            [self showPlayerWonAlert: self.gameEngine.player2];
-                        }
-                    }
                 }
+            }
+            
+//                if ([self.gameEngine isGameOver]) {
+//                    if (!self.gameEngine.hasFreeCells && !self.gameEngine.winningConditionsFulfiled) {
+//                        NSLog(@"It's a draw. Nobody wins!");
+//                        [self showDrawAlert];
+//
+//                    } else if (self.gameEngine.winningConditionsFulfiled) {
+//                        [self.consoleVCEnterButton setEnabled:NO];
+//                        [self showPlayerWonAlert: self.gameEngine.currentPlayer];
+//                    }
+//                } else {
+//                    [self.gameEngine switchCurrentPlayer];
+//                    Cell* CPUCellToSelect = [self.gameEngine randomFreeCell];
+//                    [self.gameEngine.currentPlayer makeMoveOnBoard:[self.gameEngine gameBoard] atRowIndex: [CPUCellToSelect rowIndex] columnIndex: [CPUCellToSelect colIndex]];
+//                    self.matrixLabel.text = [self.gameEngine gameBoardState];
+//                    [self.gameEngine printBoardState];
+//
+//                    if ([self.gameEngine isGameOver]) {
+//                        if (!self.gameEngine.hasFreeCells && !self.gameEngine.winningConditionsFulfiled) {
+//                            NSLog(@"It's a draw. Nobody wins!");
+//                            [self showDrawAlert];
+//
+//                        } else if (self.gameEngine.winningConditionsFulfiled) {
+//                            [self.consoleVCEnterButton setEnabled:NO];
+//                            [self showPlayerWonAlert: self.gameEngine.currentPlayer];
+//                        }
+//                    }
+//                }
         }
         
     } else {

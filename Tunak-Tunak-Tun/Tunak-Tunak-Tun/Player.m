@@ -6,7 +6,7 @@
 //
 
 #import "Player.h"
-
+#import "Board.h"
 
 @implementation Player
 -(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerID withSign:(CellState)sign {
@@ -15,8 +15,16 @@
         self.name = name;
         self.playerID = playerID;
         self.sign = sign;
-        //self.selectedCells = [[NSMutableSet<Cell*> alloc] init];
     }
     return self;
+}
+
+-(void)makeMoveOnBoard:(Board*)board atRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex {
+    [board changeCellStateAtRowIndex:rowIndex columnIndex:columnIndex withSign:self.sign];
+}
+
+
+-(void)makeMoveOnBoard:(Board*)board atIndex:(NSUInteger)index {
+    
 }
 @end

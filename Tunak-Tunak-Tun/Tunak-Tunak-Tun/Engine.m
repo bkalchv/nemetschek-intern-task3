@@ -8,6 +8,12 @@
 #import "Engine.h"
 #import "Cell.h"
 
+@interface Engine()
+//@property (nonatomic, strong) Player* player1;
+//@property (nonatomic, strong) Player* player2;
+//@property (nonatomic) NSUInteger freeCellsAmount;
+@end
+
 @implementation Engine
 
 -(instancetype) init {
@@ -16,7 +22,7 @@
         self.gameBoard = [[Board alloc] initWithRows:3];
         self.freeCellsAmount = 9;
         self.hasFreeCells = YES;
-        self.isGameOver = NO;
+        self.winningConditionsFulfiled = NO;
     }
     return self;
 }
@@ -24,15 +30,20 @@
 - (instancetype)initWithPlayersName:(NSString*)playersName {
     self = [self init];
     if (self) {
-//        self.players =  [NSArray  arrayWithObjects: [[Player alloc] initPlayerWithName:@"CPU" withId:0 withSign:CellStateO], [[Player alloc] initPlayerWithName:playersName withId:1 withSign:CellStateX], nil];
+        self.gameMode = OnePlayerGameMode;
         self.player1 = [[Player alloc] initPlayerWithName:playersName withId:1 withSign:CellStateX];
-        self.player2 = [[Player alloc] initPlayerWithName:@"CPU" withId:1 withSign:CellStateO];
+        self.player2 = [[Player alloc] initPlayerWithName:@"CPU" withId:2 withSign:CellStateO];
+        self.currentPlayer = self.player1;
     }
     return self;
 }
 
 - (void)printBoardState {
     [self.gameBoard printState];
+}
+
+- (NSString*)gameBoardState {
+    return [self.gameBoard stateString];
 }
 
 - (void)changeCellStateAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex toState:(CellState)state {
@@ -52,7 +63,7 @@
         
         if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign:player.sign])
         {
-            self.isGameOver = YES;
+            self.winningConditionsFulfiled = YES;
             NSLog(@"%@ won!", player.name);
             NSLog(@"Game over!");
             return;
@@ -73,7 +84,7 @@
         self.hasFreeCells = (self.freeCellsAmount != 0);
         if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign:player.sign])
         {
-            self.isGameOver = YES;
+            self.winningConditionsFulfiled = YES;
             NSLog(@"%@ won!", player.name);
             NSLog(@"Game over!");
             return;
@@ -101,14 +112,14 @@
     return freeCellsArray;
 }
 
--(Cell*)getRandomFreeCell{
+-(Cell*)randomFreeCell{
     NSArray<Cell*>* freeCells = [self freeCells];
     return [freeCells objectAtIndex: [self randomIndex:([freeCells count] - 1)] ];
 }
 
 - (Cell*)CPUSelects {
     if (self.hasFreeCells) {
-        Cell* CPUCellToSelect = [self getRandomFreeCell];
+        Cell* CPUCellToSelect = [self randomFreeCell];
         [self selectCellAtRowIndex:CPUCellToSelect.rowIndex atColumnIndex:CPUCellToSelect.colIndex byPlayer:self.player2];
         return CPUCellToSelect;
     } else return nil;
@@ -162,5 +173,38 @@
     return [[[self gameBoard] cellAtRowIndex:rowIndex columnIndex:columnIndex] isChecked];
 }
 
+-(void)switchCurrentPlayer{
+    if (self.gameMode == OnePlayerGameMode) {
+        [self CPUSelects];
+        return;
+    } else {
+        if (self.currentPlayer == self.player1) {
 
+            self.currentPlayer = self.player2;
+
+        } else if (self.currentPlayer == self.player2) {
+            self.currentPlayer = self.player1;
+        } else NSLog(@"Engine obj, switchCurrentPlayer: undefined behavior");
+    }
+}
+
+- (void)updateGameEngineStateOnPlayerSelectionOfCellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex{
+    Cell* selectedCell = [self.gameBoard cellAtRowIndex:rowIndex columnIndex:columnIndex];
+    self.freeCellsAmount -= 1;
+    self.hasFreeCells = (self.freeCellsAmount != 0);
+    
+    if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign: self.currentPlayer.sign])
+    {
+        self.winningConditionsFulfiled = YES;
+        NSLog(@"%@ won!", self.currentPlayer.name);
+        NSLog(@"Game over!");
+        return;
+    } else {
+        NSLog(@"Player: %tu selected: %tu %tu", self.currentPlayer.playerID, rowIndex, columnIndex);
+    }
+}
+
+- (BOOL)isGameOver {
+    return self.winningConditionsFulfiled || !self.hasFreeCells;
+}
 @end
