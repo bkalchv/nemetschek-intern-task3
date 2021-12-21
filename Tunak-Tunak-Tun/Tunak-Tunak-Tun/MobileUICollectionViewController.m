@@ -22,7 +22,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    [self refreshView];
+    if (self.gameEngine.isGameOver || !self.gameEngine.hasFreeCells) [self refreshView];
     self.collectionView.allowsSelection = YES;
     [self.collectionView reloadData];
 }
@@ -53,7 +53,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
                 NSLog(@"It's a draw. Nobody wins!");
                 [self.delegate showDrawAlert: [self.gameEngine.gameBoard stateString]];
                 
-            } else if(self.gameEngine.isGameOver) {
+            } else if (self.gameEngine.isGameOver) {
                 [self.delegate showPlayerWonAlert: self.gameEngine.player1 withGameBoardState: [self.gameEngine.gameBoard stateString]];
             }
         } else {

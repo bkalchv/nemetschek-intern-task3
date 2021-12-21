@@ -115,7 +115,7 @@
 }
 
 - (BOOL)checkColumnForCellSelection:(Cell*)cell withSign:(CellState)sign {
-    for (size_t i = 0; i < self.gameBoard.numberOfColumns; ++i) {
+    for (size_t i = 0; i < self.gameBoard.numberOfColumns; i++) {
         if ([self.gameBoard cellAtRowIndex:cell.rowIndex columnIndex:i].state != sign) break;
         if (i + 1 == self.gameBoard.numberOfColumns) return true;
     }
@@ -123,7 +123,7 @@
 }
 
 -(BOOL)checkRowForCellSelection:(Cell*)cell withSign:(CellState)sign {
-    for (size_t i = 0; i < self.gameBoard.numberOfRows; ++i) {
+    for (size_t i = 0; i < self.gameBoard.numberOfRows; i++) {
         if ([self.gameBoard cellAtRowIndex:i columnIndex:cell.colIndex].state != sign) break;
         if (i + 1 == self.gameBoard.numberOfRows) return true;
     }
@@ -132,7 +132,7 @@
 
 -(BOOL)checkDiagonalForCellSelection:(Cell*)cell withSign:(CellState)sign {
     if(cell.rowIndex == cell.colIndex) {
-        for(int i = 0; i < self.gameBoard.numberOfRows; ++i) {
+        for(int i = 0; i < self.gameBoard.numberOfRows; i++) {
             if([self.gameBoard cellAtRowIndex:i columnIndex:i].state != sign) break;
             if(i + 1 == self.gameBoard.numberOfRows) return true;
         }
@@ -142,8 +142,8 @@
 
 -(BOOL)checkAntiDiagonalForCellSelection:(Cell*)cell withSign:(CellState)sign {
     if(cell.rowIndex + cell.colIndex + 1 == self.gameBoard.numberOfRows) {
-        for(int i = 0; i < self.gameBoard.numberOfRows; ++i) {
-            if([self.gameBoard cellAtRowIndex:i columnIndex:(self.gameBoard.numberOfRows - 1)].state !=sign) break;
+        for(int i = 0; i < self.gameBoard.numberOfRows; i++) {
+            if([self.gameBoard cellAtRowIndex:i columnIndex:(self.gameBoard.numberOfRows - 1 - i)].state != sign) break;
             if(i + 1 == self.gameBoard.numberOfRows) return true;
         }
     }
