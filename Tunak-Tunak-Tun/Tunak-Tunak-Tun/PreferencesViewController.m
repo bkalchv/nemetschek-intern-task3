@@ -12,6 +12,7 @@
 @interface PreferencesViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *preferencesMessageLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *preferenceUISwitchButton;
+@property (weak, nonatomic) IBOutlet UISwitch *preferencesGameModeSwitchButton;
 @property (weak, nonatomic) IBOutlet UIButton *gameOnButton;
 @end
 
