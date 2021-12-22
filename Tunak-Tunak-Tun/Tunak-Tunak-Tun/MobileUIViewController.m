@@ -77,7 +77,7 @@
         MobileUICollectionViewController* mobileUICollectionViewController = [segue destinationViewController];
         mobileUICollectionViewController.delegate = self;
         mobileUICollectionViewController.username = self.username;
-        //mobileUICollectionViewController.player2Username = self.username;
+        mobileUICollectionViewController.player2Username = self.player2Username;
         mobileUICollectionViewController.gameMode = self.gameMode;
         switch (mobileUICollectionViewController.gameMode) {
             case GameModeOnePlayer:
@@ -90,7 +90,6 @@
             default:
                 break;
         }
-        
     }
 }
 

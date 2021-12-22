@@ -40,9 +40,9 @@
 }
 - (IBAction)onGameOnButtonClick:(id)sender {
     if (self.isUIPreferenceSwitchOn) {
-        [self showMobileViewControllerWithPlayer1Username: self.username player2Username: self.SecondPlayerNameTextField.text];
+        [self showMobileViewControllerWithPlayer1Username:self.username player2Username: self.SecondPlayerNameTextField.text];
     } else {
-        [self showConsoleViewControllerWithPlayer1Username: self.username player2Username: self.SecondPlayerNameTextField.text];
+        [self showConsoleViewControllerWithPlayer1Username:self.username player2Username: self.SecondPlayerNameTextField.text];
     }
 }
 

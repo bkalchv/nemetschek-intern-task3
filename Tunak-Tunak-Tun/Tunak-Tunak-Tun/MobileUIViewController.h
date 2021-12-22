@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MobileUIViewController : UIViewController <MobileUICollectionViewControllerDelegate, UIAdaptivePresentationControllerDelegate>
-@property (nonatomic, weak) NSString* username;
+@property (nonatomic) NSString* username;
 @property (nonatomic) NSString* player2Username;
 @property (nonatomic) GameMode gameMode;
 @end

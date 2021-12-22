@@ -17,7 +17,19 @@
 static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 
 - (void)refreshView {
-    self.gameEngine = [[Engine alloc] initWithPlayersName: self.username];
+    
+    switch (self.gameMode) {
+        case GameModeOnePlayer:
+            self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
+            break;
+        case GameModeTwoPlayers:
+            self.gameEngine = [[Engine alloc] initWithPlayer1Name:self.username player2Name:self.player2Username];
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
