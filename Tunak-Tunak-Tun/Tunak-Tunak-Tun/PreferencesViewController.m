@@ -33,32 +33,40 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)showConsoleViewControllerWithUsername:(NSString*)username {
+- (void)showConsoleViewControllerWithUsername:(NSString*)username ofGameMode:(GameMode)gameMode {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ConsoleViewController* consoleViewController = [storyboard instantiateViewControllerWithIdentifier:@"ConsoleViewController"];
     consoleViewController.username = username;
+    consoleViewController.gameMode = gameMode;
     [self presentViewController:consoleViewController animated:YES completion:nil];
 }
 
-- (void)showMobileViewControllerWithUsername:(NSString*)username {
+- (void)showMobileViewControllerWithUsername:(NSString*)username ofGameMode:(GameMode)gameMode {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MobileUIViewController* mobileUIViewController = [storyboard instantiateViewControllerWithIdentifier:@"MobileUIViewController"];
     mobileUIViewController.username = username;
+    mobileUIViewController.gameMode = gameMode;
     [self presentViewController:mobileUIViewController animated:YES completion:nil];
 }
 
 - (IBAction)onGameOnButtonClick:(id)sender {
-    switch (self.preferenceUISwitchButton.isOn) {
-        case YES:
-            [self showMobileViewControllerWithUsername:self.username];
-            break;
+    
+    if (self.preferencesGameModeSwitchButton.isOn) {
         
-        case NO:
-            [self showConsoleViewControllerWithUsername:self.username];
-            break;;
-            
-        default:
-            break;
+        if (self.preferenceUISwitchButton.isOn) {
+            [self showMobileViewControllerWithUsername:self.username ofGameMode:GameModeTwoPlayers];
+        } else {
+            [self showConsoleViewControllerWithUsername:self.username ofGameMode:GameModeTwoPlayers];
+        }
+        
+    } else {
+        
+        if (self.preferenceUISwitchButton.isOn) {
+            [self showMobileViewControllerWithUsername:self.username ofGameMode:GameModeOnePlayer];
+        } else {
+            [self showConsoleViewControllerWithUsername:self.username ofGameMode:GameModeOnePlayer];
+
+        }
     }
 }
 

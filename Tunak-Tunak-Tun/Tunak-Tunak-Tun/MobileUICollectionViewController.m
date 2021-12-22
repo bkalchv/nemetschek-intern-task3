@@ -60,7 +60,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         
         if ([self shouldGameContinue]) {
             [self.gameEngine switchCurrentPlayer];
-            if (self.gameEngine.gameMode == OnePlayerGameMode) {
+            if (self.gameEngine.gameMode == GameModeOnePlayer) {
                 [self.collectionView reloadData];
                 [self.gameEngine printBoardState];
                 [self shouldGameContinue];

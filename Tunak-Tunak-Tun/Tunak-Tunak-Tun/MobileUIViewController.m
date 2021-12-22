@@ -74,7 +74,19 @@
         MobileUICollectionViewController* mobileUICollectionViewController = [segue destinationViewController];
         mobileUICollectionViewController.delegate = self;
         mobileUICollectionViewController.username = self.username;
-        mobileUICollectionViewController.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
+        mobileUICollectionViewController.gameMode = self.gameMode;
+        switch (mobileUICollectionViewController.gameMode) {
+            case GameModeOnePlayer:
+                mobileUICollectionViewController.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
+                break;
+            case GameModeTwoPlayers:
+                NSLog(@"Case unhandled yet!");
+                break;
+                
+            default:
+                break;
+        }
+        
     }
 }
 
