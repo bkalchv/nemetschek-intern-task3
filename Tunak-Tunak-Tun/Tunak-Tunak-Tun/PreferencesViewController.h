@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PreferencesViewController : UIViewController
-@property (nonatomic, weak) NSString* username;
 @end
 
 NS_ASSUME_NONNULL_END

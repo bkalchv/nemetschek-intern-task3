@@ -21,9 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MobileUICollectionViewController : UICollectionViewController <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) Engine* gameEngine;
-@property (nonatomic, strong) NSString* username;
-@property (nonatomic, strong) NSString* player2Username;
-@property (nonatomic) GameMode gameMode;
 @property (nonatomic, strong)id <MobileUICollectionViewControllerDelegate> delegate;
 @end
 

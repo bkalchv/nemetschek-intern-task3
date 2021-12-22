@@ -18,7 +18,7 @@
 @implementation MobileUIViewController
 
 - (void)refreshView {
-    self.mobileUIUsernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
+    self.mobileUIUsernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -28,7 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.mobileUIUsernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
+    self.mobileUIUsernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
     // Do any additional setup after loading the view.
 }
 
@@ -76,15 +76,12 @@
     if ([[segue identifier] isEqualToString:@"ShowMobileUICollectionView"]) {
         MobileUICollectionViewController* mobileUICollectionViewController = [segue destinationViewController];
         mobileUICollectionViewController.delegate = self;
-        mobileUICollectionViewController.username = self.username;
-        mobileUICollectionViewController.player2Username = self.player2Username;
-        mobileUICollectionViewController.gameMode = self.gameMode;
-        switch (mobileUICollectionViewController.gameMode) {
+        switch ([GameConfigurationManager.sharedGameConfigurationManager gameMode]) {
             case GameModeOnePlayer:
-                mobileUICollectionViewController.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
+                mobileUICollectionViewController.gameEngine = [[Engine alloc] initWithPlayersName:[GameConfigurationManager.sharedGameConfigurationManager player1Username]];
                 break;
             case GameModeTwoPlayers:
-                mobileUICollectionViewController.gameEngine = [[Engine alloc] initWithPlayer1Name:self.username player2Name:self.player2Username];
+                mobileUICollectionViewController.gameEngine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name:[GameConfigurationManager.sharedGameConfigurationManager player2Username]];
                 break;
                 
             default:

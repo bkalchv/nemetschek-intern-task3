@@ -10,8 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SecondPlayerNameInputViewController : ViewController
-@property (nonatomic, weak) NSString* username;
-@property (nonatomic) BOOL isUIPreferenceSwitchOn;
 @end
 
 NS_ASSUME_NONNULL_END

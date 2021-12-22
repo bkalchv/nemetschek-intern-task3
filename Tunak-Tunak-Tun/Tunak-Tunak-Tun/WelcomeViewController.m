@@ -7,6 +7,7 @@
 
 #import "WelcomeViewController.h"
 #import "PreferencesViewController.h"
+#import "GameConfigurationManager.h"
 
 @interface WelcomeViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *toPreferencesButton;
@@ -20,10 +21,9 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)showPreferencesViewControllerWithUsername:(NSString*)username {
+- (void)showPreferencesViewController{
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PreferencesViewController* preferencesViewController = [storyboard instantiateViewControllerWithIdentifier:@"PreferencesViewController"];
-    preferencesViewController.username = username;
     [self presentViewController:preferencesViewController animated:YES completion:nil];
 }
 
@@ -34,7 +34,8 @@
     } else {
         username = self.usernameTextField.text;
     }
-    [self showPreferencesViewControllerWithUsername:username];
+    [GameConfigurationManager.sharedGameConfigurationManager addPlayer1Username:username];
+    [self showPreferencesViewController];
 }
 
 

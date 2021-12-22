@@ -6,8 +6,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GameConfigurationManager.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    
+}
 
 
 @end

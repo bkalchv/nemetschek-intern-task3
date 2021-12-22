@@ -8,6 +8,7 @@
 #import "ConsoleViewController.h"
 #import "MobileUIViewController.h"
 #import "SecondPlayerNameInputViewController.h"
+#import "GameConfigurationManager.h"
 
 @interface SecondPlayerNameInputViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *SecondPlayerNameTextField;
@@ -16,21 +17,15 @@
 
 @implementation SecondPlayerNameInputViewController
 
-- (void)showConsoleViewControllerWithPlayer1Username:(NSString*)player1Username player2Username:(NSString*)player2Username {
+- (void)showConsoleViewController {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ConsoleViewController* consoleViewController = [storyboard instantiateViewControllerWithIdentifier:@"ConsoleViewController"];
-    consoleViewController.username = player1Username;
-    consoleViewController.player2Username = player2Username;
-    consoleViewController.gameMode = GameModeTwoPlayers;
     [self presentViewController:consoleViewController animated:YES completion:nil];
 }
 
-- (void)showMobileViewControllerWithPlayer1Username:(NSString*)player1Username player2Username:(NSString*)player2Username {
+- (void)showMobileViewController {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MobileUIViewController* mobileUIViewController = [storyboard instantiateViewControllerWithIdentifier:@"MobileUIViewController"];
-    mobileUIViewController.username = player1Username;
-    mobileUIViewController.player2Username = player2Username;
-    mobileUIViewController.gameMode = GameModeTwoPlayers;
     [self presentViewController:mobileUIViewController animated:YES completion:nil];
 }
 
@@ -39,10 +34,26 @@
     // Do any additional setup after loading the view.
 }
 - (IBAction)onGameOnButtonClick:(id)sender {
-    if (self.isUIPreferenceSwitchOn) {
-        [self showMobileViewControllerWithPlayer1Username:self.username player2Username: self.SecondPlayerNameTextField.text];
+    
+    NSString* player2Username = [[NSString alloc] init];
+    if ([self.SecondPlayerNameTextField.text isEqualToString:@""]) {
+        player2Username = @"Annonymous Rat";
     } else {
-        [self showConsoleViewControllerWithPlayer1Username:self.username player2Username: self.SecondPlayerNameTextField.text];
+        player2Username = self.SecondPlayerNameTextField.text;
+    }
+    
+    [GameConfigurationManager.sharedGameConfigurationManager addPlayer2Username: player2Username];
+    
+    switch ([GameConfigurationManager.sharedGameConfigurationManager UI]) {
+        case EnumUIConsole:
+            [self showConsoleViewController];
+            break;
+        case EnumUIMobile:
+            [self showMobileViewController];
+            break;
+            
+        default:
+            break;
     }
 }
 

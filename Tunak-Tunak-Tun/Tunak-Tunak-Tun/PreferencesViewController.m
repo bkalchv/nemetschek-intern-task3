@@ -9,6 +9,8 @@
 #import "ConsoleViewController.h"
 #import "MobileUIViewController.h"
 #import "SecondPlayerNameInputViewController.h"
+#import "GameConfigurationManager.h"
+
 
 @interface PreferencesViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *preferencesMessageLabel;
@@ -20,7 +22,7 @@
 @implementation PreferencesViewController
 
 - (void)refreshView {
-    self.preferencesMessageLabel.text = [NSString stringWithFormat:@"Okay, %@ what will it be today?", self.username];
+    self.preferencesMessageLabel.text = [NSString stringWithFormat:@"Okay, %@ what will it be today?", [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -30,31 +32,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.preferencesMessageLabel.text = [NSString stringWithFormat:@"Okay, %@ what will it be today?", self.username];
+    self.preferencesMessageLabel.text = [NSString stringWithFormat:@"Okay, %@ what will it be today?", [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
     // Do any additional setup after loading the view.
 }
 
-- (void)showConsoleViewControllerWithUsername:(NSString*)username ofGameMode:(GameMode)gameMode {
+- (void)showConsoleViewController {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ConsoleViewController* consoleViewController = [storyboard instantiateViewControllerWithIdentifier:@"ConsoleViewController"];
-    consoleViewController.username = username;
-    consoleViewController.gameMode = gameMode;
     [self presentViewController:consoleViewController animated:YES completion:nil];
 }
 
-- (void)showMobileViewControllerWithUsername:(NSString*)username ofGameMode:(GameMode)gameMode {
+- (void)showMobileViewController {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MobileUIViewController* mobileUIViewController = [storyboard instantiateViewControllerWithIdentifier:@"MobileUIViewController"];
-    mobileUIViewController.username = username;
-    mobileUIViewController.gameMode = gameMode;
     [self presentViewController:mobileUIViewController animated:YES completion:nil];
 }
 
-- (void)showSecondPlayerNameInputViewControllerWithUsername:(NSString*)username UIPreferencesSwitchIsOn:(BOOL)switchState {
+- (void)showSecondPlayerNameInputViewController {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     SecondPlayerNameInputViewController* secondPlayerNameInputViewController = [storyboard instantiateViewControllerWithIdentifier:@"SecondPlayerNameInputViewController"];
-    secondPlayerNameInputViewController.username = username;
-    secondPlayerNameInputViewController.isUIPreferenceSwitchOn = switchState;
     [self presentViewController:secondPlayerNameInputViewController animated:YES completion:nil];
 }
 
@@ -63,13 +59,22 @@
     
     if (self.preferencesGameModeSwitchButton.isOn) {
         
-        [self showSecondPlayerNameInputViewControllerWithUsername:self.username UIPreferencesSwitchIsOn:self.preferenceUISwitchButton.isOn];
+        if (self.preferenceUISwitchButton.isOn) {
+            [GameConfigurationManager.sharedGameConfigurationManager changeToUI: EnumUIMobile];
+        } else {
+            [GameConfigurationManager.sharedGameConfigurationManager changeToUI: EnumUIConsole];
+        }
+        
+        [GameConfigurationManager.sharedGameConfigurationManager changeToGameMode: GameModeTwoPlayers];
+        [self showSecondPlayerNameInputViewController];
     } else {
         
         if (self.preferenceUISwitchButton.isOn) {
-            [self showMobileViewControllerWithUsername:self.username ofGameMode:GameModeOnePlayer];
+            [GameConfigurationManager.sharedGameConfigurationManager changeToUI: EnumUIMobile];
+            [self showMobileViewController];
         } else {
-            [self showConsoleViewControllerWithUsername:self.username ofGameMode:GameModeOnePlayer];
+            [GameConfigurationManager.sharedGameConfigurationManager changeToUI: EnumUIConsole];
+            [self showConsoleViewController];
 
         }
     }

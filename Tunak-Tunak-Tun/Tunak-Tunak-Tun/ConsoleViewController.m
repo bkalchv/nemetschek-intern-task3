@@ -19,12 +19,13 @@
 @implementation ConsoleViewController
 
 - (void)refreshView {
-    switch (self.gameMode) {
+    switch ([GameConfigurationManager.sharedGameConfigurationManager gameMode]) {
         case GameModeOnePlayer:
-            self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
+            self.gameEngine = [[Engine alloc] initWithPlayersName: [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
             break;
+            
         case GameModeTwoPlayers:
-            self.gameEngine = [[Engine alloc] initWithPlayer1Name:self.username player2Name: self.player2Username];
+            self.gameEngine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name: [GameConfigurationManager.sharedGameConfigurationManager player2Username]];
             break;
             
         default:
@@ -45,12 +46,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    switch (self.gameMode) {
+    switch ([GameConfigurationManager.sharedGameConfigurationManager gameMode]) {
         case GameModeOnePlayer:
-            self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
+            self.gameEngine = [[Engine alloc] initWithPlayersName: [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
             break;
         case GameModeTwoPlayers:
-            self.gameEngine = [[Engine alloc] initWithPlayer1Name:self.username player2Name: self.player2Username];
+            self.gameEngine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name: [GameConfigurationManager.sharedGameConfigurationManager player2Username]];
             break;
             
         default:
@@ -122,7 +123,7 @@
     [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
 }
 
-- (bool)checkIfGameShouldContinue {
+- (BOOL)checkIfGameShouldContinue {
     if ([self.gameEngine isGameOver]) {
         if (!self.gameEngine.hasFreeCells && !self.gameEngine.winningConditionsFulfiled) {
             NSLog(@"It's a draw. Nobody wins!");
@@ -132,9 +133,10 @@
             [self.consoleVCEnterButton setEnabled:NO];
             [self showPlayerWonAlert: self.gameEngine.currentPlayer];
         }
-        return false;
-    } else
-        return true;
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (IBAction)onConsoleVCEnterButton:(id)sender {
@@ -155,11 +157,12 @@
             
             if ([self checkIfGameShouldContinue]) {
                 [self.gameEngine switchCurrentPlayer];
+                
                 self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayer].name];
-                //[self.view reloadInputViews];
                 if (self.gameEngine.gameMode == GameModeOnePlayer) {
                     self.matrixLabel.text = [self.gameEngine gameBoardState];
                     [self.gameEngine printBoardState];
+                    [self checkIfGameShouldContinue];
                 }
             }
         }

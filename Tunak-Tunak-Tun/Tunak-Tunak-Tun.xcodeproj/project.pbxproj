@@ -27,6 +27,7 @@
 		42A945E327678C13002767C6 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945E227678C13002767C6 /* Player.m */; };
 		42A945E62767A330002767C6 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945E52767A330002767C6 /* Cell.m */; };
 		42CB4103277353D600A7046E /* SecondPlayerNameInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CB4102277353D600A7046E /* SecondPlayerNameInputViewController.m */; };
+		42CB410627737FE800A7046E /* GameConfigurationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CB410527737FE800A7046E /* GameConfigurationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,8 @@
 		42A945E52767A330002767C6 /* Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		42CB4101277353D600A7046E /* SecondPlayerNameInputViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondPlayerNameInputViewController.h; sourceTree = "<group>"; };
 		42CB4102277353D600A7046E /* SecondPlayerNameInputViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondPlayerNameInputViewController.m; sourceTree = "<group>"; };
+		42CB410427737FE800A7046E /* GameConfigurationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfigurationManager.h; sourceTree = "<group>"; };
+		42CB410527737FE800A7046E /* GameConfigurationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameConfigurationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 				42A945BF2767515E002767C6 /* ViewController.h */,
 				42A945C02767515E002767C6 /* ViewController.m */,
 				42A945C22767515E002767C6 /* Main.storyboard */,
+				42CB410427737FE800A7046E /* GameConfigurationManager.h */,
+				42CB410527737FE800A7046E /* GameConfigurationManager.m */,
 				42A945D2276756C5002767C6 /* WelcomeViewController.h */,
 				42A945D3276756C5002767C6 /* WelcomeViewController.m */,
 				429BAEF0276B818A007D73C5 /* PreferencesViewController.h */,
@@ -223,6 +228,7 @@
 				42A945D4276756C5002767C6 /* WelcomeViewController.m in Sources */,
 				42A945DA276769E9002767C6 /* ConsoleViewController.m in Sources */,
 				42A945E027678B1B002767C6 /* Engine.m in Sources */,
+				42CB410627737FE800A7046E /* GameConfigurationManager.m in Sources */,
 				4297D02D2770903A00F0782E /* MobileUICollectionViewCell.m in Sources */,
 				42A945DD27676AC5002767C6 /* Board.m in Sources */,
 				42A945E327678C13002767C6 /* Player.m in Sources */,

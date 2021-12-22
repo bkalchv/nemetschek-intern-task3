@@ -8,13 +8,9 @@
 #import <Foundation/Foundation.h>
 #import "Board.h"
 #import "Player.h"
+#import "GameConfigurationManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-typedef NS_ENUM(NSInteger, GameMode) {
-    GameModeOnePlayer,
-    GameModeTwoPlayers
-};
 
 @interface Engine : NSObject
 @property (nonatomic, strong)       Board* gameBoard;
