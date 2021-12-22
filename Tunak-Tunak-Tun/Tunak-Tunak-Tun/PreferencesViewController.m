@@ -8,6 +8,7 @@
 #import "PreferencesViewController.h"
 #import "ConsoleViewController.h"
 #import "MobileUIViewController.h"
+#import "SecondPlayerNameInputViewController.h"
 
 @interface PreferencesViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *preferencesMessageLabel;
@@ -49,16 +50,20 @@
     [self presentViewController:mobileUIViewController animated:YES completion:nil];
 }
 
+- (void)showSecondPlayerNameInputViewControllerWithUsername:(NSString*)username UIPreferencesSwitchIsOn:(BOOL)switchState {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SecondPlayerNameInputViewController* secondPlayerNameInputViewController = [storyboard instantiateViewControllerWithIdentifier:@"SecondPlayerNameInputViewController"];
+    secondPlayerNameInputViewController.username = username;
+    secondPlayerNameInputViewController.isUIPreferenceSwitchOn = switchState;
+    [self presentViewController:secondPlayerNameInputViewController animated:YES completion:nil];
+}
+
+
 - (IBAction)onGameOnButtonClick:(id)sender {
     
     if (self.preferencesGameModeSwitchButton.isOn) {
         
-        if (self.preferenceUISwitchButton.isOn) {
-            [self showMobileViewControllerWithUsername:self.username ofGameMode:GameModeTwoPlayers];
-        } else {
-            [self showConsoleViewControllerWithUsername:self.username ofGameMode:GameModeTwoPlayers];
-        }
-        
+        [self showSecondPlayerNameInputViewControllerWithUsername:self.username UIPreferencesSwitchIsOn:self.preferenceUISwitchButton.isOn];
     } else {
         
         if (self.preferenceUISwitchButton.isOn) {

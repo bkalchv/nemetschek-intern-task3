@@ -19,8 +19,19 @@
 @implementation ConsoleViewController
 
 - (void)refreshView {
-    self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
-    self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
+    switch (self.gameMode) {
+        case GameModeOnePlayer:
+            self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
+            break;
+        case GameModeTwoPlayers:
+            self.gameEngine = [[Engine alloc] initWithPlayer1Name:self.username player2Name: self.player2Username];
+            break;
+            
+        default:
+            break;
+    }
+    
+    self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayer].name];
     self.consoleVCEnterButton.enabled = YES;
     self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
     [self.gameEngine printBoardState];
@@ -33,9 +44,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
+    
+    switch (self.gameMode) {
+        case GameModeOnePlayer:
+            self.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
+            break;
+        case GameModeTwoPlayers:
+            self.gameEngine = [[Engine alloc] initWithPlayer1Name:self.username player2Name: self.player2Username];
+            break;
+            
+        default:
+            break;
+    }
+    
     self.inputTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-    self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
+    self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayer].name];
     [self.gameEngine printBoardState];
     // Do any additional setup after loading the view.
 }
@@ -132,6 +155,8 @@
             
             if ([self checkIfGameShouldContinue]) {
                 [self.gameEngine switchCurrentPlayer];
+                self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayer].name];
+                //[self.view reloadInputViews];
                 if (self.gameEngine.gameMode == GameModeOnePlayer) {
                     self.matrixLabel.text = [self.gameEngine gameBoardState];
                     [self.gameEngine printBoardState];

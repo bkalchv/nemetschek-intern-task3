@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showPlayerWonAlert:(Player*)player withGameBoardState:(NSString*)gameBoardState;
 - (void)showOneMoreTimeViewController;
 - (void)showAlreadySelectedAlertForCell:(Cell*)cell;
+- (void)updateUsernameLabel:(NSString*)currentPlayerUsername;
 
 @end
 

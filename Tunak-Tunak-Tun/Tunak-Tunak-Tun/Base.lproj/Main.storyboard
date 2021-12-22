@@ -319,7 +319,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yK9-5h-9jo" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2748" y="-988"/>
+            <point key="canvasLocation" x="-3528" y="-988"/>
         </scene>
         <!--MobileUI View Controller-->
         <scene sceneID="MiZ-hy-D8j">
@@ -463,7 +463,78 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHY-pK-09X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1884" y="-988"/>
+            <point key="canvasLocation" x="-2812" y="-988"/>
+        </scene>
+        <!--Second Player Name Input View Controller-->
+        <scene sceneID="Wt6-31-P5j">
+            <objects>
+                <viewController storyboardIdentifier="SecondPlayerNameInputViewController" id="Pmf-GJ-x0X" customClass="SecondPlayerNameInputViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rg6-U8-KxX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tick-Tack-Toe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7VP-oR-Lix">
+                                <rect key="frame" x="116.5" y="188" width="181" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, enter second player's name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZNZ-zP-hgg">
+                                <rect key="frame" x="70" y="405" width="274" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ex. Johnny Simp" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BrC-1X-dE5">
+                                <rect key="frame" x="52" y="460" width="310" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="310" id="pxX-Bw-a0h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Two Players Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuL-LV-rkW">
+                                <rect key="frame" x="137.5" y="232" width="139" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suV-Xz-D4m">
+                                <rect key="frame" x="144.5" y="607" width="125" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="0GH-uT-VJT"/>
+                                    <constraint firstAttribute="height" constant="50" id="89h-x0-stI"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Game on!"/>
+                                <connections>
+                                    <action selector="onGameOnButtonClick:" destination="Pmf-GJ-x0X" eventType="touchUpInside" id="ZE1-em-wPp"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QJH-iK-DqR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BrC-1X-dE5" firstAttribute="top" secondItem="QJH-iK-DqR" secondAttribute="top" constant="416" id="1mD-Tf-K1W"/>
+                            <constraint firstItem="suV-Xz-D4m" firstAttribute="top" secondItem="QJH-iK-DqR" secondAttribute="top" constant="563" id="2ZY-uC-bLu"/>
+                            <constraint firstItem="VuL-LV-rkW" firstAttribute="centerX" secondItem="QJH-iK-DqR" secondAttribute="centerX" id="9Gy-Nu-fFh"/>
+                            <constraint firstItem="7VP-oR-Lix" firstAttribute="top" secondItem="QJH-iK-DqR" secondAttribute="top" constant="144" id="Cex-BZ-Osz"/>
+                            <constraint firstItem="7VP-oR-Lix" firstAttribute="centerX" secondItem="QJH-iK-DqR" secondAttribute="centerX" id="GTV-UZ-fle"/>
+                            <constraint firstItem="BrC-1X-dE5" firstAttribute="centerX" secondItem="QJH-iK-DqR" secondAttribute="centerX" id="NGi-mC-hRf"/>
+                            <constraint firstItem="suV-Xz-D4m" firstAttribute="centerX" secondItem="QJH-iK-DqR" secondAttribute="centerX" id="WNR-GZ-W20"/>
+                            <constraint firstItem="ZNZ-zP-hgg" firstAttribute="centerX" secondItem="QJH-iK-DqR" secondAttribute="centerX" id="Xd1-EU-z2e"/>
+                            <constraint firstItem="ZNZ-zP-hgg" firstAttribute="top" secondItem="QJH-iK-DqR" secondAttribute="top" constant="361" id="lcm-Y2-F0K"/>
+                            <constraint firstItem="VuL-LV-rkW" firstAttribute="top" secondItem="QJH-iK-DqR" secondAttribute="top" constant="188" id="sLq-6R-ugs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="GameOnButton" destination="suV-Xz-D4m" id="qFK-jS-biJ"/>
+                        <outlet property="SecondPlayerNameTextField" destination="BrC-1X-dE5" id="tYY-6G-76x"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Roj-tq-clU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2036.2318840579712" y="-988.39285714285711"/>
         </scene>
     </scenes>
     <resources>

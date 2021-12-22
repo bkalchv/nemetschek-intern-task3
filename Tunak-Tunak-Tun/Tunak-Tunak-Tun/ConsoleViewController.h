@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ConsoleViewController : UIViewController <UIAdaptivePresentationControllerDelegate>
 @property (nonatomic) Engine* gameEngine;
 @property (nonatomic) NSString* username;
+@property (nonatomic) NSString* player2Username;
 @property (nonatomic) GameMode gameMode;
 @end
 

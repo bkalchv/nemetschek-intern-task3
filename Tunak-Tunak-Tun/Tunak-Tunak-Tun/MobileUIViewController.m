@@ -19,7 +19,6 @@
 
 - (void)refreshView {
     self.mobileUIUsernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", self.username];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -63,6 +62,10 @@
     [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
 }
 
+- (void)updateUsernameLabel:(NSString*) currentPlayerUsername {
+    [self.mobileUIUsernameLabel setText:  [NSString stringWithFormat:@"It's up to you, %@!", currentPlayerUsername]];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -74,13 +77,14 @@
         MobileUICollectionViewController* mobileUICollectionViewController = [segue destinationViewController];
         mobileUICollectionViewController.delegate = self;
         mobileUICollectionViewController.username = self.username;
+        //mobileUICollectionViewController.player2Username = self.username;
         mobileUICollectionViewController.gameMode = self.gameMode;
         switch (mobileUICollectionViewController.gameMode) {
             case GameModeOnePlayer:
                 mobileUICollectionViewController.gameEngine = [[Engine alloc] initWithPlayersName:self.username];
                 break;
             case GameModeTwoPlayers:
-                NSLog(@"Case unhandled yet!");
+                mobileUICollectionViewController.gameEngine = [[Engine alloc] initWithPlayer1Name:self.username player2Name:self.player2Username];
                 break;
                 
             default:

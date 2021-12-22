@@ -60,6 +60,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         
         if ([self shouldGameContinue]) {
             [self.gameEngine switchCurrentPlayer];
+            [self.delegate updateUsernameLabel:[self.gameEngine currentPlayer].name];
             if (self.gameEngine.gameMode == GameModeOnePlayer) {
                 [self.collectionView reloadData];
                 [self.gameEngine printBoardState];
