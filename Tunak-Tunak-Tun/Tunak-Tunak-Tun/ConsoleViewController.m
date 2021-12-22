@@ -132,7 +132,7 @@
             
             if ([self checkIfGameShouldContinue]) {
                 [self.gameEngine switchCurrentPlayer];
-                if (self.gameEngine.gameMode == OnePlayerGameMode) {
+                if (self.gameEngine.gameMode == GameModeOnePlayer) {
                     self.matrixLabel.text = [self.gameEngine gameBoardState];
                     [self.gameEngine printBoardState];
                 }

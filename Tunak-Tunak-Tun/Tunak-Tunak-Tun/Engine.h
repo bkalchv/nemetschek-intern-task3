@@ -12,8 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, GameMode) {
-    OnePlayerGameMode,
-    TwoPlayersGameMode
+    GameModeOnePlayer,
+    GameModeTwoPlayers
 };
 
 @interface Engine : NSObject
@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger, GameMode) {
 
 - (instancetype)init;
 - (instancetype)initWithPlayersName:(NSString*)playersName;
+- (instancetype)initWithPlayer1Name:(NSString*)player1Name player2Name:(NSString*)player2Name;
 - (void)printBoardState;
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex;
 - (void)selectCellAtIndex:(NSUInteger)index;

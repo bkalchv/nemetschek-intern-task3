@@ -30,9 +30,20 @@
 - (instancetype)initWithPlayersName:(NSString*)playersName {
     self = [self init];
     if (self) {
-        self.gameMode = OnePlayerGameMode;
+        self.gameMode = GameModeOnePlayer;
         self.player1 = [[Player alloc] initPlayerWithName:playersName withId:1 withSign:CellStateX];
         self.player2 = [[Player alloc] initPlayerWithName:@"CPU" withId:2 withSign:CellStateO];
+        self.currentPlayer = self.player1;
+    }
+    return self;
+}
+
+- (instancetype)initWithPlayer1Name:(NSString*)player1Name player2Name:(NSString*)player2Name {
+    self = [self init];
+    if (self) {
+        self.gameMode = GameModeTwoPlayers;
+        self.player1 = [[Player alloc] initPlayerWithName:player1Name withId:1 withSign:CellStateX];
+        self.player2 = [[Player alloc] initPlayerWithName:player2Name withId:2 withSign:CellStateO];
         self.currentPlayer = self.player1;
     }
     return self;
@@ -161,7 +172,7 @@
 
         self.currentPlayer = self.player2;
         
-        if (self.gameMode == OnePlayerGameMode) {
+        if (self.gameMode == GameModeOnePlayer) {
             [self CPUSelects];
         }
 
