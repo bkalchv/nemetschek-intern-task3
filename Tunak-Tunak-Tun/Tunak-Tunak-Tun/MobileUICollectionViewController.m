@@ -72,9 +72,8 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         
         if ([self shouldGameContinue]) {
             [self.gameEngine switchCurrentPlayer];
-            //[self.delegate updateUsernameLabel:[self.gameEngine currentPlayer].name];
             if (self.gameEngine.gameMode == GameModeOnePlayer && [self.gameEngine.currentPlayer isKindOfClass:[Bot class]]) {
-                NSLog(@"BOT HERE\n");
+                NSLog(@"BOT HERE\n"); // debugging purposes
                 Cell* selectedCellByBot = [(Bot*)self.gameEngine.currentPlayer makeMoveOnBoard: self.gameEngine.gameBoard];
                 [self.gameEngine updateGameEngineStateOnPlayerSelectionOfCellAtRowIndex:selectedCellByBot.rowIndex columnIndex:selectedCellByBot.colIndex];
                 [self.collectionView reloadData];

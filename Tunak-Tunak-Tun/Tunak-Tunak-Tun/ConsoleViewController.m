@@ -123,7 +123,7 @@
     [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
 }
 
-- (BOOL)checkIfGameShouldContinue {
+- (BOOL)shouldGameContinue {
     if ([self.gameEngine isGameOver]) {
         if (!self.gameEngine.hasFreeCells && !self.gameEngine.winningConditionsFulfiled) {
             NSLog(@"It's a draw. Nobody wins!");
@@ -155,15 +155,19 @@
             self.matrixLabel.text = [self.gameEngine gameBoardState];
             [self.gameEngine printBoardState];
             
-            if ([self checkIfGameShouldContinue]) {
+            if ([self shouldGameContinue]) {
                 [self.gameEngine switchCurrentPlayer];
                 
-                self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayer].name];
-                if (self.gameEngine.gameMode == GameModeOnePlayer) {
+                if (self.gameEngine.gameMode == GameModeOnePlayer && [self.gameEngine.currentPlayer isKindOfClass:[Bot class]]) {
+                    NSLog(@"BOT HERE\n");
+                    [(Bot*)self.gameEngine.currentPlayer makeMoveOnBoard: self.gameEngine.gameBoard];
                     self.matrixLabel.text = [self.gameEngine gameBoardState];
                     [self.gameEngine printBoardState];
-                    [self checkIfGameShouldContinue];
+                    [self shouldGameContinue];
+                    [self.gameEngine switchCurrentPlayer];
                 }
+                
+                self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayer].name];
             }
         }
         
