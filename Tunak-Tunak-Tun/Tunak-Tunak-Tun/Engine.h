@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isCellCheckedAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex;
 - (BOOL)isCellCheckedAtIndex:(NSUInteger)index;
 - (NSString*)gameBoardState;
-- (void)updateGameEngineStateOnPlayerSelectionOfCellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex;
+- (void)updateGameEngineStateOnPlayerSelection;
 - (void)updateGameEngineStateOnPlayerSelectionOfCellAtIndex:(NSUInteger)index;
 - (void)switchCurrentPlayer;
 - (BOOL)isGameOver;

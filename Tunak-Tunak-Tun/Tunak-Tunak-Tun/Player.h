@@ -14,10 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Player : NSObject
 @property NSUInteger playerID;
+
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic) CellState sign;
+@property (nonatomic) NSUInteger lastCellSelectionRowIndex;
+@property (nonatomic) NSUInteger lastCellSelectionColIndex;
 -(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerId withSign:(CellState)sign;
--(void)makeMoveOnBoard:(Board*)board atRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex;
+-(void)makeMoveOnBoard:(Board*)board;
 -(void)makeMoveOnBoard:(Board*)board atIndex:(NSUInteger)index;
 @end
 

@@ -58,8 +58,10 @@
 }
 
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player {
-    [player makeMoveOnBoard:[self gameBoard] atRowIndex:rowIndex columnIndex:columnIndex];
-    [self updateGameEngineStateOnPlayerSelectionOfCellAtRowIndex:rowIndex columnIndex:columnIndex];
+    [player setLastCellSelectionRowIndex:rowIndex];
+    [player setLastCellSelectionColIndex:columnIndex];
+    [player makeMoveOnBoard:self.gameBoard];
+    [self updateGameEngineStateOnPlayerSelection];
 }
 
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex {
@@ -175,8 +177,8 @@
 }
 
 
-- (void)updateGameEngineStateOnPlayerSelectionOfCellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex{
-    Cell* selectedCell = [self.gameBoard cellAtRowIndex:rowIndex columnIndex:columnIndex];
+- (void)updateGameEngineStateOnPlayerSelection {
+    Cell* selectedCell = [self.gameBoard cellAtRowIndex:[self.currentPlayer lastCellSelectionRowIndex] columnIndex:[self.currentPlayer lastCellSelectionColIndex]];
     self.freeCellsAmount -= 1;
     NSLog(@"%tu", [self freeCellsAmount]);
     self.hasFreeCells = (self.freeCellsAmount != 0);
@@ -188,7 +190,7 @@
         NSLog(@"Game over!");
         return;
     } else {
-        NSLog(@"Player: %tu selected: %tu %tu", self.currentPlayer.playerID, rowIndex, columnIndex);
+        NSLog(@"Player: %tu selected: %tu %tu", self.currentPlayer.playerID, [self.currentPlayer lastCellSelectionRowIndex], [self.currentPlayer lastCellSelectionColIndex]);
     }
 }
 

@@ -151,16 +151,19 @@
             //[self showAlreadySelectedAlertForCell:selectedCell];
             NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
         } else {
-            [self.gameEngine selectCellAtRowIndex:inputRowIndex atColumnIndex:inputColIndex];
+            [self.gameEngine.currentPlayer setLastCellSelectionRowIndex:inputRowIndex];
+            [self.gameEngine.currentPlayer setLastCellSelectionColIndex:inputColIndex];
+            [self.gameEngine.currentPlayer makeMoveOnBoard:self.gameEngine.gameBoard];
+            [self.gameEngine updateGameEngineStateOnPlayerSelection];
             self.matrixLabel.text = [self.gameEngine gameBoardState];
             [self.gameEngine printBoardState];
             
             if ([self shouldGameContinue]) {
                 [self.gameEngine switchCurrentPlayer];
                 
-                if (self.gameEngine.gameMode == GameModeOnePlayer && [self.gameEngine.currentPlayer isKindOfClass:[Bot class]]) {
-                    NSLog(@"BOT HERE\n");
-                    [(Bot*)self.gameEngine.currentPlayer makeMoveOnBoard: self.gameEngine.gameBoard];
+                if (self.gameEngine.gameMode == GameModeOnePlayer) {
+                    [self.gameEngine.currentPlayer makeMoveOnBoard: self.gameEngine.gameBoard];
+                    [self.gameEngine updateGameEngineStateOnPlayerSelection];
                     self.matrixLabel.text = [self.gameEngine gameBoardState];
                     [self.gameEngine printBoardState];
                     [self shouldGameContinue];

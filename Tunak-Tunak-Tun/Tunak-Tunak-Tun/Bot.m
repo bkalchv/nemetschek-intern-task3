@@ -37,10 +37,11 @@
     return [freeCells objectAtIndex: [self randomIndex:([freeCells count] - 1)] ];
 }
 
--(Cell*)makeMoveOnBoard:(Board*)board {
+-(void)makeMoveOnBoard:(Board*)board {
     Cell* cellToSelect = [self randomFreeCell:board];
+    [self setLastCellSelectionRowIndex:cellToSelect.rowIndex];
+    [self setLastCellSelectionColIndex:cellToSelect.colIndex];
     [board changeCellStateAtRowIndex:cellToSelect.rowIndex columnIndex:cellToSelect.colIndex withSign: self.sign];
-    return cellToSelect;
 }
 
 @end

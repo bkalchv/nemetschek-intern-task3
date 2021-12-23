@@ -8,6 +8,10 @@
 #import "Player.h"
 #import "Board.h"
 
+
+@interface Player ()
+@end
+
 @implementation Player
 -(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerID withSign:(CellState)sign {
     self = [super init];
@@ -19,10 +23,17 @@
     return self;
 }
 
--(void)makeMoveOnBoard:(Board*)board atRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex {
-    [board changeCellStateAtRowIndex:rowIndex columnIndex:columnIndex withSign:self.sign];
+-(void)makeMoveOnBoard:(Board*)board {
+    [board changeCellStateAtRowIndex:self.lastCellSelectionRowIndex columnIndex:self.lastCellSelectionColIndex withSign:self.sign];
 }
 
+-(void)setLastCellSelectionRowIndex:(NSUInteger)rowIndex {
+    _lastCellSelectionRowIndex = rowIndex;
+}
+
+-(void)setLastCellSelectionColIndex:(NSUInteger)colIndex {
+    _lastCellSelectionColIndex = colIndex;
+}
 
 -(void)makeMoveOnBoard:(Board*)board atIndex:(NSUInteger)index {
     [board changeCellStateAtIndex:index withSign:self.sign];
