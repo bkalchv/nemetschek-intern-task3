@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "Board.h"
 #import "Player.h"
+#import "Bot.h"
 #import "GameConfigurationManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)       Board* gameBoard;
 @property (nonatomic, strong)       Player* currentPlayer;
 @property (nonatomic)               GameMode gameMode;
-@property (nonatomic) BOOL          hasFreeCells;
-@property (nonatomic) BOOL          winningConditionsFulfiled;
+@property (nonatomic)               BOOL hasFreeCells;
+@property (nonatomic)               BOOL winningConditionsFulfiled;
 
 - (instancetype)init;
 - (instancetype)initWithPlayersName:(NSString*)playersName;
@@ -25,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)printBoardState;
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex;
 - (void)selectCellAtIndex:(NSUInteger)index;
-- (Cell*)CPUSelects; // not public, yo
+//- (Cell*)CPUSelects; // not public, yo
 - (Cell*)randomFreeCell;
 - (BOOL)areWinningConditionsFulfilledForSelectionOfCell:(Cell*)cell withSign:(CellState)sign;
 - (Cell*)cellAtIndex:(NSUInteger)index;

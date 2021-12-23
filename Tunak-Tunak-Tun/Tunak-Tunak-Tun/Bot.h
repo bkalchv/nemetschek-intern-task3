@@ -8,11 +8,13 @@
 #import <Foundation/Foundation.h>
 #import "Player.h"
 
+@class Cell;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Bot : Player
 -(instancetype)initWithSign:(CellState)sign;
--(void)makeMoveOnBoard:(Board*)board;
+-(Cell*)makeMoveOnBoard:(Board*)board;
 @end
 
 NS_ASSUME_NONNULL_END

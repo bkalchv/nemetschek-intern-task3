@@ -32,7 +32,7 @@
     if (self) {
         self.gameMode = GameModeOnePlayer;
         self.player1 = [[Player alloc] initPlayerWithName:playersName withId:1 withSign:CellStateX];
-        self.player2 = [[Player alloc] initPlayerWithName:@"CPU" withId:2 withSign:CellStateO];
+        self.player2 = [[Bot alloc] initWithSign:CellStateO];
         self.currentPlayer = self.player1;
     }
     return self;
@@ -57,14 +57,6 @@
     return [self.gameBoard stateString];
 }
 
-- (void)changeCellStateAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex toState:(CellState)state {
-    [[self.gameBoard cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:state];
-}
-
-- (void)changeCellStateAtIndex:(NSUInteger)index toState:(CellState)state {
-    [[self.gameBoard.boardMatrixArray objectAtIndex:index] setState:state];
-}
-
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player {
     [player makeMoveOnBoard:[self gameBoard] atRowIndex:rowIndex columnIndex:columnIndex];
     [self updateGameEngineStateOnPlayerSelectionOfCellAtRowIndex:rowIndex columnIndex:columnIndex];
@@ -78,7 +70,6 @@
     [player makeMoveOnBoard:[self gameBoard] atIndex:index];
     [self updateGameEngineStateOnPlayerSelectionOfCellAtIndex:index];
 }
-
 
 - (void)selectCellAtIndex:(NSUInteger)index {
     [self selectCellAtIndex:index byPlayer:self.currentPlayer];
@@ -105,14 +96,14 @@
     return [freeCells objectAtIndex: [self randomIndex:([freeCells count] - 1)] ];
 }
 
-- (Cell*)CPUSelects {
-    if (self.hasFreeCells) {
-        Cell* CPUCellToSelect = [self randomFreeCell];
-        [self selectCellAtRowIndex:CPUCellToSelect.rowIndex atColumnIndex:CPUCellToSelect.colIndex byPlayer: self.currentPlayer];
-        [self setCurrentPlayer:self.player1];
-        return CPUCellToSelect;
-    } else return nil;
-}
+//- (Cell*)CPUSelects {
+//    if (self.hasFreeCells) {
+//        Cell* CPUCellToSelect = [self randomFreeCell];
+//        [self selectCellAtRowIndex:CPUCellToSelect.rowIndex atColumnIndex:CPUCellToSelect.colIndex byPlayer: self.currentPlayer];
+//        [self setCurrentPlayer:self.player1];
+//        return CPUCellToSelect;
+//    } else return nil;
+//}
 
 - (BOOL)checkColumnForCellSelection:(Cell*)cell withSign:(CellState)sign {
     for (size_t i = 0; i < self.gameBoard.numberOfColumns; i++) {
@@ -171,10 +162,6 @@
     if (self.currentPlayer == self.player1) {
 
         self.currentPlayer = self.player2;
-        
-        if (self.gameMode == GameModeOnePlayer) {
-            [self CPUSelects];
-        }
 
     } else if (self.currentPlayer == self.player2) {
         
