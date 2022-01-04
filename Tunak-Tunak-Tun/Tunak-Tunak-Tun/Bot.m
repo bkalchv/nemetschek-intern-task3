@@ -8,6 +8,7 @@
 #import "Bot.h"
 #import "Board.h"
 #import "Cell.h"
+#import <UIKit/UIKit.h>
 
 @implementation Bot
 
@@ -39,9 +40,11 @@
 
 -(void)makeMoveOnBoard:(Board*)board {
     Cell* cellToSelect = [self randomFreeCell:board];
-    [self setLastCellSelectionRowIndex:cellToSelect.rowIndex];
-    [self setLastCellSelectionColIndex:cellToSelect.colIndex];
+    NSIndexPath* indexPathOfSelectedCell = [NSIndexPath indexPathForRow:cellToSelect.colIndex inSection:cellToSelect.rowIndex];
+    [self setLastSelectedCell: indexPathOfSelectedCell];
     [board changeCellStateAtRowIndex:cellToSelect.rowIndex columnIndex:cellToSelect.colIndex withSign: self.sign];
 }
 
 @end
+	
+		

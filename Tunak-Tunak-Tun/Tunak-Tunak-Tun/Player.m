@@ -8,7 +8,6 @@
 #import "Player.h"
 #import "Board.h"
 
-
 @interface Player ()
 @end
 
@@ -24,18 +23,10 @@
 }
 
 -(void)makeMoveOnBoard:(Board*)board {
-    [board changeCellStateAtRowIndex:self.lastCellSelectionRowIndex columnIndex:self.lastCellSelectionColIndex withSign:self.sign];
+    [board changeCellStateAtRowIndex:[self.lastSelectedCell indexAtPosition:0]  columnIndex:[self.lastSelectedCell indexAtPosition:1] withSign:self.sign];
 }
 
--(void)setLastCellSelectionRowIndex:(NSUInteger)rowIndex {
-    _lastCellSelectionRowIndex = rowIndex;
-}
-
--(void)setLastCellSelectionColIndex:(NSUInteger)colIndex {
-    _lastCellSelectionColIndex = colIndex;
-}
-
--(void)makeMoveOnBoard:(Board*)board atIndex:(NSUInteger)index {
-    [board changeCellStateAtIndex:index withSign:self.sign];
+-(void)setLastSelectedCell:(NSIndexPath *)lastSelectedCell {
+    _lastSelectedCell = lastSelectedCell;
 }
 @end

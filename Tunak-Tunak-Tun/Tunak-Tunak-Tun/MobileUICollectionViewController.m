@@ -61,12 +61,21 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     NSLog(@"I was pressed: %@", indexPath);
     
     NSUInteger inputIndex = [indexPath indexAtPosition:1];
+    NSUInteger inputRowIndex = [self.gameEngine calculateRowIndex:inputIndex];
+    NSUInteger inputColumnIndex = [self.gameEngine calculateColumnIndex:inputIndex];
     
-    if ([self.gameEngine isCellCheckedAtIndex: inputIndex]) {
-        //[self.delegate showAlreadySelectedAlertForCell:selectedGameCell]; // TODO DO NOT SHOW
-        NSLog(@"Cell %tu already selected! Please select another cell!", inputIndex);
+    // section == indexAtPosition: 0 && row = indexAtPosition: 1 for indexPath, therefore swapped
+    NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:inputColumnIndex  inSection:inputRowIndex];
+    
+    if ([self.gameEngine isCellChecked: inputIndexPath]) {
+        NSLog(@"Cell %tu %tu already selected! Please select another cell!", inputRowIndex, inputColumnIndex);
     } else {
-        [self.gameEngine selectCellAtIndex:inputIndex];
+        
+        [self.gameEngine.currentPlayer setLastSelectedCell:inputIndexPath];
+        
+        [self.gameEngine.currentPlayer makeMoveOnBoard: self.gameEngine.gameBoard];
+        [self.gameEngine updateGameEngineStateOnPlayerSelection];
+        
         [self.collectionView reloadData];
         [self.gameEngine printBoardState];
         
@@ -138,7 +147,8 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MobileUICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    Cell* gameCell = [self.gameEngine cellAtIndex: [indexPath indexAtPosition:1]];
+    NSIndexPath* cellIndexPath = [NSIndexPath indexPathForRow:[self.gameEngine calculateColumnIndex:indexPath.row] inSection:[self.gameEngine calculateRowIndex:indexPath.row]];
+    Cell* gameCell = [self.gameEngine.gameBoard cellAt: cellIndexPath];
     NSString* cellLabelText = [self cellLabelTextByState:gameCell.state];
     [cell.cellLabel setText: cellLabelText];
     [cell setBackgroundColor: UIColor.grayColor];

@@ -146,11 +146,9 @@
         NSArray<NSString*>* inputArray = [inputString componentsSeparatedByString:@" "];
         NSUInteger inputRowIndex = [inputArray[0] integerValue];
         NSUInteger inputColIndex = [inputArray[1] integerValue];
+        NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:inputColIndex inSection:inputRowIndex]; // actual format: [row , col]
         
-//        NSIndexPath *iPath = [NSIndexPath indexPathForRow:inputRowIndex inSection:inputColIndex]; // [,]
-        
-        if ([self.gameEngine isCellCheckedAtRowIndex:inputRowIndex columnIndex:inputColIndex]) {
-            //[self showAlreadySelectedAlertForCell:selectedCell];
+        if ([self.gameEngine isCellChecked: inputIndexPath]) {
             NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
         } else {
 //            [self.gameEngine.currentPlayer setSelectedRowAndCol: indexPath];
@@ -158,10 +156,11 @@
 //            {
 //
 //            }
-            [self.gameEngine.currentPlayer setLastCellSelectionRowIndex:inputRowIndex];
-            [self.gameEngine.currentPlayer setLastCellSelectionColIndex:inputColIndex];
-            [self.gameEngine.currentPlayer makeMoveOnBoard:self.gameEngine.gameBoard];
+            [self.gameEngine.currentPlayer setLastSelectedCell:inputIndexPath];
+            
+            [self.gameEngine.currentPlayer makeMoveOnBoard: self.gameEngine.gameBoard];
             [self.gameEngine updateGameEngineStateOnPlayerSelection];
+            
             self.matrixLabel.text = [self.gameEngine gameBoardState];
             [self.gameEngine printBoardState];
             

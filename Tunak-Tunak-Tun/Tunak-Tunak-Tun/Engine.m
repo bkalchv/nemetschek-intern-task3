@@ -58,8 +58,6 @@
 }
 
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player {
-    [player setLastCellSelectionRowIndex:rowIndex];
-    [player setLastCellSelectionColIndex:columnIndex];
     [player makeMoveOnBoard:self.gameBoard];
     [self updateGameEngineStateOnPlayerSelection];
 }
@@ -67,45 +65,6 @@
 - (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex {
     [self selectCellAtRowIndex:rowIndex atColumnIndex:columnIndex byPlayer:self.currentPlayer];
 }
-
-- (void)selectCellAtIndex:(NSUInteger)index byPlayer:(Player *)player{
-    [player makeMoveOnBoard:[self gameBoard] atIndex:index];
-    [self updateGameEngineStateOnPlayerSelectionOfCellAtIndex:index];
-}
-
-- (void)selectCellAtIndex:(NSUInteger)index {
-    [self selectCellAtIndex:index byPlayer:self.currentPlayer];
-}
-
--(NSUInteger)randomIndex:(NSUInteger)maxIndex {
-    NSUInteger lowerBoundIndex = 0;
-    NSUInteger upperBoundIndex = maxIndex;
-    NSUInteger randomIndex = lowerBoundIndex + arc4random() % (upperBoundIndex - lowerBoundIndex + 1);
-    return randomIndex;
-}
-
-//TODO: - use a separate collection for the free cells instead of recursice calls to random (calculated property
--(NSArray<Cell*> *)freeCells {
-    NSMutableArray<Cell*>* freeCellsArray = [[NSMutableArray<Cell*> alloc] init];
-    for (Cell* cell in self.gameBoard.boardMatrixArray) {
-        if (!cell.isChecked) [freeCellsArray addObject:cell];
-    }
-    return freeCellsArray;
-}
-
--(Cell*)randomFreeCell{
-    NSArray<Cell*>* freeCells = [self freeCells];
-    return [freeCells objectAtIndex: [self randomIndex:([freeCells count] - 1)] ];
-}
-
-//- (Cell*)CPUSelects {
-//    if (self.hasFreeCells) {
-//        Cell* CPUCellToSelect = [self randomFreeCell];
-//        [self selectCellAtRowIndex:CPUCellToSelect.rowIndex atColumnIndex:CPUCellToSelect.colIndex byPlayer: self.currentPlayer];
-//        [self setCurrentPlayer:self.player1];
-//        return CPUCellToSelect;
-//    } else return nil;
-//}
 
 - (BOOL)checkColumnForCellSelection:(Cell*)cell withSign:(CellState)sign {
     for (size_t i = 0; i < self.gameBoard.numberOfColumns; i++) {
@@ -147,16 +106,8 @@
     return [self checkColumnForCellSelection:cell withSign:sign] || [self checkRowForCellSelection:cell withSign:sign] || [self checkDiagonalForCellSelection:cell withSign:sign] || [self checkAntiDiagonalForCellSelection:cell withSign:sign];
 }
 
-- (Cell*)cellAtIndex:(NSUInteger)index {
-    return [self.gameBoard cellAtIndex:index];
-}
-
-- (BOOL)isCellCheckedAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex {
-    return [[[self gameBoard] cellAtRowIndex:rowIndex columnIndex:columnIndex] isChecked];
-}
-
-- (BOOL)isCellCheckedAtIndex:(NSUInteger)index {
-    return [[[self gameBoard] cellAtIndex:index] isChecked];
+- (BOOL)isCellChecked:(NSIndexPath*)indexPath {
+    return [[self.gameBoard cellAt:indexPath] isChecked];
 }
 
 -(void)switchCurrentPlayer{
@@ -176,10 +127,18 @@
     return self.winningConditionsFulfiled || !self.hasFreeCells;
 }
 
+- (NSInteger)calculateRowIndex:(NSInteger)index {
+    return index / [self.gameBoard numberOfColumns];
+}
+
+- (NSInteger)calculateColumnIndex:(NSInteger)index {
+    return index % [self.gameBoard numberOfColumns];
+}
+
 //delegate win/loss
 
 - (void)updateGameEngineStateOnPlayerSelection {
-    Cell* selectedCell = [self.gameBoard cellAtRowIndex:[self.currentPlayer lastCellSelectionRowIndex] columnIndex:[self.currentPlayer lastCellSelectionColIndex]];
+    Cell* selectedCell = [self.gameBoard cellAt:[self.currentPlayer lastSelectedCell]];
     self.freeCellsAmount -= 1;
     NSLog(@"%tu", [self freeCellsAmount]);
     self.hasFreeCells = (self.freeCellsAmount != 0);
@@ -191,25 +150,7 @@
         NSLog(@"Game over!");
         return;
     } else {
-        NSLog(@"Player: %tu selected: %tu %tu", self.currentPlayer.playerID, [self.currentPlayer lastCellSelectionRowIndex], [self.currentPlayer lastCellSelectionColIndex]);
-    }
-}
-
-
-- (void)updateGameEngineStateOnPlayerSelectionOfCellAtIndex:(NSUInteger)index {
-    Cell* selectedCell = [self.gameBoard cellAtIndex:index];
-    self.freeCellsAmount -= 1;
-    NSLog(@"%tu", [self freeCellsAmount]);
-    self.hasFreeCells = (self.freeCellsAmount != 0);
-    
-    if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign:self.currentPlayer.sign])
-    {
-        self.winningConditionsFulfiled = YES;
-        NSLog(@"%@ won!", self.currentPlayer.name);
-        NSLog(@"Game over!");
-        return;
-    } else {
-        NSLog(@"Player: %tu selected: %tu %tu", self.currentPlayer.playerID, [selectedCell rowIndex], [selectedCell colIndex]);
+        NSLog(@"Player: %tu selected: %tu %tu", self.currentPlayer.playerID, [self.currentPlayer.lastSelectedCell indexAtPosition:0], [self.currentPlayer.lastSelectedCell indexAtPosition:1]);
     }
 }
 

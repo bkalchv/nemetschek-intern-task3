@@ -31,8 +31,8 @@
     return self.boardMatrixArray[rowIndex * self.numberOfColumns + colIndex];
 }
 
--(Cell*)cellAtIndex:(NSUInteger)index {
-    return self.boardMatrixArray[index];
+-(Cell*)cellAt:(NSIndexPath*)indexPath {
+    return self.boardMatrixArray[[indexPath indexAtPosition: 0] * self.numberOfColumns + [indexPath indexAtPosition: 1]];
 }
 
 
@@ -68,10 +68,6 @@
 
 -(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withSign:(CellState)sign {
     [[self cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:sign];
-}
-
--(void)changeCellStateAtIndex:(NSUInteger)index withSign:(CellState)sign {
-    [[self cellAtIndex:index] setState:sign];
 }
 
 @end

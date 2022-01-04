@@ -20,10 +20,8 @@ typedef NS_ENUM(NSInteger, CellState);
 - (void)printState;
 -(NSString*)stateString;
 -(Cell*)cellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)colIndex;
--(Cell*)cellAtIndex:(NSUInteger)index;
-
+-(Cell*)cellAt:(NSIndexPath*)indexPath;
 -(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withSign:(CellState)sign;
--(void)changeCellStateAtIndex:(NSUInteger)index withSign:(CellState)sign;
 @end
 
 NS_ASSUME_NONNULL_END

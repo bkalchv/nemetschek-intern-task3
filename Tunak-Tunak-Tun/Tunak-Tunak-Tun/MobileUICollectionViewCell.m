@@ -26,8 +26,6 @@
         case CellStateX:
             [self updateCellLabel:@"X"];
             break;
-        case CellStateEmpty:@"";
-            break;
 
         default:
             break;

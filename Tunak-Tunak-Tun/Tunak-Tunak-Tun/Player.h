@@ -17,11 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic) CellState sign;
-@property (nonatomic) NSUInteger lastCellSelectionRowIndex;
-@property (nonatomic) NSUInteger lastCellSelectionColIndex;
+@property (nonatomic, strong) NSIndexPath* lastSelectedCell;
 -(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerId withSign:(CellState)sign;
 -(void)makeMoveOnBoard:(Board*)board;
--(void)makeMoveOnBoard:(Board*)board atIndex:(NSUInteger)index;
 @end
 
 NS_ASSUME_NONNULL_END

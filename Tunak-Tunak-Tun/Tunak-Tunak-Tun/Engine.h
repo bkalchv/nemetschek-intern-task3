@@ -24,20 +24,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithPlayersName:(NSString*)playersName;
 - (instancetype)initWithPlayer1Name:(NSString*)player1Name player2Name:(NSString*)player2Name;
 - (void)printBoardState;
-- (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex;
-- (void)selectCellAtIndex:(NSUInteger)index;
-//- (Cell*)CPUSelects; // not public, yo
-- (Cell*)randomFreeCell;
-- (BOOL)areWinningConditionsFulfilledForSelectionOfCell:(Cell*)cell withSign:(CellState)sign;
-- (Cell*)cellAtIndex:(NSUInteger)index;
-
-- (BOOL)isCellCheckedAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex;
-- (BOOL)isCellCheckedAtIndex:(NSUInteger)index;
 - (NSString*)gameBoardState;
+- (BOOL)isCellChecked:(NSIndexPath*)indexPath;
+- (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex;
 - (void)updateGameEngineStateOnPlayerSelection;
-- (void)updateGameEngineStateOnPlayerSelectionOfCellAtIndex:(NSUInteger)index;
+- (BOOL)areWinningConditionsFulfilledForSelectionOfCell:(Cell*)cell withSign:(CellState)sign;
+
 - (void)switchCurrentPlayer;
 - (BOOL)isGameOver;
+
+- (NSInteger)calculateRowIndex:(NSInteger)index;
+- (NSInteger)calculateColumnIndex:(NSInteger)index;
+
 @end
 
 NS_ASSUME_NONNULL_END
