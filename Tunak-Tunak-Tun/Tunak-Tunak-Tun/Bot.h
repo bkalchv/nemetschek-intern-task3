@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Bot : Player
 -(instancetype)initWithSign:(CellState)sign;
--(void)makeMoveOnBoard:(Board*)board;
 @end
 
 NS_ASSUME_NONNULL_END

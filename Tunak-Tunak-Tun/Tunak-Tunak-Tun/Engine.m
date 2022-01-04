@@ -176,6 +176,7 @@
     return self.winningConditionsFulfiled || !self.hasFreeCells;
 }
 
+//delegate win/loss
 
 - (void)updateGameEngineStateOnPlayerSelection {
     Cell* selectedCell = [self.gameBoard cellAtRowIndex:[self.currentPlayer lastCellSelectionRowIndex] columnIndex:[self.currentPlayer lastCellSelectionColIndex]];
@@ -211,5 +212,18 @@
         NSLog(@"Player: %tu selected: %tu %tu", self.currentPlayer.playerID, [selectedCell rowIndex], [selectedCell colIndex]);
     }
 }
+
+// TODO
+//-(BOOL)didCurrentPlayerMakeValidMove
+//{
+//    if (isValid)
+//    {
+//        [self.currentPlayer makeMoveOnBoard: self.gameBoard];
+//        return YES;
+//    }
+//
+//    return NO;
+//
+//}
 
 @end

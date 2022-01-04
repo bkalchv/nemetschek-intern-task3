@@ -147,10 +147,17 @@
         NSUInteger inputRowIndex = [inputArray[0] integerValue];
         NSUInteger inputColIndex = [inputArray[1] integerValue];
         
+//        NSIndexPath *iPath = [NSIndexPath indexPathForRow:inputRowIndex inSection:inputColIndex]; // [,]
+        
         if ([self.gameEngine isCellCheckedAtRowIndex:inputRowIndex columnIndex:inputColIndex]) {
             //[self showAlreadySelectedAlertForCell:selectedCell];
             NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
         } else {
+//            [self.gameEngine.currentPlayer setSelectedRowAndCol: indexPath];
+//            if ([self.gameEngine didCurrentPlayerMakeMove])
+//            {
+//
+//            }
             [self.gameEngine.currentPlayer setLastCellSelectionRowIndex:inputRowIndex];
             [self.gameEngine.currentPlayer setLastCellSelectionColIndex:inputColIndex];
             [self.gameEngine.currentPlayer makeMoveOnBoard:self.gameEngine.gameBoard];

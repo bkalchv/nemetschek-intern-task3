@@ -72,6 +72,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         
         if ([self shouldGameContinue]) {
             [self.gameEngine switchCurrentPlayer];
+            [self.delegate updateUsernameLabel: self.gameEngine.currentPlayer.name];
             if (self.gameEngine.gameMode == GameModeOnePlayer) {
                 [self.gameEngine.currentPlayer makeMoveOnBoard: self.gameEngine.gameBoard];
                 [self.gameEngine updateGameEngineStateOnPlayerSelection];
@@ -79,13 +80,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
                 [self.gameEngine printBoardState];
                 [self shouldGameContinue];
                 [self.gameEngine switchCurrentPlayer];
-                
-                //      old stuff:
-                //                Cell* cell = [self.gameEngine randomFreeCell];
-                //                NSUInteger indexOfRandomCell = cell.rowIndex * [self.gameEngine.gameBoard numberOfColumns] + cell.colIndex;
-                //                [self.gameEngine.currentPlayer makeMoveOnBoard:[self.gameEngine gameBoard] atIndex:indexOfRandomCell];
-                //                [self.gameEngine updateGameEngineStateOnPlayerSelectionOfCellAtIndex: indexOfRandomCell];
-                //                [self.gameEngine switchCurrentPlayer];
+                [self.delegate updateUsernameLabel: self.gameEngine.currentPlayer.name];
             }
         }
     }

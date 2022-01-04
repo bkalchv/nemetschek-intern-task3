@@ -141,10 +141,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFM-oU-jKJ">
-                                <rect key="frame" x="156.5" y="547" width="101" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="101" id="VMV-ry-qT7"/>
-                                </constraints>
+                                <rect key="frame" x="162" y="547" width="90.5" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Print state"/>
                                 <connections>
