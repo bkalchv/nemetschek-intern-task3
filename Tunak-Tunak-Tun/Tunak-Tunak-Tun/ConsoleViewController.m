@@ -140,6 +140,17 @@
     NSLog(@"Player: %tu selected: %tu %tu", self.gameEngine.currentPlayer.playerID, [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:0], [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:1]);
 }
 
+-(void)checkGameOutcome {
+    if ([self.gameEngine winningConditionsFulfiled]) {
+        [self handleWin];
+    } else if (![self.gameEngine winningConditionsFulfiled] && ![self.gameEngine hasFreeCells]) {
+        [self handleDraw];
+    } else {
+        [self printCurrentPlayerSelection];
+    }
+}
+
+
 - (IBAction)onConsoleVCEnterButton:(id)sender {
     NSString* inputString = self.inputTextField.text;
     
@@ -155,30 +166,19 @@
             self.matrixLabel.text = [self.gameEngine gameBoardState];
             [self.gameEngine printBoardState];
             
-            if ([self.gameEngine winningConditionsFulfiled]) {
-                [self handleWin];
-            } else if (![self.gameEngine hasFreeCells]) {
-                [self handleDraw];
-            } else {
-                [self printCurrentPlayerSelection];
-            }
+            [self checkGameOutcome];
 
             if (![self.gameEngine isGameOver]) [self.gameEngine switchCurrentPlayer];
                 
-            
-//            if (![self.gameEngine isGameOver] &&  self.gameEngine.gameMode == GameModeOnePlayer && [self.gameEngine didCurrentPlayerMakeValidMove]) {
-//                self.matrixLabel.text = [self.gameEngine gameBoardState];
-//                [self.gameEngine printBoardState];
-//                
-//                if ([self.gameEngine winningConditionsFulfiled]) {
-//                    [self handleWin];
-//                } else if (![self.gameEngine hasFreeCells]) {
-//                    [self handleDraw];
-//                } else {
-//                    [self printCurrentPlayerSelection];
-//                    [self.gameEngine switchCurrentPlayer];
-//                }
-//            }
+            if (self.gameEngine.gameMode == GameModeOnePlayer) {
+                self.matrixLabel.text = [self.gameEngine gameBoardState];
+                [self.gameEngine printBoardState];
+                
+                //Check game outcome
+                [self checkGameOutcome];
+                //If game is still not over - switch current player back to player;
+                if (![self.gameEngine isGameOver]) [self.gameEngine switchCurrentPlayer];
+            }
         } else {
             NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
         }
