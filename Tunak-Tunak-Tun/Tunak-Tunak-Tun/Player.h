@@ -18,9 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic) CellState sign;
 @property (nonatomic, strong) NSIndexPath* lastSelectedCell;
--(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerId withSign:(CellState)sign;
--(void)makeMoveOnBoard:(Board*)board;
-//-(void)yourTurnBaby;
+@property (nonatomic, strong) Board* board;
+-(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerId withSign:(CellState)sign withBoard:(Board*)board;
+-(void)makeMove;
+-(void)yourTurnBaby;
 
 @end
 

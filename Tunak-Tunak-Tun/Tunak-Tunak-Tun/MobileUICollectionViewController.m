@@ -59,6 +59,16 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     NSLog(@"Player: %tu selected: %tu %tu", self.gameEngine.currentPlayer.playerID, [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:0], [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:1]);
 }
 
+-(void)checkGameOutcome {
+    if ([self.gameEngine winningConditionsFulfiled]) {
+        [self handleWin];
+    } else if (![self.gameEngine winningConditionsFulfiled] && ![self.gameEngine hasFreeCells]) {
+        [self handleDraw];
+    } else {
+        [self printCurrentPlayerSelection];
+    }
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"I was pressed: %@", indexPath);
     
@@ -76,29 +86,15 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         [self.gameEngine printBoardState];
         
         //Check game outcome
-        if ([self.gameEngine winningConditionsFulfiled]) {
-            [self handleWin];
-        } else if (![self.gameEngine hasFreeCells]) {
-            [self handleDraw];
-        } else {
-            [self printCurrentPlayerSelection];
-        }
+        [self checkGameOutcome];
         
         if (![self.gameEngine isGameOver]) [self.gameEngine switchCurrentPlayer];
         
-        
-        if (![self.gameEngine isGameOver] &&  self.gameEngine.gameMode == GameModeOnePlayer && [self.gameEngine didCurrentPlayerMakeValidMove]) {
+        if (self.gameEngine.gameMode == GameModeOnePlayer) {
             [self.collectionView reloadData];
             [self.gameEngine printBoardState];
-            
-            if ([self.gameEngine winningConditionsFulfiled]) {
-                [self handleWin];
-            } else if (![self.gameEngine hasFreeCells]) {
-                [self handleDraw];
-            } else {
-                [self printCurrentPlayerSelection];
-                [self.gameEngine switchCurrentPlayer];
-            }
+            //Check game outcome	
+            [self checkGameOutcome];
         }
         
     } else {

@@ -14,36 +14,31 @@
 
 @implementation Player
 // init with board
--(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerID withSign:(CellState)sign {
+-(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerID withSign:(CellState)sign withBoard:(Board*)board {
     self = [super init];
     if (self) {
         self.name = name;
         self.playerID = playerID;
         self.sign = sign;
+        self.board = board;
     }
     return self;
 }
 
--(void)markForDeath:(NSIndexPath *)indexPath
-{
-    self.lastSelectedCell = indexPath;
-}
-
 //remove board param
-
--(void)makeMoveOnBoard:(Board*)board {
+-(void)makeMove {
     NSUInteger lastSelectedCellRowIndex = [self.lastSelectedCell section];
     NSUInteger lastSelectedCellColIndex = [self.lastSelectedCell row];
-    [board changeCellStateAtRowIndex:lastSelectedCellRowIndex  columnIndex:lastSelectedCellColIndex withSign:self.sign];
+    [self.board changeCellStateAtRowIndex:lastSelectedCellRowIndex  columnIndex:lastSelectedCellColIndex withSign:self.sign];
 }
 
 -(void)setLastSelectedCell:(NSIndexPath *)lastSelectedCell {
     _lastSelectedCell = lastSelectedCell;
 }
 
-//-(void)yourTurnBaby
-//{
-//    // nothing
-//}
+-(void)yourTurnBaby
+{
+    //[self makeMove];
+}
 
 @end

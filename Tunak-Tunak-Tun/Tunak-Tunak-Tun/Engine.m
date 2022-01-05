@@ -31,8 +31,8 @@
     self = [self init];
     if (self) {
         self.gameMode = GameModeOnePlayer;
-        self.player1 = [[Player alloc] initPlayerWithName:playersName withId:1 withSign:CellStateX];
-        self.player2 = [[Bot alloc] initWithSign:CellStateO];
+        self.player1 = [[Player alloc] initPlayerWithName:playersName withId:1 withSign:CellStateX withBoard:self.gameBoard];
+        self.player2 = [[Bot alloc] initWithSign:CellStateO withBoard:self.gameBoard];
         self.currentPlayer = self.player1;
     }
     return self;
@@ -42,8 +42,8 @@
     self = [self init];
     if (self) {
         self.gameMode = GameModeTwoPlayers;
-        self.player1 = [[Player alloc] initPlayerWithName:player1Name withId:1 withSign:CellStateX];
-        self.player2 = [[Player alloc] initPlayerWithName:player2Name withId:2 withSign:CellStateO];
+        self.player1 = [[Player alloc] initPlayerWithName:player1Name withId:1 withSign:CellStateX withBoard:self.gameBoard];
+        self.player2 = [[Player alloc] initPlayerWithName:player2Name withId:2 withSign:CellStateO withBoard:self.gameBoard];
         self.currentPlayer = self.player1;
     }
     return self;
@@ -111,9 +111,11 @@
     } else if (self.currentPlayer == self.player2) {
         
         self.currentPlayer = self.player1;
-    
-        [self.currentPlayer yourTurnBaby];
+
     } else NSLog(@"Engine obj, switchCurrentPlayer: undefined behavior");
+    
+    [self.currentPlayer yourTurnBaby];
+    if ([self.currentPlayer.name isEqualToString:@"CPU"] && self.gameMode == GameModeOnePlayer) [self updateGameEngineStateOnPlayerMove];
 }
 
 - (BOOL)isGameOver {
@@ -141,18 +143,13 @@
 }
 
 - (BOOL)isValidMove {
-    
-    if ([self gameMode] == GameModeOnePlayer && [[self.currentPlayer name] isEqual:@"CPU"]) {
-        return YES; // Because by design a Bot will choose only from the free cells
-    }
-    
     Cell* lastSelectedCell = [self.gameBoard cellAt:[self.currentPlayer lastSelectedCell]];
     return !lastSelectedCell.isChecked;
 }
 
 -(BOOL)didCurrentPlayerMakeValidMove {
     if ([self isValidMove]) {
-        [self.currentPlayer makeMoveOnBoard: self.gameBoard];
+        [self.currentPlayer makeMove];
         [self updateGameEngineStateOnPlayerMove];
         
         return YES;

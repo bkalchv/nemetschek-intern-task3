@@ -12,8 +12,8 @@
 
 @implementation Bot
 
--(instancetype)initWithSign:(CellState)sign {
-    self = [super initPlayerWithName:@"CPU" withId:2 withSign:sign];
+-(instancetype)initWithSign:(CellState)sign withBoard:(Board*)board {
+    self = [super initPlayerWithName:@"CPU" withId:2 withSign:sign withBoard:board];
     return self;
 }
 
@@ -25,31 +25,29 @@
 }
 
 //TODO: - use a separate collection for the free cells instead of recursice calls to random (calculated property
--(NSArray<Cell*> *)freeCellsOfBoard:(Board*)board {
+-(NSArray<Cell*> *)freeCellsOfBoard {
     NSMutableArray<Cell*>* freeCellsArray = [[NSMutableArray<Cell*> alloc] init];
-    for (Cell* cell in board.boardMatrixArray) {
+    for (Cell* cell in self.board.boardMatrixArray) {
         if (!cell.isChecked) [freeCellsArray addObject:cell];
     }
     return freeCellsArray;
 }
 
--(Cell*)randomFreeCell:(Board*)board{
-    NSArray<Cell*>* freeCells = [self freeCellsOfBoard:board];
+-(Cell*)randomFreeCell {
+    NSArray<Cell*>* freeCells = [self freeCellsOfBoard];
     return [freeCells objectAtIndex: [self randomIndex:([freeCells count] - 1)] ];
 }
 
--(void)makeMoveOnBoard:(Board*)board {
-    Cell* cellToSelect = [self randomFreeCell:board];
+-(void)makeMove {
+    Cell* cellToSelect = [self randomFreeCell];
     NSIndexPath* indexPathOfSelectedCell = [NSIndexPath indexPathForRow:cellToSelect.colIndex inSection:cellToSelect.rowIndex];
     [self setLastSelectedCell: indexPathOfSelectedCell];
-    [board changeCellStateAtRowIndex:cellToSelect.rowIndex columnIndex:cellToSelect.colIndex withSign: self.sign];
+    [self.board changeCellStateAtRowIndex:cellToSelect.rowIndex columnIndex:cellToSelect.colIndex withSign: self.sign];
 }
 
-//-(void)yourTurnBaby
-//{
-//    // from free cells pick random
-//    //make move on picked cell
-//}
+-(void)yourTurnBaby {
+    [self makeMove];
+}
 
 @end
 	
