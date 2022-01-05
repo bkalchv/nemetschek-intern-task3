@@ -26,10 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)printBoardState;
 - (NSString*)gameBoardState;
 - (BOOL)isCellChecked:(NSIndexPath*)indexPath;
-- (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex;
-- (void)updateGameEngineStateOnPlayerSelection;
-- (BOOL)areWinningConditionsFulfilledForSelectionOfCell:(Cell*)cell withSign:(CellState)sign;
 
+- (BOOL)didCurrentPlayerMakeValidMove;
 - (void)switchCurrentPlayer;
 - (BOOL)isGameOver;
 

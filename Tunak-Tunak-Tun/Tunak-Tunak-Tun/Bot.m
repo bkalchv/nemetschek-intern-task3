@@ -45,6 +45,12 @@
     [board changeCellStateAtRowIndex:cellToSelect.rowIndex columnIndex:cellToSelect.colIndex withSign: self.sign];
 }
 
+//-(void)yourTurnBaby
+//{
+//    // from free cells pick random
+//    //make move on picked cell
+//}
+
 @end
 	
 		

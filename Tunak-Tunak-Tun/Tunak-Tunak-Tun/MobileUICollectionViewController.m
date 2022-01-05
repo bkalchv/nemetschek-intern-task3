@@ -44,17 +44,19 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     self.collectionView.allowsMultipleSelection = YES;
 }
 
-- (bool)shouldGameContinue {
-    if ([self.gameEngine isGameOver]) {
-        if (!self.gameEngine.hasFreeCells && !self.gameEngine.winningConditionsFulfiled) {
-            NSLog(@"It's a draw. Nobody wins!");
-            [self.delegate showDrawAlert: [self.gameEngine gameBoardState]];
-        } else if (self.gameEngine.winningConditionsFulfiled) {
-            [self.delegate showPlayerWonAlert: self.gameEngine.currentPlayer withGameBoardState:[self.gameEngine gameBoardState]];
-        }
-        return false;
-    } else
-        return true;
+- (void)handleWin {
+    NSLog(@"%@ won!", self.gameEngine.currentPlayer.name);
+    NSLog(@"Game over!");
+    [self.delegate showPlayerWonAlert: self.gameEngine.currentPlayer withGameBoardState:[self.gameEngine gameBoardState]];
+}
+
+- (void)handleDraw {
+    NSLog(@"It's a draw. Nobody wins!");
+    [self.delegate showDrawAlert: [self.gameEngine gameBoardState]];
+}
+
+-(void)printCurrentPlayerSelection {
+    NSLog(@"Player: %tu selected: %tu %tu", self.gameEngine.currentPlayer.playerID, [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:0], [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:1]);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -67,31 +69,40 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     // section == indexAtPosition: 0 && row = indexAtPosition: 1 for indexPath, therefore swapped
     NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:inputColumnIndex  inSection:inputRowIndex];
     
-    if ([self.gameEngine isCellChecked: inputIndexPath]) {
-        NSLog(@"Cell %tu %tu already selected! Please select another cell!", inputRowIndex, inputColumnIndex);
-    } else {
-        
-        [self.gameEngine.currentPlayer setLastSelectedCell:inputIndexPath];
-        
-        [self.gameEngine.currentPlayer makeMoveOnBoard: self.gameEngine.gameBoard];
-        [self.gameEngine updateGameEngineStateOnPlayerSelection];
-        
+    [self.gameEngine.currentPlayer setLastSelectedCell: inputIndexPath];
+    if ([self.gameEngine didCurrentPlayerMakeValidMove])
+    {
         [self.collectionView reloadData];
         [self.gameEngine printBoardState];
         
-        if ([self shouldGameContinue]) {
-            [self.gameEngine switchCurrentPlayer];
-            [self.delegate updateUsernameLabel: self.gameEngine.currentPlayer.name];
-            if (self.gameEngine.gameMode == GameModeOnePlayer) {
-                [self.gameEngine.currentPlayer makeMoveOnBoard: self.gameEngine.gameBoard];
-                [self.gameEngine updateGameEngineStateOnPlayerSelection];
-                [self.collectionView reloadData];
-                [self.gameEngine printBoardState];
-                [self shouldGameContinue];
+        //Check game outcome
+        if ([self.gameEngine winningConditionsFulfiled]) {
+            [self handleWin];
+        } else if (![self.gameEngine hasFreeCells]) {
+            [self handleDraw];
+        } else {
+            [self printCurrentPlayerSelection];
+        }
+        
+        if (![self.gameEngine isGameOver]) [self.gameEngine switchCurrentPlayer];
+        
+        
+        if (![self.gameEngine isGameOver] &&  self.gameEngine.gameMode == GameModeOnePlayer && [self.gameEngine didCurrentPlayerMakeValidMove]) {
+            [self.collectionView reloadData];
+            [self.gameEngine printBoardState];
+            
+            if ([self.gameEngine winningConditionsFulfiled]) {
+                [self handleWin];
+            } else if (![self.gameEngine hasFreeCells]) {
+                [self handleDraw];
+            } else {
+                [self printCurrentPlayerSelection];
                 [self.gameEngine switchCurrentPlayer];
-                [self.delegate updateUsernameLabel: self.gameEngine.currentPlayer.name];
             }
         }
+        
+    } else {
+        NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColumnIndex);
     }
 }
 

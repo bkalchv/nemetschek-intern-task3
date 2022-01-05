@@ -57,15 +57,6 @@
     return [self.gameBoard stateString];
 }
 
-- (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex byPlayer:(Player*)player {
-    [player makeMoveOnBoard:self.gameBoard];
-    [self updateGameEngineStateOnPlayerSelection];
-}
-
-- (void)selectCellAtRowIndex:(NSUInteger)rowIndex atColumnIndex:(NSUInteger)columnIndex {
-    [self selectCellAtRowIndex:rowIndex atColumnIndex:columnIndex byPlayer:self.currentPlayer];
-}
-
 - (BOOL)checkColumnForCellSelection:(Cell*)cell withSign:(CellState)sign {
     for (size_t i = 0; i < self.gameBoard.numberOfColumns; i++) {
         if ([self.gameBoard cellAtRowIndex:cell.rowIndex columnIndex:i].state != sign) break;
@@ -102,7 +93,8 @@
     return false;
 }
 
-- (BOOL)areWinningConditionsFulfilledForSelectionOfCell:(Cell*)cell withSign:(CellState)sign {
+- (BOOL)areWinningConditionsFulfilledForSelectionOfCellAt:(NSIndexPath*)cellIndexPath withSign:(CellState)sign {
+    Cell* cell = [self.gameBoard cellAt:cellIndexPath];
     return [self checkColumnForCellSelection:cell withSign:sign] || [self checkRowForCellSelection:cell withSign:sign] || [self checkDiagonalForCellSelection:cell withSign:sign] || [self checkAntiDiagonalForCellSelection:cell withSign:sign];
 }
 
@@ -120,6 +112,7 @@
         
         self.currentPlayer = self.player1;
     
+        [self.currentPlayer yourTurnBaby];
     } else NSLog(@"Engine obj, switchCurrentPlayer: undefined behavior");
 }
 
@@ -137,34 +130,35 @@
 
 //delegate win/loss
 
-- (void)updateGameEngineStateOnPlayerSelection {
-    Cell* selectedCell = [self.gameBoard cellAt:[self.currentPlayer lastSelectedCell]];
-    self.freeCellsAmount -= 1;
-    NSLog(@"%tu", [self freeCellsAmount]);
-    self.hasFreeCells = (self.freeCellsAmount != 0);
-    
-    if ([self areWinningConditionsFulfilledForSelectionOfCell:selectedCell withSign: self.currentPlayer.sign])
-    {
-        self.winningConditionsFulfiled = YES;
-        NSLog(@"%@ won!", self.currentPlayer.name);
-        NSLog(@"Game over!");
-        return;
-    } else {
-        NSLog(@"Player: %tu selected: %tu %tu", self.currentPlayer.playerID, [self.currentPlayer.lastSelectedCell indexAtPosition:0], [self.currentPlayer.lastSelectedCell indexAtPosition:1]);
-    }
+- (BOOL)areWinningConditionsFulfilledOnPlayerMove {
+    return [self areWinningConditionsFulfilledForSelectionOfCellAt:[self.currentPlayer lastSelectedCell] withSign: self.currentPlayer.sign];
 }
 
-// TODO
-//-(BOOL)didCurrentPlayerMakeValidMove
-//{
-//    if (isValid)
-//    {
-//        [self.currentPlayer makeMoveOnBoard: self.gameBoard];
-//        return YES;
-//    }
-//
-//    return NO;
-//
-//}
+- (void)updateGameEngineStateOnPlayerMove {
+    self.freeCellsAmount -= 1;
+    self.hasFreeCells = (self.freeCellsAmount != 0);
+    self.winningConditionsFulfiled = [self areWinningConditionsFulfilledOnPlayerMove];
+}
+
+- (BOOL)isValidMove {
+    
+    if ([self gameMode] == GameModeOnePlayer && [[self.currentPlayer name] isEqual:@"CPU"]) {
+        return YES; // Because by design a Bot will choose only from the free cells
+    }
+    
+    Cell* lastSelectedCell = [self.gameBoard cellAt:[self.currentPlayer lastSelectedCell]];
+    return !lastSelectedCell.isChecked;
+}
+
+-(BOOL)didCurrentPlayerMakeValidMove {
+    if ([self isValidMove]) {
+        [self.currentPlayer makeMoveOnBoard: self.gameBoard];
+        [self updateGameEngineStateOnPlayerMove];
+        
+        return YES;
+    }
+
+    return NO;
+}
 
 @end

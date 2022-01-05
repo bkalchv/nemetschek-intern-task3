@@ -123,20 +123,21 @@
     [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
 }
 
-- (BOOL)shouldGameContinue {
-    if ([self.gameEngine isGameOver]) {
-        if (!self.gameEngine.hasFreeCells && !self.gameEngine.winningConditionsFulfiled) {
-            NSLog(@"It's a draw. Nobody wins!");
-            [self showDrawAlert];
-            
-        } else if (self.gameEngine.winningConditionsFulfiled) {
-            [self.consoleVCEnterButton setEnabled:NO];
-            [self showPlayerWonAlert: self.gameEngine.currentPlayer];
-        }
-        return NO;
-    }
-    
-    return YES;
+- (void)handleWin {
+    NSLog(@"%@ won!", self.gameEngine.currentPlayer.name);
+    NSLog(@"Game over!");
+    [self.consoleVCEnterButton setEnabled:NO];
+    [self showPlayerWonAlert: self.gameEngine.currentPlayer];
+}
+
+- (void)handleDraw {
+    NSLog(@"It's a draw. Nobody wins!");
+    [self.consoleVCEnterButton setEnabled:NO];
+    [self showDrawAlert];
+}
+
+-(void)printCurrentPlayerSelection {
+    NSLog(@"Player: %tu selected: %tu %tu", self.gameEngine.currentPlayer.playerID, [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:0], [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:1]);
 }
 
 - (IBAction)onConsoleVCEnterButton:(id)sender {
@@ -146,40 +147,41 @@
         NSArray<NSString*>* inputArray = [inputString componentsSeparatedByString:@" "];
         NSUInteger inputRowIndex = [inputArray[0] integerValue];
         NSUInteger inputColIndex = [inputArray[1] integerValue];
+        
         NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:inputColIndex inSection:inputRowIndex]; // actual format: [row , col]
         
-        if ([self.gameEngine isCellChecked: inputIndexPath]) {
-            NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
-        } else {
-//            [self.gameEngine.currentPlayer setSelectedRowAndCol: indexPath];
-//            if ([self.gameEngine didCurrentPlayerMakeMove])
-//            {
-//
-//            }
-            [self.gameEngine.currentPlayer setLastSelectedCell:inputIndexPath];
-            
-            [self.gameEngine.currentPlayer makeMoveOnBoard: self.gameEngine.gameBoard];
-            [self.gameEngine updateGameEngineStateOnPlayerSelection];
-            
+        [self.gameEngine.currentPlayer setLastSelectedCell: inputIndexPath];
+        if ([self.gameEngine didCurrentPlayerMakeValidMove]) {
             self.matrixLabel.text = [self.gameEngine gameBoardState];
             [self.gameEngine printBoardState];
             
-            if ([self shouldGameContinue]) {
-                [self.gameEngine switchCurrentPlayer];
+            if ([self.gameEngine winningConditionsFulfiled]) {
+                [self handleWin];
+            } else if (![self.gameEngine hasFreeCells]) {
+                [self handleDraw];
+            } else {
+                [self printCurrentPlayerSelection];
+            }
+
+            if (![self.gameEngine isGameOver]) [self.gameEngine switchCurrentPlayer];
                 
-                if (self.gameEngine.gameMode == GameModeOnePlayer) {
-                    [self.gameEngine.currentPlayer makeMoveOnBoard: self.gameEngine.gameBoard];
-                    [self.gameEngine updateGameEngineStateOnPlayerSelection];
-                    self.matrixLabel.text = [self.gameEngine gameBoardState];
-                    [self.gameEngine printBoardState];
-                    [self shouldGameContinue];
+            
+            if (![self.gameEngine isGameOver] &&  self.gameEngine.gameMode == GameModeOnePlayer && [self.gameEngine didCurrentPlayerMakeValidMove]) {
+                self.matrixLabel.text = [self.gameEngine gameBoardState];
+                [self.gameEngine printBoardState];
+                
+                if ([self.gameEngine winningConditionsFulfiled]) {
+                    [self handleWin];
+                } else if (![self.gameEngine hasFreeCells]) {
+                    [self handleDraw];
+                } else {
+                    [self printCurrentPlayerSelection];
                     [self.gameEngine switchCurrentPlayer];
                 }
-                
-                self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayer].name];
             }
+        } else {
+            NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
         }
-        
     } else {
         [self showInvalidInputAlert];
         NSLog(@"Invalid input. Try again!");
