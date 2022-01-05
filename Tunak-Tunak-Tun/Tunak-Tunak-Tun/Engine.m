@@ -148,7 +148,7 @@
 }
 
 -(BOOL)didCurrentPlayerMakeValidMove {
-    if ([self isValidMove]) {
+    if ([self isValidMove] && ![self.currentPlayer.name isEqualToString:@"CPU"]) {
         [self.currentPlayer makeMove];
         [self updateGameEngineStateOnPlayerMove];
         

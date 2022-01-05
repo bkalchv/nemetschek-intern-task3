@@ -56,7 +56,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 }
 
 -(void)printCurrentPlayerSelection {
-    NSLog(@"Player: %tu selected: %tu %tu", self.gameEngine.currentPlayer.playerID, [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:0], [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:1]);
+    NSLog(@"Player: %@ selected: %tu %tu", self.gameEngine.currentPlayer.name, [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:0], [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:1]);
 }
 
 -(void)checkGameOutcome {
@@ -69,17 +69,10 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     }
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"I was pressed: %@", indexPath);
+-(void)handleSelection:(NSIndexPath*)indexPath {
     
-    NSUInteger inputIndex = [indexPath indexAtPosition:1];
-    NSUInteger inputRowIndex = [self.gameEngine calculateRowIndex:inputIndex];
-    NSUInteger inputColumnIndex = [self.gameEngine calculateColumnIndex:inputIndex];
+    [self.gameEngine.currentPlayer setLastSelectedCell: indexPath];
     
-    // section == indexAtPosition: 0 && row = indexAtPosition: 1 for indexPath, therefore swapped
-    NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:inputColumnIndex  inSection:inputRowIndex];
-    
-    [self.gameEngine.currentPlayer setLastSelectedCell: inputIndexPath];
     if ([self.gameEngine didCurrentPlayerMakeValidMove])
     {
         [self.collectionView reloadData];
@@ -89,17 +82,33 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         [self checkGameOutcome];
         
         if (![self.gameEngine isGameOver]) [self.gameEngine switchCurrentPlayer];
-        
+    
         if (self.gameEngine.gameMode == GameModeOnePlayer) {
             [self.collectionView reloadData];
             [self.gameEngine printBoardState];
-            //Check game outcome	
+            
+            //Check game outcome
             [self checkGameOutcome];
+            //If game is still not over - switch current player back to player;
+            if (![self.gameEngine isGameOver]) [self.gameEngine switchCurrentPlayer];
+        } else {
+            [self.delegate updateUsernameLabel:[self.gameEngine.currentPlayer name]];
         }
         
     } else {
-        NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColumnIndex);
+        NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", [self.gameEngine.currentPlayer.lastSelectedCell section], [self.gameEngine.currentPlayer.lastSelectedCell row]);
     }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // Stays for debugging purposes
+    NSLog(@"I was pressed: %@", indexPath);
+    
+    NSUInteger inputIndex = [indexPath row];
+    // section == indexAtPosition: 0 && row = indexAtPosition: 1 for indexPath, therefore swapped
+    NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:[self.gameEngine calculateColumnIndex:inputIndex] inSection:[self.gameEngine calculateRowIndex:inputIndex]];
+    
+    [self handleSelection: inputIndexPath];
 }
 
 #pragma mark - Navigation
