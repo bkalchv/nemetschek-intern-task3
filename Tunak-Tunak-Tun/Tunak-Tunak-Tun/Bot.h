@@ -10,8 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class Move;
+
+@protocol BotDelegate <NSObject>
+- (void)handleSelection:(NSIndexPath*)indexPath;
+@end
+
 @interface Bot : Player
 -(instancetype)initWithSign:(CellState)sign withBoard:(Board*)board;
+@property (nonatomic, strong)id <BotDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

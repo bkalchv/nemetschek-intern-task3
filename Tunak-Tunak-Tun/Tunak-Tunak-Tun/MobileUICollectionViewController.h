@@ -16,10 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showOneMoreTimeViewController;
 - (void)showAlreadySelectedAlertForCell:(Cell*)cell;
 - (void)updateUsernameLabel:(NSString*)currentPlayerUsername;
-
 @end
 
-@interface MobileUICollectionViewController : UICollectionViewController <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface MobileUICollectionViewController : UICollectionViewController <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, EngineDelegate>
 @property (nonatomic, strong) Engine* gameEngine;
 @property (nonatomic, strong)id <MobileUICollectionViewControllerDelegate> delegate;
 @end

@@ -7,13 +7,14 @@
 
 #import "Player.h"
 #import "Board.h"
+#import "Move.h"
 #import <UIKit/UIKit.h>
 
 @interface Player ()
 @end
 
 @implementation Player
-// init with board
+
 -(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerID withSign:(CellState)sign withBoard:(Board*)board {
     self = [super init];
     if (self) {
@@ -25,20 +26,26 @@
     return self;
 }
 
-//remove board param
+// keeping it for now because of ConsoleVC
+// gotta go!
 -(void)makeMove {
-    NSUInteger lastSelectedCellRowIndex = [self.lastSelectedCell section];
-    NSUInteger lastSelectedCellColIndex = [self.lastSelectedCell row];
+    NSUInteger lastSelectedCellRowIndex = [self.intendedCellIndexPath section];
+    NSUInteger lastSelectedCellColIndex = [self.intendedCellIndexPath row];
     [self.board changeCellStateAtRowIndex:lastSelectedCellRowIndex  columnIndex:lastSelectedCellColIndex withSign:self.sign];
 }
 
--(void)setLastSelectedCell:(NSIndexPath *)lastSelectedCell {
-    _lastSelectedCell = lastSelectedCell;
+-(Move*)makeIntendedMove {
+    Move* intendedMove = [[Move alloc] initWithPlayer:self withBoard:self.board];
+    return intendedMove;
+}
+
+-(void)setIntendedCellIndexPath:(NSIndexPath *)intendedCellIndexPath {
+    _intendedCellIndexPath = intendedCellIndexPath;
 }
 
 -(void)yourTurnBaby
 {
-    //[self makeMove];
+    // wait for input;
 }
 
 @end

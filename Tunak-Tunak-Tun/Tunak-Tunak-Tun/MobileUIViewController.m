@@ -77,12 +77,19 @@
         MobileUICollectionViewController* mobileUICollectionViewController = [segue destinationViewController];
         mobileUICollectionViewController.delegate = self;
         switch ([GameConfigurationManager.sharedGameConfigurationManager gameMode]) {
-            case GameModeOnePlayer:
-                mobileUICollectionViewController.gameEngine = [[Engine alloc] initWithPlayersName:[GameConfigurationManager.sharedGameConfigurationManager player1Username]];
+            case GameModeOnePlayer: {
+                Engine* engine = [[Engine alloc] initWithPlayersName:[GameConfigurationManager.sharedGameConfigurationManager player1Username]];
+                engine.delegate = mobileUICollectionViewController;
+                mobileUICollectionViewController.gameEngine = engine;
                 break;
-            case GameModeTwoPlayers:
-                mobileUICollectionViewController.gameEngine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name:[GameConfigurationManager.sharedGameConfigurationManager player2Username]];
+            }
+
+            case GameModeTwoPlayers: {
+                Engine* engine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name:[GameConfigurationManager.sharedGameConfigurationManager player2Username]];
+                engine.delegate = mobileUICollectionViewController;
+                mobileUICollectionViewController.gameEngine = engine;
                 break;
+            }
                 
             default:
                 break;

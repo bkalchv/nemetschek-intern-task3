@@ -9,7 +9,7 @@
 
 typedef NS_ENUM(NSInteger, CellState);
 @class Board;
-
+@class Move;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Player : NSObject
@@ -17,10 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic) CellState sign;
-@property (nonatomic, strong) NSIndexPath* lastSelectedCell;
+@property (nonatomic, strong) NSIndexPath* intendedCellIndexPath;
 @property (nonatomic, strong) Board* board;
 -(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerId withSign:(CellState)sign withBoard:(Board*)board;
 -(void)makeMove;
+-(Move*)makeIntendedMove;
 -(void)yourTurnBaby;
 
 @end

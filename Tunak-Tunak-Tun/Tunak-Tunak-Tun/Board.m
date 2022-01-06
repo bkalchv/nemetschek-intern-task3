@@ -70,4 +70,12 @@
     [[self cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:sign];
 }
 
+-(NSUInteger)calculateFreeCellsAmount {
+    NSUInteger freeCellsAmount = 0;
+    for (Cell* cell in self.boardMatrixArray) {
+        if (![cell isChecked]) freeCellsAmount++;
+    }
+    return freeCellsAmount;
+}
+
 @end

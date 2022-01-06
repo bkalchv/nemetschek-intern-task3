@@ -8,6 +8,7 @@
 #import "MobileUICollectionViewController.h"
 #import "MobileUICollectionViewCell.h"
 #import "OneMoreTimeViewController.h"
+#import "Engine.h"
 
 @interface MobileUICollectionViewController ()
 @end
@@ -19,13 +20,19 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 - (void)refreshView {
     
     switch ([GameConfigurationManager.sharedGameConfigurationManager gameMode]) {
-        case GameModeOnePlayer:
-            self.gameEngine = [[Engine alloc] initWithPlayersName: [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
+        case GameModeOnePlayer: {
+            Engine* engine = [[Engine alloc] initWithPlayersName: [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
+            engine.delegate = self;
+            self.gameEngine = engine;
             break;
-        case GameModeTwoPlayers:
-            self.gameEngine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name:[GameConfigurationManager.sharedGameConfigurationManager player2Username]];
+        }
+        case GameModeTwoPlayers: {
+            Engine* engine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name:[GameConfigurationManager.sharedGameConfigurationManager player2Username]];
+            engine.delegate = self;
+            self.gameEngine = engine;
             break;
-            
+        }
+ 
         default:
             break;
     }
@@ -56,7 +63,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 }
 
 -(void)printCurrentPlayerSelection {
-    NSLog(@"Player: %@ selected: %tu %tu", self.gameEngine.currentPlayer.name, [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:0], [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:1]);
+    NSLog(@"Player: %@ selected: %tu %tu", self.gameEngine.currentPlayer.name, [self.gameEngine.currentPlayer.intendedCellIndexPath indexAtPosition:0], [self.gameEngine.currentPlayer.intendedCellIndexPath indexAtPosition:1]);
 }
 
 -(void)checkGameOutcome {
@@ -71,32 +78,20 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 
 -(void)handleSelection:(NSIndexPath*)indexPath {
     
-    [self.gameEngine.currentPlayer setLastSelectedCell: indexPath];
+    [self.gameEngine.currentPlayer setIntendedCellIndexPath: indexPath];
+    Move *move = [self.gameEngine.currentPlayer makeIntendedMove];
     
-    if ([self.gameEngine didCurrentPlayerMakeValidMove])
-    {
+    if ([self.gameEngine didCurrentPlayerMakeValidMove:move]) {
+        [self.gameEngine handleValidMove:move];
         [self.collectionView reloadData];
-        [self.gameEngine printBoardState];
         
-        //Check game outcome
-        [self checkGameOutcome];
-        
-        if (![self.gameEngine isGameOver]) [self.gameEngine switchCurrentPlayer];
-    
-        if (self.gameEngine.gameMode == GameModeOnePlayer) {
-            [self.collectionView reloadData];
-            [self.gameEngine printBoardState];
-            
-            //Check game outcome
-            [self checkGameOutcome];
-            //If game is still not over - switch current player back to player;
-            if (![self.gameEngine isGameOver]) [self.gameEngine switchCurrentPlayer];
-        } else {
+        if (![self.gameEngine isGameOver]) {
+            [self.gameEngine switchCurrentPlayer];
             [self.delegate updateUsernameLabel:[self.gameEngine.currentPlayer name]];
         }
         
     } else {
-        NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", [self.gameEngine.currentPlayer.lastSelectedCell section], [self.gameEngine.currentPlayer.lastSelectedCell row]);
+        NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", [self.gameEngine.currentPlayer.intendedCellIndexPath section], [self.gameEngine.currentPlayer.intendedCellIndexPath row]);
     }
 }
 
@@ -106,7 +101,9 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     
     NSUInteger inputIndex = [indexPath row];
     // section == indexAtPosition: 0 && row = indexAtPosition: 1 for indexPath, therefore swapped
-    NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:[self.gameEngine calculateColumnIndex:inputIndex] inSection:[self.gameEngine calculateRowIndex:inputIndex]];
+    NSInteger row = [self.gameEngine calculateRowIndex:inputIndex];
+    NSInteger col = [self.gameEngine calculateColumnIndex:inputIndex];
+    NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:col inSection:row];
     
     [self handleSelection: inputIndexPath];
 }

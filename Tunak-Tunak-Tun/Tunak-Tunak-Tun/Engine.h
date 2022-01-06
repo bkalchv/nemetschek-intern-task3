@@ -13,12 +13,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Engine : NSObject
+@protocol EngineDelegate <NSObject>
+- (void)checkGameOutcome;
+- (void)handleSelection:(NSIndexPath*)indexPath;
+@end
+
+@interface Engine : NSObject <BotDelegate>
 @property (nonatomic, strong)       Board* gameBoard;
 @property (nonatomic, strong)       Player* currentPlayer;
 @property (nonatomic)               GameMode gameMode;
 @property (nonatomic)               BOOL hasFreeCells;
 @property (nonatomic)               BOOL winningConditionsFulfiled;
+@property (nonatomic, strong)id     <EngineDelegate> delegate;
 
 - (instancetype)init;
 - (instancetype)initWithPlayersName:(NSString*)playersName;
@@ -26,8 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)printBoardState;
 - (NSString*)gameBoardState;
 - (BOOL)isCellChecked:(NSIndexPath*)indexPath;
-
-- (BOOL)didCurrentPlayerMakeValidMove;
+-(BOOL)didCurrentPlayerMakeValidMove;
+-(BOOL)didCurrentPlayerMakeValidMove:(Move*)move;
+-(void)handleValidMove:(Move*)move;
+-(void)handleSelection:(NSIndexPath *)indexPath;
 - (void)switchCurrentPlayer;
 - (BOOL)isGameOver;
 

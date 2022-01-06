@@ -7,11 +7,10 @@
 
 #import <UIKit/UIKit.h>
 #import "WelcomeViewController.h"
-
-@class Engine;
+#import "Engine.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ConsoleViewController : UIViewController <UIAdaptivePresentationControllerDelegate>
+@interface ConsoleViewController : UIViewController <UIAdaptivePresentationControllerDelegate, EngineDelegate>
 @property (nonatomic) Engine* gameEngine;
 @end
 

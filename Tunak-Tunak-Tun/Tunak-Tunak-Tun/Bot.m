@@ -8,6 +8,7 @@
 #import "Bot.h"
 #import "Board.h"
 #import "Cell.h"
+#import "Move.h"
 #import <UIKit/UIKit.h>
 
 @implementation Bot
@@ -38,15 +39,12 @@
     return [freeCells objectAtIndex: [self randomIndex:([freeCells count] - 1)] ];
 }
 
--(void)makeMove {
-    Cell* cellToSelect = [self randomFreeCell];
-    NSIndexPath* indexPathOfSelectedCell = [NSIndexPath indexPathForRow:cellToSelect.colIndex inSection:cellToSelect.rowIndex];
-    [self setLastSelectedCell: indexPathOfSelectedCell];
-    [self.board changeCellStateAtRowIndex:cellToSelect.rowIndex columnIndex:cellToSelect.colIndex withSign: self.sign];
-}
-
 -(void)yourTurnBaby {
-    [self makeMove];
+    Cell* cellToSelect = [self randomFreeCell];
+    NSIndexPath* indexPathOfSelectedCell = [NSIndexPath indexPathForRow: cellToSelect.rowIndex * self.board.numberOfColumns + cellToSelect.colIndex inSection:0];
+    NSIndexPath* intendedCellIndexPath = [NSIndexPath indexPathForRow:[cellToSelect colIndex] inSection:[cellToSelect rowIndex]];
+    [self setIntendedCellIndexPath: indexPathOfSelectedCell];
+    [self.delegate handleSelection: intendedCellIndexPath];
 }
 
 @end

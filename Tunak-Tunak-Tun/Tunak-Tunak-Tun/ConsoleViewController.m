@@ -20,13 +20,20 @@
 
 - (void)refreshView {
     switch ([GameConfigurationManager.sharedGameConfigurationManager gameMode]) {
-        case GameModeOnePlayer:
-            self.gameEngine = [[Engine alloc] initWithPlayersName: [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
+        case GameModeOnePlayer: {
+            Engine* engine = [[Engine alloc] initWithPlayersName: [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
+            engine.delegate = self;
+            self.gameEngine = engine;
             break;
             
-        case GameModeTwoPlayers:
-            self.gameEngine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name: [GameConfigurationManager.sharedGameConfigurationManager player2Username]];
+        }
+            
+        case GameModeTwoPlayers: {
+            Engine* engine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name: [GameConfigurationManager.sharedGameConfigurationManager player2Username]];
+            engine.delegate = self;
+            self.gameEngine = engine;
             break;
+        }
             
         default:
             break;
@@ -47,12 +54,19 @@
     [super viewDidLoad];
     
     switch ([GameConfigurationManager.sharedGameConfigurationManager gameMode]) {
-        case GameModeOnePlayer:
-            self.gameEngine = [[Engine alloc] initWithPlayersName: [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
+        case GameModeOnePlayer: {
+            Engine* engine = [[Engine alloc] initWithPlayersName: [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
+            engine.delegate = self;
+            self.gameEngine = engine;
             break;
-        case GameModeTwoPlayers:
-            self.gameEngine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name: [GameConfigurationManager.sharedGameConfigurationManager player2Username]];
+        }
+
+        case GameModeTwoPlayers: {
+            Engine* engine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name: [GameConfigurationManager.sharedGameConfigurationManager player2Username]];
+            engine.delegate = self;
+            self.gameEngine = engine;
             break;
+        }
             
         default:
             break;
@@ -137,7 +151,7 @@
 }
 
 -(void)printCurrentPlayerSelection {
-    NSLog(@"Player: %tu selected: %tu %tu", self.gameEngine.currentPlayer.playerID, [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:0], [self.gameEngine.currentPlayer.lastSelectedCell indexAtPosition:1]);
+    NSLog(@"Player: %tu selected: %tu %tu", self.gameEngine.currentPlayer.playerID, [self.gameEngine.currentPlayer.intendedCellIndexPath indexAtPosition:0], [self.gameEngine.currentPlayer.intendedCellIndexPath indexAtPosition:1]);
 }
 
 -(void)checkGameOutcome {
@@ -147,6 +161,23 @@
         [self handleDraw];
     } else {
         [self printCurrentPlayerSelection];
+    }
+}
+
+-(void)handleSelection:(NSIndexPath*)indexPath {
+    [self.gameEngine.currentPlayer setIntendedCellIndexPath: indexPath];
+    Move* move = [self.gameEngine.currentPlayer makeIntendedMove];
+    
+    if ([self.gameEngine didCurrentPlayerMakeValidMove:move]) {
+        [self.gameEngine handleValidMove:move];
+        self.matrixLabel.text = [self.gameEngine gameBoardState];
+        
+        if (![self.gameEngine isGameOver])  {
+            [self.gameEngine switchCurrentPlayer];
+            self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayer].name];
+        }
+    } else {
+        NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", [indexPath section], [indexPath row]);
     }
 }
 
@@ -160,28 +191,7 @@
         NSUInteger inputColIndex = [inputArray[1] integerValue];
         
         NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:inputColIndex inSection:inputRowIndex]; // actual format: [row , col]
-        
-        [self.gameEngine.currentPlayer setLastSelectedCell: inputIndexPath];
-        if ([self.gameEngine didCurrentPlayerMakeValidMove]) {
-            self.matrixLabel.text = [self.gameEngine gameBoardState];
-            [self.gameEngine printBoardState];
-            
-            [self checkGameOutcome];
-
-            if (![self.gameEngine isGameOver]) [self.gameEngine switchCurrentPlayer];
-                
-            if (self.gameEngine.gameMode == GameModeOnePlayer) {
-                self.matrixLabel.text = [self.gameEngine gameBoardState];
-                [self.gameEngine printBoardState];
-                
-                //Check game outcome
-                [self checkGameOutcome];
-                //If game is still not over - switch current player back to player;
-                if (![self.gameEngine isGameOver]) [self.gameEngine switchCurrentPlayer];
-            }
-        } else {
-            NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", inputRowIndex, inputColIndex);
-        }
+        [self handleSelection:inputIndexPath];
     } else {
         [self showInvalidInputAlert];
         NSLog(@"Invalid input. Try again!");

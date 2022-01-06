@@ -7,6 +7,8 @@
 
 #import "Engine.h"
 #import "Cell.h"
+#import "Move.h"
+#import <UIKit/UIKit.h>
 
 @interface Engine()
 @property (nonatomic, strong) Player* player1;
@@ -32,7 +34,10 @@
     if (self) {
         self.gameMode = GameModeOnePlayer;
         self.player1 = [[Player alloc] initPlayerWithName:playersName withId:1 withSign:CellStateX withBoard:self.gameBoard];
-        self.player2 = [[Bot alloc] initWithSign:CellStateO withBoard:self.gameBoard];
+        Bot* bot = [[Bot alloc] initWithSign:CellStateO withBoard:self.gameBoard];
+        bot.delegate = self;
+        self.player2 = bot;
+        
         self.currentPlayer = self.player1;
     }
     return self;
@@ -115,7 +120,7 @@
     } else NSLog(@"Engine obj, switchCurrentPlayer: undefined behavior");
     
     [self.currentPlayer yourTurnBaby];
-    if ([self.currentPlayer.name isEqualToString:@"CPU"] && self.gameMode == GameModeOnePlayer) [self updateGameEngineStateOnPlayerMove];
+    //if ([self.currentPlayer.name isEqualToString:@"CPU"] && self.gameMode == GameModeOnePlayer) [self updateGameEngineStateOnPlayerMove];
 }
 
 - (BOOL)isGameOver {
@@ -133,29 +138,46 @@
 //delegate win/loss
 
 - (BOOL)areWinningConditionsFulfilledOnPlayerMove {
-    return [self areWinningConditionsFulfilledForSelectionOfCellAt:[self.currentPlayer lastSelectedCell] withSign: self.currentPlayer.sign];
+    return [self areWinningConditionsFulfilledForSelectionOfCellAt:[self.currentPlayer intendedCellIndexPath] withSign: self.currentPlayer.sign];
 }
 
 - (void)updateGameEngineStateOnPlayerMove {
-    self.freeCellsAmount -= 1;
+    // TODO: make it calculated
+    self.freeCellsAmount = [self.gameBoard calculateFreeCellsAmount];
     self.hasFreeCells = (self.freeCellsAmount != 0);
     self.winningConditionsFulfiled = [self areWinningConditionsFulfilledOnPlayerMove];
 }
 
 - (BOOL)isValidMove {
-    Cell* lastSelectedCell = [self.gameBoard cellAt:[self.currentPlayer lastSelectedCell]];
+    Cell* lastSelectedCell = [self.gameBoard cellAt:[self.currentPlayer intendedCellIndexPath]];
     return !lastSelectedCell.isChecked;
 }
 
 -(BOOL)didCurrentPlayerMakeValidMove {
     if ([self isValidMove] && ![self.currentPlayer.name isEqualToString:@"CPU"]) {
-        [self.currentPlayer makeMove];
         [self updateGameEngineStateOnPlayerMove];
-        
+
         return YES;
     }
 
     return NO;
+}
+
+-(BOOL)didCurrentPlayerMakeValidMove:(Move*)move {
+    return [move isValidMove];
+}
+
+-(void)handleValidMove:(Move*)move {
+    NSUInteger moveRow = [move.player.intendedCellIndexPath section];
+    NSUInteger moveColumn = [move.player.intendedCellIndexPath row];
+    [self.gameBoard changeCellStateAtRowIndex:moveRow columnIndex:moveColumn withSign:[self.currentPlayer sign]];
+    [self updateGameEngineStateOnPlayerMove];
+    [self printBoardState];
+    [self.delegate checkGameOutcome];
+}
+
+-(void)handleSelection:(NSIndexPath *)indexPath {
+    [self.delegate handleSelection:indexPath];
 }
 
 @end
