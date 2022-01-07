@@ -166,6 +166,34 @@
     }
 }
 
+-(void)enableUndoButton {
+    [self.undoButton setEnabled:YES];
+}
+
+-(void)disableUndoButton {
+    [self.undoButton setEnabled:NO];
+}
+
+-(void)enableRedoButton {
+    [self.redoButton setEnabled:YES];
+}
+
+-(void)disableRedoButton {
+    [self.redoButton setEnabled:NO];
+}
+
+- (IBAction)onUndoButtonClick:(id)sender {
+    [self.gameEngine undo];
+    if ([self.gameEngine isUndoStackEmpty]) [self disableUndoButton];
+    if (![self.gameEngine isRedoStackEmpty]) [self enableRedoButton];
+}
+
+- (IBAction)redoButtonClick:(id)sender {
+    [self.gameEngine redo];
+    if ([self.gameEngine isRedoStackEmpty]) [self disableRedoButton];
+    if (![self.gameEngine isUndoStackEmpty]) [self enableUndoButton];
+}
+
 -(void)handleSelection:(NSIndexPath*)indexPath {
     [self.gameEngine setCurrentPlayerIntendedCellIndexPath: indexPath];
     Move* move = [self.gameEngine makeIntendedMoveOfCurrentPlayer];
@@ -183,6 +211,7 @@
         NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", [indexPath section], [indexPath row]);
     }
 }
+
 
 
 - (IBAction)onConsoleVCEnterButton:(id)sender {

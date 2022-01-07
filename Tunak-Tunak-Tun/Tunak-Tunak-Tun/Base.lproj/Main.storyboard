@@ -157,11 +157,17 @@
                                 <rect key="frame" x="298" y="407.5" width="48" height="21.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="baseline_undo_black_24pt" title=""/>
+                                <connections>
+                                    <action selector="onUndoButtonClick:" destination="l9W-wL-bPk" eventType="touchUpInside" id="83T-fb-LGi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="teV-Fj-ZwD">
                                 <rect key="frame" x="346" y="399.5" width="48" height="38"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="baseline_redo_black_24pt" title=""/>
+                                <connections>
+                                    <action selector="redoButtonClick:" destination="l9W-wL-bPk" eventType="touchUpInside" id="cg5-fg-dol"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aln-xS-DDI">
                                 <rect key="frame" x="152" y="493" width="110" height="31"/>
@@ -360,11 +366,18 @@
                                 <rect key="frame" x="287" y="403" width="48" height="38"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="baseline_undo_black_24pt" title=""/>
+                                <connections>
+                                    <action selector="onUndoButtonClick:" destination="P1T-WY-bEq" eventType="touchUpInside" id="fex-iU-1c2"/>
+                                    <action selector="onUndoButtonClick:" destination="JN5-Rx-dQp" eventType="touchUpInside" id="rbu-Z3-Qfb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcL-eX-WWk">
                                 <rect key="frame" x="335" y="403" width="48" height="38"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="baseline_redo_black_24pt" title=""/>
+                                <connections>
+                                    <action selector="onRedoButtonClick:" destination="JN5-Rx-dQp" eventType="touchUpInside" id="FV1-6M-cVo"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="shP-a3-0LJ"/>
@@ -395,6 +408,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sfa-SG-akO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="P1T-WY-bEq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1023" y="-1267"/>
         </scene>

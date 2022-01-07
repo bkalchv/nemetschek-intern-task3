@@ -33,7 +33,7 @@
     }
 }
 
-- (Move*)popObject {
+- (Move*)pop {
     if (_count > 0) {
         NSUInteger lastObjectIndex = [_moves count] - 1;
         Move* moveOnTop = [_moves objectAtIndex:lastObjectIndex];
@@ -45,7 +45,7 @@
     return nil;
 }
 
-- (Move*)peekObject {
+- (Move*)peek {
     if (_count > 0) {
         NSUInteger lastObjectIndex = [_moves count] - 1;
         Move* moveOnTop = [_moves objectAtIndex:lastObjectIndex];

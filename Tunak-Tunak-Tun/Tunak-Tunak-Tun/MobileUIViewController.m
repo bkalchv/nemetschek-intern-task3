@@ -76,6 +76,16 @@
     [self.undoButton setEnabled:NO];
 }
 
+- (IBAction)onRedoButtonClick:(id)sender {
+
+}
+
+- (IBAction)onUndoButtonClick:(id)sender {
+    // delegate to engine that undo button has been clicked
+        // 
+    // if undoStack is empty -> disable undoButton
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

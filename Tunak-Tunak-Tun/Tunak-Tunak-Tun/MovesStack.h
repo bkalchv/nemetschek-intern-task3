@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)initWithArray:(NSArray<Move*>*)array;
 - (void)pushMove:(Move*)move;
-- (id)popObject;
-- (id)peekObject;
+- (id)pop;
+- (id)peek;
 
 @end
 NS_ASSUME_NONNULL_END

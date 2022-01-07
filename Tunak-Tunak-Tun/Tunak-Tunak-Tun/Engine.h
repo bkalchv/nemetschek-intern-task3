@@ -45,6 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isGameOver;
 
 - (BOOL)isUndoStackEmpty;
+- (BOOL)isRedoStackEmpty;
+- (void)redo;
+- (void)undo;
 
 - (NSInteger)calculateRowIndex:(NSInteger)index;
 - (NSInteger)calculateColumnIndex:(NSInteger)index;

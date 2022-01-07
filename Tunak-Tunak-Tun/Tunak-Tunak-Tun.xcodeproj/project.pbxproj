@@ -100,8 +100,6 @@
 				42A945E52767A330002767C6 /* Cell.m */,
 				42A945DB27676AC5002767C6 /* Board.h */,
 				42A945DC27676AC5002767C6 /* Board.m */,
-				42810BB427886E8500DD0E57 /* MovesStack.h */,
-				42810BB527886E8500DD0E57 /* MovesStack.m */,
 				42A945E127678C13002767C6 /* Player.h */,
 				42A945E227678C13002767C6 /* Player.m */,
 				426B519B27748850009A8B2F /* Bot.h */,
@@ -112,6 +110,8 @@
 				42A945D6276758F5002767C6 /* TunakCell.m */,
 				42810BB1278722ED00DD0E57 /* Move.h */,
 				42810BB2278722ED00DD0E57 /* Move.m */,
+				42810BB427886E8500DD0E57 /* MovesStack.h */,
+				42810BB527886E8500DD0E57 /* MovesStack.m */,
 			);
 			name = GameComponents;
 			sourceTree = "<group>";

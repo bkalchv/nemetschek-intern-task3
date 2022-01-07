@@ -159,8 +159,6 @@
     return index % [self.gameBoard numberOfColumns];
 }
 
-//delegate win/loss
-
 - (BOOL)areWinningConditionsFulfilledOnPlayerMove {
     return [self areWinningConditionsFulfilledForSelectionOfCellAt:[self.currentPlayer intendedCellIndexPath] withSign: self.currentPlayer.sign];
 }
@@ -184,7 +182,7 @@
     NSUInteger moveRow = [move.player.intendedCellIndexPath section];
     NSUInteger moveColumn = [move.player.intendedCellIndexPath row];
     [self.gameBoard changeCellStateAtRowIndex:moveRow columnIndex:moveColumn withSign:[self.currentPlayer sign]];
-    // TODO: undoStack push?
+    // TODO: undoStack push here?
     [self.undoStack pushMove:move];
     [self updateGameEngineStateOnPlayerMove];
     [self printBoardState];
@@ -195,8 +193,25 @@
     [self.delegate handleSelection:indexPath];
 }
 
+-(void)undo {
+    Move* undoStackTopMove = [self.undoStack peek];
+    [self.redoStack pushMove:undoStackTopMove];
+    [self.undoStack pop];
+}
+
+-(void)redo {
+    Move* redoStackTopMove = [self.redoStack peek];
+    [self.undoStack pushMove: redoStackTopMove];
+    [self.redoStack pop];
+}
+
 - (BOOL)isUndoStackEmpty {
     return self.undoStack.count == 0;
 }
+
+- (BOOL)isRedoStackEmpty {
+    return self.redoStack.count == 0;
+}
+
 
 @end
