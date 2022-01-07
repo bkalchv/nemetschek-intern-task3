@@ -6,8 +6,9 @@
 //
 
 #import "Engine.h"
-#import "Move.h"
 #import "Cell.h"
+#import "Move.h"
+#import "MovesStack.h"
 #import <UIKit/UIKit.h>
 
 @interface Engine()
@@ -15,6 +16,8 @@
 @property (nonatomic, strong) Player* player1;
 @property (nonatomic, strong) Player* player2;
 @property (nonatomic) NSUInteger freeCellsAmount;
+@property (nonatomic, strong) MovesStack* undoStack;
+@property (nonatomic, strong) MovesStack* redoStack;
 @end
 
 @implementation Engine
@@ -38,8 +41,8 @@
         Bot* bot = [[Bot alloc] initWithSign:CellStateO withBoard:self.gameBoard];
         bot.delegate = self;
         self.player2 = bot;
-        
         self.currentPlayer = self.player1;
+        
     }
     return self;
 }
@@ -51,6 +54,8 @@
         self.player1 = [[Player alloc] initPlayerWithName:player1Name withId:1 withSign:CellStateX withBoard:self.gameBoard];
         self.player2 = [[Player alloc] initPlayerWithName:player2Name withId:2 withSign:CellStateO withBoard:self.gameBoard];
         self.currentPlayer = self.player1;
+        self.undoStack = [[MovesStack alloc] init];
+        self.redoStack = [[MovesStack alloc] init];
     }
     return self;
 }
@@ -160,7 +165,6 @@
 }
 
 - (void)updateGameEngineStateOnPlayerMove {
-    // TODO: make it calculated
     self.freeCellsAmount = [self.gameBoard calculateFreeCellsAmount];
     self.hasFreeCells = (self.freeCellsAmount != 0);
     self.winningConditionsFulfiled = [self areWinningConditionsFulfilledOnPlayerMove];
@@ -179,6 +183,8 @@
     NSUInteger moveRow = [move.player.intendedCellIndexPath section];
     NSUInteger moveColumn = [move.player.intendedCellIndexPath row];
     [self.gameBoard changeCellStateAtRowIndex:moveRow columnIndex:moveColumn withSign:[self.currentPlayer sign]];
+    // TODO: undoStack push?
+    [self.undoStack pushMove:move];
     [self updateGameEngineStateOnPlayerMove];
     [self printBoardState];
     [self.delegate checkGameOutcome];
@@ -186,6 +192,10 @@
 
 -(void)handleSelection:(NSIndexPath *)indexPath {
     [self.delegate handleSelection:indexPath];
+}
+
+- (BOOL)isUndoStackEmpty {
+    return self.undoStack.count == 0;
 }
 
 @end

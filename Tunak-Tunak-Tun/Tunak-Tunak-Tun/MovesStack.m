@@ -21,6 +21,7 @@
 - (instancetype)initWithArray:(NSArray<Move*>*)array {
     if ((self = [super init])) {
         _moves = [[NSMutableArray alloc] initWithArray:array];
+        _count = 0;
     }
     return self;
 }
@@ -28,14 +29,16 @@
 - (void)pushMove:(Move*)move {
     if (move != nil) {
         [_moves addObject:move];
+        _count = [_moves count];
     }
 }
 
 - (Move*)popObject {
-    if ([_moves count] > 0) {
+    if (_count > 0) {
         NSUInteger lastObjectIndex = [_moves count] - 1;
         Move* moveOnTop = [_moves objectAtIndex:lastObjectIndex];
         [_moves removeLastObject];
+        _count = [_moves count];
         return moveOnTop;
     }
     
@@ -43,7 +46,7 @@
 }
 
 - (Move*)peekObject {
-    if ([_moves count] > 0) {
+    if (_count > 0) {
         NSUInteger lastObjectIndex = [_moves count] - 1;
         Move* moveOnTop = [_moves objectAtIndex:lastObjectIndex];
         return moveOnTop;

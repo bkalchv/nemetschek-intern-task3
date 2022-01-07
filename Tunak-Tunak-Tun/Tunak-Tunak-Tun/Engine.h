@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)switchCurrentPlayer;
 - (BOOL)isGameOver;
 
+- (BOOL)isUndoStackEmpty;
+
 - (NSInteger)calculateRowIndex:(NSInteger)index;
 - (NSInteger)calculateColumnIndex:(NSInteger)index;
 

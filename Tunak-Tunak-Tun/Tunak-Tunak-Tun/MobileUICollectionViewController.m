@@ -106,6 +106,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:col inSection:row];
     
     [self handleSelection: inputIndexPath];
+    if (![self.gameEngine isUndoStackEmpty]) [self.delegate enableUndoButton];
 }
 
 #pragma mark - Navigation

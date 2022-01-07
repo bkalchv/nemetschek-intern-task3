@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *consoleVCEnterButton;
 @property (weak, nonatomic) IBOutlet UILabel *matrixLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *undoButton;
+@property (weak, nonatomic) IBOutlet UIButton *redoButton;
 @end
 
 @implementation ConsoleViewController
@@ -172,6 +174,7 @@
         [self.gameEngine handleValidMove:move];
         self.matrixLabel.text = [self.gameEngine gameBoardState];
         
+        
         if (![self.gameEngine isGameOver])  {
             [self.gameEngine switchCurrentPlayer];
             self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayerName]];
@@ -192,6 +195,7 @@
         
         NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:inputColIndex inSection:inputRowIndex]; // actual format: [row , col]
         [self handleSelection:inputIndexPath];
+        if (![self.gameEngine isUndoStackEmpty]) [self.undoButton setEnabled:YES];
     } else {
         [self showInvalidInputAlert];
         NSLog(@"Invalid input. Try again!");

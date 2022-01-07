@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showOneMoreTimeViewController;
 - (void)showAlreadySelectedAlertForCell:(Cell*)cell;
 - (void)updateUsernameLabel:(NSString*)currentPlayerUsername;
+- (void)enableUndoButton;
+- (void)disableUndoButton;
 @end
 
 @interface MobileUICollectionViewController : UICollectionViewController <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, EngineDelegate>

@@ -13,6 +13,8 @@
 
 @interface MobileUIViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *mobileUIUsernameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *undoButton;
+@property (weak, nonatomic) IBOutlet UIButton *redoButton;
 @end
 
 @implementation MobileUIViewController
@@ -64,6 +66,14 @@
 
 - (void)updateUsernameLabel:(NSString*) currentPlayerUsername {
     [self.mobileUIUsernameLabel setText:  [NSString stringWithFormat:@"It's up to you, %@!", currentPlayerUsername]];
+}
+
+- (void)enableUndoButton {
+    [self.undoButton setEnabled:YES];
+}
+
+- (void)disableUndoButton {
+    [self.undoButton setEnabled:NO];
 }
 
 #pragma mark - Navigation

@@ -25,7 +25,6 @@
     return randomIndex;
 }
 
-//TODO: - use a separate collection for the free cells instead of recursice calls to random (calculated property
 -(NSArray<Cell*> *)freeCellsOfBoard {
     NSMutableArray<Cell*>* freeCellsArray = [[NSMutableArray<Cell*> alloc] init];
     for (Cell* cell in self.board.boardMatrixArray) {
