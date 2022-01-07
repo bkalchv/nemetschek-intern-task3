@@ -6,8 +6,8 @@
 //
 
 #import "Engine.h"
-#import "Cell.h"
 #import "Move.h"
+#import "Cell.h"
 #import <UIKit/UIKit.h>
 
 @interface Engine()
@@ -169,16 +169,6 @@
 - (BOOL)isValidMove {
     Cell* lastSelectedCell = [self.gameBoard cellAt:[self.currentPlayer intendedCellIndexPath]];
     return !lastSelectedCell.isChecked;
-}
-
--(BOOL)didCurrentPlayerMakeValidMove {
-    if ([self isValidMove] && ![self.currentPlayer.name isEqualToString:@"CPU"]) {
-        [self updateGameEngineStateOnPlayerMove];
-
-        return YES;
-    }
-
-    return NO;
 }
 
 -(BOOL)didCurrentPlayerMakeValidMove:(Move*)move {

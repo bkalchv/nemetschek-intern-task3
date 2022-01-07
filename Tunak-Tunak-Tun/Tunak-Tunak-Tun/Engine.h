@@ -6,8 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
+
+@class Player;
 #import "Board.h"
-#import "Player.h"
 #import "Bot.h"
 #import "GameConfigurationManager.h"
 
@@ -37,10 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSIndexPath*)currentPlayerIntendedCellIndexPath;
 - (void)setCurrentPlayerIntendedCellIndexPath:(NSIndexPath*)indexPath;
 - (Move*)makeIntendedMoveOfCurrentPlayer;
--(BOOL)didCurrentPlayerMakeValidMove;
--(BOOL)didCurrentPlayerMakeValidMove:(Move*)move;
--(void)handleValidMove:(Move*)move;
--(void)handleSelection:(NSIndexPath *)indexPath;
+- (BOOL)didCurrentPlayerMakeValidMove:(Move*)move;
+- (void)handleSelection:(NSIndexPath *)indexPath;
+- (void)handleValidMove:(Move*)move;
 - (void)switchCurrentPlayer;
 - (BOOL)isGameOver;
 

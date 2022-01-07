@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		426B519D27748850009A8B2F /* Bot.m in Sources */ = {isa = PBXBuildFile; fileRef = 426B519C27748850009A8B2F /* Bot.m */; };
 		42810BB3278722ED00DD0E57 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 42810BB2278722ED00DD0E57 /* Move.m */; };
+		42810BB627886E8500DD0E57 /* MovesStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 42810BB527886E8500DD0E57 /* MovesStack.m */; };
 		4297D02D2770903A00F0782E /* MobileUICollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4297D02C2770903A00F0782E /* MobileUICollectionViewCell.m */; };
 		429BAEF2276B818A007D73C5 /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429BAEF1276B818A007D73C5 /* PreferencesViewController.m */; };
 		429BAEF5276B8E15007D73C5 /* MobileUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429BAEF4276B8E15007D73C5 /* MobileUIViewController.m */; };
@@ -37,6 +38,8 @@
 		426B519C27748850009A8B2F /* Bot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bot.m; sourceTree = "<group>"; };
 		42810BB1278722ED00DD0E57 /* Move.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Move.h; sourceTree = "<group>"; };
 		42810BB2278722ED00DD0E57 /* Move.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Move.m; sourceTree = "<group>"; };
+		42810BB427886E8500DD0E57 /* MovesStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovesStack.h; sourceTree = "<group>"; };
+		42810BB527886E8500DD0E57 /* MovesStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovesStack.m; sourceTree = "<group>"; };
 		4297D02B2770903A00F0782E /* MobileUICollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileUICollectionViewCell.h; sourceTree = "<group>"; };
 		4297D02C2770903A00F0782E /* MobileUICollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MobileUICollectionViewCell.m; sourceTree = "<group>"; };
 		429BAEF0276B818A007D73C5 /* PreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 				42A945E52767A330002767C6 /* Cell.m */,
 				42A945DB27676AC5002767C6 /* Board.h */,
 				42A945DC27676AC5002767C6 /* Board.m */,
+				42810BB427886E8500DD0E57 /* MovesStack.h */,
+				42810BB527886E8500DD0E57 /* MovesStack.m */,
 				42A945E127678C13002767C6 /* Player.h */,
 				42A945E227678C13002767C6 /* Player.m */,
 				426B519B27748850009A8B2F /* Bot.h */,
@@ -235,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42810BB3278722ED00DD0E57 /* Move.m in Sources */,
+				42810BB627886E8500DD0E57 /* MovesStack.m in Sources */,
 				42A945E62767A330002767C6 /* Cell.m in Sources */,
 				42A945D4276756C5002767C6 /* WelcomeViewController.m in Sources */,
 				42A945DA276769E9002767C6 /* ConsoleViewController.m in Sources */,
