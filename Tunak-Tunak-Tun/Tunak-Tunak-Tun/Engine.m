@@ -42,7 +42,8 @@
         bot.delegate = self;
         self.player2 = bot;
         self.currentPlayer = self.player1;
-        
+        self.undoStack = [[MovesStack alloc] init];
+        self.redoStack = [[MovesStack alloc] init];
     }
     return self;
 }
