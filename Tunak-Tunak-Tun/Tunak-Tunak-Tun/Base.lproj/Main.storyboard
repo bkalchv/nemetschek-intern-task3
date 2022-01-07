@@ -378,11 +378,11 @@
                             <constraint firstItem="shP-a3-0LJ" firstAttribute="trailing" secondItem="EcL-eX-WWk" secondAttribute="trailing" constant="31" id="I5U-Xr-27z"/>
                             <constraint firstItem="shP-a3-0LJ" firstAttribute="trailing" secondItem="V0D-YV-f6W" secondAttribute="trailing" constant="79" id="NAn-pt-SOI"/>
                             <constraint firstItem="RtT-iC-adp" firstAttribute="top" secondItem="shP-a3-0LJ" secondAttribute="top" constant="79" id="Nf5-SW-VLY"/>
-                            <constraint firstItem="EcL-eX-WWk" firstAttribute="top" secondItem="shP-a3-0LJ" secondAttribute="top" constant="359" id="U7R-tt-ejl"/>
-                            <constraint firstItem="V0D-YV-f6W" firstAttribute="top" secondItem="shP-a3-0LJ" secondAttribute="top" constant="359" id="Zpv-CA-Hr0"/>
+                            <constraint firstItem="EcL-eX-WWk" firstAttribute="top" secondItem="RtT-iC-adp" secondAttribute="bottom" constant="29" id="TUF-57-mc6"/>
                             <constraint firstItem="MRF-Eu-wJ3" firstAttribute="centerX" secondItem="shP-a3-0LJ" secondAttribute="centerX" id="faA-7r-9XR"/>
                             <constraint firstItem="V0D-YV-f6W" firstAttribute="leading" secondItem="shP-a3-0LJ" secondAttribute="leading" constant="287" id="jkT-RD-bJQ"/>
                             <constraint firstItem="MRF-Eu-wJ3" firstAttribute="top" secondItem="shP-a3-0LJ" secondAttribute="top" constant="35" id="lI4-yH-5Fe"/>
+                            <constraint firstItem="V0D-YV-f6W" firstAttribute="top" secondItem="RtT-iC-adp" secondAttribute="bottom" constant="29" id="ran-AS-nhh"/>
                             <constraint firstItem="shP-a3-0LJ" firstAttribute="bottom" secondItem="V0D-YV-f6W" secondAttribute="bottom" constant="372" id="xep-mV-jn7"/>
                         </constraints>
                     </view>
