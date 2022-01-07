@@ -52,9 +52,9 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 }
 
 - (void)handleWin {
-    NSLog(@"%@ won!", self.gameEngine.currentPlayer.name);
+    NSLog(@"%@ won!", [self.gameEngine currentPlayerName]);
     NSLog(@"Game over!");
-    [self.delegate showPlayerWonAlert: self.gameEngine.currentPlayer withGameBoardState:[self.gameEngine gameBoardState]];
+    [self.delegate showPlayerWonAlert: [self.gameEngine currentPlayerName] withGameBoardState:[self.gameEngine gameBoardState]];
 }
 
 - (void)handleDraw {
@@ -63,7 +63,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 }
 
 -(void)printCurrentPlayerSelection {
-    NSLog(@"Player: %@ selected: %tu %tu", self.gameEngine.currentPlayer.name, [self.gameEngine.currentPlayer.intendedCellIndexPath indexAtPosition:0], [self.gameEngine.currentPlayer.intendedCellIndexPath indexAtPosition:1]);
+    NSLog(@"Player: %@ selected: %tu %tu", [self.gameEngine currentPlayerName], [[self.gameEngine currentPlayerIntendedCellIndexPath] section], [[self.gameEngine currentPlayerIntendedCellIndexPath] row]);
 }
 
 -(void)checkGameOutcome {
@@ -78,8 +78,8 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 
 -(void)handleSelection:(NSIndexPath*)indexPath {
     
-    [self.gameEngine.currentPlayer setIntendedCellIndexPath: indexPath];
-    Move *move = [self.gameEngine.currentPlayer makeIntendedMove];
+    [self.gameEngine setCurrentPlayerIntendedCellIndexPath: indexPath];
+    Move *move = [self.gameEngine makeIntendedMoveOfCurrentPlayer];
     
     if ([self.gameEngine didCurrentPlayerMakeValidMove:move]) {
         [self.gameEngine handleValidMove:move];
@@ -87,11 +87,11 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         
         if (![self.gameEngine isGameOver]) {
             [self.gameEngine switchCurrentPlayer];
-            [self.delegate updateUsernameLabel:[self.gameEngine.currentPlayer name]];
+            [self.delegate updateUsernameLabel:[self.gameEngine currentPlayerName]];
         }
         
     } else {
-        NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", [self.gameEngine.currentPlayer.intendedCellIndexPath section], [self.gameEngine.currentPlayer.intendedCellIndexPath row]);
+        NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", [[self.gameEngine currentPlayerIntendedCellIndexPath] section], [[self.gameEngine currentPlayerIntendedCellIndexPath] row]);
     }
 }
 

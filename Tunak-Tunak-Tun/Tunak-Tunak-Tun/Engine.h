@@ -11,6 +11,8 @@
 #import "Bot.h"
 #import "GameConfigurationManager.h"
 
+// TODO: fwd declaration?
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol EngineDelegate <NSObject>
@@ -20,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Engine : NSObject <BotDelegate>
 @property (nonatomic, strong)       Board* gameBoard;
-@property (nonatomic, strong)       Player* currentPlayer;
 @property (nonatomic)               GameMode gameMode;
 @property (nonatomic)               BOOL hasFreeCells;
 @property (nonatomic)               BOOL winningConditionsFulfiled;
@@ -32,6 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)printBoardState;
 - (NSString*)gameBoardState;
 - (BOOL)isCellChecked:(NSIndexPath*)indexPath;
+- (NSString*)currentPlayerName;
+- (NSIndexPath*)currentPlayerIntendedCellIndexPath;
+- (void)setCurrentPlayerIntendedCellIndexPath:(NSIndexPath*)indexPath;
+- (Move*)makeIntendedMoveOfCurrentPlayer;
 -(BOOL)didCurrentPlayerMakeValidMove;
 -(BOOL)didCurrentPlayerMakeValidMove:(Move*)move;
 -(void)handleValidMove:(Move*)move;

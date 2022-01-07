@@ -39,7 +39,7 @@
             break;
     }
     
-    self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayer].name];
+    self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayerName]];
     self.consoleVCEnterButton.enabled = YES;
     self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
     [self.gameEngine printBoardState];
@@ -73,7 +73,7 @@
     }
     
     self.inputTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-    self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayer].name];
+    self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayerName]];
     [self.gameEngine printBoardState];
     // Do any additional setup after loading the view.
 }
@@ -100,8 +100,8 @@
     [self presentViewController:drawAlert animated:YES completion:nil];
 }
 
-- (void)showPlayerWonAlert:(Player*)player {
-    UIAlertController* playerWonAlert = [UIAlertController alertControllerWithTitle: [NSString stringWithFormat:@"Player %@ won!", player.name] message: [NSString stringWithString:self.gameEngine.gameBoard.stateString] preferredStyle:UIAlertControllerStyleAlert];
+- (void)showPlayerWonAlert:(NSString*)playerName {
+    UIAlertController* playerWonAlert = [UIAlertController alertControllerWithTitle: [NSString stringWithFormat:@"Player %@ won!", playerName] message: [NSString stringWithString:self.gameEngine.gameBoard.stateString] preferredStyle:UIAlertControllerStyleAlert];
     [playerWonAlert addAction: [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         [self showOneMoreTimeViewController];
     } ]];
@@ -138,10 +138,10 @@
 }
 
 - (void)handleWin {
-    NSLog(@"%@ won!", self.gameEngine.currentPlayer.name);
+    NSLog(@"%@ won!", [self.gameEngine currentPlayerName]);
     NSLog(@"Game over!");
     [self.consoleVCEnterButton setEnabled:NO];
-    [self showPlayerWonAlert: self.gameEngine.currentPlayer];
+    [self showPlayerWonAlert: [self.gameEngine currentPlayerName]];
 }
 
 - (void)handleDraw {
@@ -151,7 +151,7 @@
 }
 
 -(void)printCurrentPlayerSelection {
-    NSLog(@"Player: %tu selected: %tu %tu", self.gameEngine.currentPlayer.playerID, [self.gameEngine.currentPlayer.intendedCellIndexPath indexAtPosition:0], [self.gameEngine.currentPlayer.intendedCellIndexPath indexAtPosition:1]);
+    NSLog(@"Player: %@ selected: %tu %tu", [self.gameEngine currentPlayerName], [[self.gameEngine currentPlayerIntendedCellIndexPath] section],  [[self.gameEngine currentPlayerIntendedCellIndexPath] row]);
 }
 
 -(void)checkGameOutcome {
@@ -165,8 +165,8 @@
 }
 
 -(void)handleSelection:(NSIndexPath*)indexPath {
-    [self.gameEngine.currentPlayer setIntendedCellIndexPath: indexPath];
-    Move* move = [self.gameEngine.currentPlayer makeIntendedMove];
+    [self.gameEngine setCurrentPlayerIntendedCellIndexPath: indexPath];
+    Move* move = [self.gameEngine makeIntendedMoveOfCurrentPlayer];
     
     if ([self.gameEngine didCurrentPlayerMakeValidMove:move]) {
         [self.gameEngine handleValidMove:move];
@@ -174,7 +174,7 @@
         
         if (![self.gameEngine isGameOver])  {
             [self.gameEngine switchCurrentPlayer];
-            self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayer].name];
+            self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayerName]];
         }
     } else {
         NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", [indexPath section], [indexPath row]);

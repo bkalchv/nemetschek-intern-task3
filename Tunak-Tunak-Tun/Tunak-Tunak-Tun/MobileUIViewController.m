@@ -46,8 +46,8 @@
     [self presentViewController:drawAlert animated:YES completion:nil];
 }
 
-- (void)showPlayerWonAlert:(Player*)player withGameBoardState:(NSString*)gameBoardState {
-    UIAlertController* playerWonAlert = [UIAlertController alertControllerWithTitle: [NSString stringWithFormat:@"Player %@ won!", player.name] message: [NSString stringWithString: gameBoardState] preferredStyle:UIAlertControllerStyleAlert];
+- (void)showPlayerWonAlert:(NSString*)playerName withGameBoardState:(NSString*)gameBoardState {
+    UIAlertController* playerWonAlert = [UIAlertController alertControllerWithTitle: [NSString stringWithFormat:@"Player %@ won!", playerName] message: [NSString stringWithString: gameBoardState] preferredStyle:UIAlertControllerStyleAlert];
     [playerWonAlert addAction: [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         [self showOneMoreTimeViewController];
     } ]];

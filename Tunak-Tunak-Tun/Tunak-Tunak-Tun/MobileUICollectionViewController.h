@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol MobileUICollectionViewControllerDelegate <NSObject>
 - (void)showDrawAlert:(NSString*)gameBoardState;
-- (void)showPlayerWonAlert:(Player*)player withGameBoardState:(NSString*)gameBoardState;
+- (void)showPlayerWonAlert:(NSString*)playerName withGameBoardState:(NSString*)gameBoardState;
 - (void)showOneMoreTimeViewController;
 - (void)showAlreadySelectedAlertForCell:(Cell*)cell;
 - (void)updateUsernameLabel:(NSString*)currentPlayerUsername;

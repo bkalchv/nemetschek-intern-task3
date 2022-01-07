@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 
 @interface Engine()
+@property (nonatomic, strong) Player* currentPlayer;
 @property (nonatomic, strong) Player* player1;
 @property (nonatomic, strong) Player* player2;
 @property (nonatomic) NSUInteger freeCellsAmount;
@@ -57,6 +58,23 @@
 - (void)printBoardState {
     [self.gameBoard printState];
 }
+
+-(NSString*)currentPlayerName {
+    return [self.currentPlayer name];
+}
+
+- (NSIndexPath*)currentPlayerIntendedCellIndexPath {
+    return [self.currentPlayer intendedCellIndexPath];
+}
+
+- (void)setCurrentPlayerIntendedCellIndexPath:(NSIndexPath*)indexPath {
+    [self.currentPlayer setIntendedCellIndexPath:indexPath];
+}
+
+- (Move*)makeIntendedMoveOfCurrentPlayer {
+    return [self.currentPlayer makeIntendedMove];
+}
+
 
 - (NSString*)gameBoardState {
     return [self.gameBoard stateString];
