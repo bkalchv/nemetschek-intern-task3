@@ -13,9 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class Player;
 
 @interface Move : NSObject
+@property (nonatomic, strong) NSIndexPath* indexPath;
 -(instancetype)initWithIndexPath:(NSIndexPath*)indexPath withBoard:(Board*)board;
 -(BOOL) isValidMove;
--(NSIndexPath*)indexPath;
 @end
 
 NS_ASSUME_NONNULL_END

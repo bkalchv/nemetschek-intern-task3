@@ -228,7 +228,6 @@
 }
 
 
-
 - (IBAction)onConsoleVCEnterButton:(id)sender {
     NSString* inputString = self.inputTextField.text;
     

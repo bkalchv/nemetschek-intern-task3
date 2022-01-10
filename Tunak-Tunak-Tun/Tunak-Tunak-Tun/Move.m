@@ -11,7 +11,6 @@
 #import "Player.h"
 
 @interface Move ()
-@property (nonatomic, strong) NSIndexPath* indexPath;
 @property (nonatomic, strong) Board *board;
 @end
 
@@ -29,7 +28,4 @@
     return ![self.board cellAt: self.indexPath].isChecked;
 }
 
--(NSIndexPath*)indexPath {
-    return _indexPath;
-}
 @end

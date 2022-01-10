@@ -209,12 +209,21 @@
     [self.gameBoard changeCellStateAtRowIndex:row columnIndex:col withSign:sign];
 }
 
+// TODO: move->opposite && undo to work without move
 -(void)undoLastMove:(Move*)move {
     [self deselectCellAtIndexPath: [move indexPath]];
+    
+    //Move* m = [self.undoStack pop];
+    // [self makeMove:m.opposite];
 }
 
 -(void)redoLastMove:(Move*)move {
     [self selectCellAtIndexPath:[move indexPath] withSign:[self.currentPlayer sign]];
+}
+
+-(void)makeMove:(Move *)move
+{
+    [self makeMoveOfCurrentPlayer:move.indexPath];
 }
 
 -(void)undo {

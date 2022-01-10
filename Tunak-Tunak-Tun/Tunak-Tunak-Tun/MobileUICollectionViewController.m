@@ -116,7 +116,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     [self.gameEngine undo];
     
     if ([self.gameEngine gameMode] == GameModeOnePlayer) [self.gameEngine undo];
-    
+    [self.delegate updateUsernameLabel:[self.gameEngine currentPlayerName]];
     if ([self.gameEngine isUndoStackEmpty]) [self.delegate disableUndoButton];
     if (![self.gameEngine isRedoStackEmpty]) [self.delegate enableRedoButton];
     [self.collectionView reloadData];
@@ -126,7 +126,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     [self.gameEngine redo];
     
     if ([self.gameEngine gameMode] == GameModeOnePlayer) [self.gameEngine redo];
-    
+    [self.delegate updateUsernameLabel:[self.gameEngine currentPlayerName]];
     if ([self.gameEngine isRedoStackEmpty]) [self.delegate disableRedoButton];
     if (![self.gameEngine isUndoStackEmpty]) [self.delegate enableUndoButton];
     [self.collectionView reloadData];
