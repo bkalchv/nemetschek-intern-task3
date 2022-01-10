@@ -22,6 +22,8 @@
 
 - (void)refreshView {
     self.mobileUIUsernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
+    [self.undoButton setEnabled:NO];
+    [self.redoButton setEnabled:NO];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -68,8 +70,6 @@
 - (void)updateUsernameLabel:(NSString*) currentPlayerUsername {
     [self.mobileUIUsernameLabel setText:  [NSString stringWithFormat:@"It's up to you, %@!", currentPlayerUsername]];
 }
-
-
 
 - (void)enableUndoButton {
     [self.undoButton setEnabled:YES];

@@ -27,6 +27,8 @@
             Engine* engine = [[Engine alloc] initWithPlayersName: [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
             engine.delegate = self;
             self.gameEngine = engine;
+            [self.undoButton setEnabled:NO];
+            [self.redoButton setEnabled:NO];
             break;
             
         }
@@ -35,6 +37,8 @@
             Engine* engine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name: [GameConfigurationManager.sharedGameConfigurationManager player2Username]];
             engine.delegate = self;
             self.gameEngine = engine;
+            [self.undoButton setEnabled:NO];
+            [self.redoButton setEnabled:NO];
             break;
         }
             

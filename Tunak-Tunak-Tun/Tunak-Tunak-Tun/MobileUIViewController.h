@@ -8,7 +8,6 @@
 #import <UIKit/UIKit.h>
 
 #import "Engine.h"
-#import "MobileUICollectionViewController.h"
 #import "MobileUICollectionViewControllerDelegate.h"
 #import "MobileUIViewControllerDelegate.h"
 
