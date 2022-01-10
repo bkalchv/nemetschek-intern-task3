@@ -70,11 +70,11 @@
 }
 
 - (NSIndexPath*)currentPlayerIntendedCellIndexPath {
-    return [self.currentPlayer intendedCellIndexPath];
+    return [self.currentPlayer intendedCellIndexPath]; // legit?
 }
 
 - (void)setCurrentPlayerIntendedCellIndexPath:(NSIndexPath*)indexPath {
-    [self.currentPlayer setIntendedCellIndexPath:indexPath];
+    [self.currentPlayer setIntendedCellIndexPath:indexPath]; // legit?
 }
 
 - (Move*)makeIntendedMoveOfCurrentPlayer {
@@ -144,7 +144,6 @@
     } else NSLog(@"Engine obj, switchCurrentPlayer: undefined behavior");
     
     [self.currentPlayer yourTurnBaby];
-    //if ([self.currentPlayer.name isEqualToString:@"CPU"] && self.gameMode == GameModeOnePlayer) [self updateGameEngineStateOnPlayerMove];
 }
 
 - (BOOL)isGameOver {
@@ -196,12 +195,14 @@
 -(void)undo {
     Move* undoStackTopMove = [self.undoStack peek];
     [self.redoStack pushMove:undoStackTopMove];
+    // [self undoLastMove: undoStackTopMove]; // TODO: implement deselection/reverse selection somehow
     [self.undoStack pop];
 }
 
 -(void)redo {
     Move* redoStackTopMove = [self.redoStack peek];
     [self.undoStack pushMove: redoStackTopMove];
+    // [self redoLastMove: redoStackTopMove]
     [self.redoStack pop];
 }
 

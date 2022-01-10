@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 
 @interface Player ()
+@property (nonatomic, strong) NSIndexPath* intendedCellIndexPath;
 @end
 
 @implementation Player
@@ -26,21 +27,17 @@
     return self;
 }
 
-// keeping it for now because of ConsoleVC
-// gotta go!
--(void)makeMove {
-    NSUInteger lastSelectedCellRowIndex = [self.intendedCellIndexPath section];
-    NSUInteger lastSelectedCellColIndex = [self.intendedCellIndexPath row];
-    [self.board changeCellStateAtRowIndex:lastSelectedCellRowIndex  columnIndex:lastSelectedCellColIndex withSign:self.sign];
-}
-
 -(Move*)makeIntendedMove {
     Move* intendedMove = [[Move alloc] initWithPlayer:self withBoard:self.board];
     return intendedMove;
 }
 
--(void)setIntendedCellIndexPath:(NSIndexPath *)intendedCellIndexPath {
-    _intendedCellIndexPath = intendedCellIndexPath;
+-(NSIndexPath*)intendedCellIndexPath {
+    return _intendedCellIndexPath;
+}
+
+-(void)intendedCellIndexPathSetter:(NSIndexPath *)indexPath {
+    _intendedCellIndexPath = indexPath;
 }
 
 -(void)yourTurnBaby

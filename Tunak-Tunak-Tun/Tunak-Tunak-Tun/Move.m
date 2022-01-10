@@ -20,7 +20,7 @@
     return self;
 }
 
--(BOOL) isValidMove {
+-(BOOL)isValidMove {
     return ![self.board cellAt: [self.player intendedCellIndexPath]].isChecked;
 }
 @end
