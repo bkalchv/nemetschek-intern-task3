@@ -185,12 +185,22 @@
 
 - (IBAction)onUndoButtonClick:(id)sender {
     [self.gameEngine undo];
+    
+    if ([self.gameEngine gameMode] == GameModeOnePlayer) [self.gameEngine undo];
+    
+    self.matrixLabel.text = [self.gameEngine gameBoardState];
+    self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayerName]];
     if ([self.gameEngine isUndoStackEmpty]) [self disableUndoButton];
     if (![self.gameEngine isRedoStackEmpty]) [self enableRedoButton];
 }
 
 - (IBAction)redoButtonClick:(id)sender {
     [self.gameEngine redo];
+    
+    if ([self.gameEngine gameMode] == GameModeOnePlayer) [self.gameEngine redo];
+    
+    self.matrixLabel.text = [self.gameEngine gameBoardState];
+    self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayerName]];
     if ([self.gameEngine isRedoStackEmpty]) [self disableRedoButton];
     if (![self.gameEngine isUndoStackEmpty]) [self enableUndoButton];
 }
@@ -204,7 +214,7 @@
         
         
         if (![self.gameEngine isGameOver])  {
-            [self.gameEngine switchCurrentPlayer];
+            [self.gameEngine switchCurrentPlayerWithYourTurnBabySideEffect];
             self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayerName]];
         }
     } else {

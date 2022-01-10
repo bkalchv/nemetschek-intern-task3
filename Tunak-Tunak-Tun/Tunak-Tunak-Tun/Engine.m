@@ -122,19 +122,26 @@
     return [[self.gameBoard cellAt:indexPath] isChecked];
 }
 
+-(void)switchCurrentPlayerWithYourTurnBabySideEffect {
+    [self switchCurrentPlayer];
+    [self.currentPlayer yourTurnBaby];
+}
+
 -(void)switchCurrentPlayer{
 
     if (self.currentPlayer == self.player1) {
 
         self.currentPlayer = self.player2;
+        
+        return;
 
     } else if (self.currentPlayer == self.player2) {
         
         self.currentPlayer = self.player1;
+        
+        return;
 
     } else NSLog(@"Engine obj, switchCurrentPlayer: undefined behavior");
-    
-    [self.currentPlayer yourTurnBaby];
 }
 
 - (BOOL)isGameOver {
@@ -159,8 +166,19 @@
     self.winningConditionsFulfiled = [self areWinningConditionsFulfilledOnPlayerMove:move];
 }
 
+- (void)updateGameEngineStateOnGameBoardStateChange {
+    self.freeCellsAmount = [self.gameBoard calculateFreeCellsAmount];
+    self.hasFreeCells = (self.freeCellsAmount != 0);
+}
+
 -(BOOL)didCurrentPlayerMakeValidMove:(Move*)move {
     return [move isValidMove];
+}
+
+-(void)emptyRedoStack {
+    while (![self isRedoStackEmpty]) {
+        [self.redoStack pop];
+    }
 }
 
 -(void)handleValidMove:(Move*)move {
@@ -171,6 +189,9 @@
     [self.undoStack pushMove:move];
     [self updateGameEngineStateOnPlayerMove:move];
     [self printBoardState];
+    
+    [self emptyRedoStack];
+    
     [self.delegate checkGameOutcomeForMove:move];
 }
 
@@ -178,18 +199,48 @@
     [self.delegate handleSelection:indexPath];
 }
 
+-(void)deselectCellAtIndexPath:(NSIndexPath*)indexPath {
+    [self.gameBoard deselectCellAtIndexPath:indexPath];
+}
+
+-(void)selectCellAtIndexPath:(NSIndexPath*)indexPath withSign:(CellState)sign {
+    NSUInteger row = [indexPath section];
+    NSUInteger col = [indexPath row];
+    [self.gameBoard changeCellStateAtRowIndex:row columnIndex:col withSign:sign];
+}
+
+-(void)undoLastMove:(Move*)move {
+    [self deselectCellAtIndexPath: [move indexPath]];
+}
+
+-(void)redoLastMove:(Move*)move {
+    [self selectCellAtIndexPath:[move indexPath] withSign:[self.currentPlayer sign]];
+}
+
 -(void)undo {
     Move* undoStackTopMove = [self.undoStack peek];
-    [self.redoStack pushMove:undoStackTopMove];
-    // [self undoLastMove: undoStackTopMove]; // TODO: implement deselection/reverse selection somehow
-    [self.undoStack pop];
+    if (undoStackTopMove != nil) {
+        [self.redoStack pushMove: undoStackTopMove];
+        [self undoLastMove: undoStackTopMove];
+        // Stays for debuging purposes
+        //NSLog(@"After Undo:\n");
+        //[self printBoardState];
+        [self updateGameEngineStateOnGameBoardStateChange];
+        [self.undoStack pop];
+        [self switchCurrentPlayer];
+    }
+
 }
 
 -(void)redo {
     Move* redoStackTopMove = [self.redoStack peek];
-    [self.undoStack pushMove: redoStackTopMove];
-    // [self redoLastMove: redoStackTopMove]
-    [self.redoStack pop];
+    if (redoStackTopMove != nil) {
+        [self.undoStack pushMove:redoStackTopMove];
+        [self redoLastMove: redoStackTopMove];
+        [self updateGameEngineStateOnGameBoardStateChange];
+        [self.redoStack pop];
+        [self switchCurrentPlayer];
+    }
 }
 
 - (BOOL)isUndoStackEmpty {

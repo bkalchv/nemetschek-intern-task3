@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)didCurrentPlayerMakeValidMove:(Move*)move;
 - (void)handleSelection:(NSIndexPath *)indexPath;
 - (void)handleValidMove:(Move*)move;
-- (void)switchCurrentPlayer;
+-(void)switchCurrentPlayerWithYourTurnBabySideEffect;
 - (BOOL)isGameOver;
 
 - (BOOL)isUndoStackEmpty;

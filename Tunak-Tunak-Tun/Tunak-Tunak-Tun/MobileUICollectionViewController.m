@@ -86,7 +86,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         [self.collectionView reloadData];
         
         if (![self.gameEngine isGameOver]) {
-            [self.gameEngine switchCurrentPlayer];
+            [self.gameEngine switchCurrentPlayerWithYourTurnBabySideEffect];
             [self.delegate updateUsernameLabel:[self.gameEngine currentPlayerName]];
         }
         

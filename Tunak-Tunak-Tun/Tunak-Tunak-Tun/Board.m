@@ -4,7 +4,7 @@
 //
 //  Created by Bogdan Kalchev on 13.12.21.
 //
-
+#import <UIKit/UIKit.h>
 #import "Board.h"
 #import "Cell.h"
 
@@ -35,6 +35,11 @@
     return self.boardMatrixArray[[indexPath indexAtPosition: 0] * self.numberOfColumns + [indexPath indexAtPosition: 1]];
 }
 
+-(void)deselectCellAtIndexPath:(NSIndexPath*)indexPath {
+    NSUInteger row = [indexPath section];
+    NSUInteger col = [indexPath row];
+    [self changeCellStateAtRowIndex:row columnIndex:col withSign:CellStateEmpty];
+}
 
 -(NSArray<Cell*>*)row:(NSUInteger)rowIndex {
     NSMutableArray<Cell*>* rowArray = [[NSMutableArray<Cell*> alloc] init];
