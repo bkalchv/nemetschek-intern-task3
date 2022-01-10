@@ -11,6 +11,7 @@
 #import "MobileUICollectionViewCell.h"
 #import "OneMoreTimeViewController.h"
 
+
 @interface MobileUIViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *mobileUIUsernameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *undoButton;
@@ -68,6 +69,8 @@
     [self.mobileUIUsernameLabel setText:  [NSString stringWithFormat:@"It's up to you, %@!", currentPlayerUsername]];
 }
 
+
+
 - (void)enableUndoButton {
     [self.undoButton setEnabled:YES];
 }
@@ -76,14 +79,20 @@
     [self.undoButton setEnabled:NO];
 }
 
-- (IBAction)onRedoButtonClick:(id)sender {
+- (void)enableRedoButton {
+    [self.redoButton setEnabled:YES];
+}
 
+- (void)disableRedoButton {
+    [self.redoButton setEnabled:NO];
+}
+
+- (IBAction)onRedoButtonClick:(id)sender {
+    [self.delegate onRedoButtonClick];
 }
 
 - (IBAction)onUndoButtonClick:(id)sender {
-    // delegate to engine that undo button has been clicked
-        // 
-    // if undoStack is empty -> disable undoButton
+    [self.delegate onUndoButtonClick];
 }
 
 #pragma mark - Navigation
@@ -96,6 +105,7 @@
     if ([[segue identifier] isEqualToString:@"ShowMobileUICollectionView"]) {
         MobileUICollectionViewController* mobileUICollectionViewController = [segue destinationViewController];
         mobileUICollectionViewController.delegate = self;
+        self.delegate = mobileUICollectionViewController;
         switch ([GameConfigurationManager.sharedGameConfigurationManager gameMode]) {
             case GameModeOnePlayer: {
                 Engine* engine = [[Engine alloc] initWithPlayersName:[GameConfigurationManager.sharedGameConfigurationManager player1Username]];

@@ -185,11 +185,11 @@
     NSUInteger moveRow = [move.indexPath section];
     NSUInteger moveColumn = [move.indexPath row];
     [self.gameBoard changeCellStateAtRowIndex:moveRow columnIndex:moveColumn withSign:[self.currentPlayer sign]];
-    // TODO: undoStack push here?
+    // legit?
     [self.undoStack pushMove:move];
     [self updateGameEngineStateOnPlayerMove:move];
     [self printBoardState];
-    
+    // legit?
     [self emptyRedoStack];
     
     [self.delegate checkGameOutcomeForMove:move];

@@ -83,6 +83,9 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     
     if ([self.gameEngine didCurrentPlayerMakeValidMove:move]) {
         [self.gameEngine handleValidMove:move];
+        
+        if ([self.gameEngine isRedoStackEmpty]) [self.delegate disableRedoButton];
+        
         [self.collectionView reloadData];
         
         if (![self.gameEngine isGameOver]) {
@@ -107,6 +110,26 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     
     [self handleSelection: inputIndexPath];
     if (![self.gameEngine isUndoStackEmpty]) [self.delegate enableUndoButton];
+}
+
+- (void)onUndoButtonClick {
+    [self.gameEngine undo];
+    
+    if ([self.gameEngine gameMode] == GameModeOnePlayer) [self.gameEngine undo];
+    
+    if ([self.gameEngine isUndoStackEmpty]) [self.delegate disableUndoButton];
+    if (![self.gameEngine isRedoStackEmpty]) [self.delegate enableRedoButton];
+    [self.collectionView reloadData];
+}
+
+- (void)onRedoButtonClick {
+    [self.gameEngine redo];
+    
+    if ([self.gameEngine gameMode] == GameModeOnePlayer) [self.gameEngine redo];
+    
+    if ([self.gameEngine isRedoStackEmpty]) [self.delegate disableRedoButton];
+    if (![self.gameEngine isUndoStackEmpty]) [self.delegate enableUndoButton];
+    [self.collectionView reloadData];
 }
 
 #pragma mark - Navigation

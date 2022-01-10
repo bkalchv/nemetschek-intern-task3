@@ -210,6 +210,7 @@
     
     if ([self.gameEngine didCurrentPlayerMakeValidMove:move]) {
         [self.gameEngine handleValidMove:move];
+        if ([self.gameEngine isRedoStackEmpty]) [self disableRedoButton];
         self.matrixLabel.text = [self.gameEngine gameBoardState];
         
         

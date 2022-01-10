@@ -6,21 +6,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MobileUIViewController.h"
+#import "MobileUICollectionViewControllerDelegate.h"
+#import "MobileUIViewControllerDelegate.h"
 #import "Engine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MobileUICollectionViewControllerDelegate <NSObject>
-- (void)showDrawAlert:(NSString*)gameBoardState;
-- (void)showPlayerWonAlert:(NSString*)playerName withGameBoardState:(NSString*)gameBoardState;
-- (void)showOneMoreTimeViewController;
-- (void)showAlreadySelectedAlertForCell:(Cell*)cell;
-- (void)updateUsernameLabel:(NSString*)currentPlayerUsername;
-- (void)enableUndoButton;
-- (void)disableUndoButton;
-@end
-
-@interface MobileUICollectionViewController : UICollectionViewController <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, EngineDelegate>
+@interface MobileUICollectionViewController : UICollectionViewController <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, EngineDelegate, MobileUIViewControllerDelegate>
 @property (nonatomic, strong) Engine* gameEngine;
 @property (nonatomic, strong)id <MobileUICollectionViewControllerDelegate> delegate;
 @end
