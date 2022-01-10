@@ -10,17 +10,26 @@
 #import "Cell.h"
 #import "Player.h"
 
+@interface Move ()
+@property (nonatomic, strong) NSIndexPath* indexPath;
+@property (nonatomic, strong) Board *board;
+@end
+
 @implementation Move
-- (instancetype)initWithPlayer:(Player*)player withBoard:(Board*)board {
+- (instancetype)initWithIndexPath:(NSIndexPath*)indexPath withBoard:(Board*)board {
     self = [super init];
     if (self) {
-        self.player = player;
+        self.indexPath = indexPath;
         self.board = board;
     }
     return self;
 }
 
 -(BOOL)isValidMove {
-    return ![self.board cellAt: [self.player intendedCellIndexPath]].isChecked;
+    return ![self.board cellAt: self.indexPath].isChecked;
+}
+
+-(NSIndexPath*)indexPath {
+    return _indexPath;
 }
 @end

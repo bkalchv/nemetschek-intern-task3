@@ -9,6 +9,7 @@
 #import "MobileUICollectionViewCell.h"
 #import "OneMoreTimeViewController.h"
 #import "Engine.h"
+#import "Move.h"
 
 @interface MobileUICollectionViewController ()
 @end
@@ -62,24 +63,23 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     [self.delegate showDrawAlert: [self.gameEngine gameBoardState]];
 }
 
--(void)printCurrentPlayerSelection {
-    NSLog(@"Player: %@ selected: %tu %tu", [self.gameEngine currentPlayerName], [[self.gameEngine currentPlayerIntendedCellIndexPath] section], [[self.gameEngine currentPlayerIntendedCellIndexPath] row]);
+-(void)printCurrentPlayerMove:(Move*)move {
+    NSLog(@"Player: %@ selected: %tu %tu", [self.gameEngine currentPlayerName], [move.indexPath section], [move.indexPath row]);
 }
 
--(void)checkGameOutcome {
+-(void)checkGameOutcomeForMove:(Move*)move {
     if ([self.gameEngine winningConditionsFulfiled]) {
         [self handleWin];
     } else if (![self.gameEngine winningConditionsFulfiled] && ![self.gameEngine hasFreeCells]) {
         [self handleDraw];
     } else {
-        [self printCurrentPlayerSelection];
+        [self printCurrentPlayerMove:move];
     }
 }
 
 -(void)handleSelection:(NSIndexPath*)indexPath {
     
-    [self.gameEngine setCurrentPlayerIntendedCellIndexPath: indexPath];
-    Move *move = [self.gameEngine makeIntendedMoveOfCurrentPlayer];
+    Move *move = [self.gameEngine makeMoveOfCurrentPlayer:indexPath];
     
     if ([self.gameEngine didCurrentPlayerMakeValidMove:move]) {
         [self.gameEngine handleValidMove:move];
@@ -91,7 +91,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         }
         
     } else {
-        NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", [[self.gameEngine currentPlayerIntendedCellIndexPath] section], [[self.gameEngine currentPlayerIntendedCellIndexPath] row]);
+        NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", [indexPath section], [indexPath row]);
     }
 }
 
@@ -153,7 +153,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         case CellStateEmpty:
             return @"";
             break;
-
+            
         default:
             break;
     }
@@ -173,32 +173,76 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 #pragma mark <UICollectionViewDelegate>
 
 /*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
+ // Uncomment this method to specify if the specified item should be highlighted during tracking
+ - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+ return YES;
+ }
+ */
 
 /*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
+ // Uncomment this method to specify if the specified item should be selected
+ - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+ return YES;
+ }
+ */
 
 /*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
+ // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+ - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
+ return NO;
+ }
+ 
+ - (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+ return NO;
+ }
+ 
+ - (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forIte- (void)encodeWithCoder:(nonnull NSCoder *)coder {
+ <#code#>
+ }
+ 
+ - (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
+ <#code#>
+ }
+ 
+ - (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
+ <#code#>
+ }
+ 
+ - (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
+ <#code#>
+ }
+ 
+ - (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
+ <#code#>
+ }
+ 
+ - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
+ <#code#>
+ }
+ 
+ - (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
+ <#code#>
+ }
+ 
+ - (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator {
+ <#code#>
+ }
+ 
+ - (void)setNeedsFocusUpdate {
+ <#code#>
+ }
+ 
+ - (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
+ <#code#>
+ }
+ 
+ - (void)updateFocusIfNeeded {
+ <#code#>
+ }
+ 
+ mAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+ 
+ }
+ */
 
 @end

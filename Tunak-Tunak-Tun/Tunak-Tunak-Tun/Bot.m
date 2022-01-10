@@ -40,7 +40,6 @@
 
 -(void)yourTurnBaby {
     Cell* cellToSelect = [self randomFreeCell];
-    //NSIndexPath* indexPathOfSelectedCell = [NSIndexPath indexPathForRow: cellToSelect.rowIndex * self.board.numberOfColumns + cellToSelect.colIndex inSection:0];
     NSIndexPath* intendedCellIndexPath = [NSIndexPath indexPathForRow:[cellToSelect colIndex] inSection:[cellToSelect rowIndex]];
     [self.delegate handleSelection: intendedCellIndexPath];
 }

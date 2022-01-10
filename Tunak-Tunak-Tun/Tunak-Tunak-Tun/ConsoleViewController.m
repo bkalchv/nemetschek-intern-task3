@@ -8,6 +8,7 @@
 #import "ConsoleViewController.h"
 #import "OneMoreTimeViewController.h"
 #import "Engine.h"
+#import "Move.h"
 
 @interface ConsoleViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *inputTextField;
@@ -152,17 +153,17 @@
     [self showDrawAlert];
 }
 
--(void)printCurrentPlayerSelection {
-    NSLog(@"Player: %@ selected: %tu %tu", [self.gameEngine currentPlayerName], [[self.gameEngine currentPlayerIntendedCellIndexPath] section],  [[self.gameEngine currentPlayerIntendedCellIndexPath] row]);
+-(void)printCurrentPlayerSelectionForMove:(Move*)move {
+    NSLog(@"Player: %@ selected: %tu %tu", [self.gameEngine currentPlayerName], [move.indexPath section],  [move.indexPath row]);
 }
 
--(void)checkGameOutcome {
+-(void)checkGameOutcomeForMove:(Move*)move {
     if ([self.gameEngine winningConditionsFulfiled]) {
         [self handleWin];
     } else if (![self.gameEngine winningConditionsFulfiled] && ![self.gameEngine hasFreeCells]) {
         [self handleDraw];
     } else {
-        [self printCurrentPlayerSelection];
+        [self printCurrentPlayerSelectionForMove:move];
     }
 }
 
@@ -195,8 +196,7 @@
 }
 
 -(void)handleSelection:(NSIndexPath*)indexPath {
-    [self.gameEngine setCurrentPlayerIntendedCellIndexPath: indexPath];
-    Move* move = [self.gameEngine makeIntendedMoveOfCurrentPlayer];
+    Move* move = [self.gameEngine makeMoveOfCurrentPlayer:indexPath];
     
     if ([self.gameEngine didCurrentPlayerMakeValidMove:move]) {
         [self.gameEngine handleValidMove:move];

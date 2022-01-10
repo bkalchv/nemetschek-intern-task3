@@ -69,18 +69,9 @@
     return [self.currentPlayer name];
 }
 
-- (NSIndexPath*)currentPlayerIntendedCellIndexPath {
-    return [self.currentPlayer intendedCellIndexPath]; // legit?
+- (Move*)makeMoveOfCurrentPlayer:(NSIndexPath*)indexPath {
+    return [self.currentPlayer makeMoveWithIndexPath:indexPath];
 }
-
-- (void)setCurrentPlayerIntendedCellIndexPath:(NSIndexPath*)indexPath {
-    [self.currentPlayer setIntendedCellIndexPath:indexPath]; // legit?
-}
-
-- (Move*)makeIntendedMoveOfCurrentPlayer {
-    return [self.currentPlayer makeIntendedMove];
-}
-
 
 - (NSString*)gameBoardState {
     return [self.gameBoard stateString];
@@ -158,19 +149,14 @@
     return index % [self.gameBoard numberOfColumns];
 }
 
-- (BOOL)areWinningConditionsFulfilledOnPlayerMove {
-    return [self areWinningConditionsFulfilledForSelectionOfCellAt:[self.currentPlayer intendedCellIndexPath] withSign: self.currentPlayer.sign];
+- (BOOL)areWinningConditionsFulfilledOnPlayerMove:(Move*)move {
+    return [self areWinningConditionsFulfilledForSelectionOfCellAt:move.indexPath withSign: self.currentPlayer.sign];
 }
 
-- (void)updateGameEngineStateOnPlayerMove {
+- (void)updateGameEngineStateOnPlayerMove:(Move*)move {
     self.freeCellsAmount = [self.gameBoard calculateFreeCellsAmount];
     self.hasFreeCells = (self.freeCellsAmount != 0);
-    self.winningConditionsFulfiled = [self areWinningConditionsFulfilledOnPlayerMove];
-}
-
-- (BOOL)isValidMove {
-    Cell* lastSelectedCell = [self.gameBoard cellAt:[self.currentPlayer intendedCellIndexPath]];
-    return !lastSelectedCell.isChecked;
+    self.winningConditionsFulfiled = [self areWinningConditionsFulfilledOnPlayerMove:move];
 }
 
 -(BOOL)didCurrentPlayerMakeValidMove:(Move*)move {
@@ -178,14 +164,14 @@
 }
 
 -(void)handleValidMove:(Move*)move {
-    NSUInteger moveRow = [move.player.intendedCellIndexPath section];
-    NSUInteger moveColumn = [move.player.intendedCellIndexPath row];
+    NSUInteger moveRow = [move.indexPath section];
+    NSUInteger moveColumn = [move.indexPath row];
     [self.gameBoard changeCellStateAtRowIndex:moveRow columnIndex:moveColumn withSign:[self.currentPlayer sign]];
     // TODO: undoStack push here?
     [self.undoStack pushMove:move];
-    [self updateGameEngineStateOnPlayerMove];
+    [self updateGameEngineStateOnPlayerMove:move];
     [self printBoardState];
-    [self.delegate checkGameOutcome];
+    [self.delegate checkGameOutcomeForMove:move];
 }
 
 -(void)handleSelection:(NSIndexPath *)indexPath {

@@ -10,10 +10,6 @@
 #import "Move.h"
 #import <UIKit/UIKit.h>
 
-@interface Player ()
-@property (nonatomic, strong) NSIndexPath* intendedCellIndexPath;
-@end
-
 @implementation Player
 
 -(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerID withSign:(CellState)sign withBoard:(Board*)board {
@@ -27,19 +23,10 @@
     return self;
 }
 
--(Move*)makeIntendedMove {
-    Move* intendedMove = [[Move alloc] initWithPlayer:self withBoard:self.board];
-    return intendedMove;
+-(Move*)makeMoveWithIndexPath:(NSIndexPath*)indexPath {
+    Move* move = [[Move alloc] initWithIndexPath:indexPath withBoard:self.board];
+    return move;
 }
-
--(NSIndexPath*)intendedCellIndexPath {
-    return _intendedCellIndexPath;
-}
-
--(void)intendedCellIndexPathSetter:(NSIndexPath *)indexPath {
-    _intendedCellIndexPath = indexPath;
-}
-
 -(void)yourTurnBaby
 {
     // wait for input;

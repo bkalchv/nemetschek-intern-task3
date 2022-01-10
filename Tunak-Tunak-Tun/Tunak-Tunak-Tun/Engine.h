@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @class Player;
+@class Move;
 #import "Board.h"
 #import "Bot.h"
 #import "GameConfigurationManager.h"
@@ -17,7 +18,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol EngineDelegate <NSObject>
-- (void)checkGameOutcome;
+- (void)checkGameOutcomeForMove:(Move*)move;
 - (void)handleSelection:(NSIndexPath*)indexPath;
 @end
 
@@ -35,9 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString*)gameBoardState;
 - (BOOL)isCellChecked:(NSIndexPath*)indexPath;
 - (NSString*)currentPlayerName;
-- (NSIndexPath*)currentPlayerIntendedCellIndexPath;
-- (void)setCurrentPlayerIntendedCellIndexPath:(NSIndexPath*)indexPath;
-- (Move*)makeIntendedMoveOfCurrentPlayer;
+
+- (Move*)makeMoveOfCurrentPlayer:(NSIndexPath*)indexPath;
+
 - (BOOL)didCurrentPlayerMakeValidMove:(Move*)move;
 - (void)handleSelection:(NSIndexPath *)indexPath;
 - (void)handleValidMove:(Move*)move;
