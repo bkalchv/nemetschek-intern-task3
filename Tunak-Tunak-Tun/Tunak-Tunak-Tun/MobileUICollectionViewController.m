@@ -84,13 +84,15 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     if ([self.gameEngine didCurrentPlayerCreateValidMove:move]) {
         [self.gameEngine handleValidMove:move];
         
-        if ([self.gameEngine isRedoStackEmpty]) [self.delegate disableRedoButton];
+        
         
         [self.collectionView reloadData];
         
         if (![self.gameEngine isGameOver]) {
             [self.gameEngine switchCurrentPlayerWithYourTurnBabySideEffect];
+            [self.gameEngine emptyRedoStack];
             [self.delegate updateUsernameLabel:[self.gameEngine currentPlayerName]];
+            if ([self.gameEngine isRedoStackEmpty]) [self.delegate disableRedoButton];
         }
         
     } else {

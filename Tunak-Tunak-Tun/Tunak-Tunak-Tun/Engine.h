@@ -38,13 +38,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath;
 - (BOOL)didCurrentPlayerCreateValidMove:(Move*)move;
 - (void)handleValidMove:(Move*)move;
+- (void)switchCurrentPlayer;
 - (void)switchCurrentPlayerWithYourTurnBabySideEffect;
 - (BOOL)isGameOver;
 
 - (BOOL)isUndoStackEmpty;
 - (BOOL)isRedoStackEmpty;
-- (void)redo;
 - (void)undo;
+//- (void)undoBot;
+- (void)redo;
+- (void)emptyRedoStack;
+//- (void)redoBot;
 
 - (NSInteger)calculateRowIndex:(NSInteger)index;
 - (NSInteger)calculateColumnIndex:(NSInteger)index;

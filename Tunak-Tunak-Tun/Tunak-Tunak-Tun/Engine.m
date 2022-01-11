@@ -18,6 +18,7 @@
 @property (nonatomic) NSUInteger freeCellsAmount;
 @property (nonatomic, strong) MovesStack* undoStack;
 @property (nonatomic, strong) MovesStack* redoStack;
+@property (nonatomic, strong) MovesStack* redoStackBot;
 @end
 
 @implementation Engine
@@ -85,6 +86,15 @@
     return [move isValidMove];
 }
 
+-(Move*)lastBotMoveFromRedoStack {
+    while (![self isRedoStackEmpty]) {
+        Move* currentPop = [self.redoStack pop];
+        if (currentPop.sign == self.player2.sign) return currentPop;
+    }
+        
+    return nil; // noBotMove found in redoStack
+}
+
 -(void)handleValidMove:(Move*)move {
     NSUInteger moveRow = [move.indexPath section];
     NSUInteger moveColumn = [move.indexPath row];
@@ -92,7 +102,6 @@
     [self.undoStack pushMove:move];
     [self updateGameEngineStateOnPlayerMove:move];
     [self printBoardState];
-    [self emptyRedoStack];
     [self.delegate checkGameOutcomeForMove:move];
 }
 
@@ -118,8 +127,24 @@
 }
 
 -(void)switchCurrentPlayerWithYourTurnBabySideEffect {
-    [self switchCurrentPlayer];
-    [self.currentPlayer yourTurnBaby];
+    if ([self gameMode] == GameModeOnePlayer) {
+        if (![self isRedoStackEmpty]) {
+            Move* lastBotMoveFromRedoStack = [self lastBotMoveFromRedoStack];
+            if (lastBotMoveFromRedoStack != nil && [lastBotMoveFromRedoStack isValidMove]) {
+                    [self makeMove: lastBotMoveFromRedoStack];
+                    [self.undoStack pushMove:lastBotMoveFromRedoStack];
+            } else {
+                [self switchCurrentPlayer];
+                [self.currentPlayer yourTurnBaby];
+            }
+        } else {
+            [self switchCurrentPlayer];
+            [self.currentPlayer yourTurnBaby];
+        }
+    } else {
+        [self switchCurrentPlayer];
+        [self.currentPlayer yourTurnBaby];
+    }
 }
 
 
@@ -204,29 +229,21 @@
     NSUInteger row = [move.indexPath section];
     NSUInteger col = [move.indexPath row];
     [self.gameBoard changeCellStateAtRowIndex:row columnIndex:col withSign:[move sign]];
+    // if ([self gameMode] == GameModeOnePlayer) [self.undoStack pushMove:move];
+    // TODO: switchPlayer here?
 }
-
-//-(void)deselectCellAtIndexPath:(NSIndexPath*)indexPath {
-//    [self.gameBoard deselectCellAtIndexPath:indexPath];
-//}
-//
-//-(void)selectCellAtIndexPath:(NSIndexPath*)indexPath withSign:(CellState)sign {
-//    NSUInteger row = [indexPath section];
-//    NSUInteger col = [indexPath row];
-//    [self.gameBoard changeCellStateAtRowIndex:row columnIndex:col withSign:sign];
-//}
 
 // TODO: move->opposite
 -(void)undoLastMove {
     Move* lastMove = [self.undoStack pop];
     [self makeMove: lastMove.opposite];
     // [self deselectCellAtIndexPath: [lastMove indexPath]];
-    
 }
 
 -(void)redoLastMove {
     Move* lastMove = [self.redoStack pop];
     [self makeMove: lastMove];
+    //if ([self gameMode] == GameModeOnePlayer) [self.undoStack pushMove:lastMove];
     //[self selectCellAtIndexPath:[lastMove indexPath] withSign:[lastMove sign]];
 }
 
