@@ -69,8 +69,8 @@
     return [self.currentPlayer name];
 }
 
-- (Move*)makeMoveOfCurrentPlayer:(NSIndexPath*)indexPath {
-    return [self.currentPlayer makeMoveWithIndexPath:indexPath];
+- (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath {
+    return [self.currentPlayer createMoveWithIndexPath:indexPath];
 }
 
 - (NSString*)gameBoardState {
@@ -185,13 +185,10 @@
     NSUInteger moveRow = [move.indexPath section];
     NSUInteger moveColumn = [move.indexPath row];
     [self.gameBoard changeCellStateAtRowIndex:moveRow columnIndex:moveColumn withSign:[self.currentPlayer sign]];
-    // legit?
     [self.undoStack pushMove:move];
     [self updateGameEngineStateOnPlayerMove:move];
     [self printBoardState];
-    // legit?
     [self emptyRedoStack];
-    
     [self.delegate checkGameOutcomeForMove:move];
 }
 
@@ -210,44 +207,38 @@
 }
 
 // TODO: move->opposite && undo to work without move
--(void)undoLastMove:(Move*)move {
-    [self deselectCellAtIndexPath: [move indexPath]];
+-(void)undoLastMove {
+    Move* lastMove = [self.undoStack pop];
+    [self deselectCellAtIndexPath: [lastMove indexPath]];
     
-    //Move* m = [self.undoStack pop];
     // [self makeMove:m.opposite];
 }
 
--(void)redoLastMove:(Move*)move {
-    [self selectCellAtIndexPath:[move indexPath] withSign:[self.currentPlayer sign]];
+-(void)redoLastMove {
+    Move* lastMove = [self.redoStack pop];
+    [self selectCellAtIndexPath:[lastMove indexPath] withSign:[self.currentPlayer sign]];
 }
 
--(void)makeMove:(Move *)move
-{
-    [self makeMoveOfCurrentPlayer:move.indexPath];
-}
+//-(void)makeMove:(Move *)move {
+//    [self makeMoveOfCurrentPlayer: move.indexPath];
+//}
 
 -(void)undo {
-    Move* undoStackTopMove = [self.undoStack peek];
-    if (undoStackTopMove != nil) {
-        [self.redoStack pushMove: undoStackTopMove];
-        [self undoLastMove: undoStackTopMove];
-        // Stays for debuging purposes
-        //NSLog(@"After Undo:\n");
-        //[self printBoardState];
+    Move* undoStackTop = [self.undoStack peek];
+    if (![self isUndoStackEmpty] && undoStackTop != nil) {
+        [self.redoStack pushMove: undoStackTop];
+        [self undoLastMove];
         [self updateGameEngineStateOnGameBoardStateChange];
-        [self.undoStack pop];
         [self switchCurrentPlayer];
     }
-
 }
 
 -(void)redo {
-    Move* redoStackTopMove = [self.redoStack peek];
-    if (redoStackTopMove != nil) {
-        [self.undoStack pushMove:redoStackTopMove];
-        [self redoLastMove: redoStackTopMove];
+    Move* redoStackTop = [self.undoStack peek];
+    if (![self isRedoStackEmpty] && redoStackTop != nil) {
+        [self.undoStack pushMove: redoStackTop];
+        [self redoLastMove];
         [self updateGameEngineStateOnGameBoardStateChange];
-        [self.redoStack pop];
         [self switchCurrentPlayer];
     }
 }

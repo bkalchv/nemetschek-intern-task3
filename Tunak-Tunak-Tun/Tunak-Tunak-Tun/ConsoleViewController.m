@@ -210,7 +210,7 @@
 }
 
 -(void)handleSelection:(NSIndexPath*)indexPath {
-    Move* move = [self.gameEngine makeMoveOfCurrentPlayer:indexPath];
+    Move* move = [self.gameEngine createMoveOfCurrentPlayer:indexPath];
     
     if ([self.gameEngine didCurrentPlayerMakeValidMove:move]) {
         [self.gameEngine handleValidMove:move];

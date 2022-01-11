@@ -23,10 +23,11 @@
     return self;
 }
 
--(Move*)makeMoveWithIndexPath:(NSIndexPath*)indexPath {
+-(Move*)createMoveWithIndexPath:(NSIndexPath*)indexPath {
     Move* move = [[Move alloc] initWithIndexPath:indexPath withBoard:self.board];
     return move;
 }
+
 -(void)yourTurnBaby
 {
     // wait for input;

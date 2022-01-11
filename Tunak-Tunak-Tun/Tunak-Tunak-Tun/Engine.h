@@ -13,8 +13,6 @@
 #import "Bot.h"
 #import "GameConfigurationManager.h"
 
-// TODO: fwd declaration?
-
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol EngineDelegate <NSObject>
@@ -37,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isCellChecked:(NSIndexPath*)indexPath;
 - (NSString*)currentPlayerName;
 
-- (Move*)makeMoveOfCurrentPlayer:(NSIndexPath*)indexPath;
+- (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath;
 
 - (BOOL)didCurrentPlayerMakeValidMove:(Move*)move;
 - (void)handleSelection:(NSIndexPath *)indexPath;
