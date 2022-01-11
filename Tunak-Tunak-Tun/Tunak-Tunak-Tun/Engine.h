@@ -31,8 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithPlayersName:(NSString*)playersName;
 - (instancetype)initWithPlayer1Name:(NSString*)player1Name player2Name:(NSString*)player2Name;
 - (void)printBoardState;
-- (NSString*)gameBoardState;
-- (BOOL)isCellChecked:(NSIndexPath*)indexPath;
+- (NSString*)gameBoardStateAsString;
+- (BOOL)isCellCheckedAt:(NSIndexPath*)indexPath;
 - (NSString*)currentPlayerName;
 
 - (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath;

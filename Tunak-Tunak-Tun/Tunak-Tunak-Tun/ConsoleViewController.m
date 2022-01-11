@@ -192,7 +192,7 @@
     
     if ([self.gameEngine gameMode] == GameModeOnePlayer) [self.gameEngine undo];
     
-    self.matrixLabel.text = [self.gameEngine gameBoardState];
+    self.matrixLabel.text = [self.gameEngine gameBoardStateAsString];
     self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayerName]];
     if ([self.gameEngine isUndoStackEmpty]) [self disableUndoButton];
     if (![self.gameEngine isRedoStackEmpty]) [self enableRedoButton];
@@ -203,7 +203,7 @@
     
     if ([self.gameEngine gameMode] == GameModeOnePlayer) [self.gameEngine redo];
     
-    self.matrixLabel.text = [self.gameEngine gameBoardState];
+    self.matrixLabel.text = [self.gameEngine gameBoardStateAsString];
     self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayerName]];
     if ([self.gameEngine isRedoStackEmpty]) [self disableRedoButton];
     if (![self.gameEngine isUndoStackEmpty]) [self enableUndoButton];
@@ -215,7 +215,7 @@
     if ([self.gameEngine didCurrentPlayerMakeValidMove:move]) {
         [self.gameEngine handleValidMove:move];
         if ([self.gameEngine isRedoStackEmpty]) [self disableRedoButton];
-        self.matrixLabel.text = [self.gameEngine gameBoardState];
+        self.matrixLabel.text = [self.gameEngine gameBoardStateAsString];
         
         
         if (![self.gameEngine isGameOver])  {

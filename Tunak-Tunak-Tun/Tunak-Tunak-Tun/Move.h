@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Move : NSObject
 @property (nonatomic, strong) NSIndexPath* indexPath;
 -(instancetype)initWithIndexPath:(NSIndexPath*)indexPath withBoard:(Board*)board;
--(BOOL) isValidMove;
+-(BOOL)isValidMove;
+//-(Move*)opposite;
 @end
 
 NS_ASSUME_NONNULL_END

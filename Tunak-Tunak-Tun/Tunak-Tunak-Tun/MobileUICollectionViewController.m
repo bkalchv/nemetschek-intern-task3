@@ -55,12 +55,12 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 - (void)handleWin {
     NSLog(@"%@ won!", [self.gameEngine currentPlayerName]);
     NSLog(@"Game over!");
-    [self.delegate showPlayerWonAlert: [self.gameEngine currentPlayerName] withGameBoardState:[self.gameEngine gameBoardState]];
+    [self.delegate showPlayerWonAlert: [self.gameEngine currentPlayerName] withGameBoardState:[self.gameEngine gameBoardStateAsString]];
 }
 
 - (void)handleDraw {
     NSLog(@"It's a draw. Nobody wins!");
-    [self.delegate showDrawAlert: [self.gameEngine gameBoardState]];
+    [self.delegate showDrawAlert: [self.gameEngine gameBoardStateAsString]];
 }
 
 -(void)printCurrentPlayerMove:(Move*)move {

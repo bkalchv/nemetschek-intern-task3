@@ -73,7 +73,7 @@
     return [self.currentPlayer createMoveWithIndexPath:indexPath];
 }
 
-- (NSString*)gameBoardState {
+- (NSString*)gameBoardStateAsString {
     return [self.gameBoard stateString];
 }
 
@@ -118,13 +118,8 @@
     return [self checkColumnForCellSelection:cell withSign:sign] || [self checkRowForCellSelection:cell withSign:sign] || [self checkDiagonalForCellSelection:cell withSign:sign] || [self checkAntiDiagonalForCellSelection:cell withSign:sign];
 }
 
-- (BOOL)isCellChecked:(NSIndexPath*)indexPath {
+- (BOOL)isCellCheckedAt:(NSIndexPath*)indexPath {
     return [[self.gameBoard cellAt:indexPath] isChecked];
-}
-
--(void)switchCurrentPlayerWithYourTurnBabySideEffect {
-    [self switchCurrentPlayer];
-    [self.currentPlayer yourTurnBaby];
 }
 
 -(void)switchCurrentPlayer{
@@ -144,6 +139,11 @@
     } else NSLog(@"Engine obj, switchCurrentPlayer: undefined behavior");
 }
 
+-(void)switchCurrentPlayerWithYourTurnBabySideEffect {
+    [self switchCurrentPlayer];
+    [self.currentPlayer yourTurnBaby];
+}
+
 - (BOOL)isGameOver {
     return self.winningConditionsFulfiled || !self.hasFreeCells;
 }
@@ -157,7 +157,7 @@
 }
 
 - (BOOL)areWinningConditionsFulfilledOnPlayerMove:(Move*)move {
-    return [self areWinningConditionsFulfilledForSelectionOfCellAt:move.indexPath withSign: self.currentPlayer.sign];
+    return [self areWinningConditionsFulfilledForSelectionOfCellAt:move.indexPath withSign:self.currentPlayer.sign];
 }
 
 - (void)updateGameEngineStateOnPlayerMove:(Move*)move {
@@ -180,6 +180,10 @@
         [self.redoStack pop];
     }
 }
+
+//-(void)makeMove:(Move *)move {
+//    [self makeMoveOfCurrentPlayer: move.indexPath];
+//}
 
 -(void)handleValidMove:(Move*)move {
     NSUInteger moveRow = [move.indexPath section];
@@ -206,22 +210,17 @@
     [self.gameBoard changeCellStateAtRowIndex:row columnIndex:col withSign:sign];
 }
 
-// TODO: move->opposite && undo to work without move
+// TODO: move->opposite
 -(void)undoLastMove {
     Move* lastMove = [self.undoStack pop];
     [self deselectCellAtIndexPath: [lastMove indexPath]];
-    
-    // [self makeMove:m.opposite];
+    // [self makeMove: lastMove.opposite];
 }
 
 -(void)redoLastMove {
     Move* lastMove = [self.redoStack pop];
     [self selectCellAtIndexPath:[lastMove indexPath] withSign:[self.currentPlayer sign]];
 }
-
-//-(void)makeMove:(Move *)move {
-//    [self makeMoveOfCurrentPlayer: move.indexPath];
-//}
 
 -(void)undo {
     Move* undoStackTop = [self.undoStack peek];
