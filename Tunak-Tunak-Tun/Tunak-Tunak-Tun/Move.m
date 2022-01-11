@@ -15,17 +15,23 @@
 @end
 
 @implementation Move
-- (instancetype)initWithIndexPath:(NSIndexPath*)indexPath withBoard:(Board*)board {
+- (instancetype)initWithIndexPath:(NSIndexPath*)indexPath withBoard:(Board*)board withSign:(CellState)sign {
     self = [super init];
     if (self) {
         self.indexPath = indexPath;
         self.board = board;
+        self.sign = sign;
     }
     return self;
 }
 
 -(BOOL)isValidMove {
     return ![self.board cellAt: self.indexPath].isChecked;
+}
+
+-(Move*)opposite {
+    Move* oppositeMove = [[Move alloc]initWithIndexPath:self.indexPath withBoard:self.board withSign:CellStateEmpty];
+    return oppositeMove;
 }
 
 @end

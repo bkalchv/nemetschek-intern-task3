@@ -24,7 +24,7 @@
 }
 
 -(Move*)createMoveWithIndexPath:(NSIndexPath*)indexPath {
-    Move* move = [[Move alloc] initWithIndexPath:indexPath withBoard:self.board];
+    Move* move = [[Move alloc] initWithIndexPath:indexPath withBoard:self.board withSign:self.sign];
     return move;
 }
 

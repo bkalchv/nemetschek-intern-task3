@@ -100,7 +100,7 @@
 //}
 
 - (void)showDrawAlert {
-    UIAlertController* drawAlert = [UIAlertController alertControllerWithTitle: @"It's a draw!" message: [NSString stringWithString:self.gameEngine.gameBoard.stateString] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* drawAlert = [UIAlertController alertControllerWithTitle: @"It's a draw!" message: [NSString stringWithString:self.gameEngine.gameBoard.stateAsString] preferredStyle:UIAlertControllerStyleAlert];
     [drawAlert addAction: [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         [self showOneMoreTimeViewController];
     } ]];
@@ -108,7 +108,7 @@
 }
 
 - (void)showPlayerWonAlert:(NSString*)playerName {
-    UIAlertController* playerWonAlert = [UIAlertController alertControllerWithTitle: [NSString stringWithFormat:@"Player %@ won!", playerName] message: [NSString stringWithString:self.gameEngine.gameBoard.stateString] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* playerWonAlert = [UIAlertController alertControllerWithTitle: [NSString stringWithFormat:@"Player %@ won!", playerName] message: [NSString stringWithString:self.gameEngine.gameBoard.stateAsString] preferredStyle:UIAlertControllerStyleAlert];
     [playerWonAlert addAction: [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         [self showOneMoreTimeViewController];
     } ]];

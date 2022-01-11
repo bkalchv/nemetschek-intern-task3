@@ -177,7 +177,10 @@
 }
 
 - (BOOL)areWinningConditionsFulfilledOnPlayerMove:(Move*)move {
-    return [self areWinningConditionsFulfilledForSelectionOfCellAt:move.indexPath withSign:self.currentPlayer.sign];
+    // TODO: quesiton
+    return [self areWinningConditionsFulfilledForSelectionOfCellAt:move.indexPath withSign:move.sign];
+    // vs
+    // return [self areWinningConditionsFulfilledForSelectionOfCellAt:move.indexPath withSign:self.currentPlayer.sign];
 }
 
 - (void)updateGameEngineStateOnPlayerMove:(Move*)move {
@@ -201,7 +204,6 @@
 //    [self makeMoveOfCurrentPlayer: move.indexPath];
 //}
 
-
 -(void)deselectCellAtIndexPath:(NSIndexPath*)indexPath {
     [self.gameBoard deselectCellAtIndexPath:indexPath];
 }
@@ -221,7 +223,7 @@
 
 -(void)redoLastMove {
     Move* lastMove = [self.redoStack pop];
-    [self selectCellAtIndexPath:[lastMove indexPath] withSign:[self.currentPlayer sign]];
+    [self selectCellAtIndexPath:[lastMove indexPath] withSign:[lastMove sign]];
 }
 
 - (BOOL)isUndoStackEmpty {
@@ -243,7 +245,7 @@
 }
 
 -(void)redo {
-    Move* redoStackTop = [self.undoStack peek];
+    Move* redoStackTop = [self.redoStack peek];
     if (![self isRedoStackEmpty] && redoStackTop != nil) {
         [self.undoStack pushMove: redoStackTop];
         [self redoLastMove];

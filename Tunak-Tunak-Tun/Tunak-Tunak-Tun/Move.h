@@ -10,13 +10,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class Board;
-@class Player;
+typedef NS_ENUM(NSInteger, CellState);
 
 @interface Move : NSObject
 @property (nonatomic, strong) NSIndexPath* indexPath;
--(instancetype)initWithIndexPath:(NSIndexPath*)indexPath withBoard:(Board*)board;
+@property (nonatomic)         CellState    sign;
+-(instancetype)initWithIndexPath:(NSIndexPath*)indexPath withBoard:(Board*)board withSign:(CellState)sign;
 -(BOOL)isValidMove;
-//-(Move*)opposite;
+-(Move*)opposite;
 @end
 
 NS_ASSUME_NONNULL_END
