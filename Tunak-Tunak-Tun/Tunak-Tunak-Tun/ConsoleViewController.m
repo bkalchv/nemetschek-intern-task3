@@ -48,7 +48,7 @@
     
     self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayerName]];
     self.consoleVCEnterButton.enabled = YES;
-    self.matrixLabel.text = [self.gameEngine.gameBoard stateString];
+    self.matrixLabel.text = [self.gameEngine.gameBoard stateAsString];
     [self.gameEngine printBoardState];
 }
 
@@ -212,7 +212,7 @@
 -(void)handleSelection:(NSIndexPath*)indexPath {
     Move* move = [self.gameEngine createMoveOfCurrentPlayer:indexPath];
     
-    if ([self.gameEngine didCurrentPlayerMakeValidMove:move]) {
+    if ([self.gameEngine didCurrentPlayerCreateValidMove:move]) {
         [self.gameEngine handleValidMove:move];
         if ([self.gameEngine isRedoStackEmpty]) [self disableRedoButton];
         self.matrixLabel.text = [self.gameEngine gameBoardStateAsString];

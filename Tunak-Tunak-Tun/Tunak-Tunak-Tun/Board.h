@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, CellState);
 - (instancetype)initWithRows:(NSUInteger)rowsAmount;
 - (void)printRow:(NSUInteger)row;
 - (void)printState;
--(NSString*)stateString;
+-(NSString*)stateAsString;
 -(Cell*)cellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)colIndex;
 -(Cell*)cellAt:(NSIndexPath*)indexPath;
 -(void)deselectCellAtIndexPath:(NSIndexPath*)indexPath;

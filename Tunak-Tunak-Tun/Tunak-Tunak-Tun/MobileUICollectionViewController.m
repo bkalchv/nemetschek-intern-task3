@@ -81,7 +81,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     
     Move *move = [self.gameEngine createMoveOfCurrentPlayer:indexPath];
     
-    if ([self.gameEngine didCurrentPlayerMakeValidMove:move]) {
+    if ([self.gameEngine didCurrentPlayerCreateValidMove:move]) {
         [self.gameEngine handleValidMove:move];
         
         if ([self.gameEngine isRedoStackEmpty]) [self.delegate disableRedoButton];

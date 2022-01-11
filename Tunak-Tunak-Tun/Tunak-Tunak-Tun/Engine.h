@@ -30,17 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init;
 - (instancetype)initWithPlayersName:(NSString*)playersName;
 - (instancetype)initWithPlayer1Name:(NSString*)player1Name player2Name:(NSString*)player2Name;
-- (void)printBoardState;
 - (NSString*)gameBoardStateAsString;
+- (void)printBoardState;
 - (BOOL)isCellCheckedAt:(NSIndexPath*)indexPath;
 - (NSString*)currentPlayerName;
-
-- (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath;
-
-- (BOOL)didCurrentPlayerMakeValidMove:(Move*)move;
 - (void)handleSelection:(NSIndexPath *)indexPath;
+- (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath;
+- (BOOL)didCurrentPlayerCreateValidMove:(Move*)move;
 - (void)handleValidMove:(Move*)move;
--(void)switchCurrentPlayerWithYourTurnBabySideEffect;
+- (void)switchCurrentPlayerWithYourTurnBabySideEffect;
 - (BOOL)isGameOver;
 
 - (BOOL)isUndoStackEmpty;

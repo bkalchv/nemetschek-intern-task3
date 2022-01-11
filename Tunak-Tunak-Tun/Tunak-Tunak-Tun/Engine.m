@@ -61,8 +61,16 @@
     return self;
 }
 
+- (NSString*)gameBoardStateAsString {
+    return [self.gameBoard stateAsString];
+}
+
 - (void)printBoardState {
     [self.gameBoard printState];
+}
+
+- (BOOL)isCellCheckedAt:(NSIndexPath*)indexPath {
+    return [[self.gameBoard cellAt:indexPath] isChecked];
 }
 
 -(NSString*)currentPlayerName {
@@ -73,9 +81,47 @@
     return [self.currentPlayer createMoveWithIndexPath:indexPath];
 }
 
-- (NSString*)gameBoardStateAsString {
-    return [self.gameBoard stateString];
+-(BOOL)didCurrentPlayerCreateValidMove:(Move*)move {
+    return [move isValidMove];
 }
+
+-(void)handleValidMove:(Move*)move {
+    NSUInteger moveRow = [move.indexPath section];
+    NSUInteger moveColumn = [move.indexPath row];
+    [self.gameBoard changeCellStateAtRowIndex:moveRow columnIndex:moveColumn withSign:[self.currentPlayer sign]];
+    [self.undoStack pushMove:move];
+    [self updateGameEngineStateOnPlayerMove:move];
+    [self printBoardState];
+    [self emptyRedoStack];
+    [self.delegate checkGameOutcomeForMove:move];
+}
+
+-(void)handleSelection:(NSIndexPath *)indexPath {
+    [self.delegate handleSelection:indexPath];
+}
+
+-(void)switchCurrentPlayer{
+
+    if (self.currentPlayer == self.player1) {
+
+        self.currentPlayer = self.player2;
+        
+        return;
+
+    } else if (self.currentPlayer == self.player2) {
+        
+        self.currentPlayer = self.player1;
+        
+        return;
+
+    } else NSLog(@"Engine obj, switchCurrentPlayer: undefined behavior");
+}
+
+-(void)switchCurrentPlayerWithYourTurnBabySideEffect {
+    [self switchCurrentPlayer];
+    [self.currentPlayer yourTurnBaby];
+}
+
 
 - (BOOL)checkColumnForCellSelection:(Cell*)cell withSign:(CellState)sign {
     for (size_t i = 0; i < self.gameBoard.numberOfColumns; i++) {
@@ -118,32 +164,6 @@
     return [self checkColumnForCellSelection:cell withSign:sign] || [self checkRowForCellSelection:cell withSign:sign] || [self checkDiagonalForCellSelection:cell withSign:sign] || [self checkAntiDiagonalForCellSelection:cell withSign:sign];
 }
 
-- (BOOL)isCellCheckedAt:(NSIndexPath*)indexPath {
-    return [[self.gameBoard cellAt:indexPath] isChecked];
-}
-
--(void)switchCurrentPlayer{
-
-    if (self.currentPlayer == self.player1) {
-
-        self.currentPlayer = self.player2;
-        
-        return;
-
-    } else if (self.currentPlayer == self.player2) {
-        
-        self.currentPlayer = self.player1;
-        
-        return;
-
-    } else NSLog(@"Engine obj, switchCurrentPlayer: undefined behavior");
-}
-
--(void)switchCurrentPlayerWithYourTurnBabySideEffect {
-    [self switchCurrentPlayer];
-    [self.currentPlayer yourTurnBaby];
-}
-
 - (BOOL)isGameOver {
     return self.winningConditionsFulfiled || !self.hasFreeCells;
 }
@@ -171,10 +191,6 @@
     self.hasFreeCells = (self.freeCellsAmount != 0);
 }
 
--(BOOL)didCurrentPlayerMakeValidMove:(Move*)move {
-    return [move isValidMove];
-}
-
 -(void)emptyRedoStack {
     while (![self isRedoStackEmpty]) {
         [self.redoStack pop];
@@ -185,20 +201,6 @@
 //    [self makeMoveOfCurrentPlayer: move.indexPath];
 //}
 
--(void)handleValidMove:(Move*)move {
-    NSUInteger moveRow = [move.indexPath section];
-    NSUInteger moveColumn = [move.indexPath row];
-    [self.gameBoard changeCellStateAtRowIndex:moveRow columnIndex:moveColumn withSign:[self.currentPlayer sign]];
-    [self.undoStack pushMove:move];
-    [self updateGameEngineStateOnPlayerMove:move];
-    [self printBoardState];
-    [self emptyRedoStack];
-    [self.delegate checkGameOutcomeForMove:move];
-}
-
--(void)handleSelection:(NSIndexPath *)indexPath {
-    [self.delegate handleSelection:indexPath];
-}
 
 -(void)deselectCellAtIndexPath:(NSIndexPath*)indexPath {
     [self.gameBoard deselectCellAtIndexPath:indexPath];
@@ -222,6 +224,14 @@
     [self selectCellAtIndexPath:[lastMove indexPath] withSign:[self.currentPlayer sign]];
 }
 
+- (BOOL)isUndoStackEmpty {
+    return self.undoStack.count == 0;
+}
+
+- (BOOL)isRedoStackEmpty {
+    return self.redoStack.count == 0;
+}
+
 -(void)undo {
     Move* undoStackTop = [self.undoStack peek];
     if (![self isUndoStackEmpty] && undoStackTop != nil) {
@@ -241,14 +251,5 @@
         [self switchCurrentPlayer];
     }
 }
-
-- (BOOL)isUndoStackEmpty {
-    return self.undoStack.count == 0;
-}
-
-- (BOOL)isRedoStackEmpty {
-    return self.redoStack.count == 0;
-}
-
 
 @end
