@@ -200,30 +200,34 @@
     }
 }
 
-//-(void)makeMove:(Move *)move {
-//    [self makeMoveOfCurrentPlayer: move.indexPath];
+-(void)makeMove:(Move *)move {
+    NSUInteger row = [move.indexPath section];
+    NSUInteger col = [move.indexPath row];
+    [self.gameBoard changeCellStateAtRowIndex:row columnIndex:col withSign:[move sign]];
+}
+
+//-(void)deselectCellAtIndexPath:(NSIndexPath*)indexPath {
+//    [self.gameBoard deselectCellAtIndexPath:indexPath];
 //}
-
--(void)deselectCellAtIndexPath:(NSIndexPath*)indexPath {
-    [self.gameBoard deselectCellAtIndexPath:indexPath];
-}
-
--(void)selectCellAtIndexPath:(NSIndexPath*)indexPath withSign:(CellState)sign {
-    NSUInteger row = [indexPath section];
-    NSUInteger col = [indexPath row];
-    [self.gameBoard changeCellStateAtRowIndex:row columnIndex:col withSign:sign];
-}
+//
+//-(void)selectCellAtIndexPath:(NSIndexPath*)indexPath withSign:(CellState)sign {
+//    NSUInteger row = [indexPath section];
+//    NSUInteger col = [indexPath row];
+//    [self.gameBoard changeCellStateAtRowIndex:row columnIndex:col withSign:sign];
+//}
 
 // TODO: move->opposite
 -(void)undoLastMove {
     Move* lastMove = [self.undoStack pop];
-    [self deselectCellAtIndexPath: [lastMove indexPath]];
-    // [self makeMove: lastMove.opposite];
+    [self makeMove: lastMove.opposite];
+    // [self deselectCellAtIndexPath: [lastMove indexPath]];
+    
 }
 
 -(void)redoLastMove {
     Move* lastMove = [self.redoStack pop];
-    [self selectCellAtIndexPath:[lastMove indexPath] withSign:[lastMove sign]];
+    [self makeMove: lastMove];
+    //[self selectCellAtIndexPath:[lastMove indexPath] withSign:[lastMove sign]];
 }
 
 - (BOOL)isUndoStackEmpty {
