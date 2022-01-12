@@ -10,10 +10,11 @@
 #import "Engine.h"
 #import "MobileUICollectionViewControllerDelegate.h"
 #import "MobileUIViewControllerDelegate.h"
+#import "OneMoreTimeViewControllerDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MobileUIViewController : UIViewController <MobileUICollectionViewControllerDelegate, UIAdaptivePresentationControllerDelegate>
+@interface MobileUIViewController : UIViewController <MobileUICollectionViewControllerDelegate,OneMoreTimeViewControllerDelegate, UIAdaptivePresentationControllerDelegate>
 @property (nonatomic, strong)id <MobileUIViewControllerDelegate> delegate;
 @end
 

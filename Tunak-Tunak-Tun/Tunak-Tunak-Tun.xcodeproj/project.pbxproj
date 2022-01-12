@@ -76,6 +76,7 @@
 		42A945E227678C13002767C6 /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		42A945E42767A330002767C6 /* Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		42A945E52767A330002767C6 /* Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		42AB6409278F319F00C2FC83 /* OneMoreTimeViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneMoreTimeViewControllerDelegate.h; sourceTree = "<group>"; };
 		42BAA513278C842900645001 /* MobileUICollectionViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileUICollectionViewControllerDelegate.h; sourceTree = "<group>"; };
 		42BAA514278C863100645001 /* MobileUIViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileUIViewControllerDelegate.h; sourceTree = "<group>"; };
 		42CB4101277353D600A7046E /* SecondPlayerNameInputViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondPlayerNameInputViewController.h; sourceTree = "<group>"; };
@@ -162,6 +163,7 @@
 				429BAEF7276B9627007D73C5 /* MobileUICollectionViewController.m */,
 				4297D02B2770903A00F0782E /* MobileUICollectionViewCell.h */,
 				4297D02C2770903A00F0782E /* MobileUICollectionViewCell.m */,
+				42AB6409278F319F00C2FC83 /* OneMoreTimeViewControllerDelegate.h */,
 				42A5A0562768DDBB007AD579 /* OneMoreTimeViewController.h */,
 				42A5A0572768DDBB007AD579 /* OneMoreTimeViewController.m */,
 				42A945C52767515F002767C6 /* Assets.xcassets */,

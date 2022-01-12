@@ -63,6 +63,7 @@
 - (void)showOneMoreTimeViewController {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     OneMoreTimeViewController* oneMoreTimeViewController = [storyboard instantiateViewControllerWithIdentifier:@"OneMoreTimeViewController"];
+    oneMoreTimeViewController.delegate = self;
     self.presentationController.delegate = self;
     [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
 }
@@ -93,6 +94,10 @@
 
 - (IBAction)onUndoButtonClick:(id)sender {
     [self.delegate onUndoButtonClick];
+}
+
+- (void)dismissPresentingViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Navigation

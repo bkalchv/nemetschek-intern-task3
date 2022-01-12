@@ -9,7 +9,9 @@
 
 @implementation OneMoreTimeViewController
 - (IBAction)onOneMoreTimeVCYesButton:(id)sender {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:^(void){
+        [self.delegate dismissPresentingViewController];
+    }];
 }
 
 - (IBAction)onOneMoreTimeVCNoButtonClick:(id)sender {

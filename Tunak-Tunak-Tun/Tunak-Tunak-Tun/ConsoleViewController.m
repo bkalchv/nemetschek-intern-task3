@@ -140,6 +140,7 @@
 - (void)showOneMoreTimeViewController {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     OneMoreTimeViewController* oneMoreTimeViewController = [storyboard instantiateViewControllerWithIdentifier:@"OneMoreTimeViewController"];
+    oneMoreTimeViewController.delegate = self;
     self.presentationController.delegate = self;
     [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
 }
@@ -251,6 +252,10 @@
 
 - (IBAction)onConsoleVCPrintStateButtonClick:(id)sender {
     [self.gameEngine printBoardState];
+}
+
+- (void)dismissPresentingViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
