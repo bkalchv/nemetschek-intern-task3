@@ -30,7 +30,6 @@
             [self.undoButton setEnabled:NO];
             [self.redoButton setEnabled:NO];
             break;
-            
         }
             
         case GameModeTwoPlayers: {

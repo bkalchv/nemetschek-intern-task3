@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PreferencesViewController : UIViewController
+@interface PreferencesViewController : UIViewController 
 @end
 
 NS_ASSUME_NONNULL_END

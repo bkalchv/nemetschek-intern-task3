@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, EnumUI) {
 - (NSString*) player2Username;
 - (void) addPlayer1Username:(NSString*)player1Username;
 - (void) addPlayer2Username:(NSString*)player2Username;
+- (void) resetPlayer1Name;
 
 @end
 

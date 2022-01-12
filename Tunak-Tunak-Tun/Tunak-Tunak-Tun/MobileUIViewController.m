@@ -11,7 +11,6 @@
 #import "MobileUICollectionViewCell.h"
 #import "OneMoreTimeViewController.h"
 
-
 @interface MobileUIViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *mobileUIUsernameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *undoButton;

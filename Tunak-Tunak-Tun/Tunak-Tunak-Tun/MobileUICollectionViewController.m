@@ -37,7 +37,6 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         default:
             break;
     }
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

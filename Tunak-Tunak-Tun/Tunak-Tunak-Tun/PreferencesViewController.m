@@ -30,6 +30,10 @@
     [self refreshView];
 }
 
+//-(void)presentationControllerDidDismiss:(UIPresentationController *)presentationController {
+//    [GameConfigurationManager.sharedGameConfigurationManager resetPlayer1Name];
+//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.preferencesMessageLabel.text = [NSString stringWithFormat:@"Okay, %@ what will it be today?", [GameConfigurationManager.sharedGameConfigurationManager player1Username]];

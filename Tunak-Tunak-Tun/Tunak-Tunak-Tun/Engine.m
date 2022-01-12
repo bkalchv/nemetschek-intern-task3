@@ -81,15 +81,6 @@
     return [move isValidMove];
 }
 
--(Move*)lastBotMoveFromRedoStack {
-    while (![self isRedoStackEmpty]) {
-        Move* currentPop = [self.redoStack pop];
-        if (currentPop.sign == self.player2.sign) return currentPop; // legit? maybe game configuration should hold the bot's sign
-    }
-        
-    return nil; // no BotMove found in redoStack
-}
-
 -(void)handleValidMove:(Move*)move {
     // legit? look up your notes ;)
     [self makeMove:move];
@@ -121,25 +112,8 @@
 
 -(void)switchCurrentPlayerWithYourTurnBabySideEffect {
     //legit? idea tho?
-    if ([self gameMode] == GameModeOnePlayer) {
-        if (![self isRedoStackEmpty]) {
-            Move* lastBotMoveFromRedoStack = [self lastBotMoveFromRedoStack];
-            if (lastBotMoveFromRedoStack != nil && [lastBotMoveFromRedoStack isValidMove]) {
-                    [self makeMove: lastBotMoveFromRedoStack];
-                    [self.undoStack pushMove:lastBotMoveFromRedoStack];
-                    //[self.undoStack pushMove:lastBotMoveFromRedoStack];
-            } else {
-                [self switchCurrentPlayer];
-                [self.currentPlayer yourTurnBaby];
-            }
-        } else {
-            [self switchCurrentPlayer];
-            [self.currentPlayer yourTurnBaby];
-        }
-    } else {
-        [self switchCurrentPlayer];
-        [self.currentPlayer yourTurnBaby];
-    }
+    [self switchCurrentPlayer];
+    [self.currentPlayer yourTurnBaby];
 }
 
 
