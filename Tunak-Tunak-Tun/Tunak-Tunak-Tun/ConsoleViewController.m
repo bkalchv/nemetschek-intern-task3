@@ -192,10 +192,10 @@
     
     if ([self.gameEngine gameMode] == GameModeOnePlayer) [self.gameEngine undo];
     
-    self.matrixLabel.text = [self.gameEngine gameBoardStateAsString];
     self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayerName]];
     if ([self.gameEngine isUndoStackEmpty]) [self disableUndoButton];
     if (![self.gameEngine isRedoStackEmpty]) [self enableRedoButton];
+    self.matrixLabel.text = [self.gameEngine gameBoardStateAsString];
 }
 
 - (IBAction)redoButtonClick:(id)sender {
@@ -203,24 +203,26 @@
     
     if ([self.gameEngine gameMode] == GameModeOnePlayer) [self.gameEngine redo];
     
-    self.matrixLabel.text = [self.gameEngine gameBoardStateAsString];
     self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayerName]];
     if ([self.gameEngine isRedoStackEmpty]) [self disableRedoButton];
     if (![self.gameEngine isUndoStackEmpty]) [self enableUndoButton];
+    self.matrixLabel.text = [self.gameEngine gameBoardStateAsString];
 }
 
 -(void)handleSelection:(NSIndexPath*)indexPath {
+    
     Move* move = [self.gameEngine createMoveOfCurrentPlayer:indexPath];
     
     if ([self.gameEngine didCurrentPlayerCreateValidMove:move]) {
         [self.gameEngine handleValidMove:move];
-        if ([self.gameEngine isRedoStackEmpty]) [self disableRedoButton];
-        self.matrixLabel.text = [self.gameEngine gameBoardStateAsString];
         
+        self.matrixLabel.text = [self.gameEngine gameBoardStateAsString];
         
         if (![self.gameEngine isGameOver])  {
             [self.gameEngine switchCurrentPlayerWithYourTurnBabySideEffect];
+            [self.gameEngine emptyRedoStack];
             self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayerName]];
+            if ([self.gameEngine isRedoStackEmpty]) [self disableRedoButton];
         }
     } else {
         NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", [indexPath section], [indexPath row]);

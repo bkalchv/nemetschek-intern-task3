@@ -65,12 +65,6 @@
     return self.boardMatrixArray[[indexPath indexAtPosition: 0] * self.numberOfColumns + [indexPath indexAtPosition: 1]];
 }
 
--(void)deselectCellAtIndexPath:(NSIndexPath*)indexPath {
-    NSUInteger row = [indexPath section];
-    NSUInteger col = [indexPath row];
-    [self changeCellStateAtRowIndex:row columnIndex:col withSign:CellStateEmpty];
-}
-
 -(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withSign:(CellState)sign {
     [[self cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:sign];
 }

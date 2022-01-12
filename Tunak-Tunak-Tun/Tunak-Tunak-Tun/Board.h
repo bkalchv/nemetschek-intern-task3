@@ -21,7 +21,6 @@ typedef NS_ENUM(NSInteger, CellState);
 -(NSString*)stateAsString;
 -(Cell*)cellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)colIndex;
 -(Cell*)cellAt:(NSIndexPath*)indexPath;
--(void)deselectCellAtIndexPath:(NSIndexPath*)indexPath;
 -(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withSign:(CellState)sign;
 -(NSUInteger)calculateFreeCellsAmount;
 @end

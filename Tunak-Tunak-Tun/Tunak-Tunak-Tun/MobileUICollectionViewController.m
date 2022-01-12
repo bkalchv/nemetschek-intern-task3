@@ -84,8 +84,6 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     if ([self.gameEngine didCurrentPlayerCreateValidMove:move]) {
         [self.gameEngine handleValidMove:move];
         
-        
-        
         [self.collectionView reloadData];
         
         if (![self.gameEngine isGameOver]) {

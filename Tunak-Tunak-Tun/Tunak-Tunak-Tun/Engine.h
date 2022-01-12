@@ -32,7 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithPlayer1Name:(NSString*)player1Name player2Name:(NSString*)player2Name;
 - (NSString*)gameBoardStateAsString;
 - (void)printBoardState;
-- (BOOL)isCellCheckedAt:(NSIndexPath*)indexPath;
 - (NSString*)currentPlayerName;
 - (void)handleSelection:(NSIndexPath *)indexPath;
 - (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath;
@@ -45,11 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isUndoStackEmpty;
 - (BOOL)isRedoStackEmpty;
 - (void)undo;
-//- (void)undoBot;
 - (void)redo;
 - (void)emptyRedoStack;
-//- (void)redoBot;
-
 - (NSInteger)calculateRowIndex:(NSInteger)index;
 - (NSInteger)calculateColumnIndex:(NSInteger)index;
 
