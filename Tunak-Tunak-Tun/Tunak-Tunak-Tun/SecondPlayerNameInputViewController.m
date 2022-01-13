@@ -67,6 +67,7 @@
 
 -(void)presentationControllerDidDismiss:(UIPresentationController *)presentationController {
     [GameConfigurationManager.sharedGameConfigurationManager resetPlayer2Name];
+    self.SecondPlayerNameTextField.text = @"";
 }
 
 /*
