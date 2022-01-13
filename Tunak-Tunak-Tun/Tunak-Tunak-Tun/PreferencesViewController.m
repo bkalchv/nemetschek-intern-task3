@@ -30,9 +30,7 @@
     [self refreshView];
 }
 
-//-(void)presentationControllerDidDismiss:(UIPresentationController *)presentationController {
-//    [GameConfigurationManager.sharedGameConfigurationManager resetPlayer1Name];
-//}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

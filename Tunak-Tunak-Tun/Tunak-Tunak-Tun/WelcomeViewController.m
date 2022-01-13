@@ -24,6 +24,7 @@
 - (void)showPreferencesViewController{
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PreferencesViewController* preferencesViewController = [storyboard instantiateViewControllerWithIdentifier:@"PreferencesViewController"];
+    preferencesViewController.presentationController.delegate = self ;
     [self presentViewController:preferencesViewController animated:YES completion:nil];
 }
 
@@ -38,7 +39,9 @@
     [self showPreferencesViewController];
 }
 
-
+-(void)presentationControllerDidDismiss:(UIPresentationController *)presentationController {
+    [GameConfigurationManager.sharedGameConfigurationManager resetPlayer1Name];
+}
 
 
 /*

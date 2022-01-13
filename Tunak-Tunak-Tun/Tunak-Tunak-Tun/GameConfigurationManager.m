@@ -95,8 +95,8 @@ static GameConfigurationManager* sharedGameConfigurationManager;
 
 }
 
-- (void) resetPlayer1Name{
-    [self setPlayer1Username:nil];
+- (void)resetPlayer1Name{
+    _player1Username = nil;
 }
 
 
