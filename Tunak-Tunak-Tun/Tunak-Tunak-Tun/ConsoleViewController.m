@@ -254,7 +254,11 @@
 }
 
 - (void)dismissPresentingViewController {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^(void){
+        if ([self.gameEngine gameMode] == GameModeTwoPlayers) {
+            [self.delegateToSecondPlayerVC dismissVC];
+        }
+    }];
 }
 
 /*

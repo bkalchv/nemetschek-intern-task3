@@ -52,10 +52,6 @@ static GameConfigurationManager* sharedGameConfigurationManager;
     }
 }
 
-//-(GameMode) gameMode {
-//    return [self gameMode];
-//}
-
 - (void) changeToUI:(EnumUI)UI {
     switch (UI) {
         case EnumUIConsole:
@@ -66,10 +62,6 @@ static GameConfigurationManager* sharedGameConfigurationManager;
             break;
     }
 }
-
-//-(EnumUI) UI {
-//    return [self UI];
-//}
 
 - (NSString*) player1Username {
     if (_player1Username == nil) return nil;
@@ -95,9 +87,12 @@ static GameConfigurationManager* sharedGameConfigurationManager;
 
 }
 
-- (void)resetPlayer1Name{
+- (void)resetPlayer1Name {
     _player1Username = nil;
 }
 
+-(void)resetPlayer2Name{
+    _player2Username = nil;
+}
 
 @end

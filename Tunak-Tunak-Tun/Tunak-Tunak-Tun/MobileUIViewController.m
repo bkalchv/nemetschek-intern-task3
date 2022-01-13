@@ -96,7 +96,9 @@
 }
 
 - (void)dismissPresentingViewController {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^(void){
+        if (self.delegateToSecondPlayerVC != nil) [self.delegateToSecondPlayerVC dismissVC];
+    }];
 }
 
 #pragma mark - Navigation

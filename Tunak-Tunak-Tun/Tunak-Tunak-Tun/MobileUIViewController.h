@@ -11,11 +11,13 @@
 #import "MobileUICollectionViewControllerDelegate.h"
 #import "MobileUIViewControllerDelegate.h"
 #import "OneMoreTimeViewControllerDelegate.h"
+#import "SecondPlayerVCDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MobileUIViewController : UIViewController <MobileUICollectionViewControllerDelegate,OneMoreTimeViewControllerDelegate, UIAdaptivePresentationControllerDelegate>
 @property (nonatomic, strong)id <MobileUIViewControllerDelegate> delegate;
+@property (nonatomic, strong)id <SecondPlayerVCDelegate> delegateToSecondPlayerVC;
 @end
 
 NS_ASSUME_NONNULL_END

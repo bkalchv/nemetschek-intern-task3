@@ -20,12 +20,14 @@
 - (void)showConsoleViewController {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ConsoleViewController* consoleViewController = [storyboard instantiateViewControllerWithIdentifier:@"ConsoleViewController"];
+    consoleViewController.delegateToSecondPlayerVC = self;
     [self presentViewController:consoleViewController animated:YES completion:nil];
 }
 
 - (void)showMobileViewController {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MobileUIViewController* mobileUIViewController = [storyboard instantiateViewControllerWithIdentifier:@"MobileUIViewController"];
+    mobileUIViewController.delegateToSecondPlayerVC = self;
     [self presentViewController:mobileUIViewController animated:YES completion:nil];
 }
 
@@ -55,6 +57,16 @@
         default:
             break;
     }
+}
+
+- (void)dismissVC {
+    [self dismissViewControllerAnimated:YES completion:^(void){
+        [GameConfigurationManager.sharedGameConfigurationManager resetPlayer2Name];
+    }];
+}
+
+-(void)presentationControllerDidDismiss:(UIPresentationController *)presentationController {
+    [GameConfigurationManager.sharedGameConfigurationManager resetPlayer2Name];
 }
 
 /*

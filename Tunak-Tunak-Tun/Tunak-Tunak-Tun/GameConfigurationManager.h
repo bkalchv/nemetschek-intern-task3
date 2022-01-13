@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, EnumUI) {
 - (void) addPlayer1Username:(NSString*)player1Username;
 - (void) addPlayer2Username:(NSString*)player2Username;
 - (void) resetPlayer1Name;
+- (void) resetPlayer2Name;
 
 @end
 
