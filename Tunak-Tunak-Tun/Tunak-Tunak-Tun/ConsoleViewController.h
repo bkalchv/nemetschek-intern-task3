@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "OneMoreTimeViewControllerDelegate.h"
 #import "SecondPlayerVCDelegate.h"
-#import "WelcomeViewController.h"
+#import "FirstPlayerNameInputViewController.h"
 #import "Engine.h"
 NS_ASSUME_NONNULL_BEGIN
 

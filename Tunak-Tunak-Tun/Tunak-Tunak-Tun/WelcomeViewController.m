@@ -2,49 +2,46 @@
 //  WelcomeViewController.m
 //  Tunak-Tunak-Tun
 //
-//  Created by Bogdan Kalchev on 13.12.21.
+//  Created by Bogdan Kalchev on 14.01.22.
 //
 
 #import "WelcomeViewController.h"
-#import "PreferencesViewController.h"
-#import "GameConfigurationManager.h"
 
 @interface WelcomeViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *toPreferencesButton;
-@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+@property NSArray<NSString*>* games;
+@property CGRect scrollViewFrame;
+@property (weak, nonatomic) IBOutlet UIScrollView *gameChoiceScrollView;
+@property (weak, nonatomic) IBOutlet UIPageControl *gameChoicePageControll;
+@property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 @end
 
 @implementation WelcomeViewController
 
+- (void) setupScreens {
+    for (NSUInteger index = 0; index < [self.games count]; ++index) {
+
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setGames: [[NSArray<NSString*> alloc] initWithObjects: @"TickTackToe", @"TunakTunakTun", nil]];
+    [self setScrollViewFrame: CGRectMake(0, 0, 0, 0)];
+    self.gameChoicePageControll.numberOfPages = [self.games count];
+    
+    [self setupScreens];
+    
+    self.gameChoiceScrollView.contentSize = CGSizeMake(200, 100);
+    self.gameChoiceScrollView.delegate = self;
+    [self.gameChoiceScrollView.layer setBorderWidth:5];
+    [self.gameChoiceScrollView.layer setBorderColor: UIColor.blueColor.CGColor];
 }
 
-- (void)showPreferencesViewController{
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    PreferencesViewController* preferencesViewController = [storyboard instantiateViewControllerWithIdentifier:@"PreferencesViewController"];
-    preferencesViewController.presentationController.delegate = self ;
-    [self presentViewController:preferencesViewController animated:YES completion:nil];
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSUInteger currentPage = (NSUInteger) round(scrollView.contentOffset.x / 100);
+    self.gameChoicePageControll.currentPage = currentPage;
 }
-
-- (IBAction)onToPreferencesButtonClick:(id)sender {
-    NSString* username = [[NSString alloc] init];
-    if ([self.usernameTextField.text isEqualToString:@""]) {
-        username = @"Annonymous Mouse";
-    } else {
-        username = self.usernameTextField.text;
-    }
-    [GameConfigurationManager.sharedGameConfigurationManager addPlayer1Username:username];
-    [self showPreferencesViewController];
-}
-
--(void)presentationControllerDidDismiss:(UIPresentationController *)presentationController {
-    [GameConfigurationManager.sharedGameConfigurationManager resetPlayer1Name];
-    [GameConfigurationManager.sharedGameConfigurationManager resetPlayer2Name];
-    self.usernameTextField.text = @"";
-}
-
 
 /*
 #pragma mark - Navigation

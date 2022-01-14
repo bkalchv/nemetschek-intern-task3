@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l29-XB-j0G">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XjA-Nq-pWz">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
@@ -9,65 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="Welcome">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tunak-Tunak-Tun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3M-Yj-MTC">
-                                <rect key="frame" x="95.5" y="187" width="223" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, enter your name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAj-qf-Ofh">
-                                <rect key="frame" x="113" y="405" width="188" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ex. Johnny Simp" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JNT-NO-lE7">
-                                <rect key="frame" x="52" y="457" width="310" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="310" id="kTX-eS-Hus"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ps8-1j-Ajs">
-                                <rect key="frame" x="144.5" y="605" width="125" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="9Yh-7l-zG2"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="vaL-5Y-2eV"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Game on!"/>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zAj-qf-Ofh" secondAttribute="bottom" constant="436" id="031-vx-WKk"/>
-                            <constraint firstItem="u3M-Yj-MTC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="143" id="E9W-Bv-4H0"/>
-                            <constraint firstItem="zAj-qf-Ofh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="361" id="MxG-jl-kJ8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="u3M-Yj-MTC" secondAttribute="bottom" constant="639" id="Npd-Lo-ppZ"/>
-                            <constraint firstItem="JNT-NO-lE7" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="RB1-Vh-GcX"/>
-                            <constraint firstItem="u3M-Yj-MTC" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="XHB-4n-a2t"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ps8-1j-Ajs" secondAttribute="bottom" constant="207" id="YC3-jU-fyV"/>
-                            <constraint firstItem="ps8-1j-Ajs" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ahg-fQ-CpI"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="JNT-NO-lE7" secondAttribute="bottom" constant="371" id="rI2-ex-gQe"/>
-                            <constraint firstItem="JNT-NO-lE7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="413" id="uaY-3w-Ujz"/>
-                            <constraint firstItem="zAj-qf-Ofh" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="vb6-js-gbS"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="339" y="94"/>
-        </scene>
         <!--MobileUI Collection View Controller-->
         <scene sceneID="jTV-ox-kVw">
             <objects>
@@ -277,9 +218,64 @@
             <point key="canvasLocation" x="-188" y="-988"/>
         </scene>
         <!--Welcome View Controller-->
+        <scene sceneID="4c9-zs-elK">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeViewController" id="XjA-Nq-pWz" customClass="WelcomeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rFP-Zy-VQJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pick a game:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh3-5b-DHO">
+                                <rect key="frame" x="151" y="257" width="112" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcv-SE-hGs">
+                                <rect key="frame" x="58" y="94" width="298" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOt-Qw-qiy">
+                                <rect key="frame" x="160" y="616" width="95" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Confirm"/>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KR6-3K-c5k">
+                                <rect key="frame" x="98" y="332" width="218" height="171"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="jrU-Mn-3BG"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="kDn-1T-arX"/>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="Tl9-Bh-enC">
+                                <rect key="frame" x="129" y="511" width="156" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <color key="pageIndicatorTintColor" systemColor="opaqueSeparatorColor"/>
+                                <color key="currentPageIndicatorTintColor" name="AccentColor"/>
+                            </pageControl>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="M9h-3p-b9F"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="confirmButton" destination="nOt-Qw-qiy" id="6IV-z9-1Wj"/>
+                        <outlet property="gameChoicePageControll" destination="Tl9-Bh-enC" id="Wpm-Hl-7aW"/>
+                        <outlet property="gameChoiceScrollView" destination="KR6-3K-c5k" id="cVF-lQ-NBo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c8A-np-U4T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4381.159420289855" y="-988.39285714285711"/>
+        </scene>
+        <!--First Player Name Input View Controller-->
         <scene sceneID="knS-In-L1c">
             <objects>
-                <viewController storyboardIdentifier="WelcomeViewController" id="l29-XB-j0G" customClass="WelcomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirstPlayerNameInputViewController" id="l29-XB-j0G" customClass="FirstPlayerNameInputViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gBU-la-04e" customClass="Welcome">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -514,7 +510,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHY-pK-09X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2812" y="-988"/>
+            <point key="canvasLocation" x="-2781" y="-988"/>
         </scene>
         <!--Second Player Name Input View Controller-->
         <scene sceneID="Wt6-31-P5j">
@@ -591,6 +587,15 @@
     <resources>
         <image name="baseline_redo_black_24pt" width="24" height="24"/>
         <image name="baseline_undo_black_24pt" width="24" height="24"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
