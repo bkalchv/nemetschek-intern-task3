@@ -11,6 +11,8 @@
 		42810BB3278722ED00DD0E57 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 42810BB2278722ED00DD0E57 /* Move.m */; };
 		42810BB627886E8500DD0E57 /* MovesStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 42810BB527886E8500DD0E57 /* MovesStack.m */; };
 		4297D02D2770903A00F0782E /* MobileUICollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4297D02C2770903A00F0782E /* MobileUICollectionViewCell.m */; };
+		429A5F2D27958748007977C5 /* GamePicturesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 429A5F2C27958748007977C5 /* GamePicturesView.m */; };
+		429A5F2F2795887C007977C5 /* GamePicturesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 429A5F2E2795887C007977C5 /* GamePicturesView.xib */; };
 		429BAEF2276B818A007D73C5 /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429BAEF1276B818A007D73C5 /* PreferencesViewController.m */; };
 		429BAEF5276B8E15007D73C5 /* MobileUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429BAEF4276B8E15007D73C5 /* MobileUIViewController.m */; };
 		429BAEF8276B9627007D73C5 /* MobileUICollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429BAEF7276B9627007D73C5 /* MobileUICollectionViewController.m */; };
@@ -44,6 +46,9 @@
 		42979A0D27909CC800EDDCCA /* SecondPlayerVCDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondPlayerVCDelegate.h; sourceTree = "<group>"; };
 		4297D02B2770903A00F0782E /* MobileUICollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileUICollectionViewCell.h; sourceTree = "<group>"; };
 		4297D02C2770903A00F0782E /* MobileUICollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MobileUICollectionViewCell.m; sourceTree = "<group>"; };
+		429A5F2B27958748007977C5 /* GamePicturesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GamePicturesView.h; sourceTree = "<group>"; };
+		429A5F2C27958748007977C5 /* GamePicturesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GamePicturesView.m; sourceTree = "<group>"; };
+		429A5F2E2795887C007977C5 /* GamePicturesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GamePicturesView.xib; sourceTree = "<group>"; };
 		429BAEF0276B818A007D73C5 /* PreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
 		429BAEF1276B818A007D73C5 /* PreferencesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreferencesViewController.m; sourceTree = "<group>"; };
 		429BAEF3276B8E15007D73C5 /* MobileUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileUIViewController.h; sourceTree = "<group>"; };
@@ -151,6 +156,9 @@
 				42A945C22767515E002767C6 /* Main.storyboard */,
 				42CB410427737FE800A7046E /* GameConfigurationManager.h */,
 				42CB410527737FE800A7046E /* GameConfigurationManager.m */,
+				429A5F2E2795887C007977C5 /* GamePicturesView.xib */,
+				429A5F2B27958748007977C5 /* GamePicturesView.h */,
+				429A5F2C27958748007977C5 /* GamePicturesView.m */,
 				42C3C89F2791B4EA00FA343E /* WelcomeViewController.h */,
 				42C3C8A02791B4EA00FA343E /* WelcomeViewController.m */,
 				42A945D2276756C5002767C6 /* FirstPlayerNameInputViewController.h */,
@@ -240,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42A945C92767515F002767C6 /* LaunchScreen.storyboard in Resources */,
+				429A5F2F2795887C007977C5 /* GamePicturesView.xib in Resources */,
 				42A945C62767515F002767C6 /* Assets.xcassets in Resources */,
 				42A945C42767515E002767C6 /* Main.storyboard in Resources */,
 			);
@@ -269,6 +278,7 @@
 				42A5A0582768DDBB007AD579 /* OneMoreTimeViewController.m in Sources */,
 				42A945BE2767515E002767C6 /* SceneDelegate.m in Sources */,
 				429BAEF8276B9627007D73C5 /* MobileUICollectionViewController.m in Sources */,
+				429A5F2D27958748007977C5 /* GamePicturesView.m in Sources */,
 				42C3C8A12791B4EA00FA343E /* WelcomeViewController.m in Sources */,
 				429BAEF2276B818A007D73C5 /* PreferencesViewController.m in Sources */,
 				42A945D7276758F5002767C6 /* TunakCell.m in Sources */,

@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -215,7 +216,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q3E-OM-Eo7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-188" y="-988"/>
+            <point key="canvasLocation" x="-190" y="-867"/>
         </scene>
         <!--Welcome View Controller-->
         <scene sceneID="4c9-zs-elK">
@@ -245,12 +246,6 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Confirm"/>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KR6-3K-c5k">
-                                <rect key="frame" x="98" y="332" width="218" height="171"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <viewLayoutGuide key="contentLayoutGuide" id="jrU-Mn-3BG"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="kDn-1T-arX"/>
-                            </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="Tl9-Bh-enC">
                                 <rect key="frame" x="129" y="511" width="156" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -258,13 +253,22 @@
                                 <color key="pageIndicatorTintColor" systemColor="opaqueSeparatorColor"/>
                                 <color key="currentPageIndicatorTintColor" name="AccentColor"/>
                             </pageControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KR6-3K-c5k">
+                                <rect key="frame" x="117" y="323" width="180" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="jrU-Mn-3BG"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="kDn-1T-arX"/>
+                                <connections>
+                                    <outlet property="delegate" destination="XjA-Nq-pWz" id="o8q-7U-wiY"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="M9h-3p-b9F"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <outlet property="confirmButton" destination="nOt-Qw-qiy" id="6IV-z9-1Wj"/>
-                        <outlet property="gameChoicePageControll" destination="Tl9-Bh-enC" id="Wpm-Hl-7aW"/>
+                        <outlet property="gameChoicePageControl" destination="Tl9-Bh-enC" id="Wpm-Hl-7aW"/>
                         <outlet property="gameChoiceScrollView" destination="KR6-3K-c5k" id="cVF-lQ-NBo"/>
                     </connections>
                 </viewController>
