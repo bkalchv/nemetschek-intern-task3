@@ -79,10 +79,10 @@ static GameConfigurationManager* sharedGameConfigurationManager;
 - (NSString*) currentGameAsString {
     switch (self.game) {
         case GameTickTackToe:
-            return @"TickTackToe";
+            return @"Tick-Tack-Toe";
             break;
         case GameTunakTunakTun:
-            return @"TunakTunakTun";
+            return @"Tunak-Tunak-Tun";
             break;
     }
 }

@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WelcomeViewController : UIViewController <UIScrollViewDelegate>
+@interface WelcomeViewController : UIViewController <UIScrollViewDelegate, UIAdaptivePresentationControllerDelegate>
 @end
 
 NS_ASSUME_NONNULL_END

@@ -238,6 +238,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Confirm"/>
+                                <connections>
+                                    <action selector="onConfirmButtonClick:" destination="XjA-Nq-pWz" eventType="touchUpInside" id="nYp-P6-Zdm"/>
+                                </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KR6-3K-c5k">
                                 <rect key="frame" x="117" y="323" width="180" height="180"/>
@@ -320,20 +323,20 @@
                         <viewLayoutGuide key="safeArea" id="u5d-gO-YJm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="u5d-gO-YJm" firstAttribute="bottom" secondItem="5OO-wL-g6F" secondAttribute="bottom" constant="436" id="31Y-Xo-6HS"/>
                             <constraint firstItem="u5d-gO-YJm" firstAttribute="bottom" secondItem="ILz-AU-dzI" secondAttribute="bottom" constant="371" id="6ct-WH-qwm"/>
-                            <constraint firstItem="ILz-AU-dzI" firstAttribute="top" secondItem="u5d-gO-YJm" secondAttribute="top" constant="413" id="DBg-S0-XJF"/>
                             <constraint firstItem="72a-V9-YqU" firstAttribute="centerX" secondItem="u5d-gO-YJm" secondAttribute="centerX" id="O3q-nV-OKM"/>
                             <constraint firstItem="u5d-gO-YJm" firstAttribute="bottom" secondItem="7EP-O0-KnT" secondAttribute="bottom" constant="206" id="OMM-Jb-LUq"/>
                             <constraint firstItem="5OO-wL-g6F" firstAttribute="centerX" secondItem="u5d-gO-YJm" secondAttribute="centerX" id="VpT-b2-flk"/>
                             <constraint firstItem="ILz-AU-dzI" firstAttribute="centerX" secondItem="u5d-gO-YJm" secondAttribute="centerX" id="Zoc-ir-M3E"/>
+                            <constraint firstItem="ILz-AU-dzI" firstAttribute="top" secondItem="5OO-wL-g6F" secondAttribute="bottom" constant="31" id="ciH-zJ-bgz"/>
                             <constraint firstItem="72a-V9-YqU" firstAttribute="top" secondItem="u5d-gO-YJm" secondAttribute="top" constant="143" id="er0-R3-3QG"/>
+                            <constraint firstItem="5OO-wL-g6F" firstAttribute="top" secondItem="72a-V9-YqU" secondAttribute="bottom" constant="182" id="mLW-11-Owh"/>
                             <constraint firstItem="7EP-O0-KnT" firstAttribute="centerX" secondItem="u5d-gO-YJm" secondAttribute="centerX" id="tak-lB-CTG"/>
-                            <constraint firstItem="5OO-wL-g6F" firstAttribute="top" secondItem="u5d-gO-YJm" secondAttribute="top" constant="361" id="ztG-PX-Zmb"/>
                             <constraint firstItem="u5d-gO-YJm" firstAttribute="bottom" secondItem="72a-V9-YqU" secondAttribute="bottom" constant="639" id="zuH-AT-SeO"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="gameNameLabel" destination="72a-V9-YqU" id="lHw-aM-sTf"/>
                         <outlet property="toPreferencesButton" destination="7EP-O0-KnT" id="mdG-eV-1K0"/>
                         <outlet property="usernameTextField" destination="ILz-AU-dzI" id="6GY-E1-uyr"/>
                     </connections>

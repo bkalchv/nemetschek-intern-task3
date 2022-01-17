@@ -12,6 +12,7 @@
 @interface FirstPlayerNameInputViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *toPreferencesButton;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+@property (weak, nonatomic) IBOutlet UILabel *gameNameLabel;
 @end
 
 @implementation FirstPlayerNameInputViewController
@@ -19,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.gameNameLabel setText:[GameConfigurationManager.sharedGameConfigurationManager currentGameAsString]];
 }
 
 - (void)showPreferencesViewController{

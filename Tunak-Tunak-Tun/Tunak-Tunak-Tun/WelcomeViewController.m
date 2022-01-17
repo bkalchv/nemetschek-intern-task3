@@ -8,6 +8,7 @@
 #import "WelcomeViewController.h"
 #import "GamePicturesView.h"
 #import "GameConfigurationManager.h"
+#import "FirstPlayerNameInputViewController.h"
 
 @interface WelcomeViewController ()
 @property NSArray<NSString*>* games;
@@ -72,6 +73,17 @@
     } else if ([chosenGameName isEqualToString:@"TunakTunakTun"]) {
         [GameConfigurationManager.sharedGameConfigurationManager changeToGame:GameTunakTunakTun];
     }
+}
+
+- (void)showPreferencesViewController{
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FirstPlayerNameInputViewController* firstPlayerNameInputViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstPlayerNameInputViewController"];
+    firstPlayerNameInputViewController.presentationController.delegate = self ;
+    [self presentViewController:firstPlayerNameInputViewController animated:YES completion:nil];
+}
+
+- (IBAction)onConfirmButtonClick:(id)sender {
+    [self showPreferencesViewController];
 }
 
 /*
