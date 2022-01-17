@@ -5,21 +5,14 @@
 //  Created by Bogdan Kalchev on 13.12.21.
 //
 
-#import "TunakCell.h"
+#import "TunakTunakTunCell.h"
+#import "TunakTunakTunCellState.h"
 
 @implementation TunakCell
-- (instancetype) initWithState:(TunakCellState)state atRow:(NSUInteger)row atColumn:(NSUInteger)col {
-    self = [super init];
+- (instancetype) initWithState:(TunakTunakTunCellState)state atRow:(NSUInteger)row atColumn:(NSUInteger)col {
+    self = [super initAtRow:row atColumn:col];
     if (self) {
-        if (state == TunakCellStateUnchecked) {
-            self.isChecked = NO;
-            self.state = TunakCellStateUnchecked;
-        } else {
-            self.isChecked = YES;
-            self.state = state;
-        }
-        self.rowIndex = row;
-        self.colIndex = col;
+        self.state = state;
     }
     return self;
 }
@@ -37,11 +30,15 @@
         case TunakCellStateYellow:
             result = @"y";
             break;
-        case TunakCellStateUnchecked:
+        case TunakCellStateEmpty:
             result = @"-";
             break;
     }
     
     return result;
+}
+
+- (BOOL)isChecked {
+    return self.state != TunakCellStateEmpty;
 }
 @end

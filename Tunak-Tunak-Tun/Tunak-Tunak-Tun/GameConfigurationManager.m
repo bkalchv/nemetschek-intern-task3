@@ -32,7 +32,7 @@ static GameConfigurationManager* sharedGameConfigurationManager;
     if (self = [super init]) {
         self.gameMode           = GameModeOnePlayer;
         self.UI                 = EnumUIConsole;
-        self.game               = GameTickTackToe;
+        self.game               = GameTicTacToe;
         self.player1Username    = nil;
         self.player1Username    = nil;
     }
@@ -67,8 +67,8 @@ static GameConfigurationManager* sharedGameConfigurationManager;
 
 - (void) changeToGame:(Game)game {
     switch (game) {
-        case GameTickTackToe:
-            [self setGame:GameTickTackToe];
+        case GameTicTacToe:
+            [self setGame:GameTicTacToe];
             break;
         case GameTunakTunakTun:
             [self setGame:GameTunakTunakTun];
@@ -78,16 +78,14 @@ static GameConfigurationManager* sharedGameConfigurationManager;
 
 - (NSString*) currentGameAsString {
     switch (self.game) {
-        case GameTickTackToe:
-            return @"Tick-Tack-Toe";
+        case GameTicTacToe:
+            return @"Tic-Tac-Toe";
             break;
         case GameTunakTunakTun:
             return @"Tunak-Tunak-Tun";
             break;
     }
 }
-
-
 
 - (NSString*) player1Username {
     if (_player1Username == nil) return nil;

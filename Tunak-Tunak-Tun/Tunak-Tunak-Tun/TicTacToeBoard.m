@@ -1,15 +1,15 @@
 //
-//  Board.m
+//  TicTacToeBoard.m
 //  Tunak-Tunak-Tun
 //
-//  Created by Bogdan Kalchev on 13.12.21.
+//  Created by Bogdan Kalchev on 17.01.22.
 //
-#import <UIKit/UIKit.h>
-#import "Board.h"
+
+#import "TicTacToeBoard.h"
 #import "TicTacToeCell.h"
 #import "TicTacToeCellState.h"
 
-@implementation Board
+@implementation TicTacToeBoard
 - (instancetype)initWithRows:(NSUInteger)rowsAmount {
     self = [super init];
     if (self) {
@@ -58,17 +58,17 @@
     return state;
 }
 
--(Cell*)cellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)colIndex {
+-(TicTacToeCell*)cellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)colIndex {
     return self.boardMatrixArray[rowIndex * self.numberOfColumns + colIndex];
 }
 
--(Cell*)cellAt:(NSIndexPath*)indexPath {
+-(TicTacToeCell*)cellAt:(NSIndexPath*)indexPath {
     return self.boardMatrixArray[[indexPath indexAtPosition: 0] * self.numberOfColumns + [indexPath indexAtPosition: 1]];
 }
 
-//-(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withSign:(TicTacToeCellState)sign {
-//    [[self cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:sign];
-//}
+-(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withSign:(TicTacToeCellState)sign {
+    [[self cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:sign];
+}
 
 -(NSUInteger)calculateFreeCellsAmount {
     NSUInteger freeCellsAmount = 0;
@@ -77,5 +77,4 @@
     }
     return freeCellsAmount;
 }
-
 @end

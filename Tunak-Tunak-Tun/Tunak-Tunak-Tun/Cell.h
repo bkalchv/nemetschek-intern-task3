@@ -9,18 +9,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, CellState) {
-    CellStateX,
-    CellStateO,
-    CellStateEmpty
-};
-
 @interface Cell : NSObject
-@property (nonatomic) CellState state;
 @property (nonatomic) NSUInteger rowIndex;
 @property (nonatomic) NSUInteger colIndex;
-- (instancetype)initWithState:(CellState)state atRow:(NSUInteger)row atColumn:(NSUInteger)col;
-- (NSString*)description;
+- (instancetype)initAtRow:(NSUInteger)row atColumn:(NSUInteger)col;
 - (BOOL)isChecked;
 @end
 

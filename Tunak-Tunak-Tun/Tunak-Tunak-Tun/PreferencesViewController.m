@@ -13,6 +13,7 @@
 
 
 @interface PreferencesViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *gameNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *preferencesMessageLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *preferenceUISwitchButton;
 @property (weak, nonatomic) IBOutlet UISwitch *preferencesGameModeSwitchButton;
@@ -35,6 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.preferencesMessageLabel.text = [NSString stringWithFormat:@"Okay, %@ what will it be today?", [GameConfigurationManager.sharedGameConfigurationManager player1Username]];
+    [self.gameNameLabel setText:[GameConfigurationManager.sharedGameConfigurationManager currentGameAsString]];
     // Do any additional setup after loading the view.
 }
 

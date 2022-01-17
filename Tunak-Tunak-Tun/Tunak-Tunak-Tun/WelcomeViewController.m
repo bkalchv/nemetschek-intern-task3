@@ -57,7 +57,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setGames: [[NSArray<NSString*> alloc] initWithObjects: @"TickTackToe", @"TunakTunakTun", nil]];
+    [self setGames: [[NSArray<NSString*> alloc] initWithObjects: @"TicTacToe", @"TunakTunakTun", nil]];
     
     [self initGameChoicePageControl];
     [self initGameChoiceScrollView];
@@ -68,8 +68,8 @@
     self.gameChoicePageControl.currentPage = floor((self.gameChoiceScrollView.contentOffset.x - scrollViewWidth / [self.games count]) / scrollViewWidth) + 1;
     
     NSString* chosenGameName = [self.games objectAtIndex: (self.gameChoicePageControl.currentPage)];
-    if ([chosenGameName isEqualToString:@"TickTackToe"]) {
-        [GameConfigurationManager.sharedGameConfigurationManager changeToGame:GameTickTackToe];
+    if ([chosenGameName isEqualToString:@"TicTacToe"]) {
+        [GameConfigurationManager.sharedGameConfigurationManager changeToGame:GameTicTacToe];
     } else if ([chosenGameName isEqualToString:@"TunakTunakTun"]) {
         [GameConfigurationManager.sharedGameConfigurationManager changeToGame:GameTunakTunakTun];
     }

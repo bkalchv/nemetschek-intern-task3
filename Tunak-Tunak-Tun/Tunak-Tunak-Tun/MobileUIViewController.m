@@ -63,7 +63,7 @@
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     OneMoreTimeViewController* oneMoreTimeViewController = [storyboard instantiateViewControllerWithIdentifier:@"OneMoreTimeViewController"];
     oneMoreTimeViewController.delegate = self;
-    self.presentationController.delegate = self;
+    //self.presentationController.delegate = self; // TODO: Check if needed
     [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
 }
 
@@ -114,6 +114,14 @@
         self.delegate = mobileUICollectionViewController;
         switch ([GameConfigurationManager.sharedGameConfigurationManager gameMode]) {
             case GameModeOnePlayer: {
+                
+                //switch (game) {
+                
+                // case: TicTacToe -> TicTacToeEngine
+                // case: TunakTunakTun -> TunakTunakTunEngine
+                
+                //}
+                
                 Engine* engine = [[Engine alloc] initWithPlayersName:[GameConfigurationManager.sharedGameConfigurationManager player1Username]];
                 engine.delegate = mobileUICollectionViewController;
                 mobileUICollectionViewController.gameEngine = engine;
@@ -121,6 +129,14 @@
             }
 
             case GameModeTwoPlayers: {
+                
+                //switch (game) {
+                
+                // case: TicTacToe -> TicTacToeEngine
+                // case: TunakTunakTun -> TunakTunakTunEngine
+                
+                //}
+                
                 Engine* engine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name:[GameConfigurationManager.sharedGameConfigurationManager player2Username]];
                 engine.delegate = mobileUICollectionViewController;
                 mobileUICollectionViewController.gameEngine = engine;

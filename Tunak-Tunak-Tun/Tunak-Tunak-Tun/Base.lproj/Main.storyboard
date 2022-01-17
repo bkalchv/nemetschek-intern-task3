@@ -509,6 +509,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="gameNameLabel" destination="4gS-EA-t97" id="5aI-4S-PEu"/>
                         <outlet property="gameOnButton" destination="DZW-ul-zaP" id="mDu-2w-KOX"/>
                         <outlet property="preferenceUISwitchButton" destination="MT2-d7-JbX" id="lMT-cu-kFo"/>
                         <outlet property="preferencesGameModeSwitchButton" destination="dPc-A6-5dX" id="mlh-kf-ehP"/>
@@ -582,6 +583,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="GameNameLabel" destination="7VP-oR-Lix" id="bbV-aI-HyO"/>
                         <outlet property="GameOnButton" destination="suV-Xz-D4m" id="qFK-jS-biJ"/>
                         <outlet property="SecondPlayerNameTextField" destination="BrC-1X-dE5" id="tYY-6G-76x"/>
                     </connections>

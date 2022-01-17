@@ -11,6 +11,7 @@
 #import "GameConfigurationManager.h"
 
 @interface SecondPlayerNameInputViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *GameNameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *SecondPlayerNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *GameOnButton;
 @end
@@ -34,6 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.GameNameLabel setText:[GameConfigurationManager.sharedGameConfigurationManager currentGameAsString]];
 }
 - (IBAction)onGameOnButtonClick:(id)sender {
     

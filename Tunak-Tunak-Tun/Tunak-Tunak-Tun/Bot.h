@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface Bot : Player
--(instancetype)initWithSign:(CellState)sign withBoard:(Board*)board;
+-(instancetype)initWithSign:(TicTacToeCellState)sign withBoard:(Board*)board;
 @property (nonatomic, strong)id <BotDelegate> delegate;
 @end
 

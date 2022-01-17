@@ -10,6 +10,7 @@
 #import "OneMoreTimeViewController.h"
 #import "Engine.h"
 #import "Move.h"
+#import "TicTacToeCellState.h"
 
 @interface MobileUICollectionViewController ()
 @end
@@ -164,15 +165,15 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     return 1;
 }
 
--(NSString*)cellLabelTextByState:(CellState)state {
+-(NSString*)cellLabelTextByState:(TicTacToeCellState)state {
     switch (state) {
-        case CellStateO:
+        case TicTacToeCellStateO:
             return @"O";
             break;
-        case CellStateX:
+        case TicTacToeCellStateX:
             return @"X";
             break;
-        case CellStateEmpty:
+        case TicTacToeCellStateEmpty:
             return @"";
             break;
             
@@ -184,7 +185,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MobileUICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     NSIndexPath* cellIndexPath = [NSIndexPath indexPathForRow:[self.gameEngine calculateColumnIndex:indexPath.row] inSection:[self.gameEngine calculateRowIndex:indexPath.row]];
-    Cell* gameCell = [self.gameEngine.gameBoard cellAt: cellIndexPath];
+    TicTacToeCell* gameCell = [self.gameEngine.gameBoard cellAt: cellIndexPath];
     NSString* cellLabelText = [self cellLabelTextByState:gameCell.state];
     [cell.cellLabel setText: cellLabelText];
     [cell setBackgroundColor: UIColor.grayColor];

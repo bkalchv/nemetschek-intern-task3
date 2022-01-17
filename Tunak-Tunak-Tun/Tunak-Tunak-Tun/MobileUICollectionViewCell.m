@@ -6,6 +6,7 @@
 //
 
 #import "MobileUICollectionViewCell.h"
+#import "TicTacToeCellState.h"
 
 @implementation MobileUICollectionViewCell
 
@@ -18,12 +19,12 @@
     [self.cellLabel setText:labelText];
 }
 
--(void)updateCellLabelByState:(CellState)state {
+-(void)updateCellLabelByState:(TicTacToeCellState)state {
     switch (state) {
-        case CellStateO:
+        case TicTacToeCellStateO:
             [self updateCellLabel:@"O"];
             break;
-        case CellStateX:
+        case TicTacToeCellStateX:
             [self updateCellLabel:@"X"];
             break;
 

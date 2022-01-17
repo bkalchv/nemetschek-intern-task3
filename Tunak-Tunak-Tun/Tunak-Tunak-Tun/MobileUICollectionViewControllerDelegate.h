@@ -12,7 +12,7 @@
 - (void)showDrawAlert:(NSString*)gameBoardState;
 - (void)showPlayerWonAlert:(NSString*)playerName withGameBoardState:(NSString*)gameBoardState;
 - (void)showOneMoreTimeViewController;
-- (void)showAlreadySelectedAlertForCell:(Cell*)cell;
+- (void)showAlreadySelectedAlertForCell:(TicTacToeCell*)cell;
 - (void)updateUsernameLabel:(NSString*)currentPlayerUsername;
 - (void)enableUndoButton;
 - (void)disableUndoButton;

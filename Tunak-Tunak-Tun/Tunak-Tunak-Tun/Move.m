@@ -7,7 +7,8 @@
 
 #import "Move.h"
 #import "Board.h"
-#import "Cell.h"
+#import "TicTacToeCell.h"
+#import "TicTacToeCellState.h"
 #import "Player.h"
 
 @interface Move ()
@@ -15,7 +16,7 @@
 @end
 
 @implementation Move
-- (instancetype)initWithIndexPath:(NSIndexPath*)indexPath withBoard:(Board*)board withSign:(CellState)sign {
+- (instancetype)initWithIndexPath:(NSIndexPath*)indexPath withBoard:(Board*)board withSign:(TicTacToeCellState)sign {
     self = [super init];
     if (self) {
         self.indexPath = indexPath;
@@ -30,7 +31,7 @@
 }
 
 -(Move*)opposite {
-    Move* oppositeMove = [[Move alloc]initWithIndexPath:self.indexPath withBoard:self.board withSign:CellStateEmpty];
+    Move* oppositeMove = [[Move alloc]initWithIndexPath:self.indexPath withBoard:self.board withSign:TicTacToeCellStateEmpty];
     return oppositeMove;
 }
 

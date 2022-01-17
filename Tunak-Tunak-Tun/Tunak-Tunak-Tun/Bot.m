@@ -7,13 +7,14 @@
 
 #import "Bot.h"
 #import "Board.h"
-#import "Cell.h"
+#import "TicTacToeCell.h"
+#import "TicTacToeCellState.h"
 #import "Move.h"
 #import <UIKit/UIKit.h>
 
 @implementation Bot
 
--(instancetype)initWithSign:(CellState)sign withBoard:(Board*)board {
+-(instancetype)initWithSign:(TicTacToeCellState)sign withBoard:(Board*)board {
     self = [super initPlayerWithName:@"CPU" withId:2 withSign:sign withBoard:board];
     return self;
 }
@@ -25,9 +26,9 @@
     return randomIndex;
 }
 
--(NSArray<Cell*> *)freeCellsOfBoard {
-    NSMutableArray<Cell*>* freeCellsArray = [[NSMutableArray<Cell*> alloc] init];
-    for (Cell* cell in self.board.boardMatrixArray) {
+-(NSArray<TicTacToeCell*> *)freeCellsOfBoard {
+    NSMutableArray<TicTacToeCell*>* freeCellsArray = [[NSMutableArray<TicTacToeCell*> alloc] init];
+    for (TicTacToeCell* cell in self.board.boardMatrixArray) {
         if (!cell.isChecked) [freeCellsArray addObject:cell];
     }
     return freeCellsArray;

@@ -12,7 +12,7 @@
 
 @implementation Player
 
--(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerID withSign:(CellState)sign withBoard:(Board*)board {
+-(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerID withSign:(TicTacToeCellState)sign withBoard:(Board*)board {
     self = [super init];
     if (self) {
         self.name = name;

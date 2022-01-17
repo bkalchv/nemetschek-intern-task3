@@ -15,7 +15,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MobileUIViewController : UIViewController <MobileUICollectionViewControllerDelegate,OneMoreTimeViewControllerDelegate>
+@interface MobileUIViewController : UIViewController <MobileUICollectionViewControllerDelegate, OneMoreTimeViewControllerDelegate>
 @property (nonatomic, strong)id <MobileUIViewControllerDelegate> delegate;
 @property (nonatomic, strong)id <SecondPlayerVCDelegate> delegateToSecondPlayerVC;
 @end

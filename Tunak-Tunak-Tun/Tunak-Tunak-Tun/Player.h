@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, CellState);
+typedef NS_ENUM(NSInteger, TicTacToeCellState);
 @class Board;
 @class Move;
 NS_ASSUME_NONNULL_BEGIN
@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSUInteger playerID;
 
 @property (nonatomic, strong) NSString* name;
-@property (nonatomic) CellState sign;
+@property (nonatomic) TicTacToeCellState sign;
 @property (nonatomic, strong) Board* board;
--(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerId withSign:(CellState)sign withBoard:(Board*)board;
+-(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerId withSign:(TicTacToeCellState)sign withBoard:(Board*)board;
 -(Move*)createMoveWithIndexPath:(NSIndexPath*)indexPath;
 -(void)yourTurnBaby;
 

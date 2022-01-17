@@ -9,7 +9,7 @@
 
 @class Player;
 @class Move;
-#import "Board.h"
+#import "TicTacToeBoard.h"
 #import "Bot.h"
 #import "GameConfigurationManager.h"
 
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface Engine : NSObject <BotDelegate>
-@property (nonatomic, strong)       Board* gameBoard;
+@property (nonatomic, strong)       TicTacToeBoard* gameBoard;
 @property (nonatomic)               GameMode gameMode;
 @property (nonatomic)               BOOL hasFreeCells;
 @property (nonatomic)               BOOL winningConditionsFulfiled;
@@ -40,7 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)switchCurrentPlayer;
 - (void)switchCurrentPlayerWithYourTurnBabySideEffect;
 - (BOOL)isGameOver;
-
 - (BOOL)isUndoStackEmpty;
 - (BOOL)isRedoStackEmpty;
 - (void)undo;

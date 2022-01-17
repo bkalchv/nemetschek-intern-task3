@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class Cell;
-typedef NS_ENUM(NSInteger, CellState);
+typedef NS_ENUM(NSInteger, TicTacToeCellState);
 
 @interface Board : NSObject
 @property (nonatomic, strong) NSMutableArray<Cell*>* boardMatrixArray;
@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, CellState);
 -(NSString*)stateAsString;
 -(Cell*)cellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)colIndex;
 -(Cell*)cellAt:(NSIndexPath*)indexPath;
--(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withSign:(CellState)sign;
+//-(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withSign:(NSInteger)integerOfsign;
 -(NSUInteger)calculateFreeCellsAmount;
 @end
 
