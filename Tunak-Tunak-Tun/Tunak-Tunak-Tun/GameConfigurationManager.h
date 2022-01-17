@@ -19,15 +19,23 @@ typedef NS_ENUM(NSInteger, EnumUI) {
     EnumUIMobile
 };
 
+typedef NS_ENUM(NSInteger, Game) {
+    GameTickTackToe,
+    GameTunakTunakTun
+};
+
 @interface GameConfigurationManager : NSObject
 
 + (instancetype)sharedGameConfigurationManager;
 - (void) changeToGameMode:(GameMode)gameMode;
 - (void) changeToUI:(EnumUI)UI;
+- (void) changeToGame:(Game)game;
 - (GameMode) gameMode;
 - (EnumUI) UI;
+- (Game) game;
 - (NSString*) player1Username;
 - (NSString*) player2Username;
+- (NSString*) currentGameAsString;
 - (void) addPlayer1Username:(NSString*)player1Username;
 - (void) addPlayer2Username:(NSString*)player2Username;
 - (void) resetPlayer1Name;

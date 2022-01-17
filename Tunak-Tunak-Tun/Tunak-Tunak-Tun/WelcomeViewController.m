@@ -7,6 +7,7 @@
 
 #import "WelcomeViewController.h"
 #import "GamePicturesView.h"
+#import "GameConfigurationManager.h"
 
 @interface WelcomeViewController ()
 @property NSArray<NSString*>* games;
@@ -39,8 +40,8 @@
     
     for (NSUInteger index = 0; index < [self.games count]; ++index) {
         GamePicturesView* view = [[[NSBundle mainBundle] loadNibNamed:@"GamePicturesView" owner:nil options:nil] objectAtIndex:0];
-        NSString* gameAsString = [self.games objectAtIndex:index];
-        view.imageView.image = [UIImage imageNamed:gameAsString];
+        NSString* gameName = [self.games objectAtIndex:index];
+        view.imageView.image = [UIImage imageNamed:gameName];
         
         view.frame = CGRectMake(scrollViewWidth * index, 0, scrollViewWidth, scrollViewHeight);
         [self.gameChoiceScrollView addSubview:view];
@@ -64,6 +65,13 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat scrollViewWidth = self.gameChoiceScrollView.frame.size.width;
     self.gameChoicePageControl.currentPage = floor((self.gameChoiceScrollView.contentOffset.x - scrollViewWidth / [self.games count]) / scrollViewWidth) + 1;
+    
+    NSString* chosenGameName = [self.games objectAtIndex: (self.gameChoicePageControl.currentPage)];
+    if ([chosenGameName isEqualToString:@"TickTackToe"]) {
+        [GameConfigurationManager.sharedGameConfigurationManager changeToGame:GameTickTackToe];
+    } else if ([chosenGameName isEqualToString:@"TunakTunakTun"]) {
+        [GameConfigurationManager.sharedGameConfigurationManager changeToGame:GameTunakTunakTun];
+    }
 }
 
 /*

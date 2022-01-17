@@ -11,6 +11,7 @@
 
 @property (assign) GameMode                 gameMode;
 @property (assign) EnumUI                   UI;
+@property (assign) Game                     game;
 @property (nonatomic, strong) NSString*     player1Username;
 @property (nonatomic, strong) NSString*     player2Username;
 
@@ -31,6 +32,7 @@ static GameConfigurationManager* sharedGameConfigurationManager;
     if (self = [super init]) {
         self.gameMode           = GameModeOnePlayer;
         self.UI                 = EnumUIConsole;
+        self.game               = GameTickTackToe;
         self.player1Username    = nil;
         self.player1Username    = nil;
     }
@@ -62,6 +64,30 @@ static GameConfigurationManager* sharedGameConfigurationManager;
             break;
     }
 }
+
+- (void) changeToGame:(Game)game {
+    switch (game) {
+        case GameTickTackToe:
+            [self setGame:GameTickTackToe];
+            break;
+        case GameTunakTunakTun:
+            [self setGame:GameTunakTunakTun];
+            break;
+    }
+}
+
+- (NSString*) currentGameAsString {
+    switch (self.game) {
+        case GameTickTackToe:
+            return @"TickTackToe";
+            break;
+        case GameTunakTunakTun:
+            return @"TunakTunakTun";
+            break;
+    }
+}
+
+
 
 - (NSString*) player1Username {
     if (_player1Username == nil) return nil;
