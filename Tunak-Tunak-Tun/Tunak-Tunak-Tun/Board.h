@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, TicTacToeCellState);
 -(NSString*)stateAsString;
 -(Cell*)cellAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)colIndex;
 -(Cell*)cellAt:(NSIndexPath*)indexPath;
-//-(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withSign:(NSInteger)integerOfsign;
+-(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withIntegerOfSign:(NSInteger)integerOfSign; // TODO: Ask 
 -(NSUInteger)calculateFreeCellsAmount;
 @end
 

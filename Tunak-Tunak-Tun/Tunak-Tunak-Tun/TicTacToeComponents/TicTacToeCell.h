@@ -16,6 +16,8 @@ typedef NS_ENUM(NSInteger, TicTacToeCellState);
 - (instancetype)initWithState:(TicTacToeCellState)state atRow:(NSUInteger)row atColumn:(NSUInteger)col;
 - (NSString*)description;
 - (BOOL)isChecked;
+- (void)setState:(NSInteger)integerOfState;
+- (NSInteger)stateInteger;
 @end
 
 NS_ASSUME_NONNULL_END

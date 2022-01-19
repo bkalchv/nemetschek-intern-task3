@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSUInteger colIndex;
 - (instancetype)initAtRow:(NSUInteger)row atColumn:(NSUInteger)col;
 - (BOOL)isChecked;
+- (void)setState:(NSInteger)integerOfState;
+- (NSInteger)stateInteger;
 @end
-
 
 NS_ASSUME_NONNULL_END

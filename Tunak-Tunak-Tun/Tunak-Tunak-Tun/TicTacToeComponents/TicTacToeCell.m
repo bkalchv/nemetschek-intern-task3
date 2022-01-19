@@ -40,4 +40,13 @@
     return self.state != TicTacToeCellStateEmpty;
 }
 
+- (void)setState:(NSInteger)integerOfState {
+    TicTacToeCellState state = (TicTacToeCellState) integerOfState;
+    _state = state;
+}
+
+- (NSInteger)stateInteger {
+    return self.state;
+}
+
 @end

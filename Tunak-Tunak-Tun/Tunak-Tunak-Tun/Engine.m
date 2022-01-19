@@ -10,6 +10,8 @@
 #import "TicTacToeCellState.h"
 #import "Move.h"
 #import "MovesStack.h"
+#import "Player.h"
+#import "Bot.h"
 #import <UIKit/UIKit.h>
 
 @interface Engine()
@@ -26,7 +28,7 @@
 -(instancetype) init {
     self = [super init];
     if (self) {
-        self.gameBoard = [[TicTacToeBoard alloc] initWithRows:3];
+        self.gameBoard = [[Board alloc] initWithRows:3];
         self.freeCellsAmount = 9;
         self.hasFreeCells = YES;
         self.winningConditionsFulfiled = NO;
@@ -38,8 +40,8 @@
     self = [self init];
     if (self) {
         self.gameMode = GameModeOnePlayer;
-        self.player1 = [[Player alloc] initPlayerWithName:playersName withId:1 withSign:TicTacToeCellStateX withBoard:self.gameBoard];
-        Bot* bot = [[Bot alloc] initWithSign:TicTacToeCellStateO withBoard:self.gameBoard];
+        self.player1 = [[Player alloc] initPlayerWithName:playersName withId:1 withIntegerOfSign:(NSInteger)TicTacToeCellStateX withBoard:self.gameBoard];
+        Bot* bot = [[Bot alloc] initWithIntegerOfSign:(NSInteger)TicTacToeCellStateO withBoard:self.gameBoard];
         bot.delegate = self;
         self.player2 = bot;
         self.currentPlayer = self.player1;
@@ -53,8 +55,8 @@
     self = [self init];
     if (self) {
         self.gameMode = GameModeTwoPlayers;
-        self.player1 = [[Player alloc] initPlayerWithName:player1Name withId:1 withSign:TicTacToeCellStateX withBoard:self.gameBoard];
-        self.player2 = [[Player alloc] initPlayerWithName:player2Name withId:2 withSign:TicTacToeCellStateO withBoard:self.gameBoard];
+        self.player1 = [[Player alloc] initPlayerWithName:player1Name withId:1 withIntegerOfSign:(NSInteger)TicTacToeCellStateX withBoard:self.gameBoard];
+        self.player2 = [[Player alloc] initPlayerWithName:player2Name withId:2 withIntegerOfSign:(NSInteger)TicTacToeCellStateO withBoard:self.gameBoard];
         self.currentPlayer = self.player1;
         self.undoStack = [[MovesStack alloc] init];
         self.redoStack = [[MovesStack alloc] init];
@@ -83,7 +85,7 @@
 }
 
 -(void)handleValidMove:(Move*)move {
-    // legit? look up your notes ;)
+    // TODO: engine specific
     [self makeMove:move];
     [self.undoStack pushMove:move];
     [self printBoardState];
@@ -116,46 +118,46 @@
     [self.currentPlayer yourTurnBaby];
 }
 
-
-- (BOOL)checkColumnForCellSelection:(TicTacToeCell*)cell withSign:(TicTacToeCellState)sign { // engine specific
+// TODO: Wherever Enum -> NSInteger
+- (BOOL)checkColumnForCellSelection:(Cell*)cell withSignInteger:(NSInteger)signInteger { // engine specific
     for (size_t i = 0; i < self.gameBoard.numberOfColumns; i++) {
-        if ([self.gameBoard cellAtRowIndex:cell.rowIndex columnIndex:i].state != sign) break;
+        if ([self.gameBoard cellAtRowIndex:cell.rowIndex columnIndex:i].stateInteger != signInteger) break;
         if (i + 1 == self.gameBoard.numberOfColumns) return true;
     }
     return false;
 }
 
--(BOOL)checkRowForCellSelection:(TicTacToeCell*)cell withSign:(TicTacToeCellState)sign { // engine specific
+-(BOOL)checkRowForCellSelection:(Cell*)cell withSignInteger:(NSInteger)signInteger { // engine specific
     for (size_t i = 0; i < self.gameBoard.numberOfRows; i++) {
-        if ([self.gameBoard cellAtRowIndex:i columnIndex:cell.colIndex].state != sign) break;
+        if ([self.gameBoard cellAtRowIndex:i columnIndex:cell.colIndex].stateInteger != signInteger) break;
         if (i + 1 == self.gameBoard.numberOfRows) return true;
     }
     return false;
 }
 
--(BOOL)checkDiagonalForCellSelection:(TicTacToeCell*)cell withSign:(TicTacToeCellState)sign { // engine specific
+-(BOOL)checkDiagonalForCellSelection:(Cell*)cell withSignInteger:(NSInteger)signInteger { // engine specific
     if(cell.rowIndex == cell.colIndex) {
         for(int i = 0; i < self.gameBoard.numberOfRows; i++) {
-            if([self.gameBoard cellAtRowIndex:i columnIndex:i].state != sign) break;
+            if([self.gameBoard cellAtRowIndex:i columnIndex:i].stateInteger != signInteger) break;
             if(i + 1 == self.gameBoard.numberOfRows) return true;
         }
     }
     return false;
 }
 
--(BOOL)checkAntiDiagonalForCellSelection:(TicTacToeCell*)cell withSign:(TicTacToeCellState)sign { // engine specific
+-(BOOL)checkAntiDiagonalForCellSelection:(Cell*)cell withSignInteger:(NSInteger)signInteger { // engine specific
     if(cell.rowIndex + cell.colIndex + 1 == self.gameBoard.numberOfRows) {
         for(int i = 0; i < self.gameBoard.numberOfRows; i++) {
-            if([self.gameBoard cellAtRowIndex:i columnIndex:(self.gameBoard.numberOfRows - 1 - i)].state != sign) break;
+            if([self.gameBoard cellAtRowIndex:i columnIndex:(self.gameBoard.numberOfRows - 1 - i)].stateInteger != signInteger) break;
             if(i + 1 == self.gameBoard.numberOfRows) return true;
         }
     }
     return false;
 }
 
-- (BOOL)areWinningConditionsFulfilledForSelectionOfCellAt:(NSIndexPath*)cellIndexPath withSign:(TicTacToeCellState)sign { // engine specific
-    TicTacToeCell* cell = [self.gameBoard cellAt:cellIndexPath];
-    return [self checkColumnForCellSelection:cell withSign:sign] || [self checkRowForCellSelection:cell withSign:sign] || [self checkDiagonalForCellSelection:cell withSign:sign] || [self checkAntiDiagonalForCellSelection:cell withSign:sign];
+- (BOOL)areWinningConditionsFulfilledForSelectionOfCellAt:(NSIndexPath*)cellIndexPath withSignInteger:(NSInteger)signInteger { // engine specific
+    Cell* cell = [self.gameBoard cellAt:cellIndexPath];
+    return [self checkColumnForCellSelection:cell withSignInteger:signInteger] || [self checkRowForCellSelection:cell withSignInteger:signInteger] || [self checkDiagonalForCellSelection:cell withSignInteger:signInteger] || [self checkAntiDiagonalForCellSelection:cell withSignInteger:signInteger];
 }
 
 - (BOOL)isGameOver {
@@ -171,7 +173,7 @@
 }
 
 - (BOOL)areWinningConditionsFulfilledOnPlayerMove:(Move*)move { // engine specific
-    return [self areWinningConditionsFulfilledForSelectionOfCellAt:move.indexPath withSign:move.sign];
+    return [self areWinningConditionsFulfilledForSelectionOfCellAt:move.indexPath withSignInteger:move.integerOfSign];
 }
 
 - (void)updateGameEngineStateOnGameBoardStateChange {
@@ -194,10 +196,8 @@
 -(void)makeMove:(Move *)move {
     NSUInteger row = [move.indexPath section];
     NSUInteger col = [move.indexPath row];
-    [self.gameBoard changeCellStateAtRowIndex:row columnIndex:col withSign:[move sign]];
+    [self.gameBoard changeCellStateAtRowIndex:row columnIndex:col withIntegerOfSign:[move integerOfSign]];
     [self updateGameEngineStateOnPlayerMove:move];
-    // if ([self gameMode] == GameModeOnePlayer) [self.undoStack pushMove:move];
-    // TODO: legit? switchPlayer here?
 }
 
 // TODO: move->opposite

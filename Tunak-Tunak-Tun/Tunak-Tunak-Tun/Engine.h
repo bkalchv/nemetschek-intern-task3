@@ -7,8 +7,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class Player;
+@class TicTacToePlayer;
 @class Move;
+#import "Board.h"
 #import "TicTacToeBoard.h"
 #import "Bot.h"
 #import "GameConfigurationManager.h"
@@ -16,12 +17,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol EngineDelegate <NSObject>
+//TODO: TicTacMove* -> Move*
 - (void)checkGameOutcomeForMove:(Move*)move;
 - (void)handleSelection:(NSIndexPath*)indexPath;
 @end
 
 @interface Engine : NSObject <BotDelegate>
-@property (nonatomic, strong)       TicTacToeBoard* gameBoard;
+@property (nonatomic, strong)       Board* gameBoard;
 @property (nonatomic)               GameMode gameMode;
 @property (nonatomic)               BOOL hasFreeCells;
 @property (nonatomic)               BOOL winningConditionsFulfiled;
@@ -34,8 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)printBoardState;
 - (NSString*)currentPlayerName;
 - (void)handleSelection:(NSIndexPath *)indexPath;
+//TODO: TicTacMove* -> Move*
 - (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath;
+//TODO: TicTacMove* -> Move*
 - (BOOL)didCurrentPlayerCreateValidMove:(Move*)move;
+//TODO: TicTacMove* -> Move*
 - (void)handleValidMove:(Move*)move;
 - (void)switchCurrentPlayer;
 - (void)switchCurrentPlayerWithYourTurnBabySideEffect;

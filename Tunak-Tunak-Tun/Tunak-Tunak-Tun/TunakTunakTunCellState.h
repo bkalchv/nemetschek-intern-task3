@@ -9,10 +9,10 @@
 #define TunakTunakTunCellState_h
 
 typedef NS_ENUM(NSInteger, TunakTunakTunCellState) {
-    TunakCellStateGreen = 0,
+    TunakCellStateEmpty = 0,
+    TunakCellStateGreen,
     TunakCellStateRed,
     TunakCellStateYellow,
-    TunakCellStateEmpty
 };
 
 #endif /* TunakTunakTunCellState_h */

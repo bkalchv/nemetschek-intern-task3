@@ -8,6 +8,9 @@
 #import "Board.h"
 #import "TicTacToeCell.h"
 #import "TicTacToeCellState.h"
+#import "TunakTunakTunCell.h"
+#import "TunakTunakTunCellState.h"
+#import "GameConfigurationManager.h"
 
 @implementation Board
 - (instancetype)initWithRows:(NSUInteger)rowsAmount {
@@ -21,7 +24,20 @@
         
         for (size_t r = 0; r < self.numberOfRows; ++r) {
             for (size_t c = 0; c < self.numberOfColumns; ++c) {
-                [self.boardMatrixArray addObject: [[TicTacToeCell alloc] initWithState:TicTacToeCellStateEmpty atRow:r atColumn:c]];
+                // gotta know if TicTacToeCell or TunakCell
+                // TODO: ask
+                switch([GameConfigurationManager.sharedGameConfigurationManager game]) {
+                    case GameTicTacToe:
+                        [self.boardMatrixArray addObject: [[TicTacToeCell alloc] initWithState:TicTacToeCellStateEmpty atRow:r atColumn:c]];
+                            break;
+                            
+                    case GameTunakTunakTun:
+                        [self.boardMatrixArray addObject: [[TunakCell alloc] initWithState:TunakCellStateEmpty atRow:r atColumn:c]];
+                        
+                    default:
+                        break;
+                }
+                
             }
         }
     }
@@ -66,13 +82,13 @@
     return self.boardMatrixArray[[indexPath indexAtPosition: 0] * self.numberOfColumns + [indexPath indexAtPosition: 1]];
 }
 
-//-(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withSign:(TicTacToeCellState)sign {
-//    [[self cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:sign];
-//}
+-(void)changeCellStateAtRowIndex:(NSUInteger)rowIndex columnIndex:(NSUInteger)columnIndex withIntegerOfSign:(NSInteger)integerOfSign {
+    [[self cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:integerOfSign];
+}
 
 -(NSUInteger)calculateFreeCellsAmount {
     NSUInteger freeCellsAmount = 0;
-    for (TicTacToeCell* cell in self.boardMatrixArray) {
+    for (Cell* cell in self.boardMatrixArray) {
         if (![cell isChecked]) freeCellsAmount++;
     }
     return freeCellsAmount;

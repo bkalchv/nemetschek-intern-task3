@@ -17,7 +17,7 @@
         
         self.numberOfRows = rowsAmount;
         self.numberOfColumns = rowsAmount;
-        self.boardMatrixArray = [[NSMutableArray<Cell*> alloc] init];
+        self.boardMatrixArray = [[NSMutableArray<TicTacToeCell*> alloc] init];
         
         for (size_t r = 0; r < self.numberOfRows; ++r) {
             for (size_t c = 0; c < self.numberOfColumns; ++c) {

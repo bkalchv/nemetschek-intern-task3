@@ -7,18 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		424F01E027980D6800559A1A /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 424F01DF27980D6800559A1A /* Move.m */; };
 		426B519D27748850009A8B2F /* Bot.m in Sources */ = {isa = PBXBuildFile; fileRef = 426B519C27748850009A8B2F /* Bot.m */; };
-		42810BB3278722ED00DD0E57 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 42810BB2278722ED00DD0E57 /* Move.m */; };
 		42810BB627886E8500DD0E57 /* MovesStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 42810BB527886E8500DD0E57 /* MovesStack.m */; };
 		4297D02D2770903A00F0782E /* MobileUICollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4297D02C2770903A00F0782E /* MobileUICollectionViewCell.m */; };
 		429A5F2D27958748007977C5 /* GamePicturesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 429A5F2C27958748007977C5 /* GamePicturesView.m */; };
 		429A5F2F2795887C007977C5 /* GamePicturesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 429A5F2E2795887C007977C5 /* GamePicturesView.xib */; };
-		429A5F322795C265007977C5 /* TicTacToeEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 429A5F312795C265007977C5 /* TicTacToeEngine.m */; };
 		429A5F352795C5A3007977C5 /* TicTacToeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 429A5F342795C5A3007977C5 /* TicTacToeCell.m */; };
-		429A5F3A2795D968007977C5 /* TicTacToeBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 429A5F392795D968007977C5 /* TicTacToeBoard.m */; };
 		429BAEF2276B818A007D73C5 /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429BAEF1276B818A007D73C5 /* PreferencesViewController.m */; };
 		429BAEF5276B8E15007D73C5 /* MobileUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429BAEF4276B8E15007D73C5 /* MobileUIViewController.m */; };
 		429BAEF8276B9627007D73C5 /* MobileUICollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429BAEF7276B9627007D73C5 /* MobileUICollectionViewController.m */; };
+		42A4A28727971FF40054B11F /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A4A28627971FF40054B11F /* Player.m */; };
 		42A5A0582768DDBB007AD579 /* OneMoreTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5A0572768DDBB007AD579 /* OneMoreTimeViewController.m */; };
 		42A945BB2767515E002767C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945BA2767515E002767C6 /* AppDelegate.m */; };
 		42A945BE2767515E002767C6 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945BD2767515E002767C6 /* SceneDelegate.m */; };
@@ -32,7 +31,6 @@
 		42A945DA276769E9002767C6 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945D9276769E9002767C6 /* ConsoleViewController.m */; };
 		42A945DD27676AC5002767C6 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945DC27676AC5002767C6 /* Board.m */; };
 		42A945E027678B1B002767C6 /* Engine.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945DF27678B1B002767C6 /* Engine.m */; };
-		42A945E327678C13002767C6 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945E227678C13002767C6 /* Player.m */; };
 		42A945E62767A330002767C6 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945E52767A330002767C6 /* Cell.m */; };
 		42C3C8A12791B4EA00FA343E /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C3C8A02791B4EA00FA343E /* WelcomeViewController.m */; };
 		42CB4103277353D600A7046E /* SecondPlayerNameInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CB4102277353D600A7046E /* SecondPlayerNameInputViewController.m */; };
@@ -40,10 +38,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		424F01DE27980D6800559A1A /* Move.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Move.h; sourceTree = "<group>"; };
+		424F01DF27980D6800559A1A /* Move.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Move.m; sourceTree = "<group>"; };
 		426B519B27748850009A8B2F /* Bot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bot.h; sourceTree = "<group>"; };
 		426B519C27748850009A8B2F /* Bot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bot.m; sourceTree = "<group>"; };
-		42810BB1278722ED00DD0E57 /* Move.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Move.h; sourceTree = "<group>"; };
-		42810BB2278722ED00DD0E57 /* Move.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Move.m; sourceTree = "<group>"; };
 		42810BB427886E8500DD0E57 /* MovesStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovesStack.h; sourceTree = "<group>"; };
 		42810BB527886E8500DD0E57 /* MovesStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovesStack.m; sourceTree = "<group>"; };
 		42979A0D27909CC800EDDCCA /* SecondPlayerVCDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondPlayerVCDelegate.h; sourceTree = "<group>"; };
@@ -52,20 +50,18 @@
 		429A5F2B27958748007977C5 /* GamePicturesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GamePicturesView.h; sourceTree = "<group>"; };
 		429A5F2C27958748007977C5 /* GamePicturesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GamePicturesView.m; sourceTree = "<group>"; };
 		429A5F2E2795887C007977C5 /* GamePicturesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GamePicturesView.xib; sourceTree = "<group>"; };
-		429A5F302795C265007977C5 /* TicTacToeEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicTacToeEngine.h; sourceTree = "<group>"; };
-		429A5F312795C265007977C5 /* TicTacToeEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToeEngine.m; sourceTree = "<group>"; };
 		429A5F332795C5A3007977C5 /* TicTacToeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicTacToeCell.h; sourceTree = "<group>"; };
 		429A5F342795C5A3007977C5 /* TicTacToeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToeCell.m; sourceTree = "<group>"; };
 		429A5F362795CE47007977C5 /* TicTacToeCellState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicTacToeCellState.h; sourceTree = "<group>"; };
 		429A5F372795D173007977C5 /* TunakTunakTunCellState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TunakTunakTunCellState.h; sourceTree = "<group>"; };
-		429A5F382795D968007977C5 /* TicTacToeBoard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicTacToeBoard.h; sourceTree = "<group>"; };
-		429A5F392795D968007977C5 /* TicTacToeBoard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToeBoard.m; sourceTree = "<group>"; };
 		429BAEF0276B818A007D73C5 /* PreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
 		429BAEF1276B818A007D73C5 /* PreferencesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreferencesViewController.m; sourceTree = "<group>"; };
 		429BAEF3276B8E15007D73C5 /* MobileUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileUIViewController.h; sourceTree = "<group>"; };
 		429BAEF4276B8E15007D73C5 /* MobileUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MobileUIViewController.m; sourceTree = "<group>"; };
 		429BAEF6276B9627007D73C5 /* MobileUICollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileUICollectionViewController.h; sourceTree = "<group>"; };
 		429BAEF7276B9627007D73C5 /* MobileUICollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MobileUICollectionViewController.m; sourceTree = "<group>"; };
+		42A4A28527971FF40054B11F /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		42A4A28627971FF40054B11F /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		42A5A0562768DDBB007AD579 /* OneMoreTimeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneMoreTimeViewController.h; sourceTree = "<group>"; };
 		42A5A0572768DDBB007AD579 /* OneMoreTimeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneMoreTimeViewController.m; sourceTree = "<group>"; };
 		42A945B62767515E002767C6 /* Tunak-Tunak-Tun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tunak-Tunak-Tun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,8 +86,6 @@
 		42A945DC27676AC5002767C6 /* Board.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
 		42A945DE27678B1B002767C6 /* Engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		42A945DF27678B1B002767C6 /* Engine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Engine.m; sourceTree = "<group>"; };
-		42A945E127678C13002767C6 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
-		42A945E227678C13002767C6 /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		42A945E42767A330002767C6 /* Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		42A945E52767A330002767C6 /* Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		42AB6409278F319F00C2FC83 /* OneMoreTimeViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneMoreTimeViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -116,33 +110,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42A4A283279704170054B11F /* TicTacToeComponents */ = {
+			isa = PBXGroup;
+			children = (
+				429A5F362795CE47007977C5 /* TicTacToeCellState.h */,
+				429A5F332795C5A3007977C5 /* TicTacToeCell.h */,
+				429A5F342795C5A3007977C5 /* TicTacToeCell.m */,
+			);
+			path = TicTacToeComponents;
+			sourceTree = "<group>";
+		};
+		42A4A284279705C00054B11F /* TunakTunakTunComponents */ = {
+			isa = PBXGroup;
+			children = (
+				429A5F372795D173007977C5 /* TunakTunakTunCellState.h */,
+				42A945D5276758F5002767C6 /* TunakTunakTunCell.h */,
+				42A945D6276758F5002767C6 /* TunakTunakTunCell.m */,
+			);
+			name = TunakTunakTunComponents;
+			sourceTree = "<group>";
+		};
 		42A5A0592768DEF8007AD579 /* GameComponents */ = {
 			isa = PBXGroup;
 			children = (
 				42A945E42767A330002767C6 /* Cell.h */,
 				42A945E52767A330002767C6 /* Cell.m */,
-				429A5F362795CE47007977C5 /* TicTacToeCellState.h */,
-				429A5F332795C5A3007977C5 /* TicTacToeCell.h */,
-				429A5F342795C5A3007977C5 /* TicTacToeCell.m */,
-				429A5F372795D173007977C5 /* TunakTunakTunCellState.h */,
-				42A945D5276758F5002767C6 /* TunakTunakTunCell.h */,
-				42A945D6276758F5002767C6 /* TunakTunakTunCell.m */,
 				42A945DB27676AC5002767C6 /* Board.h */,
 				42A945DC27676AC5002767C6 /* Board.m */,
-				429A5F382795D968007977C5 /* TicTacToeBoard.h */,
-				429A5F392795D968007977C5 /* TicTacToeBoard.m */,
-				42A945E127678C13002767C6 /* Player.h */,
-				42A945E227678C13002767C6 /* Player.m */,
-				426B519B27748850009A8B2F /* Bot.h */,
-				426B519C27748850009A8B2F /* Bot.m */,
 				42A945DE27678B1B002767C6 /* Engine.h */,
 				42A945DF27678B1B002767C6 /* Engine.m */,
-				429A5F302795C265007977C5 /* TicTacToeEngine.h */,
-				429A5F312795C265007977C5 /* TicTacToeEngine.m */,
-				42810BB1278722ED00DD0E57 /* Move.h */,
-				42810BB2278722ED00DD0E57 /* Move.m */,
+				42A4A28527971FF40054B11F /* Player.h */,
+				42A4A28627971FF40054B11F /* Player.m */,
+				426B519B27748850009A8B2F /* Bot.h */,
+				426B519C27748850009A8B2F /* Bot.m */,
+				424F01DE27980D6800559A1A /* Move.h */,
+				424F01DF27980D6800559A1A /* Move.m */,
 				42810BB427886E8500DD0E57 /* MovesStack.h */,
 				42810BB527886E8500DD0E57 /* MovesStack.m */,
+				42A4A284279705C00054B11F /* TunakTunakTunComponents */,
+				42A4A283279704170054B11F /* TicTacToeComponents */,
 			);
 			name = GameComponents;
 			sourceTree = "<group>";
@@ -280,9 +286,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42810BB3278722ED00DD0E57 /* Move.m in Sources */,
+				424F01E027980D6800559A1A /* Move.m in Sources */,
 				42810BB627886E8500DD0E57 /* MovesStack.m in Sources */,
-				429A5F322795C265007977C5 /* TicTacToeEngine.m in Sources */,
 				42A945E62767A330002767C6 /* Cell.m in Sources */,
 				42A945D4276756C5002767C6 /* FirstPlayerNameInputViewController.m in Sources */,
 				42A945DA276769E9002767C6 /* ConsoleViewController.m in Sources */,
@@ -290,14 +295,12 @@
 				42CB410627737FE800A7046E /* GameConfigurationManager.m in Sources */,
 				4297D02D2770903A00F0782E /* MobileUICollectionViewCell.m in Sources */,
 				42A945DD27676AC5002767C6 /* Board.m in Sources */,
-				42A945E327678C13002767C6 /* Player.m in Sources */,
 				429BAEF5276B8E15007D73C5 /* MobileUIViewController.m in Sources */,
 				42A945C12767515E002767C6 /* ViewController.m in Sources */,
 				42A945BB2767515E002767C6 /* AppDelegate.m in Sources */,
 				42A945CC2767515F002767C6 /* main.m in Sources */,
 				42A5A0582768DDBB007AD579 /* OneMoreTimeViewController.m in Sources */,
 				42A945BE2767515E002767C6 /* SceneDelegate.m in Sources */,
-				429A5F3A2795D968007977C5 /* TicTacToeBoard.m in Sources */,
 				429BAEF8276B9627007D73C5 /* MobileUICollectionViewController.m in Sources */,
 				429A5F2D27958748007977C5 /* GamePicturesView.m in Sources */,
 				42C3C8A12791B4EA00FA343E /* WelcomeViewController.m in Sources */,
@@ -306,6 +309,7 @@
 				42A945D7276758F5002767C6 /* TunakTunakTunCell.m in Sources */,
 				426B519D27748850009A8B2F /* Bot.m in Sources */,
 				42CB4103277353D600A7046E /* SecondPlayerNameInputViewController.m in Sources */,
+				42A4A28727971FF40054B11F /* Player.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

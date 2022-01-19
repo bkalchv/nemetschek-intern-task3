@@ -9,9 +9,9 @@
 #define TicTacToeCellState_h
 
 typedef NS_ENUM(NSInteger, TicTacToeCellState) {
-    TicTacToeCellStateX = 0,
+    TicTacToeCellStateEmpty = 0,
+    TicTacToeCellStateX,
     TicTacToeCellStateO,
-    TicTacToeCellStateEmpty
 };
 
 #endif /* TicTacToeCellState_h */

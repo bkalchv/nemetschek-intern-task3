@@ -14,8 +14,8 @@
 
 @implementation Bot
 
--(instancetype)initWithSign:(TicTacToeCellState)sign withBoard:(Board*)board {
-    self = [super initPlayerWithName:@"CPU" withId:2 withSign:sign withBoard:board];
+-(instancetype)initWithIntegerOfSign:(NSInteger)integerOfSign withBoard:(Board*)board {
+    self = [super initPlayerWithName:@"CPU" withId:2 withIntegerOfSign:integerOfSign withBoard:board];
     return self;
 }
 

@@ -2,29 +2,30 @@
 //  Player.m
 //  Tunak-Tunak-Tun
 //
-//  Created by Bogdan Kalchev on 13.12.21.
+//  Created by Bogdan Kalchev on 18.01.22.
 //
 
 #import "Player.h"
-#import "Board.h"
 #import "Move.h"
-#import <UIKit/UIKit.h>
+#import "TicTacToeComponents/TicTacToeCellState.h"
+#import "TunakTunakTunCellState.h"
+#import "GameConfigurationManager.h"
 
 @implementation Player
 
--(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerID withSign:(TicTacToeCellState)sign withBoard:(Board*)board {
+-(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerID withIntegerOfSign:(NSInteger)integerOfSign withBoard:(Board*)board {
     self = [super init];
     if (self) {
         self.name = name;
         self.playerID = playerID;
-        self.sign = sign;
+        self.integerOfSign = integerOfSign;
         self.board = board;
     }
     return self;
 }
 
 -(Move*)createMoveWithIndexPath:(NSIndexPath*)indexPath {
-    Move* move = [[Move alloc] initWithIndexPath:indexPath withBoard:self.board withSign:self.sign];
+    Move* move = [[Move alloc] initWithIndexPath:indexPath withBoard:self.board withIntegerOfSign:self.integerOfSign];
     return move;
 }
 
@@ -32,5 +33,4 @@
 {
     // wait for input;
 }
-
 @end
