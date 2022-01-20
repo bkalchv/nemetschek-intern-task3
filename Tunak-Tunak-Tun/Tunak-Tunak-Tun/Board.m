@@ -86,12 +86,16 @@
     [[self cellAtRowIndex:rowIndex columnIndex:columnIndex] setState:integerOfSign];
 }
 
--(NSUInteger)calculateFreeCellsAmount {
-    NSUInteger freeCellsAmount = 0;
+-(NSArray<Cell*>*)freeCells {
+    NSMutableArray<Cell*>* result = [[NSMutableArray<Cell*> alloc] init];
     for (Cell* cell in self.boardMatrixArray) {
-        if (![cell isChecked]) freeCellsAmount++;
+        if (![cell isChecked]) [result addObject:cell];
     }
-    return freeCellsAmount;
+    return result;
+}
+
+-(NSUInteger)freeCellsAmount {
+    return [[self freeCells] count];
 }
 
 @end

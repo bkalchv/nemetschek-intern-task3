@@ -36,13 +36,16 @@
 
 -(Cell*)randomFreeCell {
     NSArray<Cell*>* freeCells = [self freeCellsOfBoard];
-    return [freeCells objectAtIndex: [self randomIndex:([freeCells count] - 1)] ];
+    if ([freeCells count]  != 0) return [freeCells objectAtIndex: [self randomIndex:([freeCells count] - 1)] ];
+    return nil;
 }
 
 -(void)yourTurnBaby {
     Cell* cellToSelect = [self randomFreeCell];
-    NSIndexPath* cellToSelectIndexPath = [NSIndexPath indexPathForRow:[cellToSelect colIndex] inSection:[cellToSelect rowIndex]];
-    [self.delegate handleSelection: cellToSelectIndexPath];
+    if (cellToSelect != nil) {
+        NSIndexPath* cellToSelectIndexPath = [NSIndexPath indexPathForRow:[cellToSelect colIndex] inSection:[cellToSelect rowIndex]];
+        [self.delegate handleSelection: cellToSelectIndexPath];
+    }
 }
 
 @end

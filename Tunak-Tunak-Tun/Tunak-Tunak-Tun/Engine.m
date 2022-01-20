@@ -18,7 +18,7 @@
 @property (nonatomic, strong) Player* currentPlayer;
 @property (nonatomic, strong) Player* player1;
 @property (nonatomic, strong) Player* player2;
-@property (nonatomic) NSUInteger freeCellsAmount;
+//@property (nonatomic) NSUInteger freeCellsAmount;
 @property (nonatomic, strong) MovesStack* undoStack;
 @property (nonatomic, strong) MovesStack* redoStack;
 @end
@@ -29,7 +29,7 @@
     self = [super init];
     if (self) {
         self.gameBoard = [[Board alloc] initWithRows:3];
-        self.freeCellsAmount = 9;
+        //self.freeCellsAmount = 9;
         self.hasFreeCells = YES;
         self.winningConditionsFulfiled = NO;
     }
@@ -177,8 +177,8 @@
 }
 
 - (void)updateGameEngineStateOnGameBoardStateChange {
-    self.freeCellsAmount = [self.gameBoard calculateFreeCellsAmount];
-    self.hasFreeCells = (self.freeCellsAmount != 0);
+    NSUInteger freeCellsAmount = [self.gameBoard freeCellsAmount];
+    self.hasFreeCells = (freeCellsAmount != 0);
 }
 
 
