@@ -7,9 +7,11 @@
 
 #import "Bot.h"
 #import "Board.h"
-#import "TicTacToeCell.h"
+#import "Cell.h"
 #import "TicTacToeCellState.h"
+#import "TunakTunakTunCellState.h"
 #import "Move.h"
+#import "GameConfigurationManager.h"
 #import <UIKit/UIKit.h>
 
 @implementation Bot
@@ -26,9 +28,17 @@
     return randomIndex;
 }
 
--(NSArray<TicTacToeCell*> *)freeCellsOfBoard {
-    NSMutableArray<TicTacToeCell*>* freeCellsArray = [[NSMutableArray<TicTacToeCell*> alloc] init];
-    for (TicTacToeCell* cell in self.board.boardMatrixArray) {
+-(NSInteger)randomValidIntegerOfTunakCellState {
+    NSInteger randomIntegerOfTunakCellState = [self randomIndex:TunakCellStateCount];
+    while (randomIntegerOfTunakCellState == TunakCellStateEmpty) {
+        randomIntegerOfTunakCellState = [self randomIndex:TunakCellStateCount];
+    }
+    return randomIntegerOfTunakCellState;
+}
+
+-(NSArray<Cell*> *)freeCellsOfBoard {
+    NSMutableArray<Cell*>* freeCellsArray = [[NSMutableArray<Cell*> alloc] init];
+    for (Cell* cell in self.board.boardMatrixArray) {
         if (!cell.isChecked) [freeCellsArray addObject:cell];
     }
     return freeCellsArray;
@@ -42,6 +52,13 @@
 
 -(void)yourTurnBaby {
     Cell* cellToSelect = [self randomFreeCell];
+    
+    // TODO: HACKY ALERT
+    if ([GameConfigurationManager.sharedGameConfigurationManager game] == GameTunakTunakTun) {
+        NSInteger randomValidIntegerOfSign = [self randomValidIntegerOfTunakCellState];
+        [self setIntegerOfSign:randomValidIntegerOfSign];
+    }
+    
     if (cellToSelect != nil) {
         NSIndexPath* cellToSelectIndexPath = [NSIndexPath indexPathForRow:[cellToSelect colIndex] inSection:[cellToSelect rowIndex]];
         [self.delegate handleSelection: cellToSelectIndexPath];

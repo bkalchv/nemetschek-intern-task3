@@ -176,12 +176,12 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         case TicTacToeCellStateEmpty:
             return @"";
             break;
-            
-        default:
-            break;
     }
+    
+    return nil;
 }
 
+//TODO: Broken -> You rely on TicTacToeCell, but thought you dont anymore. HA!
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MobileUICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     NSIndexPath* cellIndexPath = [NSIndexPath indexPathForRow:[self.gameEngine calculateColumnIndex:indexPath.row] inSection:[self.gameEngine calculateRowIndex:indexPath.row]];

@@ -12,7 +12,8 @@ typedef NS_ENUM(NSInteger, TunakTunakTunCellState) {
     TunakCellStateEmpty = 0,
     TunakCellStateRed,
     TunakCellStateYellow,
-    TunakCellStateGreen
+    TunakCellStateGreen,
+    TunakCellStateCount
 };
 
 #endif /* TunakTunakTunCellState_h */

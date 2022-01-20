@@ -6,8 +6,8 @@
 //
 
 #import "Engine.h"
-#import "TicTacToeCell.h"
 #import "TicTacToeCellState.h"
+#import "TunakTunakTunCellState.h"
 #import "Move.h"
 #import "MovesStack.h"
 #import "Player.h"
@@ -35,12 +35,33 @@
     return self;
 }
 
+-(NSUInteger)randomIndex:(NSUInteger)maxIndex {
+    NSUInteger lowerBoundIndex = 0;
+    NSUInteger upperBoundIndex = maxIndex;
+    NSUInteger randomIndex = lowerBoundIndex + arc4random() % (upperBoundIndex - lowerBoundIndex + 1);
+    return randomIndex;
+}
+
 - (instancetype)initWithPlayersName:(NSString*)playersName {
     self = [self init];
     if (self) {
         self.gameMode = GameModeOnePlayer;
         self.player1 = [[Player alloc] initPlayerWithName:playersName withId:1 withIntegerOfSign:(NSInteger)TicTacToeCellStateX withBoard:self.gameBoard];
-        Bot* bot = [[Bot alloc] initWithIntegerOfSign:(NSInteger)TicTacToeCellStateO withBoard:self.gameBoard];
+        Bot* bot;
+        switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
+            case GameTicTacToe:
+                bot = [[Bot alloc] initWithIntegerOfSign:(NSInteger)TicTacToeCellStateO withBoard:self.gameBoard];
+                break;
+            case GameTunakTunakTun: {
+                bot = [[Bot alloc] initWithIntegerOfSign:[self randomIndex:TunakCellStateCount] withBoard:self.gameBoard];
+                break;
+            }
+
+            default:
+                break;
+        }
+        
+         
         bot.delegate = self;
         self.player2 = bot;
         self.currentPlayer = self.player1;
