@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString*)currentPlayerName;
 - (void)handleSelection:(NSIndexPath *)indexPath;
 - (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath;
+- (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath withSign:(NSString*)signAsString;
 - (BOOL)didCurrentPlayerCreateValidMove:(Move*)move;
 - (void)handleValidMove:(Move*)move;
 - (void)switchCurrentPlayer;

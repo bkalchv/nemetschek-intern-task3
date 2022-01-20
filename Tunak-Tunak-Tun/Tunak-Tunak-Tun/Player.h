@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) Board* board;
 -(instancetype)initPlayerWithName:(NSString*)name withId:(NSUInteger)playerId withIntegerOfSign:(NSInteger)integerOfSign withBoard:(Board*)board;
 -(Move*)createMoveWithIndexPath:(NSIndexPath*)indexPath;
+-(Move*)createMoveWithIndexPath:(NSIndexPath*)indexPath withSign:(NSString*)signAsString;
 -(void)yourTurnBaby;
 @end
 

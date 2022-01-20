@@ -18,7 +18,6 @@
 @property (nonatomic, strong) Player* currentPlayer;
 @property (nonatomic, strong) Player* player1;
 @property (nonatomic, strong) Player* player2;
-//@property (nonatomic) NSUInteger freeCellsAmount;
 @property (nonatomic, strong) MovesStack* undoStack;
 @property (nonatomic, strong) MovesStack* redoStack;
 @end
@@ -78,6 +77,10 @@
 
 - (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath {
     return [self.currentPlayer createMoveWithIndexPath:indexPath];
+}
+
+- (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath withSign:(NSString*)signAsString {
+    return [self.currentPlayer createMoveWithIndexPath:indexPath withSign:signAsString];
 }
 
 -(BOOL)didCurrentPlayerCreateValidMove:(Move*)move {
@@ -155,7 +158,7 @@
     return false;
 }
 
-- (BOOL)areWinningConditionsFulfilledForSelectionOfCellAt:(NSIndexPath*)cellIndexPath withSignInteger:(NSInteger)signInteger { // engine specific
+- (BOOL)areWinningConditionsFulfilledForSelectionOfCellAt:(NSIndexPath*)cellIndexPath withSignInteger:(NSInteger)signInteger { // game-specific
     Cell* cell = [self.gameBoard cellAt:cellIndexPath];
     return [self checkColumnForCellSelection:cell withSignInteger:signInteger] || [self checkRowForCellSelection:cell withSignInteger:signInteger] || [self checkDiagonalForCellSelection:cell withSignInteger:signInteger] || [self checkAntiDiagonalForCellSelection:cell withSignInteger:signInteger];
 }

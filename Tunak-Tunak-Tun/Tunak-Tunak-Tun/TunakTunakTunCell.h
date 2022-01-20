@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger, TunakTunakTunCellState);
 - (instancetype)initWithState:(TunakTunakTunCellState)state atRow:(NSUInteger)row atColumn:(NSUInteger)col;
 - (NSString*)description;
 - (BOOL)isChecked;
+- (NSInteger)stateInteger;
 @end
 
 NS_ASSUME_NONNULL_END

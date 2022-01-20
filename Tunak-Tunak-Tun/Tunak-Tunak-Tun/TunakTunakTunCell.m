@@ -21,9 +21,6 @@
     NSString* result;
     
     switch (self.state){
-        case TunakCellStateGreen:
-            result = @"g";
-            break;
         case TunakCellStateRed:
             result = @"r";
             break;
@@ -33,6 +30,9 @@
         case TunakCellStateEmpty:
             result = @"-";
             break;
+        case TunakCellStateGreen:
+            result = @"g";
+            break;
     }
     
     return result;
@@ -40,5 +40,9 @@
 
 - (BOOL)isChecked {
     return self.state != TunakCellStateEmpty;
+}
+
+- (NSInteger)stateInteger {
+    return (NSInteger)self.state;
 }
 @end

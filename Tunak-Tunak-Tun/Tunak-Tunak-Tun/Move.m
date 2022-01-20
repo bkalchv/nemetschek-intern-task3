@@ -28,11 +28,11 @@
 -(BOOL)isValidMove {
     switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
         case GameTicTacToe:
-            return ![self.board cellAt: self.indexPath].isChecked;
+            return ![self.board cellAt: self.indexPath].isChecked && self != nil;
             break;
         case GameTunakTunakTun:
             //TODO: is there an invalid TunakTunakTun move?
-            return true; // ?
+            return ![self.board cellAt: self.indexPath].isChecked && self != nil; // ?
             break;
         default:
             break;
