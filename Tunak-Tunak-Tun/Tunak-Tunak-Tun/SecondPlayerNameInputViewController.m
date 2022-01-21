@@ -37,6 +37,10 @@
     // Do any additional setup after loading the view.
     [self.GameNameLabel setText:[GameConfigurationManager.sharedGameConfigurationManager currentGameAsString]];
 }
+- (IBAction)onEditingDidBegin:(id)sender {
+    [self.SecondPlayerNameTextField setPlaceholder:@""];
+}
+
 - (IBAction)onGameOnButtonClick:(id)sender {
     
     NSString* player2Username = [[NSString alloc] init];

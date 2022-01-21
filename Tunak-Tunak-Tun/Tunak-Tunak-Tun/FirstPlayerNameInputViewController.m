@@ -29,6 +29,9 @@
     preferencesViewController.presentationController.delegate = self ;
     [self presentViewController:preferencesViewController animated:YES completion:nil];
 }
+- (IBAction)onEdittingDidBegin:(id)sender {
+    [self.usernameTextField setPlaceholder:@""];
+}
 
 - (IBAction)onToPreferencesButtonClick:(id)sender {
     NSString* username = [[NSString alloc] init];

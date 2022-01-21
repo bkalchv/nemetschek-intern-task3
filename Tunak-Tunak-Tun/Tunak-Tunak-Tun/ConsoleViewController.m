@@ -79,6 +79,19 @@
             break;
     }
     
+    switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
+        case GameTicTacToe: {
+            [self.inputTextField setPlaceholder:@"'rowIndex' 'columnIndex'"];
+            }
+            break;
+        case GameTunakTunakTun: {
+            [self.inputTextField setPlaceholder:@"'rowIndex' 'columnIndex' 'colorChar'"];
+            break;
+        }
+        default:
+            break;
+    }
+    
     self.inputTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayerName]];
     [self.gameEngine printBoardState];
@@ -259,6 +272,9 @@
     }
 }
 
+- (IBAction)onEditingDidBegin:(id)sender {
+    [self.inputTextField setPlaceholder:@""];
+}
 
 - (IBAction)onConsoleVCEnterButton:(id)sender {
     NSString* inputString = self.inputTextField.text;
