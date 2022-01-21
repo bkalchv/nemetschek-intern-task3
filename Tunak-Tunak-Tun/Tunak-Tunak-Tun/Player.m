@@ -9,6 +9,8 @@
 #import "Move.h"
 #import "TicTacToeComponents/TicTacToeCellState.h"
 #import "TunakTunakTunCellState.h"
+#import "Board.h"
+#import "Cell.h"
 #import "GameConfigurationManager.h"
 
 @interface Player()
@@ -24,42 +26,40 @@
         self.playerID = playerID;
         self.integerOfSign = integerOfSign;
         self.board = board;
-        self.tunakStateDictionary = @{
-            @"r" : @(TunakCellStateRed),
-            @"y" : @(TunakCellStateYellow),
-            @"g" : @(TunakCellStateGreen)
-        };
     }
     return self;
 }
 
 -(Move*)createMoveWithIndexPath:(NSIndexPath*)indexPath {
-    Move* move = [[Move alloc] initWithIndexPath:indexPath withBoard:self.board withIntegerOfSign:self.integerOfSign];
-    return move;
-}
-
-
--(NSInteger)signIntegerValue:(NSString*)signAsString { // we're sure of the NSString format, because of the validation in the VC-er
+    Move* move;
+    
     switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
-        case GameTicTacToe: {
-            NSLog(@"Not implemented yet, but needed!");
-            return -1; // TODO: maybe not good
+        case GameTicTacToe:
+            move = [[Move alloc] initWithIndexPath:indexPath withBoard:self.board withIntegerOfSign:self.integerOfSign];
             break;
-        }
         case GameTunakTunakTun: {
-            NSNumber* signAsNSNumber = [self.tunakStateDictionary valueForKey:signAsString];
-            return [signAsNSNumber integerValue];
+            Cell* cellOfMove = [self.board cellAt:indexPath];
+            
+            switch ([cellOfMove stateInteger]) {
+                case TunakCellStateEmpty:
+                    move = [[Move alloc] initWithIndexPath:indexPath withBoard:self.board withIntegerOfSign:TunakCellStateGreen];
+                    break;
+                    
+                case TunakCellStateGreen:
+                    move = [[Move alloc] initWithIndexPath:indexPath withBoard:self.board withIntegerOfSign:TunakCellStateYellow];
+                    break;
+                    
+                case TunakCellStateYellow:
+                    move = [[Move alloc] initWithIndexPath:indexPath withBoard:self.board withIntegerOfSign:TunakCellStateRed];
+                    break;
+            }
+            
             break;
         }
+        default:
+            break;
     }
     
-    return -1;
-}
-
--(Move*)createMoveWithIndexPath:(NSIndexPath*)indexPath withSign:(NSString*)signAsString {
-    NSInteger integerOfString = [self signIntegerValue:signAsString];
-    if (integerOfString == -1) return nil;
-    Move* move = [[Move alloc] initWithIndexPath:indexPath withBoard:self.board withIntegerOfSign:integerOfString];
     return move;
 }
 

@@ -20,7 +20,7 @@
 - (NSString*)description {
     NSString* result;
     
-    switch (self.state){
+    switch (self.state) {
         case TunakCellStateRed:
             result = @"r";
             break;

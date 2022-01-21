@@ -79,19 +79,7 @@
             break;
     }
     
-    switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
-        case GameTicTacToe: {
-            [self.inputTextField setPlaceholder:@"'rowIndex' 'columnIndex'"];
-            }
-            break;
-        case GameTunakTunakTun: {
-            [self.inputTextField setPlaceholder:@"'rowIndex' 'columnIndex' 'colorChar'"];
-            break;
-        }
-        default:
-            break;
-    }
-    
+    [self.inputTextField setPlaceholder:@"'rowIndex' 'columnIndex'"];
     self.inputTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayerName]];
     [self.gameEngine printBoardState];
@@ -100,21 +88,8 @@
     [self.view addGestureRecognizer: tapRecoginzer];
 }
 
-- (void) handleTouchOutsideTextfield {
-    if ([self.inputTextField.placeholder isEqual:@""]) {
-        switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
-            case GameTicTacToe: {
-                [self.inputTextField setPlaceholder:@"'rowIndex' 'columnIndex'"];
-                }
-                break;
-            case GameTunakTunakTun: {
-                [self.inputTextField setPlaceholder:@"'rowIndex' 'columnIndex' 'colorChar'"];
-                break;
-            }
-            default:
-                break;
-        }
-    }
+- (void)handleTouchOutsideTextfield {
+    if ([self.inputTextField.placeholder isEqual:@""]) [self.inputTextField setPlaceholder:@"'rowIndex' 'columnIndex'"];
     [self.inputTextField resignFirstResponder];
 }
 
@@ -168,15 +143,6 @@
 -(BOOL)isValidTicTacToeInput:(NSString*)input {
     NSArray<NSString*>* inputArray = [input componentsSeparatedByString:@" "];
     return inputArray.count == 2 && [self isValidRowIndexInput:inputArray[0]] && [self isValidColumnIndexInput:inputArray[1]] && [self isStringNumeric:inputArray[0]] && [self isStringNumeric:inputArray[1]];
-}
-
--(BOOL)isValidTunakTunakTunState:(NSString*)input {
-    return ([input  isEqualToString:@"r"] || [input isEqualToString:@"y"] || [input isEqualToString:@"g"]);
-}
-
--(BOOL)isValidTunakTunakTunInput:(NSString*)input {
-    NSArray<NSString*>* inputArray = [input componentsSeparatedByString:@" "];
-    return inputArray.count == 3 && [self isValidRowIndexInput:inputArray[0]] && [self isValidColumnIndexInput:inputArray[1]] && [self isStringNumeric:inputArray[0]] && [self isStringNumeric:inputArray[1]] && [self isValidTunakTunakTunState:inputArray[2]];
 }
 
 - (void)showOneMoreTimeViewController {
@@ -272,26 +238,6 @@
     }
 }
 
--(void)handleTunakSelection:(NSIndexPath*)indexPath withSign:(NSString*)signAsString {
-    
-    Move* move = [self.gameEngine createMoveOfCurrentPlayer:indexPath withSign:signAsString];
-    
-    if ([self.gameEngine didCurrentPlayerCreateValidMove:move]) {
-        [self.gameEngine handleValidMove:move];
-        
-        self.matrixLabel.text = [self.gameEngine gameBoardStateAsString];
-        
-        if (![self.gameEngine isGameOver])  {
-            [self.gameEngine switchCurrentPlayerWithYourTurnBabySideEffect];
-            [self.gameEngine emptyRedoStack];
-            self.usernameLabel.text = [NSString stringWithFormat: @"It's up to you, %@!", [self.gameEngine currentPlayerName]];
-            if ([self.gameEngine isRedoStackEmpty]) [self disableRedoButton];
-        }
-    } else {
-        NSLog(@"Cell at %tu,%tu already selected! Please select another cell!", [indexPath section], [indexPath row]);
-    }
-}
-
 - (IBAction)onEditingDidBegin:(id)sender {
     [self.inputTextField setPlaceholder:@""];
 }
@@ -299,45 +245,19 @@
 - (IBAction)onConsoleVCEnterButton:(id)sender {
     NSString* inputString = self.inputTextField.text;
     
-    
-    switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
-        case GameTicTacToe: {
-            if ([self isValidTicTacToeInput:inputString]) {
-                NSArray<NSString*>* inputArray = [inputString componentsSeparatedByString:@" "];
-                NSUInteger inputRowIndex = [inputArray[0] integerValue];
-                NSUInteger inputColIndex = [inputArray[1] integerValue];
-                
-                NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:inputColIndex inSection:inputRowIndex]; // actual format: [row , col]
-                [self handleSelection:inputIndexPath];
-                if (![self.gameEngine isUndoStackEmpty]) [self.undoButton setEnabled:YES];
-            } else {
-                [self showInvalidInputAlert];
-                NSLog(@"Invalid input. Try again!");
-                NSLog(@"***Expected input: a digit <= %tu, followed by space, followed by another digit <= %tu***", self.gameEngine.gameBoard.numberOfRows - 1, self.gameEngine.gameBoard.numberOfColumns - 1);
-            }
-            break;
-        }
-        case GameTunakTunakTun: {
-            if ([self isValidTunakTunakTunInput:inputString]) {
-                NSArray<NSString*>* inputArray = [inputString componentsSeparatedByString:@" "];
-                NSUInteger inputRowIndex = [inputArray[0] integerValue];
-                NSUInteger inputColIndex = [inputArray[1] integerValue];
-                NSString*  inputColor    = inputArray[2];
-                
-                NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:inputColIndex inSection:inputRowIndex]; // actual format: [row , col]
-                [self handleTunakSelection:inputIndexPath withSign:inputColor];
-                if (![self.gameEngine isUndoStackEmpty]) [self.undoButton setEnabled:YES];
-            } else {
-                [self showInvalidInputAlert];
-                NSLog(@"Invalid input. Try again!");
-                NSLog(@"***Expected input: a digit <= %tu, followed by space, followed by another digit, followed by space, followed by the first char of the color of your choice (red, green, yellow) <= %tu***", self.gameEngine.gameBoard.numberOfRows - 1, self.gameEngine.gameBoard.numberOfColumns - 1);
-            }
-            
-        }
-        default:
-            break;
+    if ([self isValidTicTacToeInput:inputString]) {
+        NSArray<NSString*>* inputArray = [inputString componentsSeparatedByString:@" "];
+        NSUInteger inputRowIndex = [inputArray[0] integerValue];
+        NSUInteger inputColIndex = [inputArray[1] integerValue];
+        
+        NSIndexPath* inputIndexPath = [NSIndexPath indexPathForRow:inputColIndex inSection:inputRowIndex]; // actual format: [row , col]
+        [self handleSelection:inputIndexPath];
+        if (![self.gameEngine isUndoStackEmpty]) [self.undoButton setEnabled:YES];
+    } else {
+        [self showInvalidInputAlert];
+        NSLog(@"Invalid input. Try again!");
+        NSLog(@"***Expected input: a digit <= %tu, followed by space, followed by another digit <= %tu***", self.gameEngine.gameBoard.numberOfRows - 1, self.gameEngine.gameBoard.numberOfColumns - 1);
     }
-    
 
     self.inputTextField.text = @"";
 }

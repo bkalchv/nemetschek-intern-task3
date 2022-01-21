@@ -8,6 +8,7 @@
 #import "Move.h"
 #import "Board.h"
 #import "Cell.h"
+#import "TunakTunakTunCellState.h"
 #import "GameConfigurationManager.h"
 
 @interface Move ()
@@ -31,8 +32,7 @@
             return ![self.board cellAt: self.indexPath].isChecked && self != nil;
             break;
         case GameTunakTunakTun:
-            //TODO: is there an invalid TunakTunakTun move?
-            return ![self.board cellAt: self.indexPath].isChecked && self != nil; // ?
+            return  self != nil && [self tunakTunakTunMoveSign] != TunakCellStateCount; // ?
             break;
         default:
             break;

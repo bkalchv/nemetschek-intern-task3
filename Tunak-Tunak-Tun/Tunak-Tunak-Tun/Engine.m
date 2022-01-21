@@ -100,10 +100,6 @@
     return [self.currentPlayer createMoveWithIndexPath:indexPath];
 }
 
-- (Move*)createMoveOfCurrentPlayer:(NSIndexPath*)indexPath withSign:(NSString*)signAsString {
-    return [self.currentPlayer createMoveWithIndexPath:indexPath withSign:signAsString];
-}
-
 -(BOOL)didCurrentPlayerCreateValidMove:(Move*)move {
     return [move isValidMove];
 }
@@ -142,8 +138,7 @@
     [self.currentPlayer yourTurnBaby];
 }
 
-// TODO: Wherever Enum -> NSInteger
-- (BOOL)checkColumnForCellSelection:(Cell*)cell withSignInteger:(NSInteger)signInteger { // engine specific
+- (BOOL)checkColumnForCellSelection:(Cell*)cell withSignInteger:(NSInteger)signInteger {
     for (size_t i = 0; i < self.gameBoard.numberOfColumns; i++) {
         if ([self.gameBoard cellAtRowIndex:cell.rowIndex columnIndex:i].stateInteger != signInteger) break;
         if (i + 1 == self.gameBoard.numberOfColumns) return true;
@@ -151,7 +146,7 @@
     return false;
 }
 
--(BOOL)checkRowForCellSelection:(Cell*)cell withSignInteger:(NSInteger)signInteger { // engine specific
+-(BOOL)checkRowForCellSelection:(Cell*)cell withSignInteger:(NSInteger)signInteger {
     for (size_t i = 0; i < self.gameBoard.numberOfRows; i++) {
         if ([self.gameBoard cellAtRowIndex:i columnIndex:cell.colIndex].stateInteger != signInteger) break;
         if (i + 1 == self.gameBoard.numberOfRows) return true;
@@ -159,7 +154,7 @@
     return false;
 }
 
--(BOOL)checkDiagonalForCellSelection:(Cell*)cell withSignInteger:(NSInteger)signInteger { // engine specific
+-(BOOL)checkDiagonalForCellSelection:(Cell*)cell withSignInteger:(NSInteger)signInteger {
     if(cell.rowIndex == cell.colIndex) {
         for(int i = 0; i < self.gameBoard.numberOfRows; i++) {
             if([self.gameBoard cellAtRowIndex:i columnIndex:i].stateInteger != signInteger) break;
@@ -169,7 +164,7 @@
     return false;
 }
 
--(BOOL)checkAntiDiagonalForCellSelection:(Cell*)cell withSignInteger:(NSInteger)signInteger { // engine specific
+-(BOOL)checkAntiDiagonalForCellSelection:(Cell*)cell withSignInteger:(NSInteger)signInteger {
     if(cell.rowIndex + cell.colIndex + 1 == self.gameBoard.numberOfRows) {
         for(int i = 0; i < self.gameBoard.numberOfRows; i++) {
             if([self.gameBoard cellAtRowIndex:i columnIndex:(self.gameBoard.numberOfRows - 1 - i)].stateInteger != signInteger) break;
@@ -217,14 +212,13 @@
     }
 }
 
--(void)makeMove:(Move *)move {
+-(void)makeMove:(Move *)move { // game specific
     NSUInteger row = [move.indexPath section];
     NSUInteger col = [move.indexPath row];
     [self.gameBoard changeCellStateAtRowIndex:row columnIndex:col withIntegerOfSign:[move integerOfSign]];
     [self updateGameEngineStateOnPlayerMove:move];
 }
 
-// TODO: move->opposite
 -(void)undoLastMove {
     Move* undoStackTop = [self.undoStack pop];
     [self makeMove: undoStackTop.opposite];
