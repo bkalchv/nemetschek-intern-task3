@@ -11,9 +11,9 @@
 #import "GameConfigurationManager.h"
 
 @interface SecondPlayerNameInputViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *GameNameLabel;
-@property (weak, nonatomic) IBOutlet UITextField *SecondPlayerNameTextField;
-@property (weak, nonatomic) IBOutlet UIButton *GameOnButton;
+@property (weak, nonatomic) IBOutlet UILabel *gameNameLabel;
+@property (weak, nonatomic) IBOutlet UITextField *secondPlayerNameTextField;
+@property (weak, nonatomic) IBOutlet UIButton *gameOnButton;
 @end
 
 @implementation SecondPlayerNameInputViewController
@@ -35,19 +35,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.GameNameLabel setText:[GameConfigurationManager.sharedGameConfigurationManager currentGameAsString]];
+    [self.gameNameLabel setText:[GameConfigurationManager.sharedGameConfigurationManager currentGameAsString]];
+    UITapGestureRecognizer* tapRecoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchOutsideTextfield)];
+    [self.view addGestureRecognizer: tapRecoginzer];
 }
+
+- (void) handleTouchOutsideTextfield {
+    if ([self.secondPlayerNameTextField.placeholder isEqual:@""]) [self.secondPlayerNameTextField setPlaceholder:@"ex. Johnny Simp"];
+    [self.secondPlayerNameTextField resignFirstResponder];
+}
+
 - (IBAction)onEditingDidBegin:(id)sender {
-    [self.SecondPlayerNameTextField setPlaceholder:@""];
+    [self.secondPlayerNameTextField setPlaceholder:@""];
 }
 
 - (IBAction)onGameOnButtonClick:(id)sender {
     
     NSString* player2Username = [[NSString alloc] init];
-    if ([self.SecondPlayerNameTextField.text isEqualToString:@""]) {
+    if ([self.secondPlayerNameTextField.text isEqualToString:@""]) {
         player2Username = @"Annonymous Rat";
     } else {
-        player2Username = self.SecondPlayerNameTextField.text;
+        player2Username = self.secondPlayerNameTextField.text;
     }
     
     [GameConfigurationManager.sharedGameConfigurationManager addPlayer2Username: player2Username];
@@ -73,7 +81,7 @@
 
 -(void)presentationControllerDidDismiss:(UIPresentationController *)presentationController {
     [GameConfigurationManager.sharedGameConfigurationManager resetPlayer2Name];
-    self.SecondPlayerNameTextField.text = @"";
+    self.secondPlayerNameTextField.text = @"";
 }
 
 /*

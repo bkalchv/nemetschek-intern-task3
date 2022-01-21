@@ -311,6 +311,8 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="onEdittingDidBegin:" destination="l29-XB-j0G" eventType="editingDidBegin" id="vGx-4g-fJm"/>
+                                    <action selector="onEdittingDidEnd:" destination="l29-XB-j0G" eventType="editingDidEnd" id="fZw-nn-FsG"/>
+                                    <action selector="onTouchUpOutside:" destination="l29-XB-j0G" eventType="touchUpOutside" id="kWQ-o7-1nX"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7EP-O0-KnT">
@@ -592,9 +594,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="GameNameLabel" destination="7VP-oR-Lix" id="bbV-aI-HyO"/>
-                        <outlet property="GameOnButton" destination="suV-Xz-D4m" id="qFK-jS-biJ"/>
-                        <outlet property="SecondPlayerNameTextField" destination="BrC-1X-dE5" id="tYY-6G-76x"/>
+                        <outlet property="gameNameLabel" destination="7VP-oR-Lix" id="bbV-aI-HyO"/>
+                        <outlet property="gameOnButton" destination="suV-Xz-D4m" id="qFK-jS-biJ"/>
+                        <outlet property="secondPlayerNameTextField" destination="BrC-1X-dE5" id="tYY-6G-76x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Roj-tq-clU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

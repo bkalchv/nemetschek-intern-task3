@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *toPreferencesButton;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UILabel *gameNameLabel;
+
 @end
 
 @implementation FirstPlayerNameInputViewController
@@ -21,6 +22,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.gameNameLabel setText:[GameConfigurationManager.sharedGameConfigurationManager currentGameAsString]];
+    
+    UITapGestureRecognizer* tapRecoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchOutsideTextfield)];
+    [self.view addGestureRecognizer: tapRecoginzer];
+}
+
+- (void) handleTouchOutsideTextfield {
+    if ([self.usernameTextField.placeholder isEqual:@""]) [self.usernameTextField setPlaceholder:@"ex. Johnny Simp"];
+    [self.usernameTextField resignFirstResponder];
 }
 
 - (void)showPreferencesViewController{
@@ -31,6 +40,10 @@
 }
 - (IBAction)onEdittingDidBegin:(id)sender {
     [self.usernameTextField setPlaceholder:@""];
+}
+
+- (IBAction)onEdittingDidEnd:(id)sender {
+    if ([self.usernameTextField.placeholder isEqual:@""]) [self.usernameTextField setPlaceholder:@"ex. Johnny Simp"];
 }
 
 - (IBAction)onToPreferencesButtonClick:(id)sender {

@@ -31,8 +31,6 @@
     [self refreshView];
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.preferencesMessageLabel.text = [NSString stringWithFormat:@"Okay, %@ what will it be today?", [GameConfigurationManager.sharedGameConfigurationManager player1Username]];

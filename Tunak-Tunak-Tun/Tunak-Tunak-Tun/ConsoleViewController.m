@@ -95,7 +95,27 @@
     self.inputTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     self.usernameLabel.text = [NSString stringWithFormat:@"It's up to you, %@!", [self.gameEngine currentPlayerName]];
     [self.gameEngine printBoardState];
-    // Do any additional setup after loading the view.
+    
+    UITapGestureRecognizer* tapRecoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchOutsideTextfield)];
+    [self.view addGestureRecognizer: tapRecoginzer];
+}
+
+- (void) handleTouchOutsideTextfield {
+    if ([self.inputTextField.placeholder isEqual:@""]) {
+        switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
+            case GameTicTacToe: {
+                [self.inputTextField setPlaceholder:@"'rowIndex' 'columnIndex'"];
+                }
+                break;
+            case GameTunakTunakTun: {
+                [self.inputTextField setPlaceholder:@"'rowIndex' 'columnIndex' 'colorChar'"];
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    [self.inputTextField resignFirstResponder];
 }
 
 -(void)showInvalidInputAlert {
