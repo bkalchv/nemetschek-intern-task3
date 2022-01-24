@@ -44,11 +44,16 @@
 -(Move*)opposite {
     switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
         case GameTicTacToe:
-            return [[Move alloc]initWithIndexPath:self.indexPath withBoard:self.board withIntegerOfSign: 0]; // TODO: hacky!
-            break;
-        case GameTunakTunakTun:
             return [[Move alloc]initWithIndexPath:self.indexPath withBoard:self.board withIntegerOfSign: 0];
             break;
+        case GameTunakTunakTun: {
+            Cell* gameCellAtIndexPath = [self.board cellAt:self.indexPath];
+            NSInteger previousIntegerOfState = [gameCellAtIndexPath stateInteger] - 1;
+            return [[Move alloc]initWithIndexPath:self.indexPath withBoard:self.board withIntegerOfSign:previousIntegerOfState];
+            break;
+        }
+            
+
         default:
             break;
     }
