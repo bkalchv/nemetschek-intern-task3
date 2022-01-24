@@ -28,15 +28,6 @@
     return randomIndex;
 }
 
-// TODO: gone
--(NSInteger)randomValidIntegerOfTunakCellState {
-    NSInteger randomIntegerOfTunakCellState = [self randomIndex:TunakCellStateCount];
-    while (randomIntegerOfTunakCellState == TunakCellStateEmpty) {
-        randomIntegerOfTunakCellState = [self randomIndex:TunakCellStateCount];
-    }
-    return randomIntegerOfTunakCellState;
-}
-
 -(NSArray<Cell*> *)freeCellsOfBoard {
     NSMutableArray<Cell*>* freeCellsArray = [[NSMutableArray<Cell*> alloc] init];
     for (Cell* cell in self.board.boardMatrixArray) {
