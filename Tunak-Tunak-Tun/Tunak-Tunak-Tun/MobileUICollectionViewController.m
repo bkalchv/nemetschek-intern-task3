@@ -111,7 +111,6 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     
     [self handleSelection: inputIndexPath];
     if (![self.gameEngine isUndoStackEmpty]) [self.delegate enableUndoButton];
-    //[self.collectionView reloadData];
 }
 
 - (void)onUndoButtonClick {
@@ -182,7 +181,6 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
                         break;
                 }
         }
-            
                 break;
                 
         case GameTunakTunakTun: {
@@ -198,8 +196,6 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
                     break;
             }
         }
-            
-            
         default:
             break;
     }
@@ -221,21 +217,38 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         }
             break;
         case GameTunakTunakTun: {
-            //NSString* cellLabelText = [self cellLabelTextByState:gameCell.stateInteger];
-            //[cell.cellLabel setText: cellLabelText];
             switch (gameCell.stateInteger) {
                 case TunakCellStateEmpty:
+                    [cell setBackgroundView:nil];
                     [cell setBackgroundColor: UIColor.grayColor];
                     break;
-                case TunakCellStateGreen:
+                case TunakCellStateGreen: {
                     [cell setBackgroundColor:UIColor.greenColor];
+                    UIImageView* imageV = [[UIImageView alloc] initWithFrame:cell.frame];
+                    //av.backgroundColor = [UIColor clearColor];
+                    imageV.opaque = NO;
+                    imageV.image = [UIImage imageNamed:@"tunak_green"];
+                    [cell setBackgroundView:imageV];
                     break;
-                case TunakCellStateYellow:
+                }
+                case TunakCellStateYellow: {
                     [cell setBackgroundColor:UIColor.yellowColor];
+                    UIImageView* imageV = [[UIImageView alloc] initWithFrame:cell.frame];
+                    //av.backgroundColor = [UIColor clearColor];
+                    imageV.opaque = NO;
+                    imageV.image = [UIImage imageNamed:@"tunak_yellow"];
+                    [cell setBackgroundView:imageV];
                     break;
-                case TunakCellStateRed:
-                    [cell setBackgroundColor:UIColor.redColor];
-                    break;
+                }
+                case TunakCellStateRed: {
+                   [cell setBackgroundColor:UIColor.redColor];
+                   UIImageView* imageV = [[UIImageView alloc] initWithFrame:cell.frame];
+                   //av.backgroundColor = [UIColor clearColor];
+                   imageV.opaque = NO;
+                   imageV.image = [UIImage imageNamed:@"tunak_red"];
+                   [cell setBackgroundView:imageV];
+                   break;
+               }
             }
             break;
         }
