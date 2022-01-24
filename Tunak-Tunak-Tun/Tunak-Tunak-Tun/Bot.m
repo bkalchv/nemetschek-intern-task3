@@ -28,6 +28,7 @@
     return randomIndex;
 }
 
+// TODO: gone
 -(NSInteger)randomValidIntegerOfTunakCellState {
     NSInteger randomIntegerOfTunakCellState = [self randomIndex:TunakCellStateCount];
     while (randomIntegerOfTunakCellState == TunakCellStateEmpty) {
@@ -39,7 +40,21 @@
 -(NSArray<Cell*> *)freeCellsOfBoard {
     NSMutableArray<Cell*>* freeCellsArray = [[NSMutableArray<Cell*> alloc] init];
     for (Cell* cell in self.board.boardMatrixArray) {
-        if (!cell.isChecked) [freeCellsArray addObject:cell];
+        
+        switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
+            case GameTicTacToe: {
+                if (!cell.isChecked) [freeCellsArray addObject:cell];
+                break;
+            }
+                
+            case GameTunakTunakTun: {
+                if (cell.stateInteger != TunakCellStateRed) [freeCellsArray addObject:cell];
+                break;
+            }
+
+            default:
+                break;
+        }
     }
     return freeCellsArray;
 }
@@ -53,11 +68,7 @@
 -(void)yourTurnBaby {
     Cell* cellToSelect = [self randomFreeCell];
     
-    // TODO: HACKY ALERT
-    if ([GameConfigurationManager.sharedGameConfigurationManager game] == GameTunakTunakTun) {
-        NSInteger randomValidIntegerOfSign = [self randomValidIntegerOfTunakCellState];
-        [self setIntegerOfSign:randomValidIntegerOfSign];
-    }
+    if ([GameConfigurationManager.sharedGameConfigurationManager game] == GameTunakTunakTun) [self setIntegerOfSign:cellToSelect.stateInteger];
     
     if (cellToSelect != nil) {
         NSIndexPath* cellToSelectIndexPath = [NSIndexPath indexPathForRow:[cellToSelect colIndex] inSection:[cellToSelect rowIndex]];

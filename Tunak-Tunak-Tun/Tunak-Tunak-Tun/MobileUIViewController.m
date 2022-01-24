@@ -63,7 +63,6 @@
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     OneMoreTimeViewController* oneMoreTimeViewController = [storyboard instantiateViewControllerWithIdentifier:@"OneMoreTimeViewController"];
     oneMoreTimeViewController.delegate = self;
-    //self.presentationController.delegate = self; // TODO: Check if needed
     [self presentViewController:oneMoreTimeViewController animated:YES completion:nil];
 }
 

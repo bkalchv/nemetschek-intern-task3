@@ -111,6 +111,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     
     [self handleSelection: inputIndexPath];
     if (![self.gameEngine isUndoStackEmpty]) [self.delegate enableUndoButton];
+    //[self.collectionView reloadData];
 }
 
 - (void)onUndoButtonClick {
@@ -211,9 +212,39 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     MobileUICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     NSIndexPath* cellIndexPath = [NSIndexPath indexPathForRow:[self.gameEngine calculateColumnIndex:indexPath.row] inSection:[self.gameEngine calculateRowIndex:indexPath.row]];
     Cell* gameCell = [self.gameEngine.gameBoard cellAt: cellIndexPath];
-    NSString* cellLabelText = [self cellLabelTextByState:gameCell.stateInteger];
-    [cell.cellLabel setText: cellLabelText];
-    [cell setBackgroundColor: UIColor.grayColor];
+   
+    switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
+        case GameTicTacToe: {
+            NSString* cellLabelText = [self cellLabelTextByState:gameCell.stateInteger];
+            [cell.cellLabel setText: cellLabelText];
+            [cell setBackgroundColor: UIColor.grayColor];
+        }
+            break;
+        case GameTunakTunakTun: {
+            //NSString* cellLabelText = [self cellLabelTextByState:gameCell.stateInteger];
+            //[cell.cellLabel setText: cellLabelText];
+            switch (gameCell.stateInteger) {
+                case TunakCellStateEmpty:
+                    [cell setBackgroundColor: UIColor.grayColor];
+                    break;
+                case TunakCellStateGreen:
+                    [cell setBackgroundColor:UIColor.greenColor];
+                    break;
+                case TunakCellStateYellow:
+                    [cell setBackgroundColor:UIColor.yellowColor];
+                    break;
+                case TunakCellStateRed:
+                    [cell setBackgroundColor:UIColor.redColor];
+                    break;
+            }
+            break;
+        }
+
+        default:
+            break;
+    }
+   
+    
     
     return cell;
 }

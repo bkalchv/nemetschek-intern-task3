@@ -50,9 +50,10 @@
         
         Bot* bot;
         switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
-            case GameTicTacToe:
+            case GameTicTacToe: {
                 bot = [[Bot alloc] initWithIntegerOfSign:(NSInteger)TicTacToeCellStateO withBoard:self.gameBoard];
                 break;
+            }
             case GameTunakTunakTun: {
                 bot = [[Bot alloc] initWithIntegerOfSign:[self randomIndex:TunakCellStateCount] withBoard:self.gameBoard];
                 break;
@@ -62,7 +63,6 @@
                 break;
         }
         
-         
         bot.delegate = self;
         self.player2 = bot;
         self.currentPlayer = self.player1;
@@ -126,7 +126,6 @@
 }
 
 -(void)handleValidMove:(Move*)move {
-    // TODO: engine specific
     [self makeMove:move];
     [self.undoStack pushMove:move];
     [self printBoardState];

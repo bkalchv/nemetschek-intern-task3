@@ -24,8 +24,6 @@
         
         for (size_t r = 0; r < self.numberOfRows; ++r) {
             for (size_t c = 0; c < self.numberOfColumns; ++c) {
-                // gotta know if TicTacToeCell or TunakCell
-                // TODO: ask
                 switch([GameConfigurationManager.sharedGameConfigurationManager game]) {
                     case GameTicTacToe:
                         [self.boardMatrixArray addObject: [[TicTacToeCell alloc] initWithState:TicTacToeCellStateEmpty atRow:r atColumn:c]];

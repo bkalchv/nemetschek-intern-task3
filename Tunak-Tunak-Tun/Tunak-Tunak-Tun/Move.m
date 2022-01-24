@@ -15,6 +15,7 @@
 @property (nonatomic, strong) Board *board;
 @end
 
+//TODO: - Create a Tunak Move
 @implementation Move
 -(instancetype)initWithIndexPath:(NSIndexPath*)indexPath withBoard:(Board*)board withIntegerOfSign:(NSInteger)integerOfSign {
     if (self = [super init]) {
@@ -39,6 +40,7 @@
     }
 }
 
+// TODO: rework
 -(Move*)opposite {
     switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
         case GameTicTacToe:

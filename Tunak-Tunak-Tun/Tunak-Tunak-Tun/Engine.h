@@ -17,7 +17,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol EngineDelegate <NSObject>
-//TODO: TicTacMove* -> Move*
 - (void)checkGameOutcomeForMove:(Move*)move;
 - (void)handleSelection:(NSIndexPath*)indexPath;
 @end
