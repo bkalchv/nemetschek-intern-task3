@@ -11,6 +11,7 @@
 #import "Engine.h"
 #import "Move.h"
 #import "TicTacToeCellState.h"
+#import "TunakTunakTunCellState.h"
 
 @interface MobileUICollectionViewController ()
 @end
@@ -165,28 +166,52 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
     return 1;
 }
 
--(NSString*)cellLabelTextByState:(TicTacToeCellState)state {
-    switch (state) {
-        case TicTacToeCellStateO:
-            return @"O";
-            break;
-        case TicTacToeCellStateX:
-            return @"X";
-            break;
-        case TicTacToeCellStateEmpty:
-            return @"";
+-(NSString*)cellLabelTextByState:(NSInteger)integerOfState {
+    switch([GameConfigurationManager.sharedGameConfigurationManager game]) {
+        case GameTicTacToe: {
+                switch (integerOfState) {
+                    case TicTacToeCellStateO:
+                        return @"O";
+                        break;
+                    case TicTacToeCellStateX:
+                        return @"X";
+                        break;
+                    case TicTacToeCellStateEmpty:
+                        return @"";
+                        break;
+                }
+        }
+            
+                break;
+                
+        case GameTunakTunakTun: {
+            switch (integerOfState) {
+                case TunakCellStateGreen:
+                    return @"g";
+                    break;
+                case TunakCellStateYellow:
+                    return @"y";
+                    break;
+                case TunakCellStateRed:
+                    return @"r";
+                    break;
+            }
+        }
+            
+            
+        default:
             break;
     }
+
     
     return nil;
 }
 
-//TODO: Broken -> You rely on TicTacToeCell, but thought you dont anymore. HA!
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MobileUICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     NSIndexPath* cellIndexPath = [NSIndexPath indexPathForRow:[self.gameEngine calculateColumnIndex:indexPath.row] inSection:[self.gameEngine calculateRowIndex:indexPath.row]];
-    TicTacToeCell* gameCell = [self.gameEngine.gameBoard cellAt: cellIndexPath];
-    NSString* cellLabelText = [self cellLabelTextByState:gameCell.state];
+    Cell* gameCell = [self.gameEngine.gameBoard cellAt: cellIndexPath];
+    NSString* cellLabelText = [self cellLabelTextByState:gameCell.stateInteger];
     [cell.cellLabel setText: cellLabelText];
     [cell setBackgroundColor: UIColor.grayColor];
     

@@ -47,6 +47,7 @@
     if (self) {
         self.gameMode = GameModeOnePlayer;
         self.player1 = [[Player alloc] initPlayerWithName:playersName withId:1 withIntegerOfSign:(NSInteger)TicTacToeCellStateX withBoard:self.gameBoard];
+        
         Bot* bot;
         switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
             case GameTicTacToe:
@@ -74,9 +75,29 @@
 - (instancetype)initWithPlayer1Name:(NSString*)player1Name player2Name:(NSString*)player2Name {
     self = [self init];
     if (self) {
+        
+        
+        Player* player1;
+        Player* player2;
+        
+        switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
+            case GameTicTacToe:
+                player1 = [[Player alloc] initPlayerWithName:player1Name withId:1 withIntegerOfSign:TicTacToeCellStateX withBoard:self.gameBoard];
+                player2 = [[Player alloc] initPlayerWithName:player2Name withId:2 withIntegerOfSign:TicTacToeCellStateO withBoard:self.gameBoard];
+                break;
+            case GameTunakTunakTun: {
+                player1 = [[Player alloc] initPlayerWithName:player1Name withId:1 withIntegerOfSign:TunakCellStateGreen withBoard:self.gameBoard];
+                player2 = [[Player alloc] initPlayerWithName:player2Name withId:2 withIntegerOfSign:TunakCellStateGreen withBoard:self.gameBoard];
+                break;
+            }
+
+            default:
+                break;
+        }
+        
         self.gameMode = GameModeTwoPlayers;
-        self.player1 = [[Player alloc] initPlayerWithName:player1Name withId:1 withIntegerOfSign:(NSInteger)TicTacToeCellStateX withBoard:self.gameBoard];
-        self.player2 = [[Player alloc] initPlayerWithName:player2Name withId:2 withIntegerOfSign:(NSInteger)TicTacToeCellStateO withBoard:self.gameBoard];
+        self.player1 = player1;
+        self.player2 = player2;
         self.currentPlayer = self.player1;
         self.undoStack = [[MovesStack alloc] init];
         self.redoStack = [[MovesStack alloc] init];

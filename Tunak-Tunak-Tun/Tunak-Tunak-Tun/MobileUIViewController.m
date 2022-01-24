@@ -114,14 +114,6 @@
         self.delegate = mobileUICollectionViewController;
         switch ([GameConfigurationManager.sharedGameConfigurationManager gameMode]) {
             case GameModeOnePlayer: {
-                
-                //switch (game) {
-                
-                // case: TicTacToe -> TicTacToeEngine
-                // case: TunakTunakTun -> TunakTunakTunEngine
-                
-                //}
-                
                 Engine* engine = [[Engine alloc] initWithPlayersName:[GameConfigurationManager.sharedGameConfigurationManager player1Username]];
                 engine.delegate = mobileUICollectionViewController;
                 mobileUICollectionViewController.gameEngine = engine;
@@ -129,14 +121,6 @@
             }
 
             case GameModeTwoPlayers: {
-                
-                //switch (game) {
-                
-                // case: TicTacToe -> TicTacToeEngine
-                // case: TunakTunakTun -> TunakTunakTunEngine
-                
-                //}
-                
                 Engine* engine = [[Engine alloc] initWithPlayer1Name:[GameConfigurationManager.sharedGameConfigurationManager player1Username] player2Name:[GameConfigurationManager.sharedGameConfigurationManager player2Username]];
                 engine.delegate = mobileUICollectionViewController;
                 mobileUICollectionViewController.gameEngine = engine;

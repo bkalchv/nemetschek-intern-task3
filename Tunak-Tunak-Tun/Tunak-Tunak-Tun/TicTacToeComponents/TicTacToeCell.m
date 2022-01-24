@@ -21,7 +21,7 @@
 - (NSString*)description {
     NSString* result;
     
-    switch (self.state){
+    switch (self.state) {
         case TicTacToeCellStateX:
             result = @"X";
             break;
