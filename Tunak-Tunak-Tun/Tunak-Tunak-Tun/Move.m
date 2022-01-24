@@ -33,14 +33,13 @@
             return ![self.board cellAt: self.indexPath].isChecked && self != nil;
             break;
         case GameTunakTunakTun:
-            return  self != nil && [self tunakTunakTunMoveSign] != TunakCellStateCount; // ?
+            return  self != nil && [self tunakTunakTunMoveSign] <= TunakCellStateRed; // ?
             break;
         default:
             break;
     }
 }
 
-// TODO: rework
 -(Move*)opposite {
     switch ([GameConfigurationManager.sharedGameConfigurationManager game]) {
         case GameTicTacToe:

@@ -55,7 +55,7 @@
                 break;
             }
             case GameTunakTunakTun: {
-                bot = [[Bot alloc] initWithIntegerOfSign:[self randomIndex:TunakCellStateCount] withBoard:self.gameBoard];
+                bot = [[Bot alloc] initWithIntegerOfSign:(NSInteger)TunakCellStateGreen withBoard:self.gameBoard];
                 break;
             }
 
