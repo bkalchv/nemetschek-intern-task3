@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "tunak_red.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "tunak_red-removebg-preview.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

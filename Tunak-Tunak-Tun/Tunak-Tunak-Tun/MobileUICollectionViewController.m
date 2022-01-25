@@ -217,6 +217,9 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
         }
             break;
         case GameTunakTunakTun: {
+            
+            CGRect cellFrame = cell.frame;
+            CGRect tunakImageFrame =  CGRectMake(cellFrame.origin.x, cellFrame.origin.y, cellFrame.size.width - 1, cellFrame.size.height -1);
             switch (gameCell.stateInteger) {
                 case TunakCellStateEmpty:
                     [cell setBackgroundView:nil];
@@ -224,7 +227,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
                     break;
                 case TunakCellStateGreen: {
                     [cell setBackgroundColor:UIColor.greenColor];
-                    UIImageView* imageV = [[UIImageView alloc] initWithFrame:cell.frame];
+                    UIImageView* imageV = [[UIImageView alloc] initWithFrame:tunakImageFrame];
                     //av.backgroundColor = [UIColor clearColor];
                     imageV.opaque = NO;
                     imageV.image = [UIImage imageNamed:@"tunak_green"];
@@ -233,7 +236,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
                 }
                 case TunakCellStateYellow: {
                     [cell setBackgroundColor:UIColor.yellowColor];
-                    UIImageView* imageV = [[UIImageView alloc] initWithFrame:cell.frame];
+                    UIImageView* imageV = [[UIImageView alloc] initWithFrame:tunakImageFrame];
                     //av.backgroundColor = [UIColor clearColor];
                     imageV.opaque = NO;
                     imageV.image = [UIImage imageNamed:@"tunak_yellow"];
@@ -242,7 +245,7 @@ static NSString * const reuseIdentifier = @"MobileUICollectionViewCell";
                 }
                 case TunakCellStateRed: {
                    [cell setBackgroundColor:UIColor.redColor];
-                   UIImageView* imageV = [[UIImageView alloc] initWithFrame:cell.frame];
+                   UIImageView* imageV = [[UIImageView alloc] initWithFrame:tunakImageFrame];
                    //av.backgroundColor = [UIColor clearColor];
                    imageV.opaque = NO;
                    imageV.image = [UIImage imageNamed:@"tunak_red"];
