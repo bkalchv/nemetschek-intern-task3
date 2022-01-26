@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GameChoicePageViewController : UIPageViewController
+@interface GameChoicePageViewController : UIPageViewController<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @end
 

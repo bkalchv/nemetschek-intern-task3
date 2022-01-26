@@ -235,28 +235,29 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOt-Qw-qiy">
-                                <rect key="frame" x="169" y="608" width="76" height="31"/>
+                                <rect key="frame" x="169" y="658" width="76" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Confirm"/>
                                 <connections>
                                     <action selector="onConfirmButtonClick:" destination="XjA-Nq-pWz" eventType="touchUpInside" id="nYp-P6-Zdm"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9lQ-Dw-RLt">
-                                <rect key="frame" x="107" y="323" width="200" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="9lQ-Dw-RLt" secondAttribute="height" multiplier="4:5" id="Bcv-Hw-D0g"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="8cm-UJ-7h1" kind="embed" id="2dO-5T-3AP"/>
-                                </connections>
-                            </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick a game:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh3-5b-DHO">
                                 <rect key="frame" x="151" y="264" width="112" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9lQ-Dw-RLt">
+                                <rect key="frame" x="57" y="323" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="29w-iR-0US"/>
+                                    <constraint firstAttribute="height" constant="300" id="Ovh-pc-CzB"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="47s-n0-5ng" kind="embed" id="32Y-se-X38"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="M9h-3p-b9F"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -264,11 +265,10 @@
                             <constraint firstItem="Fcv-SE-hGs" firstAttribute="top" secondItem="M9h-3p-b9F" secondAttribute="top" constant="50" id="5OS-Bh-og2"/>
                             <constraint firstItem="9lQ-Dw-RLt" firstAttribute="top" secondItem="qh3-5b-DHO" secondAttribute="bottom" constant="35" id="Cjw-uq-eRg"/>
                             <constraint firstItem="Fcv-SE-hGs" firstAttribute="centerX" secondItem="M9h-3p-b9F" secondAttribute="centerX" id="CmN-h4-30x"/>
-                            <constraint firstItem="9lQ-Dw-RLt" firstAttribute="leading" secondItem="M9h-3p-b9F" secondAttribute="leading" constant="107" id="RLh-4d-604"/>
+                            <constraint firstItem="9lQ-Dw-RLt" firstAttribute="centerX" secondItem="M9h-3p-b9F" secondAttribute="centerX" id="MMd-5o-858"/>
                             <constraint firstItem="nOt-Qw-qiy" firstAttribute="centerX" secondItem="M9h-3p-b9F" secondAttribute="centerX" id="Y5S-iS-lRq"/>
                             <constraint firstItem="qh3-5b-DHO" firstAttribute="top" secondItem="Fcv-SE-hGs" secondAttribute="bottom" constant="136.5" id="fZg-1O-V3k"/>
                             <constraint firstItem="nOt-Qw-qiy" firstAttribute="top" secondItem="9lQ-Dw-RLt" secondAttribute="bottom" constant="35" id="llz-58-9ZW"/>
-                            <constraint firstItem="M9h-3p-b9F" firstAttribute="trailing" secondItem="9lQ-Dw-RLt" secondAttribute="trailing" constant="107" id="mW2-zB-ovJ"/>
                             <constraint firstItem="qh3-5b-DHO" firstAttribute="centerX" secondItem="M9h-3p-b9F" secondAttribute="centerX" id="pMu-dD-y6Y"/>
                         </constraints>
                     </view>
@@ -278,17 +278,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8A-np-U4T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4253.623188405797" y="-988.39285714285711"/>
+            <point key="canvasLocation" x="-4539" y="-988"/>
         </scene>
         <!--Game Choice Page View Controller-->
         <scene sceneID="25u-id-ngv">
             <objects>
-                <pageViewController storyboardIdentifier="GameChoicePageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="47s-n0-5ng" customClass="GameChoicePageViewController" sceneMemberID="viewController">
-                    <size key="freeformSize" width="200" height="225"/>
-                </pageViewController>
+                <pageViewController storyboardIdentifier="GameChoicePageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="47s-n0-5ng" customClass="GameChoicePageViewController" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UwP-Zu-xXT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3900" y="-458"/>
+            <point key="canvasLocation" x="-4581" y="-425"/>
         </scene>
         <!--First Player Name Input View Controller-->
         <scene sceneID="knS-In-L1c">
@@ -616,25 +614,48 @@
             <objects>
                 <viewController storyboardIdentifier="CardViewController" id="SCS-fK-6Ck" customClass="CardViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GNA-MD-O64">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="225"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TunakTunakTun" translatesAutoresizingMaskIntoConstraints="NO" id="Udf-Pn-CEX">
-                                <rect key="frame" x="13" y="0.0" width="175" height="175"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Name Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSr-iL-73x">
-                                <rect key="frame" x="0.0" y="171" width="200" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s52-qO-8Xn">
+                                <rect key="frame" x="87" y="319.5" width="240" height="267.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TunakTunakTun" translatesAutoresizingMaskIntoConstraints="NO" id="Udf-Pn-CEX">
+                                        <rect key="frame" x="32.5" y="20" width="175" height="175"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="175" id="0Nn-V9-s08"/>
+                                            <constraint firstAttribute="height" constant="175" id="mZB-OM-EV6"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Name Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSr-iL-73x">
+                                        <rect key="frame" x="20" y="211.5" width="200" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="tka-j8-c4L"/>
+                                            <constraint firstAttribute="width" constant="200" id="xeu-cF-x3V"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="FSr-iL-73x" firstAttribute="centerX" secondItem="Udf-Pn-CEX" secondAttribute="centerX" id="FYa-NN-7Y0"/>
+                                    <constraint firstItem="Udf-Pn-CEX" firstAttribute="top" secondItem="s52-qO-8Xn" secondAttribute="top" constant="20" symbolic="YES" id="Kag-6O-xeg"/>
+                                    <constraint firstItem="FSr-iL-73x" firstAttribute="top" secondItem="Udf-Pn-CEX" secondAttribute="bottom" constant="16.5" id="baH-oV-PcA"/>
+                                    <constraint firstAttribute="width" constant="240" id="hMA-iW-g6u"/>
+                                    <constraint firstItem="Udf-Pn-CEX" firstAttribute="centerX" secondItem="s52-qO-8Xn" secondAttribute="centerX" id="rnd-VX-J6b"/>
+                                    <constraint firstAttribute="height" constant="267.5" id="vni-9A-ZPm"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OCB-NY-sqO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="s52-qO-8Xn" firstAttribute="centerX" secondItem="OCB-NY-sqO" secondAttribute="centerX" id="1wu-ix-kds"/>
+                            <constraint firstItem="s52-qO-8Xn" firstAttribute="centerY" secondItem="OCB-NY-sqO" secondAttribute="centerY" id="uop-m2-ceI"/>
+                        </constraints>
                     </view>
-                    <size key="freeformSize" width="200" height="225"/>
                     <connections>
                         <outlet property="gameImageView" destination="Udf-Pn-CEX" id="f5V-tZ-Dgd"/>
                         <outlet property="gameNameLabel" destination="FSr-iL-73x" id="Qtz-UN-g02"/>
@@ -642,14 +663,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qsu-yW-uDz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3529" y="-458"/>
+            <point key="canvasLocation" x="-5288" y="-969"/>
         </scene>
         <!--Game Choice View Controller-->
         <scene sceneID="3y0-JU-Tvj">
             <objects>
                 <viewController id="8cm-UJ-7h1" customClass="GameChoiceViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PCZ-Pc-1fi">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="gKK-Gx-0kE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -657,7 +678,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fzO-l6-65z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4255" y="-466"/>
+            <point key="canvasLocation" x="-2546" y="-123"/>
         </scene>
     </scenes>
     <resources>

@@ -6,6 +6,7 @@
 //
 
 #import "Engine.h"
+#import "Cell.h"
 #import "TicTacToeCellState.h"
 #import "TunakTunakTunCellState.h"
 #import "Move.h"

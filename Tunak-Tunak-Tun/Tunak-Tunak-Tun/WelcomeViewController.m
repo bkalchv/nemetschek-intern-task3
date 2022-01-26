@@ -6,7 +6,6 @@
 //
 
 #import "WelcomeViewController.h"
-#import "GamePicturesView.h"
 #import "GameConfigurationManager.h"
 #import "FirstPlayerNameInputViewController.h"
 

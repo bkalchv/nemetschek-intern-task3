@@ -10,7 +10,6 @@
 @class TicTacToePlayer;
 @class Move;
 #import "Board.h"
-#import "TicTacToeBoard.h"
 #import "Bot.h"
 #import "GameConfigurationManager.h"
 
