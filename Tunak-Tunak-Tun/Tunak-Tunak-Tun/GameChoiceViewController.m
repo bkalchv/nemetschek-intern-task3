@@ -7,6 +7,7 @@
 
 #import "GameChoiceViewController.h"
 #import "CardViewController.h"
+#import "GameConfigurationManager.h"
 
 @interface GameChoiceViewController ()
 @property (strong, nonatomic) UIPageViewController* pageViewController;
@@ -92,7 +93,7 @@
     cardVC.pageIndex = index;
     cardVC.imageFileName = self.gameImages[index];
     cardVC.titleText = self.gameTitles[index];
-    
+    [GameConfigurationManager.sharedGameConfigurationManager changeToGame:index];
    
     return cardVC;
 }
