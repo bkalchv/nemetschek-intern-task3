@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  GameChoicePageViewController.h
 //  Tunak-Tunak-Tun
 //
 //  Created by Bogdan Kalchev on 25.01.22.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ViewController : UIViewController
+@interface GameChoicePageViewController : UIPageViewController
 
 @end
 

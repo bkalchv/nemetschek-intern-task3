@@ -21,7 +21,6 @@
 		42A5A0582768DDBB007AD579 /* OneMoreTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A5A0572768DDBB007AD579 /* OneMoreTimeViewController.m */; };
 		42A945BB2767515E002767C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945BA2767515E002767C6 /* AppDelegate.m */; };
 		42A945BE2767515E002767C6 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945BD2767515E002767C6 /* SceneDelegate.m */; };
-		42A945C12767515E002767C6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945C02767515E002767C6 /* ViewController.m */; };
 		42A945C42767515E002767C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42A945C22767515E002767C6 /* Main.storyboard */; };
 		42A945C62767515F002767C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A945C52767515F002767C6 /* Assets.xcassets */; };
 		42A945C92767515F002767C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42A945C72767515F002767C6 /* LaunchScreen.storyboard */; };
@@ -32,6 +31,10 @@
 		42A945DD27676AC5002767C6 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945DC27676AC5002767C6 /* Board.m */; };
 		42A945E027678B1B002767C6 /* Engine.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945DF27678B1B002767C6 /* Engine.m */; };
 		42A945E62767A330002767C6 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A945E52767A330002767C6 /* Cell.m */; };
+		42BE9A8527A0257E00E78017 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BE9A8427A0257E00E78017 /* ViewController.m */; };
+		42BE9A9327A0355A00E78017 /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BE9A9227A0355A00E78017 /* CardViewController.m */; };
+		42BE9A9927A035D200E78017 /* GameChoicePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BE9A9827A035D200E78017 /* GameChoicePageViewController.m */; };
+		42BE9A9C27A03BF400E78017 /* GameChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BE9A9B27A03BF400E78017 /* GameChoiceViewController.m */; };
 		42C3C8A12791B4EA00FA343E /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C3C8A02791B4EA00FA343E /* WelcomeViewController.m */; };
 		42CB4103277353D600A7046E /* SecondPlayerNameInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CB4102277353D600A7046E /* SecondPlayerNameInputViewController.m */; };
 		42CB410627737FE800A7046E /* GameConfigurationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CB410527737FE800A7046E /* GameConfigurationManager.m */; };
@@ -69,8 +72,6 @@
 		42A945BA2767515E002767C6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		42A945BC2767515E002767C6 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		42A945BD2767515E002767C6 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		42A945BF2767515E002767C6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		42A945C02767515E002767C6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		42A945C32767515E002767C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		42A945C52767515F002767C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42A945C82767515F002767C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -91,6 +92,14 @@
 		42AB6409278F319F00C2FC83 /* OneMoreTimeViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneMoreTimeViewControllerDelegate.h; sourceTree = "<group>"; };
 		42BAA513278C842900645001 /* MobileUICollectionViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileUICollectionViewControllerDelegate.h; sourceTree = "<group>"; };
 		42BAA514278C863100645001 /* MobileUIViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileUIViewControllerDelegate.h; sourceTree = "<group>"; };
+		42BE9A8327A0257E00E78017 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		42BE9A8427A0257E00E78017 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		42BE9A9127A0355A00E78017 /* CardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardViewController.h; sourceTree = "<group>"; };
+		42BE9A9227A0355A00E78017 /* CardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardViewController.m; sourceTree = "<group>"; };
+		42BE9A9727A035D200E78017 /* GameChoicePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameChoicePageViewController.h; sourceTree = "<group>"; };
+		42BE9A9827A035D200E78017 /* GameChoicePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameChoicePageViewController.m; sourceTree = "<group>"; };
+		42BE9A9A27A03BF400E78017 /* GameChoiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameChoiceViewController.h; sourceTree = "<group>"; };
+		42BE9A9B27A03BF400E78017 /* GameChoiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameChoiceViewController.m; sourceTree = "<group>"; };
 		42C3C89F2791B4EA00FA343E /* WelcomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		42C3C8A02791B4EA00FA343E /* WelcomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		42CB4101277353D600A7046E /* SecondPlayerNameInputViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondPlayerNameInputViewController.h; sourceTree = "<group>"; };
@@ -176,9 +185,15 @@
 				42A945BA2767515E002767C6 /* AppDelegate.m */,
 				42A945BC2767515E002767C6 /* SceneDelegate.h */,
 				42A945BD2767515E002767C6 /* SceneDelegate.m */,
-				42A945BF2767515E002767C6 /* ViewController.h */,
-				42A945C02767515E002767C6 /* ViewController.m */,
+				42BE9A8327A0257E00E78017 /* ViewController.h */,
+				42BE9A8427A0257E00E78017 /* ViewController.m */,
 				42A945C22767515E002767C6 /* Main.storyboard */,
+				42BE9A9A27A03BF400E78017 /* GameChoiceViewController.h */,
+				42BE9A9B27A03BF400E78017 /* GameChoiceViewController.m */,
+				42BE9A9727A035D200E78017 /* GameChoicePageViewController.h */,
+				42BE9A9827A035D200E78017 /* GameChoicePageViewController.m */,
+				42BE9A9127A0355A00E78017 /* CardViewController.h */,
+				42BE9A9227A0355A00E78017 /* CardViewController.m */,
 				42CB410427737FE800A7046E /* GameConfigurationManager.h */,
 				42CB410527737FE800A7046E /* GameConfigurationManager.m */,
 				429A5F2E2795887C007977C5 /* GamePicturesView.xib */,
@@ -296,15 +311,18 @@
 				4297D02D2770903A00F0782E /* MobileUICollectionViewCell.m in Sources */,
 				42A945DD27676AC5002767C6 /* Board.m in Sources */,
 				429BAEF5276B8E15007D73C5 /* MobileUIViewController.m in Sources */,
-				42A945C12767515E002767C6 /* ViewController.m in Sources */,
 				42A945BB2767515E002767C6 /* AppDelegate.m in Sources */,
 				42A945CC2767515F002767C6 /* main.m in Sources */,
 				42A5A0582768DDBB007AD579 /* OneMoreTimeViewController.m in Sources */,
 				42A945BE2767515E002767C6 /* SceneDelegate.m in Sources */,
+				42BE9A9927A035D200E78017 /* GameChoicePageViewController.m in Sources */,
 				429BAEF8276B9627007D73C5 /* MobileUICollectionViewController.m in Sources */,
+				42BE9A9327A0355A00E78017 /* CardViewController.m in Sources */,
 				429A5F2D27958748007977C5 /* GamePicturesView.m in Sources */,
 				42C3C8A12791B4EA00FA343E /* WelcomeViewController.m in Sources */,
 				429BAEF2276B818A007D73C5 /* PreferencesViewController.m in Sources */,
+				42BE9A8527A0257E00E78017 /* ViewController.m in Sources */,
+				42BE9A9C27A03BF400E78017 /* GameChoiceViewController.m in Sources */,
 				429A5F352795C5A3007977C5 /* TicTacToeCell.m in Sources */,
 				42A945D7276758F5002767C6 /* TunakTunakTunCell.m in Sources */,
 				426B519D27748850009A8B2F /* Bot.m in Sources */,

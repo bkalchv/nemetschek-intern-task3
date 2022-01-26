@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -236,31 +235,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOt-Qw-qiy">
-                                <rect key="frame" x="160" y="616" width="95" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Confirm"/>
-                                <connections>
-                                    <action selector="onConfirmButtonClick:" destination="XjA-Nq-pWz" eventType="touchUpInside" id="nYp-P6-Zdm"/>
-                                </connections>
-                            </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KR6-3K-c5k">
-                                <rect key="frame" x="117" y="323" width="180" height="180"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <viewLayoutGuide key="contentLayoutGuide" id="jrU-Mn-3BG"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="kDn-1T-arX"/>
-                                <connections>
-                                    <outlet property="delegate" destination="XjA-Nq-pWz" id="o8q-7U-wiY"/>
-                                </connections>
-                            </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="Tl9-Bh-enC">
-                                <rect key="frame" x="129" y="511" width="156" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                                <color key="pageIndicatorTintColor" systemColor="opaqueSeparatorColor"/>
-                                <color key="currentPageIndicatorTintColor" name="AccentColor"/>
-                            </pageControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pick a game:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh3-5b-DHO">
                                 <rect key="frame" x="151" y="278" width="112" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -268,19 +242,43 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9lQ-Dw-RLt">
+                                <rect key="frame" x="107" y="323" width="200" height="250"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="8cm-UJ-7h1" kind="embed" id="2dO-5T-3AP"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOt-Qw-qiy">
+                                <rect key="frame" x="160" y="594" width="95" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Confirm"/>
+                                <connections>
+                                    <action selector="onConfirmButtonClick:" destination="XjA-Nq-pWz" eventType="touchUpInside" id="nYp-P6-Zdm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="M9h-3p-b9F"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <outlet property="confirmButton" destination="nOt-Qw-qiy" id="6IV-z9-1Wj"/>
-                        <outlet property="gameChoicePageControl" destination="Tl9-Bh-enC" id="Wpm-Hl-7aW"/>
-                        <outlet property="gameChoiceScrollView" destination="KR6-3K-c5k" id="cVF-lQ-NBo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8A-np-U4T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4252" y="-988"/>
+            <point key="canvasLocation" x="-4253.623188405797" y="-988.39285714285711"/>
+        </scene>
+        <!--Game Choice Page View Controller-->
+        <scene sceneID="25u-id-ngv">
+            <objects>
+                <pageViewController storyboardIdentifier="GameChoicePageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="47s-n0-5ng" customClass="GameChoicePageViewController" sceneMemberID="viewController">
+                    <size key="freeformSize" width="200" height="225"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UwP-Zu-xXT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4254" y="-173"/>
         </scene>
         <!--First Player Name Input View Controller-->
         <scene sceneID="knS-In-L1c">
@@ -603,19 +601,59 @@
             </objects>
             <point key="canvasLocation" x="-2036.2318840579712" y="-988.39285714285711"/>
         </scene>
+        <!--Card View Controller-->
+        <scene sceneID="5Su-Na-hhD">
+            <objects>
+                <viewController storyboardIdentifier="CardViewController" id="SCS-fK-6Ck" customClass="CardViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GNA-MD-O64">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="225"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TunakTunakTun" translatesAutoresizingMaskIntoConstraints="NO" id="Udf-Pn-CEX">
+                                <rect key="frame" x="13" y="0.0" width="175" height="175"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Name Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSr-iL-73x">
+                                <rect key="frame" x="0.0" y="171" width="200" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OCB-NY-sqO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <size key="freeformSize" width="200" height="225"/>
+                    <connections>
+                        <outlet property="gameImageView" destination="Udf-Pn-CEX" id="f5V-tZ-Dgd"/>
+                        <outlet property="gameNameLabel" destination="FSr-iL-73x" id="Qtz-UN-g02"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qsu-yW-uDz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3884" y="-173"/>
+        </scene>
+        <!--Game Choice View Controller-->
+        <scene sceneID="3y0-JU-Tvj">
+            <objects>
+                <viewController id="8cm-UJ-7h1" customClass="GameChoiceViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PCZ-Pc-1fi">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="gKK-Gx-0kE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fzO-l6-65z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4255" y="-466"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="TunakTunakTun" width="150" height="150"/>
         <image name="baseline_redo_black_24pt" width="24" height="24"/>
         <image name="baseline_undo_black_24pt" width="24" height="24"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
