@@ -228,39 +228,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcv-SE-hGs">
-                                <rect key="frame" x="58" y="94" width="298" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcv-SE-hGs">
+                                <rect key="frame" x="146.5" y="94" width="121" height="33.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pick a game:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh3-5b-DHO">
-                                <rect key="frame" x="151" y="278" width="112" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9lQ-Dw-RLt">
-                                <rect key="frame" x="107" y="323" width="200" height="250"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="8cm-UJ-7h1" kind="embed" id="2dO-5T-3AP"/>
-                                </connections>
-                            </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOt-Qw-qiy">
-                                <rect key="frame" x="160" y="594" width="95" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOt-Qw-qiy">
+                                <rect key="frame" x="169" y="608" width="76" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Confirm"/>
                                 <connections>
                                     <action selector="onConfirmButtonClick:" destination="XjA-Nq-pWz" eventType="touchUpInside" id="nYp-P6-Zdm"/>
                                 </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9lQ-Dw-RLt">
+                                <rect key="frame" x="107" y="323" width="200" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9lQ-Dw-RLt" secondAttribute="height" multiplier="4:5" id="Bcv-Hw-D0g"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="8cm-UJ-7h1" kind="embed" id="2dO-5T-3AP"/>
+                                </connections>
+                            </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick a game:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh3-5b-DHO">
+                                <rect key="frame" x="151" y="264" width="112" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="M9h-3p-b9F"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Fcv-SE-hGs" firstAttribute="top" secondItem="M9h-3p-b9F" secondAttribute="top" constant="50" id="5OS-Bh-og2"/>
+                            <constraint firstItem="9lQ-Dw-RLt" firstAttribute="top" secondItem="qh3-5b-DHO" secondAttribute="bottom" constant="35" id="Cjw-uq-eRg"/>
+                            <constraint firstItem="Fcv-SE-hGs" firstAttribute="centerX" secondItem="M9h-3p-b9F" secondAttribute="centerX" id="CmN-h4-30x"/>
+                            <constraint firstItem="9lQ-Dw-RLt" firstAttribute="leading" secondItem="M9h-3p-b9F" secondAttribute="leading" constant="107" id="RLh-4d-604"/>
+                            <constraint firstItem="nOt-Qw-qiy" firstAttribute="centerX" secondItem="M9h-3p-b9F" secondAttribute="centerX" id="Y5S-iS-lRq"/>
+                            <constraint firstItem="qh3-5b-DHO" firstAttribute="top" secondItem="Fcv-SE-hGs" secondAttribute="bottom" constant="136.5" id="fZg-1O-V3k"/>
+                            <constraint firstItem="nOt-Qw-qiy" firstAttribute="top" secondItem="9lQ-Dw-RLt" secondAttribute="bottom" constant="35" id="llz-58-9ZW"/>
+                            <constraint firstItem="M9h-3p-b9F" firstAttribute="trailing" secondItem="9lQ-Dw-RLt" secondAttribute="trailing" constant="107" id="mW2-zB-ovJ"/>
+                            <constraint firstItem="qh3-5b-DHO" firstAttribute="centerX" secondItem="M9h-3p-b9F" secondAttribute="centerX" id="pMu-dD-y6Y"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="confirmButton" destination="nOt-Qw-qiy" id="6IV-z9-1Wj"/>
@@ -278,7 +288,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UwP-Zu-xXT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4254" y="-173"/>
+            <point key="canvasLocation" x="-3900" y="-458"/>
         </scene>
         <!--First Player Name Input View Controller-->
         <scene sceneID="knS-In-L1c">
@@ -632,7 +642,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qsu-yW-uDz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3884" y="-173"/>
+            <point key="canvasLocation" x="-3529" y="-458"/>
         </scene>
         <!--Game Choice View Controller-->
         <scene sceneID="3y0-JU-Tvj">
