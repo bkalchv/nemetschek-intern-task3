@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, EnumUI) {
 };
 
 typedef NS_ENUM(NSInteger, Game) {
-    GameTicTacToe,
+    GameTicTacToe = 0,
     GameTunakTunakTun
 };
 

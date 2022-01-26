@@ -68,10 +68,10 @@ static GameConfigurationManager* sharedGameConfigurationManager;
 - (void) changeToGame:(Game)game {
     switch (game) {
         case GameTicTacToe:
-            [self setGame:GameTicTacToe];
+            _game = GameTicTacToe;
             break;
         case GameTunakTunakTun:
-            [self setGame:GameTunakTunakTun];
+            _game = GameTunakTunakTun;
             break;
     }
 }

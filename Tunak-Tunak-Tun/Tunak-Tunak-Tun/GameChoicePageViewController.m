@@ -25,6 +25,7 @@
     self.gameImages = @[@"TicTacToe", @"tunak_green"];
     
     self.dataSource = self;
+    self.delegate = self;
     
     CardViewController* startingVC = [self viewControllerAtIndex:0];
     NSArray* viewControllers = @[startingVC];
@@ -32,16 +33,13 @@
 }
 
 - (nullable UIViewController *)pageViewController:(nonnull UIPageViewController *)pageViewController viewControllerBeforeViewController:(nonnull UIViewController *)viewController {
-    
     NSUInteger index = ((CardViewController*) viewController).pageIndex;
-        
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
     }
     
     index--;
-    
-    [GameConfigurationManager.sharedGameConfigurationManager changeToGame:index];
+
     return [self viewControllerAtIndex:index];
 }
 
@@ -57,8 +55,7 @@
         return nil;
     }
     
-    [GameConfigurationManager.sharedGameConfigurationManager changeToGame:index];
-    
+   
     return [self viewControllerAtIndex:index];
 }
 
@@ -71,7 +68,6 @@
     cardVC.pageIndex = index;
     cardVC.imageFileName = self.gameImages[index];
     cardVC.titleText = self.gameTitles[index];
-    
    
     return cardVC;
 }
@@ -86,5 +82,12 @@
     return 0;
 }
 
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed {
+    if (completed) {
+        NSInteger currentIndex = ((CardViewController *)self.viewControllers.firstObject).pageIndex;
+        NSLog(@"%ld", currentIndex);
+        [GameConfigurationManager.sharedGameConfigurationManager changeToGame:currentIndex];
+    }
+}
 
 @end
